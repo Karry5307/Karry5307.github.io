@@ -354,11 +354,13 @@
       
         <tags>
             
-            <tag> 线段树 </tag>
+            <tag> 数据结构 </tag>
             
             <tag> 洛谷 </tag>
             
-            <tag> 数据结构树链剖分 </tag>
+            <tag> 线段树 </tag>
+            
+            <tag> 树链剖分 </tag>
             
         </tags>
       
@@ -411,11 +413,11 @@
             
             <tag> 网络流 </tag>
             
-            <tag> Dinic </tag>
-            
             <tag> 最大流 </tag>
             
             <tag> 二分图匹配 </tag>
+            
+            <tag> Dinic </tag>
             
             <tag> 网络流24题 </tag>
             
@@ -440,9 +442,9 @@
             
             <tag> 网络流 </tag>
             
-            <tag> Dinic </tag>
-            
             <tag> 最大流 </tag>
+            
+            <tag> Dinic </tag>
             
         </tags>
       
@@ -463,9 +465,9 @@
             
             <tag> 网络流 </tag>
             
-            <tag> Dinic </tag>
-            
             <tag> 最大流 </tag>
+            
+            <tag> Dinic </tag>
             
             <tag> 学习笔记 </tag>
             
@@ -486,9 +488,9 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 线段树 </tag>
-            
             <tag> 洛谷 </tag>
+            
+            <tag> 线段树 </tag>
             
             <tag> 树链剖分 </tag>
             
@@ -511,9 +513,9 @@
             
             <tag> 未完待续 </tag>
             
-            <tag> 线段树 </tag>
-            
             <tag> 洛谷 </tag>
+            
+            <tag> 线段树 </tag>
             
             <tag> 树链剖分 </tag>
             
@@ -534,15 +536,15 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 线段树 </tag>
-            
             <tag> 洛谷 </tag>
             
             <tag> BZOJ </tag>
             
-            <tag> 各省省选 </tag>
-            
             <tag> HAOI </tag>
+            
+            <tag> 线段树 </tag>
+            
+            <tag> 各省省选 </tag>
             
             <tag> 树链剖分 </tag>
             
@@ -563,9 +565,9 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 线段树 </tag>
-            
             <tag> 洛谷 </tag>
+            
+            <tag> 线段树 </tag>
             
             <tag> 树链剖分 </tag>
             
