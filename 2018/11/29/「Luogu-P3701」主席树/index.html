@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计算几何,凸包,二维凸包," />
+  <meta name="keywords" content="洛谷,网络流,最大流,Dinic," />
 
 
 
@@ -79,36 +79,18 @@
 
 
 
-<meta name="description" content="二维凸包是指一个面积最小的凸多边形，使得一个给定的点集都分布在这个凸多边形的内部或者边上。">
-<meta name="keywords" content="计算几何,凸包,二维凸包">
+<meta name="description" content="A和B有五种不同的人物，共$n$个，两人之间要比$m$场。A的的$i$个人物的寿命为$hpA_i$，B的为$hpB_i$。每一次A和B选出不同的人物进行PK，每一次PK使得两边人物的寿命$-1s$，当寿命为$0$时就不能比赛了，两个人之间只能比一场。同时，当J的寿命为$0$时，同一棵树上的YYY可以为他$+1s$。每个YYY只能给每个J续一次，最大化A能赢的场次的数目。">
+<meta name="keywords" content="洛谷,网络流,最大流,Dinic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记·二维凸包">
-<meta property="og:url" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/index.html">
+<meta property="og:title" content="「Luogu P3701」「伪模板」主席树">
+<meta property="og:url" content="http://yoursite.com/2018/11/29/「Luogu-P3701」主席树/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="二维凸包是指一个面积最小的凸多边形，使得一个给定的点集都分布在这个凸多边形的内部或者边上。">
+<meta property="og:description" content="A和B有五种不同的人物，共$n$个，两人之间要比$m$场。A的的$i$个人物的寿命为$hpA_i$，B的为$hpB_i$。每一次A和B选出不同的人物进行PK，每一次PK使得两边人物的寿命$-1s$，当寿命为$0$时就不能比赛了，两个人之间只能比一场。同时，当J的寿命为$0$时，同一棵树上的YYY可以为他$+1s$。每个YYY只能给每个J续一次，最大化A能赢的场次的数目。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch0.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch1.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch2.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch4.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch5.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch6.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch7.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch8.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch9.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch10.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch11.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch12.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch13.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch14.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch15.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch16.JPG">
-<meta property="og:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/complete.JPG">
-<meta property="og:updated_time" content="2018-11-17T05:06:45.212Z">
+<meta property="og:updated_time" content="2018-11-29T10:43:46.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习笔记·二维凸包">
-<meta name="twitter:description" content="二维凸包是指一个面积最小的凸多边形，使得一个给定的点集都分布在这个凸多边形的内部或者边上。">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/21/学习笔记·二维凸包/ch0.jpg">
+<meta name="twitter:title" content="「Luogu P3701」「伪模板」主席树">
+<meta name="twitter:description" content="A和B有五种不同的人物，共$n$个，两人之间要比$m$场。A的的$i$个人物的寿命为$hpA_i$，B的为$hpB_i$。每一次A和B选出不同的人物进行PK，每一次PK使得两边人物的寿命$-1s$，当寿命为$0$时就不能比赛了，两个人之间只能比一场。同时，当J的寿命为$0$时，同一棵树上的YYY可以为他$+1s$。每个YYY只能给每个J续一次，最大化A能赢的场次的数目。">
 
 
 
@@ -149,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/21/学习笔记·二维凸包/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/29/「Luogu-P3701」主席树/"/>
 
 
 
 
 
-  <title>学习笔记·二维凸包 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>「Luogu P3701」「伪模板」主席树 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -366,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/学习笔记·二维凸包/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/「Luogu-P3701」主席树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Karry5307">
@@ -383,7 +365,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习笔记·二维凸包</h1>
+          <h1 class="post-title" itemprop="name headline">「Luogu P3701」「伪模板」主席树</h1>
         
 
         <div class="post-meta">
@@ -396,8 +378,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T19:55:45+08:00">
-                2018-10-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T17:56:51+08:00">
+                2018-11-29
               </time>
             
 
@@ -428,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  413
+                  1.1k
                 </span>
               
 
@@ -453,10 +435,9 @@
       
 
       
-        <p>二维凸包是指一个面积最小的凸多边形，使得一个给定的点集都分布在这个凸多边形的内部或者边上。<br><a id="more"></a></p>
-<h3 id="前置技能"><a href="#前置技能" class="headerlink" title="前置技能"></a>前置技能</h3><p><strong>计算几何基础</strong>，这个大概不用说了。</p>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>咕咕咕，这里我们使用比较好想的<script type="math/tex">Graham</script>算法进行求解。<br>前方大图警告。<br>首先呢，是一个点集。<br><img src="/2018/10/21/学习笔记·二维凸包/ch0.jpg" alt=""><br>因为<script type="math/tex">y</script>坐标最小的点肯定在这个凸包上，所以我们先找出<script type="math/tex">y</script>坐标最小的点,记为<script type="math/tex">P_1</script>。<br><img src="/2018/10/21/学习笔记·二维凸包/ch1.jpg" alt=""><br>接着考虑把剩下的点对于<script type="math/tex">P_1</script>从右往左编号。<br><img src="/2018/10/21/学习笔记·二维凸包/ch2.jpg" alt=""><br>PS:截图的锅，<script type="math/tex">P_{11}</script>上面那个点是<script type="math/tex">P_{12}</script>。<br>预处理完毕，接下来我们需要一个栈。由于<script type="math/tex">P_1</script>和<script type="math/tex">P_2</script>在凸包边界上，考虑将<script type="math/tex">P_1</script>和<script type="math/tex">P_2</script>入栈。<br>未完成的凸包用红色线条表示。<br><img src="/2018/10/21/学习笔记·二维凸包/ch4.JPG" alt=""><br>考虑<script type="math/tex">P_3</script>，加入它之后红色边界仍然是凸的，<script type="math/tex">P_3</script>入栈。<br><img src="/2018/10/21/学习笔记·二维凸包/ch5.jpg" alt=""><br>接下来考虑<script type="math/tex">P_4</script>，加入它之后边界是凹的，把当前栈顶<script type="math/tex">P_3</script>出栈。<br><img src="/2018/10/21/学习笔记·二维凸包/ch6.jpg" alt=""><br>考虑加入<script type="math/tex">P_4</script>当前红色边界加入<script type="math/tex">P_4</script>仍然是凸的，所以<script type="math/tex">P_4</script>入栈。<br><img src="/2018/10/21/学习笔记·二维凸包/ch7.JPG" alt=""><br>由于连续加入<script type="math/tex">P_5</script>，<script type="math/tex">P_6</script>，<script type="math/tex">P_7</script>后所得的红色边界仍然是凸的，所以将它们依次入栈。<br><img src="/2018/10/21/学习笔记·二维凸包/ch8.jpg" alt=""><br><img src="/2018/10/21/学习笔记·二维凸包/ch9.JPG" alt=""><br><img src="/2018/10/21/学习笔记·二维凸包/ch10.JPG" alt=""><br>在考虑<script type="math/tex">P_8</script>时，发现边界是凹的，将栈顶<script type="math/tex">P_7</script>出栈，而<script type="math/tex">P_8</script>入栈。<br><img src="/2018/10/21/学习笔记·二维凸包/ch11.JPG" alt=""><br><img src="/2018/10/21/学习笔记·二维凸包/ch12.JPG" alt=""><br>考虑<script type="math/tex">P_9</script>。在连续出栈<script type="math/tex">P_8</script>和<script type="math/tex">P_6</script>都不能满足红色边界为凸的，所以一出栈，将<script type="math/tex">P_9</script>入栈。<br><img src="/2018/10/21/学习笔记·二维凸包/ch13.JPG" alt=""><br><img src="/2018/10/21/学习笔记·二维凸包/ch14.JPG" alt=""><br><img src="/2018/10/21/学习笔记·二维凸包/ch15.JPG" alt=""><br>依次进行以下操作，可以得到一个处理到最后一个点的图像，然后就完结撒花了！<br><img src="/2018/10/21/学习笔记·二维凸包/ch16.JPG" alt=""><br><img src="/2018/10/21/学习笔记·二维凸包/complete.JPG" alt=""><br>所以说，<script type="math/tex">code</script>呢？<br>对不起，没有<del>个鬼</del>。<br><a href="https://karry5307.github.io/2018/10/21/%E3%80%8CLuogu-P2742%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E7%BB%B4%E5%87%B8%E5%8C%85/" target="_blank" rel="noopener">出门右转看代码</a></p>
-
+        <p>A和B有五种不同的人物，共$n$个，两人之间要比$m$场。A的的$i$个人物的寿命为$hpA_i$，B的为$hpB_i$。<br>每一次A和B选出不同的人物进行PK，每一次PK使得两边人物的寿命$-1s$，当寿命为$0$时就不能比赛了，两个人之间只能比一场。<br>同时，当J的寿命为$0$时，同一棵树上的YYY可以为他$+1s$。每个YYY只能给每个J续一次，最大化A能赢的场次的数目。<br><a id="more"></a></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一个比较巧妙的网络流建模题。<br>首先打出人物之间输赢的表，然后考虑从源点像A的第$i$个人物连边，容量为$hpA_i$，从B的第$i$个人物像汇点连边，容量为$hpB_i$。<br>以上连边，如果第$i$个人是J，则将容量增加本方YYY的数量。<br>对于A的第$i$个人能赢B的第$j$个人，就从A的第$i$个人向B的第$j$个人A的人连边，容量为$1$。跑一边最大流即可。<br>下面分析为什么这样连边是对的。<br>先不考虑续命，这个人物不能出战即找不到经过这个人物的增广路，而<strong>通过这个人物的增广路只能是从源点直接到这个人物再到后面或是前面找到的增广路到这个人物再到汇点。</strong><br>以上这句话很重要，请仔细理解。所以，<strong>当源点到这个人物或这个人物到汇点的边为零流边就找不到增广路了，即这个人没命了。</strong>所以从源点发出或到汇点连边是正确的。<br>由于两个人之间只能比一场，而题目要求只求胜利场次数，所以中间的连边也是正确的。<br>现在考虑续命。对于一个J，无论YYY是死是活，总能在它死的时候续命，对于每一个J都是一样。所以将从源点连到J的边或是J连到汇点的边的容量增加本方YYY的个数。<br>至此，连边的正确性就已经说明清楚了。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">1e5</span>+<span class="number">51</span>,inf=<span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    ll to,prev,flow;</span><br><span class="line">&#125;;</span><br><span class="line">Edge ed[MAXN&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,ll&gt;mp;</span><br><span class="line">ll nc,ec,source,sink,tot=<span class="number">1</span>,from,to,flow,maxFlow;</span><br><span class="line">ll cnt,ccnt,life,xx,yy;</span><br><span class="line">ll last[MAXN],depth[MAXN],inQueue[MAXN];</span><br><span class="line">ll win[<span class="number">5</span>][<span class="number">5</span>]=&#123;</span><br><span class="line">    <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,</span><br><span class="line">    <span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,</span><br><span class="line">    <span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,</span><br><span class="line">    <span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,</span><br><span class="line">    <span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">string</span> x[<span class="number">151</span>],y[<span class="number">151</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(ll from,ll to,ll flow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ed[++tot].prev=last[from];</span><br><span class="line">    ed[tot].to=to;</span><br><span class="line">    ed[tot].flow=flow;</span><br><span class="line">    last[from]=tot; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">Min</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x&lt;y?x:y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">bfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;ll&gt;q;</span><br><span class="line">    ll top,to;</span><br><span class="line">    <span class="built_in">memset</span>(depth,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(depth));</span><br><span class="line">    depth[source]=<span class="number">0</span>,q.push(source);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        top=q.front();</span><br><span class="line">        q.pop(),inQueue[top]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=last[top];i;i=ed[i].prev)</span><br><span class="line">        &#123;</span><br><span class="line">            to=ed[i].to;</span><br><span class="line">            <span class="keyword">if</span>(depth[to]&gt;depth[top]+<span class="number">1</span>&amp;&amp;ed[i].flow)</span><br><span class="line">            &#123;</span><br><span class="line">                depth[to]=depth[top]+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(!inQueue[to])</span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(to),inQueue[to]=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(depth[sink]!=<span class="number">0x3f3f3f3f</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;	</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">dfs</span><span class="params">(ll cur,ll flow)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll low;</span><br><span class="line">    <span class="keyword">if</span>(cur==sink)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=last[cur];i;i=ed[i].prev)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ed[i].flow&amp;&amp;depth[ed[i].to]==depth[cur]+<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(low=dfs(ed[i].to,Min(flow,ed[i].flow)))</span><br><span class="line">            &#123;</span><br><span class="line">                ed[i].flow-=low,ed[i^<span class="number">1</span>].flow+=low;</span><br><span class="line">                <span class="keyword">return</span> low;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">Dinic</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll flow;</span><br><span class="line">    <span class="keyword">while</span>(bfs())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(flow=dfs(source,inf))</span><br><span class="line">        &#123;</span><br><span class="line">            maxFlow+=flow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxFlow;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cnt=read(),ccnt=read();</span><br><span class="line">    nc=sink=(cnt+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>,source=<span class="number">1</span>;</span><br><span class="line">    mp[<span class="string">"J"</span>]=<span class="number">0</span>,mp[<span class="string">"E"</span>]=<span class="number">1</span>,mp[<span class="string">"YYY"</span>]=<span class="number">2</span>,mp[<span class="string">"HK"</span>]=<span class="number">3</span>,mp[<span class="string">"W"</span>]=<span class="number">4</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x[i];</span><br><span class="line">        xx+=(x[i]==<span class="string">"YYY"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="built_in">cin</span>&gt;&gt;y[i];</span><br><span class="line">    	yy+=(y[i]==<span class="string">"YYY"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=cnt+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        life=read();</span><br><span class="line">        addEdge(source,i,life+(x[i<span class="number">-1</span>]==<span class="string">"J"</span>?xx:<span class="number">0</span>)),addEdge(i,source,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=cnt+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        life=read();</span><br><span class="line">        addEdge(i+cnt,sink,life+(y[i<span class="number">-1</span>]==<span class="string">"J"</span>?yy:<span class="number">0</span>)),addEdge(sink,i+cnt,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        xx=mp[x[i]];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=cnt;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            yy=mp[y[j]];</span><br><span class="line">            <span class="keyword">if</span>(win[xx][yy])</span><br><span class="line">            &#123;</span><br><span class="line">                addEdge(i+<span class="number">1</span>,j+<span class="number">1</span>+cnt,<span class="number">1</span>),addEdge(j+<span class="number">1</span>+cnt,i+<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,min(ccnt,Dinic()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -478,11 +459,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算几何/" rel="tag"># 计算几何</a>
+            <a href="/tags/洛谷/" rel="tag"># 洛谷</a>
           
-            <a href="/tags/凸包/" rel="tag"># 凸包</a>
+            <a href="/tags/网络流/" rel="tag"># 网络流</a>
           
-            <a href="/tags/二维凸包/" rel="tag"># 二维凸包</a>
+            <a href="/tags/最大流/" rel="tag"># 最大流</a>
+          
+            <a href="/tags/Dinic/" rel="tag"># Dinic</a>
           
         </div>
       
@@ -495,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/15/「CodeForces-1060C」Maximum-Subrectangle/" rel="next" title="「CodeForces 1060C」Maximum Subrectangle">
-                <i class="fa fa-chevron-left"></i> 「CodeForces 1060C」Maximum Subrectangle
+              <a href="/2018/11/24/「CodeForces-558E」A-Simple-Task/" rel="next" title="「CodeForces 558E」A Simple Task">
+                <i class="fa fa-chevron-left"></i> 「CodeForces 558E」A Simple Task
               </a>
             
           </div>
@@ -504,10 +487,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/21/「Luogu-P2742」【模板】二维凸包/" rel="prev" title="「Luogu P2742」【模板】二维凸包">
-                「Luogu P2742」【模板】二维凸包 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -664,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前置技能"><span class="nav-number">1.</span> <span class="nav-text">前置技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">2.</span> <span class="nav-text">过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
@@ -1204,26 +1183,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
