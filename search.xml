@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「Luogu P3391」【模板】文艺平衡树（Splay）]]></title>
+    <url>%2F2018%2F11%2F30%2F%E3%80%8CLuogu-P3391%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91%EF%BC%88Splay%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[给一个$1\cdots n$的排列，每一次能将区间$[l,r]$反转，求最后的排列 链接题解实测暴力能$Rush 48 pts$，但是不能用暴力，只能老老实实写Splay。作为一道模板题，还是说一下我犯过的错误吧qwq。第一，$splay$函数中旋转完了一定要更新$fa$和$x$的信息，由于这个，我居然调了一下午$+$一晚上。第二，注意$reverse$中更新信息的语句，调了一中午。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161#include&lt;bits/stdc++.h&gt;#define DEBUG printf("In function %s, line %d\n",__FUNCTION__,__LINE__)using namespace std;typedef int ll;const ll MAXN=2e5+51;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;ll cnt,qcnt,l,r;namespace Splay&#123; struct Node&#123; ll fa,val,size,tag; ll ch[2]; inline void reset(ll val=0,ll fa=0) &#123; this-&gt;fa=fa,this-&gt;val=val,this-&gt;size=1; this-&gt;tag=this-&gt;ch[0]=this-&gt;ch[1]=0; &#125; &#125;; struct Splay&#123; ll tot,root; Node nd[MAXN]; inline bool id(ll x) &#123; return nd[nd[x].fa].ch[1]==x; &#125; inline void update(ll x) &#123; nd[x].size=nd[nd[x].ch[0]].size+nd[nd[x].ch[1]].size+1; &#125; inline void spread(ll x) &#123; if(nd[x].tag) &#123; nd[nd[x].ch[0]].tag^=1,nd[nd[x].ch[1]].tag^=1; nd[x].tag=0; swap(nd[x].ch[0],nd[x].ch[1]); &#125; &#125; inline void connect(ll x,ll fa,ll dir) &#123; nd[x].fa=fa,nd[fa].ch[dir]=x; &#125; inline void rotate(ll x) &#123; ll fa=nd[x].fa,gfa=nd[fa].fa,dir=id(x); connect(x,gfa,id(fa)); connect(nd[x].ch[dir^1],fa,dir); connect(fa,x,dir^1); update(fa),update(x); &#125; inline void splay(ll cur,ll target) &#123; while(nd[cur].fa!=target) &#123; ll fa=nd[cur].fa,gfa=nd[fa].fa; if(gfa!=target) &#123; rotate(id(cur)^id(fa)?cur:fa); &#125; rotate(cur); &#125; if(!target) &#123; root=cur; &#125; &#125; inline void insert(ll val) &#123; ll cur=root,fa=0; while(cur) &#123; fa=cur,cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; cur=++tot; if(fa) &#123; nd[fa].ch[val&gt;nd[fa].val]=cur; &#125; nd[cur].reset(val,fa); splay(cur,0); &#125; inline ll findRank(ll val) &#123; ll cur=root; while(1) &#123; spread(cur); if(nd[nd[cur].ch[0]].size&gt;=val) &#123; cur=nd[cur].ch[0]; &#125; else &#123; if(nd[nd[cur].ch[0]].size+1==val) &#123; return cur; &#125; else &#123; val-=nd[nd[cur].ch[0]].size+1,cur=nd[cur].ch[1]; &#125; &#125; &#125; &#125; inline void reverse(ll l,ll r) &#123; l=findRank(l),r=findRank(r+2); splay(l,0),splay(r,l); nd[nd[nd[root].ch[1]].ch[0]].tag^=1; &#125; inline void op(ll cur) &#123; spread(cur); if(nd[cur].ch[0]) &#123; op(nd[cur].ch[0]); &#125; if(nd[cur].val&gt;1&amp;&amp;nd[cur].val&lt;cnt+2) &#123; printf("%d ",nd[cur].val-1); &#125; if(nd[cur].ch[1]) &#123; op(nd[cur].ch[1]); &#125; &#125; &#125;;&#125;Splay::Splay splay;int main()&#123; cnt=read(),qcnt=read(); for(register int i=1;i&lt;=cnt+2;i++) &#123; splay.insert(i); &#125; for(register int i=0;i&lt;qcnt;i++) &#123; l=read(),r=read(); splay.reverse(l,r); &#125; splay.op(splay.root);&#125;]]></content>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>洛谷</tag>
+        <tag>平衡树</tag>
+        <tag>Splay</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「SP1043」Can you answer these queries I]]></title>
+    <url>%2F2018%2F11%2F29%2F%E3%80%8CSP1043%E3%80%8DCan-you-answer-these-queries-I%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[「Luogu P3701」「伪模板」主席树]]></title>
     <url>%2F2018%2F11%2F29%2F%E3%80%8CLuogu-P3701%E3%80%8D%E4%B8%BB%E5%B8%AD%E6%A0%91%2F</url>
     <content type="text"><![CDATA[A和B有五种不同的人物，共$n$个，两人之间要比$m$场。A的的$i$个人物的寿命为$hpA_i$，B的为$hpB_i$。每一次A和B选出不同的人物进行PK，每一次PK使得两边人物的寿命$-1s$，当寿命为$0$时就不能比赛了，两个人之间只能比一场。同时，当J的寿命为$0$时，同一棵树上的YYY可以为他$+1s$。每个YYY只能给每个J续一次，最大化A能赢的场次的数目。 题解一个比较巧妙的网络流建模题。首先打出人物之间输赢的表，然后考虑从源点像A的第$i$个人物连边，容量为$hpA_i$，从B的第$i$个人物像汇点连边，容量为$hpB_i$。以上连边，如果第$i$个人是J，则将容量增加本方YYY的数量。对于A的第$i$个人能赢B的第$j$个人，就从A的第$i$个人向B的第$j$个人A的人连边，容量为$1$。跑一边最大流即可。下面分析为什么这样连边是对的。先不考虑续命，这个人物不能出战即找不到经过这个人物的增广路，而通过这个人物的增广路只能是从源点直接到这个人物再到后面或是前面找到的增广路到这个人物再到汇点。以上这句话很重要，请仔细理解。所以，当源点到这个人物或这个人物到汇点的边为零流边就找不到增广路了，即这个人没命了。所以从源点发出或到汇点连边是正确的。由于两个人之间只能比一场，而题目要求只求胜利场次数，所以中间的连边也是正确的。现在考虑续命。对于一个J，无论YYY是死是活，总能在它死的时候续命，对于每一个J都是一样。所以将从源点连到J的边或是J连到汇点的边的容量增加本方YYY的个数。至此，连边的正确性就已经说明清楚了。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=1e5+51,inf=0x7fffffff;struct Edge&#123; ll to,prev,flow;&#125;;Edge ed[MAXN&lt;&lt;1];map&lt;string,ll&gt;mp;ll nc,ec,source,sink,tot=1,from,to,flow,maxFlow;ll cnt,ccnt,life,xx,yy;ll last[MAXN],depth[MAXN],inQueue[MAXN];ll win[5][5]=&#123; 0,0,0,1,1, 1,0,1,0,0, 1,0,0,1,0, 0,1,0,0,1, 0,1,1,0,0&#125;;string x[151],y[151];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void addEdge(ll from,ll to,ll flow)&#123; ed[++tot].prev=last[from]; ed[tot].to=to; ed[tot].flow=flow; last[from]=tot; &#125;inline ll Min(ll x,ll y)&#123; return x&lt;y?x:y;&#125;inline bool bfs()&#123; queue&lt;ll&gt;q; ll top,to; memset(depth,0x3f,sizeof(depth)); depth[source]=0,q.push(source); while(!q.empty()) &#123; top=q.front(); q.pop(),inQueue[top]=0; for(register int i=last[top];i;i=ed[i].prev) &#123; to=ed[i].to; if(depth[to]&gt;depth[top]+1&amp;&amp;ed[i].flow) &#123; depth[to]=depth[top]+1; if(!inQueue[to]) &#123; q.push(to),inQueue[to]=1; &#125; &#125; &#125; &#125; if(depth[sink]!=0x3f3f3f3f) &#123; return 1; &#125; return 0;&#125;inline ll dfs(ll cur,ll flow)&#123; ll low; if(cur==sink) &#123; return flow; &#125; for(register int i=last[cur];i;i=ed[i].prev) &#123; if(ed[i].flow&amp;&amp;depth[ed[i].to]==depth[cur]+1) &#123; if(low=dfs(ed[i].to,Min(flow,ed[i].flow))) &#123; ed[i].flow-=low,ed[i^1].flow+=low; return low; &#125; &#125; &#125; return 0;&#125;inline ll Dinic()&#123; ll flow; while(bfs()) &#123; while(flow=dfs(source,inf)) &#123; maxFlow+=flow; &#125; &#125; return maxFlow;&#125;int main()&#123; cnt=read(),ccnt=read(); nc=sink=(cnt+1)&lt;&lt;1,source=1; mp["J"]=0,mp["E"]=1,mp["YYY"]=2,mp["HK"]=3,mp["W"]=4; for(register int i=1;i&lt;=cnt;i++) &#123; cin&gt;&gt;x[i]; xx+=(x[i]=="YYY"); &#125; for(register int i=1;i&lt;=cnt;i++) &#123; cin&gt;&gt;y[i]; yy+=(y[i]=="YYY"); &#125; for(register int i=2;i&lt;=cnt+1;i++) &#123; life=read(); addEdge(source,i,life+(x[i-1]=="J"?xx:0)),addEdge(i,source,0); &#125; for(register int i=2;i&lt;=cnt+1;i++) &#123; life=read(); addEdge(i+cnt,sink,life+(y[i-1]=="J"?yy:0)),addEdge(sink,i+cnt,0); &#125; for(register int i=1;i&lt;=cnt;i++) &#123; xx=mp[x[i]]; for(register int j=1;j&lt;=cnt;j++) &#123; yy=mp[y[j]]; if(win[xx][yy]) &#123; addEdge(i+1,j+1+cnt,1),addEdge(j+1+cnt,i+1,0); &#125; &#125; &#125; printf("%d",min(ccnt,Dinic()));&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -216,9 +232,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -230,8 +246,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -241,8 +257,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -278,8 +294,8 @@
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -359,10 +375,10 @@
     <url>%2F2018%2F08%2F08%2F%E3%80%8CLuogu-P3128%E3%80%8D%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
     <content type="text"><![CDATA[给出一棵树和一些操作，每次操作都将两点间所有经过的点的点权+1，求出点权最大的点的权值。 链接Luogu P3128 题解怎么说呢，一道树上点差分模板题，当然树链剖分也可以做。定义$diff[i]$为点$i$的差分值，那么对于每一次修改的参数$start$和$end$，将$diff[start++,diff[end++,diff[\operatorname{lca}(start,end)—]$。为了不让路线修改蔓延到祖先，把LCA的父节点的差分值-1。最后用DFS求出子树差分数组的和就得到该节点修改后的点权啦。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev; &#125;;ll nc,ec,query,root,from,to;ll depth[500010],anc[500010][31],last[500010],diff[500010],LCA,maxn;edge ed[500010*2];inline void addEdge(ll from,ll to)&#123; ed[++ec].prev=last[from]; ed[ec].to=to; last[from]=ec;&#125;inline void dfs(ll node)&#123; ll son; for(register int i=last[node];i!=0;i=ed[i].prev) &#123; son=ed[i].to; if(!depth[son]) &#123; depth[son]=depth[node]+1; anc[son][0]=node; dfs(son); &#125; &#125;&#125;inline void LCASetup()&#123; depth[1]=1; anc[1][0]=0; dfs(1); for(register int i=1;i&lt;=21;i++) &#123; for(register int j=1;j&lt;=nc;j++) &#123; anc[j][i]=anc[anc[j][i-1]][i-1]; &#125; &#125;&#125;inline ll lca(ll x,ll y)&#123; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; for(register int i=21;i&gt;=0;i--) &#123; if(depth[anc[y][i]]&gt;=depth[x]) &#123; y=anc[y][i]; &#125; &#125; if(x==y) &#123; return x; &#125; for(register int i=21;i&gt;=0;i--) &#123; if(anc[x][i]!=anc[y][i]) &#123; x=anc[x][i]; y=anc[y][i]; &#125; &#125; return anc[x][0];&#125;inline ll ddfs(ll node)&#123; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; ddfs(ed[i].to); diff[node]+=diff[ed[i].to]; &#125; maxn=max(maxn,diff[node]);&#125;int main()&#123; scanf("%d%d",&amp;nc,&amp;query); for(register int i=0;i&lt;nc-1;i++) &#123; scanf("%d%d",&amp;from,&amp;to); addEdge(from,to); addEdge(to,from); &#125; LCASetup(); for(register int i=0;i&lt;query;i++) &#123; scanf("%d%d",&amp;from,&amp;to); LCA=lca(from,to); diff[from]++,diff[to]++,diff[LCA]--,diff[anc[LCA][0]]--; &#125; ddfs(1); cout&lt;&lt;maxn;&#125;]]></content>
       <tags>
-        <tag>LCA</tag>
-        <tag>树上差分</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
+        <tag>LCA</tag>
+        <tag>树上差分</tag>
         <tag>USACO</tag>
       </tags>
   </entry>
