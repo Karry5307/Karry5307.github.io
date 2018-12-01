@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/12/01/学习笔记·平衡树/splay1.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/12/01/学习笔记·平衡树/splay2.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/12/01/学习笔记·平衡树/splay3.jpg">
-<meta property="og:updated_time" content="2018-12-01T07:39:19.277Z">
+<meta property="og:updated_time" content="2018-12-01T08:32:35.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·平衡树">
 <meta name="twitter:description" content="平衡树是一种使用较为广泛的数据结构，代码比较长。">
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  601
+                  663
                 </span>
               
 
@@ -448,7 +448,7 @@
 <p>接下来是$id$，用于判断一个节点是它的父亲的哪一个孩子。<br>这个很简单，只需要几行代码。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">id</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nd[nd[x].fa].ch[<span class="number">1</span>]==x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>下一个是$connect$，用于建立新的父子关系，这个也不难。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">connect</span><span class="params">(ll x,ll fa,ll dir)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nd[x].fa=fa,nd[fa].ch[dir]=x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="关键操作"><a href="#关键操作" class="headerlink" title="关键操作"></a>关键操作</h4><p>以下两个操作是旋转操作，很关键，而且不好调。<br>首先是$rotate$，用于平衡旋转。<br>举个栗子，这是原来的平衡树。<br><img src="/2018/12/01/学习笔记·平衡树/splay0.jpg" alt=""><br>其中蓝色指向父亲，红色指向儿子。<br>调用$rotate(y)$之后，平衡树就变成这个样子了：<br><img src="/2018/12/01/学习笔记·平衡树/splay1.jpg" alt=""><br>由于之前$connect$的实现，这个就变得不难了，因为旋转依次要改变$3$对父子关系。<br>第一对，对照第二幅图可以发现，可以直接在$y$与$R$建立关系，就像这样<br><img src="/2018/12/01/学习笔记·平衡树/splay2.jpg" alt=""><br>第二对，在$B$与$x$之间建立父子关系，然后就变成了这个<br><img src="/2018/12/01/学习笔记·平衡树/splay3.jpg" alt=""><br>最后，在$x$与$y$建立父子关系就大功告成啦qwq。<br>所以，上代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll fa=nd[x].fa,gfa=nd[fa].fa,dir=id(x);</span><br><span class="line">    connect(x,gfa,id(fa));</span><br><span class="line">    connect(nd[x].ch[dir^<span class="number">1</span>],fa,dir);</span><br><span class="line">    connect(fa,x,dir^<span class="number">1</span>);</span><br><span class="line">    update(fa),update(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>还有一个是$splay$，这个尽管代码不长，但是很难调。</p>
+<p>还有一个是$splay$，这个尽管代码不长，但是很难调。<br>我不推荐直接上旋，因为这样可能会很慢。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">splay</span><span class="params">(ll cur,ll target)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(nd[cur].fa!=target)</span><br><span class="line">    &#123;</span><br><span class="line">        ll fa=nd[cur].fa,gfa=nd[fa].fa;</span><br><span class="line">        <span class="keyword">if</span>(gfa!=target)</span><br><span class="line">        &#123;</span><br><span class="line">            rotate(id(cur)^id(fa)?cur:fa);</span><br><span class="line">        &#125;</span><br><span class="line">        rotate(cur);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!target)</span><br><span class="line">    &#123;</span><br><span class="line">        root=cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="一些特例"><a href="#一些特例" class="headerlink" title="一些特例"></a>一些特例</h4>
       
     </div>
@@ -687,7 +687,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.6k</span>
+    <span title="Site words total count">21.7k</span>
   
 </div>
 
