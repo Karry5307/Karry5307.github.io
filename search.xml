@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「Luogu P2234」[HNOI2002]营业额统计]]></title>
+    <url>%2F2018%2F12%2F03%2F%E3%80%8CLuogu-P2234%E3%80%8D-HNOI2002-%E8%90%A5%E4%B8%9A%E9%A2%9D%E7%BB%9F%E8%AE%A1%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[学习笔记·平衡树]]></title>
     <url>%2F2018%2F12%2F01%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E5%B9%B3%E8%A1%A1%E6%A0%91%2F</url>
     <content type="text"><![CDATA[平衡树是一种使用较为广泛的数据结构，代码比较长。 SplaySplay最主要的一点是它能反转区间，而Treap以及替罪羊不能，这也是为什么它作为Link Cut Tree的辅助树。 框架首先需要写一个这样的程序框架：12345678910111213141516171819202122232425262728293031323334353637#include&lt;bits/stdc++.h&gt;#define DEBUG printf("In function %s, line %d\n",__FUNCTION__,__LINE__)using namespace std;typedef int ll;const ll MAXN=2e5+51;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;ll cnt,qcnt,l,r;namespace Splay&#123; struct Node&#123; ll fa,val,size,tag; ll ch[2]; &#125;; struct Splay&#123; ll tot,root; Node nd[MAXN]; //Code goes here &#125;;&#125; 以下代码片段全部接在注释处。 基本操作首先是$update$，用于更新节点的$size$。既然写过线段树，那么这个操作应该不难。1234inline void update(ll x)&#123;nd[x].size=nd[nd[x].ch[0]].size+nd[nd[x].ch[1]].size+1;&#125; 接下来是$id$，用于判断一个节点是它的父亲的哪一个孩子。这个很简单，只需要几行代码。1234inline bool id(ll x)&#123; return nd[nd[x].fa].ch[1]==x;&#125; 下一个是$connect$，用于建立新的父子关系，这个也不难。1234inline void connect(ll x,ll fa,ll dir)&#123; nd[x].fa=fa,nd[fa].ch[dir]=x;&#125; 关键操作以下两个操作是旋转操作，很关键，而且不好调。首先是$rotate$，用于平衡旋转。举个栗子，这是原来的平衡树。其中蓝色指向父亲，红色指向儿子。调用$rotate(y)$之后，平衡树就变成这个样子了：由于之前$connect$的实现，这个就变得不难了，因为旋转依次要改变$3$对父子关系。第一对，对照第二幅图可以发现，可以直接在$y$与$R$建立关系，就像这样第二对，在$B$与$x$之间建立父子关系，然后就变成了这个最后，在$x$与$y$建立父子关系就大功告成啦qwq。所以，上代码12345678inline void rotate(ll x)&#123; ll fa=nd[x].fa,gfa=nd[fa].fa,dir=id(x); connect(x,gfa,id(fa)); connect(nd[x].ch[dir^1],fa,dir); connect(fa,x,dir^1); update(fa),update(x);&#125; 还有一个是$splay$，这个尽管代码不长，但是很难调。我不推荐直接上旋，因为这样可能会很慢。12345678910111213141516inline void splay(ll cur,ll target)&#123; while(nd[cur].fa!=target) &#123; ll fa=nd[cur].fa,gfa=nd[fa].fa; if(gfa!=target) &#123; rotate(id(cur)^id(fa)?cur:fa); &#125; rotate(cur); &#125; if(!target) &#123; root=cur; &#125;&#125; 一些特例]]></content>
@@ -33,8 +38,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -242,9 +247,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -256,8 +261,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -267,8 +272,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -289,8 +294,8 @@
     <content type="text"><![CDATA[怎么说呢，有点裸的树链剖分加上一些常用小技巧…… 链接Luogu P3950]]></content>
       <tags>
         <tag>数据结构</tag>
-        <tag>未完待续</tag>
         <tag>线段树</tag>
+        <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
       </tags>
@@ -326,8 +331,8 @@
     <url>%2F2018%2F08%2F13%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%2F</url>
     <content type="text"><![CDATA[树链剖分是一种将一颗树通过划分不相交的来维护树上路径信息的算法。它保证每一个点仅在一个链上，并通过毒瘤数据结构来维护节点信息。树链剖分是干什么用的呢？很简单，借助树链剖分，可以任意修改树上两点最短路径的点权和子树点权，根本用不着树上差分。如果这棵树是一条链，支持修改和查询，那么我们可以重新按深度编号，这样子每棵子树上的编号都是连续的了，就可以用毒瘤数据结构来解决。但是，事实上，连洛谷模板的样例都不是一条链。尽管有人说可以用LCA+树上差分过，但你觉得数据可能是纯随机的么qwq。所以说，我们应该用树链剖分。 前置技能第一个是刚才标粗的毒瘤数据结构，树链剖分是依靠毒瘤数据结构，比如线段树，树状数组，平衡树等来修改和查询，否则就GG了……第二个是LCA，即最近公共祖先。第三个是树的DFS序，这个有什么用后面会讲。]]></content>
       <tags>
-        <tag>未完待续</tag>
         <tag>线段树</tag>
+        <tag>未完待续</tag>
         <tag>树链剖分</tag>
         <tag>学习笔记</tag>
       </tags>
