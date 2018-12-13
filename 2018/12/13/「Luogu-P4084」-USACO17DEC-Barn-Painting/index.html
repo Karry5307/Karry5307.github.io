@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="洛谷,USACO,DP,树形DP," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Karry5307&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/组合数学/index.html">
+<meta name="description" content="咕着先……">
+<meta name="keywords" content="洛谷,USACO,DP,树形DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Luogu P4084」[USACO17DEC]Barn Painting">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/「Luogu-P4084」-USACO17DEC-Barn-Painting/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
+<meta property="og:description" content="咕着先……">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-13T12:57:20.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Karry5307&#39;s Blog">
+<meta name="twitter:title" content="「Luogu P4084」[USACO17DEC]Barn Painting">
+<meta name="twitter:description" content="咕着先……">
 
 
 
@@ -126,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/组合数学/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/13/「Luogu-P4084」-USACO17DEC-Barn-Painting/"/>
 
 
 
 
 
-  <title>标签: 组合数学 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>「Luogu P4084」[USACO17DEC]Barn Painting | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -151,7 +156,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -329,54 +334,179 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>组合数学<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/「Luogu-P4084」-USACO17DEC-Barn-Painting/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karry5307">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Karry5307's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/11/18/「UVa-11525」Permutation/" itemprop="url">
-              
-                <span itemprop="name">「UVa 11525」Permutation</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">「Luogu P4084」[USACO17DEC]Barn Painting</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-11-18T17:36:48+08:00"
-              content="2018-11-18" >
-          11-18
-        </time>
-      </div>
+        <div class="post-meta">
+         
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T20:46:30+08:00">
+                2018-12-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  180
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <p>咕着先……<br><a id="more"></a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>开始写题解的今天，正是$12$月$13$日。今天，是南京大屠杀的$81$周年的纪念日。<br>$81$年前，即$1937$年$12$月$13$日。日本人在南京制造了震惊中外的南京大屠杀惨案。这是中华民族的血泪史，饱含着中华人民对日本侵略者的仇恨。<br>现在，我们生活在伟大富强的新中国，与现代的日本作为隔海相望的邻邦，历史的悲剧已平和下来，但是我们不能忘记这次国家的耻辱。<br>所以，我们要以史为鉴，吸取教训，努力学习，奋发图强，不让历史悲剧再次重演。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3>
+      
+    </div>
+    
+    
+    
+
+    
+	  <div>
+		
+	  </div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/洛谷/" rel="tag"># 洛谷</a>
+          
+            <a href="/tags/USACO/" rel="tag"># USACO</a>
+          
+            <a href="/tags/DP/" rel="tag"># DP</a>
+          
+            <a href="/tags/树形DP/" rel="tag"># 树形DP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/03/「Luogu-P2234」-HNOI2002-营业额统计/" rel="next" title="「Luogu P2234」[HNOI2002]营业额统计">
+                <i class="fa fa-chevron-left"></i> 「Luogu P2234」[HNOI2002]营业额统计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -384,6 +514,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -404,8 +538,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -490,6 +633,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -646,6 +805,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
