@@ -4,14 +4,18 @@
     <title><![CDATA[各省省选题选刷]]></title>
     <url>%2F2018%2F12%2F17%2F%E5%90%84%E7%9C%81%E7%9C%81%E9%80%89%E9%A2%98%E9%80%89%E5%88%B7%2F</url>
     <content type="text"><![CDATA[蒟蒻Karry5307退役失败，只能继续努力啦qwq最近在做省选题明明是BZOJ第一版的，所以说大致是按照省份刷的我这种蒟蒻只配做老年省选题……这里放一下最近做的题，按省份和年代特别久远排列，加上几句话题解……还有，由于BZOJ的题面有点布星，所以这里写洛谷的题号…… HAOI2008「Luogu P1450」「Luogu P2508」「Luogu P2510」「Luogu P2511」「Luogu P2512」 [HAOI2008]圆上的整点对$r^2$做分解质因数，对每一个质因子计算对答案的贡献即可。 「Luogu P4289」「Luogu P4290」「Luogu P4291」]]></content>
+      <tags>
+        <tag>各省省选</tag>
+        <tag>计划</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[「Luogu P2508」[HAOI2008]圆上的整点]]></title>
     <url>%2F2018%2F12%2F16%2F%E3%80%8CLuogu-P2508%E3%80%8D-HAOI2008-%E5%9C%86%E4%B8%8A%E7%9A%84%E6%95%B4%E7%82%B9%2F</url>
     <content type="text"><![CDATA[给定$r$，求满足$x^2+y^2=r^2$的整数对$(x,y)$个数量。 前置知识首先引入虚数单位$\mathrm{i}$，表示$\sqrt{-1}$，将$a+b\mathrm{i},a,b\in\mathbb{R}$型的数称为复数（其中$a\in\mathbb{R}$表示$a$为实数）。所以说可以规定一些运算。$a+b\mathrm{i}\pm c+d\mathrm{i}=(a\pm b)+(c\pm d)\mathrm{i}$$(a+b\mathrm{i})(c+d\mathrm{i})=(ac-bd)+(ad+bc)\mathrm{i}$其中，称$a+b\mathrm{i}$的复共轭为$a-b\mathrm{i}$。每一个坐标$(x,y)$，又可以唯一对应到一个复数$x+y\mathrm{i}$，于是将这种一个坐标表示一个复数的平面直角坐标系叫做复平面。对于复平面上的格点$(x,y)$，可以对应到复数$x+y\mathrm{i}$，将这类复数叫做高斯整数。说白了，高斯整数就是满足$a,b$是整数的$a+b\mathrm{i}$型数。而不能再次被分解的数就是高斯素数。比如说，$5$不是高斯素数，因为$5=5+0\mathrm{i}=(2+\mathrm{i})(2-\mathrm{i})$，而分解出的$2+\mathrm{i}$和$2-\mathrm{i}$都是高斯素数。 题解一道码量不长，但是数学知识需求挺多的一道题。先转换一下所给的方程，改成$x^2-(y\mathrm{i})^2=r^2$。拆开可得$(x+y\mathrm{i})(x-y\mathrm{i})=r^2$。而两个括号内互为复共轭，所以只需要解决这个问题，即有多少个$x+y\mathrm{i}$使得它成它的复共轭为$r^2$。这里举个栗子，比如说手玩$r=5$的情况，要先将$r^2$拆成高斯素数的乘积。$25=5^2=(2+\mathrm{i})(2-\mathrm{i})(2+\mathrm{i})(2-\mathrm{i})$在将这些高斯素数分成两列，其中第一列的第$n$个数和第二列的第$n$个数互为复共轭，最后算出来有多少种组合方式。但是这些组合方式满足左边的乘积与右边的乘积互为复共轭吗？答案是显然的，先证明两个高斯整数的乘积与它们的复共轭的乘积互为复共轭。考虑这两个数的乘积，$(a+b\mathrm{i})(c+d\mathrm{i})=(ac-bd)+(ad+bc)\mathrm{i}$。它们的复共轭的乘积，$(a-b\mathrm{i})(c-d\mathrm{i})=(ac-bd)-(ad+bc)\mathrm{i}$。啊哈！它们正好互为复共轭，所以左边的乘积与右边的乘积互为复共轭。但是，还不够。要把答案乘上$4$才行，因为两列数的乘积可以同时乘上$1$或$-1$，或一个乘以$\mathrm{i}$，另一个乘以$-\mathrm{i}$都不改变两列乘起来后两个数的乘积，所以有$4$种变换，所以算出来是$12$。现在来看一般情况。对$r^2$做质因数分解，有$r^2={p_1}^{r_1}{p_2}^{r_2}\cdots {p_k}^{r_k}$。假设现在考虑到$p_i$了（这个$i$与虚数单位的字体不一样），那么……如果$p_i\equiv 1\pmod 4$，那么这个可以分解成两个高斯素数的乘积。这个因子对格点数目点的影响为$r_i+1$，因为可以在左边放$0,1\cdots r_i$个分解后的高斯素数中的一种。如果$p_i\equiv 3\pmod 4$，那么$p_i$本身是高斯素数，对分解的贡献取决于$r_i$，如果$r_i$是奇数，那么这个多出来的因子没地方放，它会使得两边不平衡，没有格点，否则，它可以放两边，对格点个数没有贡献。如果$p_i$为$2$，那么有$2=(1+\mathrm{i})(1-\mathrm{i})$，而这两个复数刚好是旋转$90^{\circ}$的，所以变换少了$2$种，但是带来$2$中组合，对格点个数没有贡献。所以，这个算法只需要分解质因数，然后判断即可。不懂的可以看看这个视频 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;const ll MAXN=5e4+51;ll r,tot,res=1;ll factor[MAXN],cnt[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void getFact(ll num)&#123; for(register int i=2;i&lt;=num;i++) &#123; if(num==1) &#123; break; &#125; if(num%i==0) &#123; factor[tot]=i; while(num%i==0) &#123; cnt[tot]+=2,num/=i; &#125; tot++; &#125; &#125;&#125;int main()&#123; getFact(r=read()); for(register int i=0;i&lt;tot;i++) &#123; if((factor[i]&amp;3)==1) &#123; res*=(cnt[i]+1); &#125; if((factor[i]&amp;3)==3) &#123; res*=((cnt[i]&amp;1)^1); &#125; &#125; printf("%lld",res&lt;&lt;2);&#125;]]></content>
       <tags>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>数论</tag>
       </tags>
   </entry>
@@ -71,8 +75,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -280,9 +284,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -294,8 +298,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -305,8 +309,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -342,8 +346,8 @@
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -423,10 +427,10 @@
     <url>%2F2018%2F08%2F08%2F%E3%80%8CLuogu-P3128%E3%80%8D%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
     <content type="text"><![CDATA[给出一棵树和一些操作，每次操作都将两点间所有经过的点的点权+1，求出点权最大的点的权值。 链接Luogu P3128 题解怎么说呢，一道树上点差分模板题，当然树链剖分也可以做。定义$diff[i]$为点$i$的差分值，那么对于每一次修改的参数$start$和$end$，将$diff[start++,diff[end++,diff[\operatorname{lca}(start,end)—]$。为了不让路线修改蔓延到祖先，把LCA的父节点的差分值-1。最后用DFS求出子树差分数组的和就得到该节点修改后的点权啦。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev; &#125;;ll nc,ec,query,root,from,to;ll depth[500010],anc[500010][31],last[500010],diff[500010],LCA,maxn;edge ed[500010*2];inline void addEdge(ll from,ll to)&#123; ed[++ec].prev=last[from]; ed[ec].to=to; last[from]=ec;&#125;inline void dfs(ll node)&#123; ll son; for(register int i=last[node];i!=0;i=ed[i].prev) &#123; son=ed[i].to; if(!depth[son]) &#123; depth[son]=depth[node]+1; anc[son][0]=node; dfs(son); &#125; &#125;&#125;inline void LCASetup()&#123; depth[1]=1; anc[1][0]=0; dfs(1); for(register int i=1;i&lt;=21;i++) &#123; for(register int j=1;j&lt;=nc;j++) &#123; anc[j][i]=anc[anc[j][i-1]][i-1]; &#125; &#125;&#125;inline ll lca(ll x,ll y)&#123; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; for(register int i=21;i&gt;=0;i--) &#123; if(depth[anc[y][i]]&gt;=depth[x]) &#123; y=anc[y][i]; &#125; &#125; if(x==y) &#123; return x; &#125; for(register int i=21;i&gt;=0;i--) &#123; if(anc[x][i]!=anc[y][i]) &#123; x=anc[x][i]; y=anc[y][i]; &#125; &#125; return anc[x][0];&#125;inline ll ddfs(ll node)&#123; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; ddfs(ed[i].to); diff[node]+=diff[ed[i].to]; &#125; maxn=max(maxn,diff[node]);&#125;int main()&#123; scanf("%d%d",&amp;nc,&amp;query); for(register int i=0;i&lt;nc-1;i++) &#123; scanf("%d%d",&amp;from,&amp;to); addEdge(from,to); addEdge(to,from); &#125; LCASetup(); for(register int i=0;i&lt;query;i++) &#123; scanf("%d%d",&amp;from,&amp;to); LCA=lca(from,to); diff[from]++,diff[to]++,diff[LCA]--,diff[anc[LCA][0]]--; &#125; ddfs(1); cout&lt;&lt;maxn;&#125;]]></content>
       <tags>
-        <tag>洛谷</tag>
-        <tag>树链剖分</tag>
         <tag>LCA</tag>
         <tag>树上差分</tag>
+        <tag>洛谷</tag>
+        <tag>树链剖分</tag>
         <tag>USACO</tag>
       </tags>
   </entry>
