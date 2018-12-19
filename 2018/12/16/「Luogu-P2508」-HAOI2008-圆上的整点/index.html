@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="各省省选,HAOI,数论," />
+  <meta name="keywords" content="HAOI,各省省选,数论," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="给定$r$，求满足$x^2+y^2=r^2$的整数对$(x,y)$个数量。">
-<meta name="keywords" content="各省省选,HAOI,数论">
+<meta name="keywords" content="HAOI,各省省选,数论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P2508」[HAOI2008]圆上的整点">
 <meta property="og:url" content="http://yoursite.com/2018/12/16/「Luogu-P2508」-HAOI2008-圆上的整点/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定$r$，求满足$x^2+y^2=r^2$的整数对$(x,y)$个数量。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-16T08:42:09.182Z">
+<meta property="og:updated_time" content="2018-12-17T10:28:14.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P2508」[HAOI2008]圆上的整点">
 <meta name="twitter:description" content="给定$r$，求满足$x^2+y^2=r^2$的整数对$(x,y)$个数量。">
@@ -436,6 +436,7 @@
 
       
         <p>给定$r$，求满足$x^2+y^2=r^2$的整数对$(x,y)$个数量。<br><a id="more"></a></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.org/problemnew/show/P2508" target="_blank" rel="noopener">Luogu P2508</a><br><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1041" target="_blank" rel="noopener">BZOJ 1041</a></p>
 <h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><p>首先引入虚数单位$\mathrm{i}$，表示$\sqrt{-1}$，将$a+b\mathrm{i},a,b\in\mathbb{R}$型的数称为复数（其中$a\in\mathbb{R}$表示$a$为实数）。<br>所以说可以规定一些运算。<br>$a+b\mathrm{i}\pm c+d\mathrm{i}=(a\pm b)+(c\pm d)\mathrm{i}$<br>$(a+b\mathrm{i})(c+d\mathrm{i})=(ac-bd)+(ad+bc)\mathrm{i}$<br>其中，称$a+b\mathrm{i}$的复共轭为$a-b\mathrm{i}$。<br>每一个坐标$(x,y)$，又可以唯一对应到一个复数$x+y\mathrm{i}$，于是将这种一个坐标表示一个复数的平面直角坐标系叫做复平面。<br>对于复平面上的格点$(x,y)$，可以对应到复数$x+y\mathrm{i}$，将这类复数叫做<strong>高斯整数</strong>。<br>说白了，高斯整数就是满足$a,b$是整数的$a+b\mathrm{i}$型数。<br>而不能再次被分解的数就是<strong>高斯素数</strong>。<br>比如说，$5$不是高斯素数，因为$5=5+0\mathrm{i}=(2+\mathrm{i})(2-\mathrm{i})$，而分解出的$2+\mathrm{i}$和$2-\mathrm{i}$都是高斯素数。</p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一道码量不长，但是数学知识需求挺多的一道题。<br>先转换一下所给的方程，改成$x^2-(y\mathrm{i})^2=r^2$。<br>拆开可得$(x+y\mathrm{i})(x-y\mathrm{i})=r^2$。<br>而两个括号内互为复共轭，所以只需要解决这个问题，即有多少个$x+y\mathrm{i}$使得它成它的复共轭为$r^2$。<br>这里举个栗子，比如说手玩$r=5$的情况，要先将$r^2$拆成高斯素数的乘积。<br>$25=5^2=(2+\mathrm{i})(2-\mathrm{i})(2+\mathrm{i})(2-\mathrm{i})$<br>在将这些高斯素数分成两列，其中第一列的第$n$个数和第二列的第$n$个数互为复共轭，最后算出来有多少种组合方式。<br>但是这些组合方式满足左边的乘积与右边的乘积互为复共轭吗？<br>答案是显然的，先证明两个高斯整数的乘积与它们的复共轭的乘积互为复共轭。<br>考虑这两个数的乘积，$(a+b\mathrm{i})(c+d\mathrm{i})=(ac-bd)+(ad+bc)\mathrm{i}$。<br>它们的复共轭的乘积，$(a-b\mathrm{i})(c-d\mathrm{i})=(ac-bd)-(ad+bc)\mathrm{i}$。<br>啊哈！它们正好互为复共轭，所以左边的乘积与右边的乘积互为复共轭。<br>但是，还不够。要把答案乘上$4$才行，因为两列数的乘积可以同时乘上$1$或$-1$，或一个乘以$\mathrm{i}$，另一个乘以$-\mathrm{i}$都<strong>不改变两列乘起来后两个数的乘积</strong>，所以有$4$种变换，所以算出来是$12$。<br>现在来看一般情况。对$r^2$做质因数分解，有$r^2={p_1}^{r_1}{p_2}^{r_2}\cdots {p_k}^{r_k}$。<br>假设现在考虑到$p_i$了（这个$i$与虚数单位的字体不一样），那么……<br>如果$p_i\equiv 1\pmod 4$，那么这个可以分解成两个高斯素数的乘积。这个因子对格点数目点的影响为$r_i+1$，因为可以在左边放$0,1\cdots r_i$个分解后的高斯素数中的一种。<br>如果$p_i\equiv 3\pmod 4$，那么$p_i$本身是高斯素数，对分解的贡献取决于$r_i$，如果$r_i$是奇数，那么这个多出来的因子没地方放，它会使得两边不平衡，没有格点，否则，它可以放两边，对格点个数没有贡献。<br>如果$p_i$为$2$，那么有$2=(1+\mathrm{i})(1-\mathrm{i})$，而这两个复数刚好是旋转$90^{\circ}$的，所以变换少了$2$种，但是带来$2$中组合，对格点个数没有贡献。<br>所以，这个算法只需要分解质因数，然后判断即可。<br>不懂的可以看看<a href="https://www.bilibili.com/video/av12131743" target="_blank" rel="noopener">这个视频</a></p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">5e4</span>+<span class="number">51</span>;</span><br><span class="line">ll r,tot,res=<span class="number">1</span>;</span><br><span class="line">ll factor[MAXN],cnt[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">getFact</span><span class="params">(ll num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=num;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(num%i==<span class="number">0</span>)</span><br><span class="line">        &#123; </span><br><span class="line">            factor[tot]=i;</span><br><span class="line">            <span class="keyword">while</span>(num%i==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cnt[tot]+=<span class="number">2</span>,num/=i;</span><br><span class="line">            &#125;</span><br><span class="line">            tot++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    getFact(r=read());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;tot;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>((factor[i]&amp;<span class="number">3</span>)==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res*=(cnt[i]+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>((factor[i]&amp;<span class="number">3</span>)==<span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res*=((cnt[i]&amp;<span class="number">1</span>)^<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,res&lt;&lt;<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -460,9 +461,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/各省省选/" rel="tag"># 各省省选</a>
-          
             <a href="/tags/HAOI/" rel="tag"># HAOI</a>
+          
+            <a href="/tags/各省省选/" rel="tag"># 各省省选</a>
           
             <a href="/tags/数论/" rel="tag"># 数论</a>
           
@@ -566,7 +567,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -579,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -646,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前置知识"><span class="nav-number">1.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前置知识"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
