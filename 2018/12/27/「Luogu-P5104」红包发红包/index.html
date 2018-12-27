@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望">
+<meta name="description" content="一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望。">
 <meta name="keywords" content="数论，数学,概率,期望">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P5104」红包发红包">
 <meta property="og:url" content="http://yoursite.com/2018/12/27/「Luogu-P5104」红包发红包/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望">
+<meta property="og:description" content="一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-27T13:20:59.954Z">
+<meta property="og:updated_time" content="2018-12-27T13:49:09.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5104」红包发红包">
-<meta name="twitter:description" content="一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望">
+<meta name="twitter:description" content="一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望。">
 
 
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  58
+                  206
                 </span>
               
 
@@ -435,8 +435,8 @@
       
 
       
-        <p>一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望<br><a id="more"></a></p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>先来看一个引理：<br>$\mathbf{Lemma}\qquad$在$l$到$r$中随机选一个实数的期望为$\frac{l+r}{2}$。<br>$\mathbf{Proof:}$</p>
+        <p>一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望。<br><a id="more"></a></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>先来看一个引理：<br>$\mathbf{Lemma}\quad$在$l$到$r$中随机选一个实数的期望为$\frac{l+r}{2}$。<br>$\mathbf{Proof:}$<br>采用切片法。由于实数密度的均匀性，可以考虑做极限。<br>考虑将$l$到$r$的实数区间均匀的切$i-1$片，出现$i$个端点，于是对这些数求期望。<br>那么这些数的期望是：<br>$\cfrac{nl+(r-l)\sum\limits_{i=0}^{n-1}\frac{i}{n-1}}{n}$<br>$=l+\cfrac{(r-l)\frac{n}{2}}{n}$<br>$=l+\cfrac{r-l}{2}$<br>$=\cfrac{l+r}{2}$<br>所以，这东西与$i$没任何关系，求极限还是这个值，证毕。<br>回到本题。于是可以知道，第一个人抢的钱的期望是$\frac{w}{2}$，剩下$\frac{w}{2}$元。</p>
 
       
     </div>
@@ -675,7 +675,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">25.2k</span>
+    <span title="Site words total count">25.3k</span>
   
 </div>
 
