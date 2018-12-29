@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「Luogu P5110」块速递推]]></title>
     <url>%2F2018%2F12%2F28%2F%E3%80%8CLuogu-P5110%E3%80%8D%E5%9D%97%E9%80%9F%E9%80%92%E6%8E%A8%2F</url>
-    <content type="text"><![CDATA[快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值 Preposed SkillsSolution首先求$a_n=233a_{n-1}+666a{n-2}$的通项式。考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\bfrac{233+\sqrt{56953}}{2},x_2=\bfrac{233-\sqrt{56953}}{2}$。所以可以设这个数列的通项式为$p(\bfrac{233+\sqrt{56953}}{2})^n-q(\bfrac{233-\sqrt{56953}}{2})^n$。可别忘了，$a_0=0,a_1=1$，所以解出$p=\bfrac{1}{\sqrt{56953}},q=-\bfrac{1}{\sqrt{56953}}$。]]></content>
+    <content type="text"><![CDATA[快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值 Preposed SkillsSolution首先求$a_n=233a_{n-1}+666a_{n-2}$的通项式。考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\cfrac{233+\sqrt{56953}}{2},x_2=\cfrac{233-\sqrt{56953}}{2}$。所以可以设这个数列的通项式为$p(\cfrac{233+\sqrt{56953}}{2})^n-q(\cfrac{233-\sqrt{56953}}{2})^n$。可别忘了，$a_0=0,a_1=1$，所以解出$p=\cfrac{1}{\sqrt{56953}},q=-\cfrac{1}{\sqrt{56953}}$。]]></content>
       <tags>
         <tag>数论，数学</tag>
       </tags>
