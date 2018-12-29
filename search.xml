@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「Luogu P5110」块速递推]]></title>
+    <url>%2F2018%2F12%2F28%2F%E3%80%8CLuogu-P5110%E3%80%8D%E5%9D%97%E9%80%9F%E9%80%92%E6%8E%A8%2F</url>
+    <content type="text"><![CDATA[Preposed SkillsSolution考虑$a_n=233a_{n-1}+666a{n-2}$]]></content>
+      <tags>
+        <tag>数论，数学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「Luogu P5104」红包发红包]]></title>
     <url>%2F2018%2F12%2F27%2F%E3%80%8CLuogu-P5104%E3%80%8D%E7%BA%A2%E5%8C%85%E5%8F%91%E7%BA%A2%E5%8C%85%2F</url>
     <content type="text"><![CDATA[一个$w$元钱的红包，有$n$个人抢，求第$k$个人抢的钱的期望。 题解先来看一个引理：$\mathbf{Lemma}\quad$在$l$到$r$中随机选一个实数的期望为$\frac{l+r}{2}$。$\mathbf{Proof:}$采用切片法。由于实数密度的均匀性，可以考虑做极限。考虑将$l$到$r$的实数区间均匀的切$i-1$片，出现$i$个端点，于是对这些数求期望。那么这些数的期望是：$\cfrac{nl+(r-l)\sum\limits_{i=0}^{n-1}\frac{i}{n-1}}{n}$$=l+\cfrac{(r-l)\frac{n}{2}}{n}$$=l+\cfrac{r-l}{2}$$=\cfrac{l+r}{2}$所以，这东西与$i$没任何关系，求极限还是这个值，证毕。回到本题。于是可以知道，第一个人抢的钱的期望是$\frac{w}{2}$，剩下$\frac{w}{2}$元。]]></content>
@@ -30,8 +38,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -53,9 +61,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
         <tag>CodeVS</tag>
+        <tag>各省省选</tag>
         <tag>数论</tag>
       </tags>
   </entry>
@@ -115,8 +123,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -324,9 +332,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -338,8 +346,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -349,8 +357,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -387,8 +395,8 @@
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
