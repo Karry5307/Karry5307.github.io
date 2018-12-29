@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range:$T\leq 5\times 10^7$">
+<meta name="description" content="快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range：$T\leq 5\times 10^7$">
 <meta name="keywords" content="数论，数学,打表,分块">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P5110」块速递推">
 <meta property="og:url" content="http://yoursite.com/2018/12/28/「Luogu-P5110」块速递推/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range:$T\leq 5\times 10^7$">
+<meta property="og:description" content="快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range：$T\leq 5\times 10^7$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-29T08:15:47.208Z">
+<meta property="og:updated_time" content="2018-12-29T08:21:44.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5110」块速递推">
-<meta name="twitter:description" content="快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range:$T\leq 5\times 10^7$">
+<meta name="twitter:description" content="快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range：$T\leq 5\times 10^7$">
 
 
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  549
+                  814
                 </span>
               
 
@@ -436,7 +436,7 @@
 
       
         <p>快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。</p>
-<p>Data Range:$T\leq 5\times 10^7$</p>
+<p>Data Range：$T\leq 5\times 10^7$</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="Preposed-Skills"><a href="#Preposed-Skills" class="headerlink" title="Preposed Skills"></a>Preposed Skills</h3><h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先求$a_n=233a_{n-1}+666a_{n-2}$的通项式。</p>
 <p>考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\cfrac{233+\sqrt{56953}}{2},x_2=\cfrac{233-\sqrt{56953}}{2}$。</p>
 <p>所以可以设这个数列的通项式为$a_n=p(\cfrac{233+\sqrt{56953}}{2})^n+q(\cfrac{233-\sqrt{56953}}{2})^n$。</p>
@@ -444,7 +444,7 @@
 <p>所以$a_n=\cfrac{1}{\sqrt{56953}}[(\cfrac{233+\sqrt{56953}}{2})^n-(\cfrac{233-\sqrt{56953}}{2})^n]$</p>
 <p>现在来解决除号以及根号。首先，枚举得$\sqrt{56953}\equiv 188305837\pmod {10^9+7}$。所以说$a_n=\cfrac{1}{188305037}(94153035^n-905847205^n)$，而$188305837^{-1}\equiv 233230706\pmod {10^9+7}$。</p>
 <p>所以，最终的通项式就是$a_n=233230706(94153035^n-905847205^n)$。</p>
-<p>但是，由于毒瘤出题人的毒瘤给分制度，前面六个点每点$1 pts$，所以用龟速幂只能水$6 pts$。我尝试用$O(1)$的按位龟速乘优化了一下后，还是只有$6 pts$。看来我们只能优化计算上面的两个幂的常数。</p>
+<p>但是，由于毒瘤出题人的毒瘤给分制度，前面六个点每点$1 pts$，所以用龟速幂只能水$6 pts$。我尝试用$O(1)$的按位龟速乘优化了一下后，还是只有$6 pts$。看来我们只能优化计算上面的两个幂的过程。</p>
 <p>很明显可以先优化一下指数，由欧拉小定理得：</p>
 <p>$a_{n+\varphi(10^9+7)}\equiv a_n\pmod {10^9+7}$</p>
 <p>于是可以把指数模$\varphi(10^9+7)=10^9+6$，但是还是只能得$6 pts$。</p>
@@ -458,9 +458,9 @@
 <p>最后，预处理出</p>
 <p>$94153035^k,94153035^2k\cdots 94153035^{k(k-1)}$</p>
 <p>和<br>$905847205^k,905847205^k\cdots 905847205^{k(k-1)}$</p>
+<p>显然，这些步骤的时间复杂度为$O(k)$的。</p>
 <p>把询问$m$拆成$ak+b$的形式，其中$0\leq b&lt;k$。用数学化的语言来讲，$a=\lfloor \frac{m}{k}\rfloor,b=m\bmod k$，所以可以拆成整块和散块来做到$O(1)$查询啦qwq。</p>
-<p>时间复杂度为$O(T+\sqrt{10^9+6})$</p>
-
+<h2 id="时间复杂度为-O-T-sqrt-10-9-6-。"><a href="#时间复杂度为-O-T-sqrt-10-9-6-。" class="headerlink" title="时间复杂度为$O(T+\sqrt{10^9+6})$。"></a>时间复杂度为$O(T+\sqrt{10^9+6})$。</h2><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">31651</span>,MOD=<span class="number">1e9</span>+<span class="number">7</span>,blockSize=<span class="number">31623</span>;</span><br><span class="line">ll test,num,res,resx,resy;</span><br><span class="line">ll blockx[MAXN],powx[MAXN],blocky[MAXN],powy[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    blockx[<span class="number">0</span>]=powx[<span class="number">0</span>]=blocky[<span class="number">0</span>]=powy[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;blockSize;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        blockx[i]=blockx[i<span class="number">-1</span>]*<span class="number">37348318u</span>ll%MOD;</span><br><span class="line">        blocky[i]=blocky[i<span class="number">-1</span>]*<span class="number">482464047u</span>ll%MOD;</span><br><span class="line">        powx[i]=powx[i<span class="number">-1</span>]*<span class="number">94153035l</span>l%MOD;</span><br><span class="line">        powy[i]=powy[i<span class="number">-1</span>]*<span class="number">905847205l</span>l%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> maker&#123;</span><br><span class="line">    ll sa,sb,sc;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        sa=read(),sb=read(),sc=read();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> ll <span class="title">randInt</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        sa^=sa&lt;&lt;<span class="number">32</span>,sa^=sa&gt;&gt;<span class="number">13</span>,sa^=sa&lt;&lt;<span class="number">1</span>;</span><br><span class="line">        ll t=sa;</span><br><span class="line">        sa=sb,sb=sc,sc^=t^sa;</span><br><span class="line">        <span class="keyword">return</span> sc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    test=read();</span><br><span class="line">    maker::setup(),setup();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;test;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num=maker::randInt()%(MOD<span class="number">-1</span>);</span><br><span class="line">        resx=blockx[num/blockSize]*powx[num%blockSize]%MOD;</span><br><span class="line">        resy=blocky[num/blockSize]*powy[num%blockSize]%MOD;</span><br><span class="line">        res^=(<span class="number">233230706</span>*((resx-resy+MOD)%MOD)%MOD);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%llu"</span>,res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -664,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preposed-Skills"><span class="nav-number">1.1.</span> <span class="nav-text">Preposed Skills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preposed-Skills"><span class="nav-number">1.1.</span> <span class="nav-text">Preposed Skills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度为-O-T-sqrt-10-9-6-。"><span class="nav-number">2.</span> <span class="nav-text">时间复杂度为$O(T+\sqrt{10^9+6})$。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.1.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -698,7 +698,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">25.9k</span>
+    <span title="Site words total count">26.2k</span>
   
 </div>
 
