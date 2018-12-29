@@ -3,9 +3,11 @@
   <entry>
     <title><![CDATA[「Luogu P5110」块速递推]]></title>
     <url>%2F2018%2F12%2F28%2F%E3%80%8CLuogu-P5110%E3%80%8D%E5%9D%97%E9%80%9F%E9%80%92%E6%8E%A8%2F</url>
-    <content type="text"><![CDATA[快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Preposed SkillsSolution首先求$a_n=233a_{n-1}+666a_{n-2}$的通项式。 考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\cfrac{233+\sqrt{56953}}{2},x_2=\cfrac{233-\sqrt{56953}}{2}$。 所以可以设这个数列的通项式为$a_n=p(\cfrac{233+\sqrt{56953}}{2})^n+q(\cfrac{233-\sqrt{56953}}{2})^n$。 可别忘了，$a_0=0,a_1=1$，所以解出$p=\cfrac{1}{\sqrt{56953}},q=-\cfrac{1}{\sqrt{56953}}$。 所以$a_n=\cfrac{1}{\sqrt{56953}}[(\cfrac{233+\sqrt{56953}}{2})^n-(\cfrac{233-\sqrt{56953}}{2})]$]]></content>
+    <content type="text"><![CDATA[快速求$a_n=233a_{n-1}+666a{n-2}$第$n$项的值。 Data Range:$T\leq 5\times 10^7$ Preposed SkillsSolution首先求$a_n=233a_{n-1}+666a_{n-2}$的通项式。 考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\cfrac{233+\sqrt{56953}}{2},x_2=\cfrac{233-\sqrt{56953}}{2}$。 所以可以设这个数列的通项式为$a_n=p(\cfrac{233+\sqrt{56953}}{2})^n+q(\cfrac{233-\sqrt{56953}}{2})^n$。 可别忘了，$a_0=0,a_1=1$，所以解出$p=\cfrac{1}{\sqrt{56953}},q=-\cfrac{1}{\sqrt{56953}}$。 所以$a_n=\cfrac{1}{\sqrt{56953}}[(\cfrac{233+\sqrt{56953}}{2})^n-(\cfrac{233-\sqrt{56953}}{2})^n]$ 现在来解决除号以及根号。首先，枚举得$\sqrt{56953}\equiv 188305837\pmod {10^9+7}$。所以说$a_n=/cfrac{1}{188305037}(94153035^n-905847205^n)$，而$188305837^{-1}\equiv 233230706\pmod {10^9+7}$。 所以，最终的通项式就是$a_n=233230706(94153035^n-905847205^n)$。 但是，由于毒瘤出题人的毒瘤给分制度，前面六个点每点$1 pts$，所以用龟速幂只能水$6 pts$。我尝试用$O(1)$的按位龟速乘优化了一下后，还是只有$6 pts$。看来我们只能优化计算上面的两个幂的常数。 很明显可以先优化一下指数，由欧拉小定理得： $a_{n+\varphi(10^9+7)}\equiv a_n\pmod {10^9+7}$ 于是可以把指数模$\varphi(10^9+7)=10^9+6$，但是还是只能得$6 pts$。 于是考虑$100 pts$的分块打表大法。由上面的结论可知，可以将指数控制在$10^9+6$以内，所以可以考虑分块打表。 可以知道，$\lceil\sqrt{10^9+6}\rceil=31623$，所以以这个数作为块长分块，将它记为$k$。 首先，预处理出$$和$905847205^0,905847205^1\cdots 90584720594153035^0,94153035^1\cdots 94153035^{k-1}^{k-1}$ 然后，用龟速幂可算出$94153035^k\equiv 37348318\pmod {10^9+7}$，$905847205^k\equiv 482464047\pmod {10^9+7}$ 最后，预处理出$94153035^k,94153035^2k\cdots 94153035^{k(k-1)}$和$905847205^k,905847205^k\cdots 905847205^{k(k-1)}$ 把询问$m$拆成$ak+b$的形式，其中$0\leq b&lt;k$。用数学化的语言来讲，$a=\lfloor \frac{m}{k}\rfloor,b=m\bmod k$，所以可以拆成整块和散块来做到$O(1)$查询啦qwq。 时间复杂度为$O(T+\sqrt{10^9+6})$]]></content>
       <tags>
         <tag>数论，数学</tag>
+        <tag>打表</tag>
+        <tag>分块</tag>
       </tags>
   </entry>
   <entry>
@@ -38,8 +40,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -61,10 +63,10 @@
       <tags>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
-        <tag>CodeVS</tag>
+        <tag>HAOI</tag>
         <tag>数论</tag>
+        <tag>CodeVS</tag>
       </tags>
   </entry>
   <entry>
@@ -194,8 +196,8 @@
     <url>%2F2018%2F11%2F10%2F%E3%80%8CLuogu-P2532%E3%80%8D-AHOI2012-%E6%A0%91%E5%B1%8B%E9%98%B6%E6%A2%AF%2F</url>
     <content type="text"><![CDATA[引言NOIP rp++! 链接Luogu P2532 题解考虑$f_i$表示搭$i$层高的阶梯的方案数，$g_{i,j}$表示最左下角的钢材上面有$i$层高，右边有$j$层高的方案数，那么如图$f_n=\sum^{n-1}_{i=1}g_{i,j}$而$i+j=n$且$g_{i,j}=f_if_j$$\therefore f_n=\sum^{n-1}_{i=1}f_if_{n-i}$显然是卡特兰的递推式，所以就可以用卡特兰数求，但是要用高精度…… 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e4+51; struct BigInt&#123; ll digit; ll num[MAXN]; BigInt() &#123; memset(num,0,sizeof(num)); &#125; inline void operator =(ll x) &#123; while(x) &#123; num[digit++]=x%10000,x/=10000; &#125; &#125; inline void op() &#123; printf("%d",num[digit-1]); for(register int i=digit-2;i&gt;=0;i--) &#123; if(!num[i]) &#123; printf("0000"); continue; &#125; ll rest=3-(ll)(log10(num[i])); for(register int j=rest;j;j--) &#123; putchar('0'); &#125; printf("%d",num[i]); &#125; &#125; inline bool operator &gt;(const BigInt &amp;rhs)const &#123; if(digit!=rhs.digit) &#123; return digit&gt;rhs.digit; &#125; for(register int i=digit-1;i&gt;=0;i--) &#123; if(num[i]!=rhs.num[i]) &#123; return num[i]&gt;rhs.num[i]; &#125; &#125; return 0; &#125;&#125;; ll num;BigInt res;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline BigInt operator +(BigInt x,BigInt y)&#123; BigInt res; ll carry=0; res.digit=max(x.digit,y.digit)+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]+y.num[i]+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator *(BigInt x,ll y)&#123; BigInt res; ll carry=0; res.digit=x.digit+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]*y+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator /(BigInt x,ll y)&#123; BigInt res; ll cur=0; res.digit=x.digit; for(register int i=x.digit-1;i&gt;=0;i--) &#123; cur=cur*10000+x.num[i]; if(cur&gt;=y) &#123; res.num[i]=cur/y,cur%=y; &#125; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;int main()&#123; num=read(); res=1; for(register int i=1;i&lt;=2*num;i++) &#123; res=res*i; &#125; res=res/(num+1); for(register int i=1;i&lt;=num;i++) &#123; res=res/i/i; &#125; res.op();&#125;]]></content>
       <tags>
-        <tag>数论</tag>
         <tag>高精</tag>
+        <tag>数论</tag>
         <tag>卡特兰</tag>
       </tags>
   </entry>
@@ -343,8 +345,8 @@
     <url>%2F2018%2F09%2F24%2F%E3%80%8CLuogu-P3376%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E7%BD%91%E7%BB%9C%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
     <content type="text"></content>
       <tags>
-        <tag>未完待续</tag>
         <tag>洛谷</tag>
+        <tag>未完待续</tag>
         <tag>网络流</tag>
         <tag>最大流</tag>
         <tag>Dinic</tag>
@@ -380,10 +382,10 @@
     <content type="text"><![CDATA[怎么说呢，有点裸的树链剖分加上一些常用小技巧…… 链接Luogu P3950]]></content>
       <tags>
         <tag>数据结构</tag>
-        <tag>未完待续</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
+        <tag>未完待续</tag>
       </tags>
   </entry>
   <entry>
@@ -395,8 +397,8 @@
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -417,9 +419,9 @@
     <url>%2F2018%2F08%2F13%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%2F</url>
     <content type="text"><![CDATA[树链剖分是一种将一颗树通过划分不相交的来维护树上路径信息的算法。它保证每一个点仅在一个链上，并通过毒瘤数据结构来维护节点信息。树链剖分是干什么用的呢？很简单，借助树链剖分，可以任意修改树上两点最短路径的点权和子树点权，根本用不着树上差分。如果这棵树是一条链，支持修改和查询，那么我们可以重新按深度编号，这样子每棵子树上的编号都是连续的了，就可以用毒瘤数据结构来解决。但是，事实上，连洛谷模板的样例都不是一条链。尽管有人说可以用LCA+树上差分过，但你觉得数据可能是纯随机的么qwq。所以说，我们应该用树链剖分。 前置技能第一个是刚才标粗的毒瘤数据结构，树链剖分是依靠毒瘤数据结构，比如线段树，树状数组，平衡树等来修改和查询，否则就GG了……第二个是LCA，即最近公共祖先。第三个是树的DFS序，这个有什么用后面会讲。]]></content>
       <tags>
-        <tag>未完待续</tag>
         <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>未完待续</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -428,10 +430,10 @@
     <url>%2F2018%2F08%2F11%2F%E3%80%8CLuogu-P2002%E3%80%8D%E6%B6%88%E6%81%AF%E6%89%A9%E6%95%A3%2F</url>
     <content type="text"><![CDATA[给出一个有向图，消息沿着边扩散，求最少需要在几个点发消息才能使整个图所有点都得到消息。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev;&#125;;edge ed[500001],scc[500001];ll test,tot,num,top,cnt,nc,ec,ans;ll last[500001],sccLast[500001],dfn[500001],low[500001],ins[500001],belong[500001];ll from[500001],to[500001],size[500001],in[500001];stack&lt;ll&gt;st;inline void addEdge(ll from,ll to)&#123; ed[++tot].to=to; ed[tot].prev=last[from]; last[from]=tot;&#125;inline void addSCC(ll from,ll to)&#123; scc[++tot].to=to; scc[tot].prev=sccLast[from]; sccLast[from]=tot;&#125;inline void tarjan(ll node)&#123; dfn[node]=low[node]=++num; st.push(node),ins[node]=1; ll flag=0,to; for(register int i=last[node];i;i=ed[i].prev) &#123; to=ed[i].to; if(!dfn[to]) &#123; tarjan(to); low[node]=min(low[node],low[to]); &#125; else &#123; if(ins[to]) &#123; low[node]=min(low[node],dfn[to]); &#125; &#125; &#125; if(dfn[node]==low[node]) &#123; cnt++; ll nd; do &#123; nd=st.top(),st.pop(); ins[nd]=0; belong[nd]=cnt; size[cnt]++; &#125; while(node!=nd); &#125;&#125;inline void mergePoint()&#123; tot=0; for(register int i=0;i&lt;ec;i++) &#123; if(belong[from[i]]!=belong[to[i]]) &#123; addSCC(belong[from[i]],belong[to[i]]); in[belong[to[i]]]++; &#125; &#125;&#125;int main()&#123; cin&gt;&gt;nc&gt;&gt;ec; for(register int i=0;i&lt;ec;i++) &#123; cin&gt;&gt;from[i]&gt;&gt;to[i]; addEdge(from[i],to[i]); &#125; for(register int i=1;i&lt;=nc;i++) &#123; if(!dfn[i]) &#123; tarjan(i); &#125; &#125; mergePoint(); for(register int i=1;i&lt;=cnt;i++) &#123; if(!in[i]) &#123; ans++; &#125; &#125; cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
       <tags>
+        <tag>洛谷</tag>
         <tag>图论</tag>
         <tag>强连通分量</tag>
         <tag>未完待续</tag>
-        <tag>洛谷</tag>
       </tags>
   </entry>
   <entry>
@@ -451,11 +453,11 @@
     <url>%2F2018%2F08%2F09%2F%E3%80%8CHAOI2006%E3%80%8D%E5%8F%97%E6%AC%A2%E8%BF%8E%E7%9A%84%E7%89%9B%2F</url>
     <content type="text"><![CDATA[给定一个有向图，找出与其他点均可达的点的个数。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev;&#125;;edge ed[150001],scc[150001];ll sccno,tot,num,top,cnt,nc,ec,ans;ll last[150001],sccLast[150001],dfn[150001],low[150001],ins[150001],belong[150001];ll from[150001],to[150001],size[150001],out[150001];stack&lt;ll&gt;st;inline void addEdge(ll from,ll to)&#123; ed[++tot].to=to; ed[tot].prev=last[from]; last[from]=tot;&#125;inline void addSCC(ll from,ll to)&#123; scc[++tot].to=to; scc[tot].prev=sccLast[from]; sccLast[from]=tot;&#125;inline void tarjan(ll node)&#123; dfn[node]=low[node]=++num; st.push(node),ins[node]=1; ll flag=0,to; for(register int i=last[node];i;i=ed[i].prev) &#123; to=ed[i].to; if(!dfn[to]) &#123; tarjan(to); low[node]=min(low[node],low[to]); &#125; else &#123; if(ins[to]) &#123; low[node]=min(low[node],dfn[to]); &#125; &#125; &#125; if(dfn[node]==low[node]) &#123; cnt++; ll nd; do &#123; nd=st.top(),st.pop(); ins[nd]=0; belong[nd]=cnt; size[cnt]++; &#125; while(node!=nd); &#125;&#125;inline void mergePoint()&#123; tot=0; for(register int i=0;i&lt;ec;i++) &#123; if(belong[from[i]]!=belong[to[i]]) &#123; addSCC(belong[from[i]],belong[to[i]]); out[belong[from[i]]]++; &#125; &#125;&#125;int main()&#123; cin&gt;&gt;nc&gt;&gt;ec; for(register int i=0;i&lt;ec;i++) &#123; cin&gt;&gt;from[i]&gt;&gt;to[i]; addEdge(from[i],to[i]); &#125; for(register int i=1;i&lt;=nc;i++) &#123; if(!dfn[i]) &#123; tarjan(i); &#125; &#125; mergePoint(); for(register int i=1;i&lt;=cnt;i++) &#123; if(!out[i]) &#123; ans++; sccno=i; &#125; &#125; if(ans!=1) &#123; cout&lt;&lt;0; &#125; else &#123; cout&lt;&lt;size[sccno]; &#125;&#125;]]></content>
       <tags>
-        <tag>图论</tag>
-        <tag>强连通分量</tag>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
         <tag>HAOI</tag>
+        <tag>图论</tag>
+        <tag>强连通分量</tag>
         <tag>缩点</tag>
       </tags>
   </entry>
