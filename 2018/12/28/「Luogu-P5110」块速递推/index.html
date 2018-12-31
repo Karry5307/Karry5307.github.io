@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个数列$a$，满足如下递推式： $a_n=233a_{n-1}+666a_{n-2}$。 求出这个数列第$n$项$a_n\bmod 10^9+7$的值，一共有$T$组数据，为了减少输出量，请输出这些答案的异或和。 Data Range：$T\leq 5\times 10^7,0\leq n&amp;lt;2^{64}$ Solution首先求$a_n=233a_{n-1}+666a_{n-2}$的通">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-30T08:00:25.435Z">
+<meta property="og:updated_time" content="2018-12-31T06:07:43.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5110」块速递推">
 <meta name="twitter:description" content="给定一个数列$a$，满足如下递推式： $a_n=233a_{n-1}+666a_{n-2}$。 求出这个数列第$n$项$a_n\bmod 10^9+7$的值，一共有$T$组数据，为了减少输出量，请输出这些答案的异或和。 Data Range：$T\leq 5\times 10^7,0\leq n&amp;lt;2^{64}$ Solution首先求$a_n=233a_{n-1}+666a_{n-2}$的通">
@@ -445,8 +445,9 @@
 <p>可别忘了，$a_0=0,a_1=1$，所以解出$p=\cfrac{1}{\sqrt{56953}},q=-\cfrac{1}{\sqrt{56953}}$。</p>
 <p>所以$a_n=\cfrac{1}{\sqrt{56953}}[(\cfrac{233+\sqrt{56953}}{2})^n-(\cfrac{233-\sqrt{56953}}{2})^n]$</p>
 <p>现在来解决除号以及根号。首先，枚举得$\sqrt{56953}\equiv 188305837\pmod {10^9+7}$。</p>
-<p>所以说$a_n=\cfrac{1}{188305037}(94153035^n-905847205^n)$，而$188305837^{-1}\equiv 233230706\pmod {10^9+7}$。</p>
-<p>所以，最终的通项式就是$a_n=233230706(94153035^n-905847205^n)$。</p>
+<p>所以说</p>
+<script type="math/tex; mode=display">a_n=\cfrac{1}{188305037}(94153035^n-905847205^n)$，而$188305837^{-1}\equiv 233230706\pmod {10^9+7}</script><p>所以，最终的通项式就是</p>
+<p><script type="math/tex">a_n=233230706(94153035^n-905847205^n)</script>。</p>
 <p>但是，由于毒瘤出题人的毒瘤给分制度，前面六个点每点$1 pts$，所以用龟速幂只能水$6 pts$。我尝试用$O(1)$的按位龟速乘优化了一下后，还是只有$6 pts$。看来我们只能优化计算上面的两个幂的过程。</p>
 <p>很明显可以先优化一下指数，由欧拉小定理得：</p>
 <p>$a_{n+\varphi(10^9+7)}\equiv a_n\pmod {10^9+7}$</p>
