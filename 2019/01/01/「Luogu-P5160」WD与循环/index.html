@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定$n,m$，求以下代码的运行结果：12345678910111213int cnt=0;for(register int a_1=0;a_1&amp;lt;=m;a_1++)&amp;#123;	for(register int a_2=0;a_1+a_2&amp;lt;=m;a_2++)	&amp;#123;		...		for(register int a_n=0;a_1+a_2+...+a_n&amp;lt;=m;a_n++)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-01T10:54:37.322Z">
+<meta property="og:updated_time" content="2019-01-01T12:43:16.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5160」WD与循环">
 <meta name="twitter:description" content="给定$n,m$，求以下代码的运行结果：12345678910111213int cnt=0;for(register int a_1=0;a_1&amp;lt;=m;a_1++)&amp;#123;	for(register int a_2=0;a_1+a_2&amp;lt;=m;a_2++)	&amp;#123;		...		for(register int a_n=0;a_1+a_2+...+a_n&amp;lt;=m;a_n++)">
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  83
+                  106
                 </span>
               
 
@@ -437,7 +437,7 @@
       
         <p>给定$n,m$，求以下代码的运行结果：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> a_1=<span class="number">0</span>;a_1&lt;=m;a_1++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> a_2=<span class="number">0</span>;a_1+a_2&lt;=m;a_2++)</span><br><span class="line">	&#123;</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> a_n=<span class="number">0</span>;a_1+a_2+...+a_n&lt;=m;a_n++)</span><br><span class="line">		&#123;</span><br><span class="line">			cnt=(cnt+<span class="number">1</span>)%<span class="number">19491001</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, cnt);</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>考虑爆搜出小样例找规律，可以得到是一个组合数。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>先声明：$19491001$是质数！<del>质数的日子一般都会发生大事，如$1<strong>**</strong>7$</del><br>考虑爆搜出小样例找规律，可以得到是一个组合数。</p>
 
       
     </div>
