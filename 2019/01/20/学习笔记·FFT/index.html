@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="多项式，爽！ 前言首先，在以下的文章中，将一个多项式表示为$F(x),G(x)$等。 FFTFFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求卷积的方法。 卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。 形如$y_n=\sum\limits_{i}x_ih_{n-i}$的式子，将$y$称为$xh$的卷积。 但是这个东西">
+<meta name="description" content="多项式，爽！">
 <meta name="keywords" content="学习笔记,多项式,FFT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记·多项式专题">
 <meta property="og:url" content="http://yoursite.com/2019/01/20/学习笔记·FFT/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="多项式，爽！ 前言首先，在以下的文章中，将一个多项式表示为$F(x),G(x)$等。 FFTFFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求卷积的方法。 卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。 形如$y_n=\sum\limits_{i}x_ih_{n-i}$的式子，将$y$称为$xh$的卷积。 但是这个东西">
+<meta property="og:description" content="多项式，爽！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-20T13:34:08.157Z">
+<meta property="og:updated_time" content="2019-01-20T13:37:18.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题">
-<meta name="twitter:description" content="多项式，爽！ 前言首先，在以下的文章中，将一个多项式表示为$F(x),G(x)$等。 FFTFFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求卷积的方法。 卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。 形如$y_n=\sum\limits_{i}x_ih_{n-i}$的式子，将$y$称为$xh$的卷积。 但是这个东西">
+<meta name="twitter:description" content="多项式，爽！">
 
 
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  268
+                  309
                 </span>
               
 
@@ -435,7 +435,7 @@
       
 
       
-        <p><del>多项式，爽！</del></p>
+        <p><del>多项式，爽！</del><br><a id="more"></a></p>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>首先，在以下的文章中，将一个多项式表示为$F(x),G(x)$等。</p>
 <h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><p>FFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求<strong>卷积</strong>的方法。</p>
 <p>卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。</p>
@@ -448,6 +448,8 @@
 <p>抽出$x^2$项，将两个多项式看做$x$和$h$，结果看做$y$，其中$x_k$表示$x$这个多项式的$x^k$的系数，那么有：</p>
 <p>$y_2=x_0h_2+x_1h_1+x_2h_0$</p>
 <p>$\quad\sum\limits_{i}x_ih_{2-i}$</p>
+<p>有没有发现这是一个卷积的形式！</p>
+<p>再试别的一些多项式，会发现抽出任何项都会发现是卷积的形式。</p>
 
       
     </div>
