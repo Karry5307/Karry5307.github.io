@@ -3,16 +3,6 @@
   <entry>
     <title><![CDATA[学习笔记·多项式专题]]></title>
     <url>%2F2019%2F01%2F20%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B8%93%E9%A2%98%2F</url>
-    <content type="text"></content>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>多项式</tag>
-        <tag>FFT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[学习笔记·多项式专题]]></title>
-    <url>%2F2019%2F01%2F20%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7FFT%2F</url>
     <content type="text"><![CDATA[多项式，爽！ 前言首先，在以下的文章中，将一个多项式表示为$F(x),G(x)$等。 FFTFFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求卷积的方法。 卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。 形如$y_n=\sum\limits_{i}x_ih_{n-i}$的式子，将$y$称为$xh$的卷积。 但是这个东西有一个更直观的名字：多项式乘法！ 为什么呢？可以看一个直观的解析。]]></content>
       <tags>
         <tag>学习笔记</tag>
@@ -35,8 +25,8 @@
     <url>%2F2018%2F12%2F31%2F%E3%80%8CLuogu-P5159%E3%80%8DWD%E4%B8%8E%E7%9F%A9%E9%98%B5%2F</url>
     <content type="text"><![CDATA[求有多少个$n\times m$的矩阵，使得每行每列异或值都是$0$。 Data Range：$T\leq 10^5,1\leq n,m\leq 10^9$ Solution先声明一下，$(n,m)$表示$n\times m$矩阵的答案，这里假定$n\leq m$，因为$(n,m)=(m,n)$。 不知道有没有人在看到这题的时候想到了NOIP 2018的填数游戏，按照这个思路，可以写一个爆搜跑一下小数据，这里记录一下我得到的小数据的答案： $(2,2)=2,(2,3)=4,(2,4)=8,(2,5)=16,(2,6)=32\cdots$ $(3,3)=16,(3,4)=64,(3,5)=256,(3,6)=1024\cdots$ $(4,4)=512,(4,5)=4096,(4,6)=32768\cdots$ $(5,5)=65536\cdots$ 首先考虑$(n,m)\div (n,m-1)$，把这个值记为$\operatorname{grow}(n)$，于是有： $\operatorname{grow}(2)=2,\operatorname{grow}(3)=4,\operatorname{grow}(4)=8,\operatorname{grow}(5)=16\cdots$ 所以$\operatorname{grow}(n)=2^{n-1}$。 接下来算$(n,n)$，有： $(2,2)=2,(3,3)=16,(4,4)=512,(5,5)=65536$。 乍一看，没什么规律，所以将这些式子变个形： $(2,2)=2^1,(3,3)=2^4,(4,4)=2^9,(5,5)=2^{16}\cdots$ 啊哈！这样就有规律啦qwq！ 于是就有$(n,n)=2^{(n-1)^2}$ 综上，可以得出$(n,m)\equiv 2^{(n-1)^2}\times(2^{n-1})^{m-n}$。 于是就可以用快速幂做啦qwq。 但是这样子$\texttt{Subtask 3}$会TLE，所以考虑优化。 不是有欧拉定理吗？ 所以说可以把$(n-1)^2$模个$\varphi(998244353)=998244352$，就可以完结撒花啦qwq！ Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;const ll MOD=998244353;ll test,length,width,base,grow;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline ll qpow(ll base,ll exponent,ll mod)&#123; if(!exponent) &#123; return 1; &#125; ll temp=qpow(base,exponent&gt;&gt;1,mod),res=temp*temp%mod; if(exponent&amp;1) &#123; res=res*base%mod; &#125; return res;&#125;int main()&#123; test=read(); for(register int i=0;i&lt;test;i++) &#123; length=read(),width=read(); if(length&gt;width) &#123; swap(length,width); &#125; base=qpow(2,(length-1)*(length-1)%(MOD-1),MOD); grow=qpow(2,length-1,MOD); printf("%lld\n",base*qpow(grow,width-length,MOD)%MOD); &#125;&#125;]]></content>
       <tags>
-        <tag>找规律</tag>
         <tag>打表</tag>
+        <tag>找规律</tag>
         <tag>数学</tag>
       </tags>
   </entry>
@@ -105,8 +95,8 @@
         <tag>BZOJ</tag>
         <tag>HAOI</tag>
         <tag>各省省选</tag>
-        <tag>数论</tag>
         <tag>CodeVS</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -165,8 +155,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -236,8 +226,8 @@
     <url>%2F2018%2F11%2F10%2F%E3%80%8CLuogu-P2532%E3%80%8D-AHOI2012-%E6%A0%91%E5%B1%8B%E9%98%B6%E6%A2%AF%2F</url>
     <content type="text"><![CDATA[引言NOIP rp++! 链接Luogu P2532 题解考虑$f_i$表示搭$i$层高的阶梯的方案数，$g_{i,j}$表示最左下角的钢材上面有$i$层高，右边有$j$层高的方案数，那么如图$f_n=\sum^{n-1}_{i=1}g_{i,j}$而$i+j=n$且$g_{i,j}=f_if_j$$\therefore f_n=\sum^{n-1}_{i=1}f_if_{n-i}$显然是卡特兰的递推式，所以就可以用卡特兰数求，但是要用高精度…… 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e4+51; struct BigInt&#123; ll digit; ll num[MAXN]; BigInt() &#123; memset(num,0,sizeof(num)); &#125; inline void operator =(ll x) &#123; while(x) &#123; num[digit++]=x%10000,x/=10000; &#125; &#125; inline void op() &#123; printf("%d",num[digit-1]); for(register int i=digit-2;i&gt;=0;i--) &#123; if(!num[i]) &#123; printf("0000"); continue; &#125; ll rest=3-(ll)(log10(num[i])); for(register int j=rest;j;j--) &#123; putchar('0'); &#125; printf("%d",num[i]); &#125; &#125; inline bool operator &gt;(const BigInt &amp;rhs)const &#123; if(digit!=rhs.digit) &#123; return digit&gt;rhs.digit; &#125; for(register int i=digit-1;i&gt;=0;i--) &#123; if(num[i]!=rhs.num[i]) &#123; return num[i]&gt;rhs.num[i]; &#125; &#125; return 0; &#125;&#125;; ll num;BigInt res;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline BigInt operator +(BigInt x,BigInt y)&#123; BigInt res; ll carry=0; res.digit=max(x.digit,y.digit)+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]+y.num[i]+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator *(BigInt x,ll y)&#123; BigInt res; ll carry=0; res.digit=x.digit+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]*y+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator /(BigInt x,ll y)&#123; BigInt res; ll cur=0; res.digit=x.digit; for(register int i=x.digit-1;i&gt;=0;i--) &#123; cur=cur*10000+x.num[i]; if(cur&gt;=y) &#123; res.num[i]=cur/y,cur%=y; &#125; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;int main()&#123; num=read(); res=1; for(register int i=1;i&lt;=2*num;i++) &#123; res=res*i; &#125; res=res/(num+1); for(register int i=1;i&lt;=num;i++) &#123; res=res/i/i; &#125; res.op();&#125;]]></content>
       <tags>
-        <tag>高精</tag>
         <tag>数论</tag>
+        <tag>高精</tag>
         <tag>卡特兰</tag>
       </tags>
   </entry>
@@ -374,9 +364,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -388,8 +378,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -399,8 +389,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -422,8 +412,8 @@
     <content type="text"><![CDATA[怎么说呢，有点裸的树链剖分加上一些常用小技巧…… 链接Luogu P3950]]></content>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>未完待续</tag>
+        <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
       </tags>
@@ -459,8 +449,8 @@
     <url>%2F2018%2F08%2F13%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%2F</url>
     <content type="text"><![CDATA[树链剖分是一种将一颗树通过划分不相交的来维护树上路径信息的算法。它保证每一个点仅在一个链上，并通过毒瘤数据结构来维护节点信息。树链剖分是干什么用的呢？很简单，借助树链剖分，可以任意修改树上两点最短路径的点权和子树点权，根本用不着树上差分。如果这棵树是一条链，支持修改和查询，那么我们可以重新按深度编号，这样子每棵子树上的编号都是连续的了，就可以用毒瘤数据结构来解决。但是，事实上，连洛谷模板的样例都不是一条链。尽管有人说可以用LCA+树上差分过，但你觉得数据可能是纯随机的么qwq。所以说，我们应该用树链剖分。 前置技能第一个是刚才标粗的毒瘤数据结构，树链剖分是依靠毒瘤数据结构，比如线段树，树状数组，平衡树等来修改和查询，否则就GG了……第二个是LCA，即最近公共祖先。第三个是树的DFS序，这个有什么用后面会讲。]]></content>
       <tags>
-        <tag>线段树</tag>
         <tag>未完待续</tag>
+        <tag>线段树</tag>
         <tag>树链剖分</tag>
         <tag>学习笔记</tag>
       </tags>
