@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="多项式，爽！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-21T08:56:19.609Z">
+<meta property="og:updated_time" content="2019-01-21T09:00:58.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题">
 <meta name="twitter:description" content="多项式，爽！">
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  682
+                  747
                 </span>
               
 
@@ -463,12 +463,14 @@
 <p>如果让你把两个$n$次多项式$F(x)$与$G(x)$乘起来，怎么办？</p>
 <p>你首先所想到的，肯定是像上面那样，把两个多项式暴力地乘起来。</p>
 <p>但是，这样做时间复杂度是多少呢？</p>
-<p>我每一次从$F(x)$中拿出一个单项式与$G(x)$相乘，时间复杂度是$O(n)$的，但是$F(x)$从$x^0$到$x^n$有$n+1$个单项式，所以总的来说是$$O(n^2)的。</p>
+<p>我每一次从$F(x)$中拿出一个单项式与$G(x)$相乘，时间复杂度是$O(n)$的，但是$F(x)$从$x^0$到$x^n$有$n+1$个单项式，所以总的来说是$O(n^2)$的。</p>
 <p>所以说，有没有更快一点的方法呢？</p>
 <p>还真有！！</p>
 <p>首先看一个问题。</p>
-<p>有$n$个点，是$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求F(x)呢？</p>
-<p>你想一想，</p>
+<p>给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求F(x)呢？</p>
+<p>先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？</p>
+<p>比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有：</p>
+<p>$\begin{cases}a_1=1 \ a_0+a_1=3\end{cases}$</p>
 
       
     </div>
@@ -707,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.5k</span>
+    <span title="Site words total count">27.6k</span>
   
 </div>
 
