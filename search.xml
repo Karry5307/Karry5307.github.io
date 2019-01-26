@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[学习笔记·多项式专题]]></title>
-    <url>%2F2019%2F01%2F20%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B8%93%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[多项式，爽！ FFTFFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求卷积的方法。 卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。 形如$y_n=\sum\limits_{i}x_ih_{n-i}$（表示所有$x_i$和$h_{n-i}$有意义时$x_i$）的式子，将$y$称为$xh$的卷积。 但是这个东西有一个更直观的名字：多项式乘法！ 为什么呢？可以看一个直观的解析。 比如说，设$f(x)=1x^2+3x-1,g(x)=3x^2+1x-5$计算$f(x)g(x)$（这里故意加上了这个系数）。 原式$=1x^2(3x^2+1x-5)+3x(3x^2+1x-5)-1(3x^2+1x-5)$ $\quad {=(1\times 3)x^4+(1\times 1+3\times 3)x^3+[1\times -5+3\times 1+(-1)\times(-5)]x^2+}$ $\quad\quad[3\times -5+(-1)\times 1]x+(-1)\times (-5)$。 抽出$x^2$项，将$f(x)$和$g(x)$的系数看做$x$和$h$，结果的系数看做$y$，其中$x_k$表示$x$这个多项式的$x^k$的系数（其实这个数列$x$叫做多项式$x$的系数数列），那么有： $y_2=x_0h_2+x_1h_1+x_2h_0$ $\quad=\sum\limits_{i}x_ih_{2-i}$ 有没有发现这是一个卷积的形式！ 再试别的一些多项式，会发现抽出任何项都会发现是卷积的形式。 为什么呢？ 考虑$y_k$的求法，即$y_kx^k$是怎么得到的。 首先，它只能是一些$x_ix^i$和$h_jx^j$的乘积组成的。（不能由一个多项式的两个单项式的乘积转移而来，还有，这里的$x$应该不会搞混吧） 其次，$x_ix^i$和$h_jx^j$的乘积是一个次数为$k$的单项式。 所以，它只能由$x_0x^0\cdot h_kx^k,x_1x^1\cdot h_{k-1}x^{k-1}\cdots$得到。 而$y_kx^k$正好是这些多项式的和。 所以，$y_kx^k=\sum\limits_{i=0}^kx_ix^i\cdot h_{k-i}x^{k-i}$ 于是自然有y_k=\sum\limits_{i=0}^{k}x_ih_{k-i} 这就是一个卷积的形式啊！ 于是，我们可以显然的知道，多项式乘法就是卷积。 回到正题，先定义几个符号： $F(x)$代表一个多项式，叫做“多项式$F$”。 比如说，设$F(x)=x^3+x^2-1$，如果以后说$x^3+x^2-1$，就直接提$F(x)$就好啦。 于是开始进入多项式乘法这个问题。 如果让你把两个$n$次多项式$F(x)$与$G(x)$乘起来，怎么办？ 你首先所想到的，肯定是像上面那样，把两个多项式暴力地乘起来。 但是，这样做时间复杂度是多少呢？ 我每一次从$F(x)$中拿出一个单项式与$G(x)$相乘，时间复杂度是$O(n)$的，但是$F(x)$从$x^0$到$x^n$有$n+1$个单项式，所以总的来说是$O(n^2)$的。 所以说，有没有更快一点的方法呢？ 还真有！！ 首先看一个问题。 给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求F(x)呢？ 先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？ 比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有： \begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}解得 \begin{cases}a_0=2 \\ a_1=1\end{cases}而当$F(x)$为二次多项式时，即$F(x)=a_0x^2+a_1x+a_2$，那么可列出如下式子： \begin{cases}a_2=1 \\ a_0+a_1+a_2=3\end{cases}这样子我们最多得到 \begin{cases}a_0+a_1=2 \\ a_2=3\end{cases}$F(x)$为二次多项式就已经不能精确解出系数的值了，那么更高次多项式更不行了。 所以说给两个点的值能确定一个一次多项式。 可以尝试一下$3$个点，它是可以确定一个二次多项式的（可能不能确定一个一次多项式，因为方程组可能无解）。 根据以上的实验可知，$n$个点最多确定一个$n-1$次多项式。 但是，为什么呢？]]></content>
+    <title><![CDATA[「Luogu P4245」【模板】任意模数NTT]]></title>
+    <url>%2F2019%2F01%2F26%2F%E3%80%8CLuogu-P4245%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BB%BB%E6%84%8F%E6%A8%A1%E6%95%B0NTT%2F</url>
+    <content type="text"><![CDATA[给定两个$n$次多项式$F(x),G(x)$的系数数列$a,b$和一个整数$p$，求$F(x)G(x)$在$\bmod p$意义下的值。不保证$p$可以分解成$a\cdot 2^k+1$的形式。Data Range：$1\leq n\leq 10^5,0\leq a_i,b_i\leq 10^9,2\leq p\leq 10^9+9$如果$p$是形如$a\cdot 2^k+1$的质数，可以直接刚$\texttt{NTT}$，但是布星啊，样例中的$p$都不是质数，所以说怎么办呢？]]></content>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>洛谷</tag>
+        <tag>模板</tag>
+        <tag>数论，数学</tag>
         <tag>多项式</tag>
+        <tag>CRT</tag>
+        <tag>NTT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[学习笔记·多项式专题（一）]]></title>
+    <url>%2F2019%2F01%2F20%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B8%93%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[多项式，爽！ FFTFFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求卷积的方法。 卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。 形如$y_n=\sum\limits_{i}x_ih_{n-i}$（表示所有$x_i$和$h_{n-i}$有意义时$x_i$）的式子，将$y$称为$xh$的卷积。 但是这个东西有一个更直观的名字：多项式乘法！ 为什么呢？可以看一个直观的解析。 比如说，设$f(x)=1x^2+3x-1,g(x)=3x^2+1x-5$计算$f(x)g(x)$（这里故意加上了这个系数）。 原式$=1x^2(3x^2+1x-5)+3x(3x^2+1x-5)-1(3x^2+1x-5)$ $\quad {=(1\times 3)x^4+(1\times 1+3\times 3)x^3+[1\times -5+3\times 1+(-1)\times(-5)]x^2+}$ $\quad\quad[3\times -5+(-1)\times 1]x+(-1)\times (-5)$。 抽出$x^2$项，将$f(x)$和$g(x)$的系数看做$x$和$h$，结果的系数看做$y$，其中$x_k$表示$x$这个多项式的$x^k$的系数（其实这个数列$x$叫做多项式$x$的系数数列），那么有： $y_2=x_0h_2+x_1h_1+x_2h_0$ $\quad=\sum\limits_{i}x_ih_{2-i}$ 有没有发现这是一个卷积的形式！ 再试别的一些多项式，会发现抽出任何项都会发现是卷积的形式。 为什么呢？ 考虑$y_k$的求法，即$y_kx^k$是怎么得到的。 首先，它只能是一些$x_ix^i$和$h_jx^j$的乘积组成的。（不能由一个多项式的两个单项式的乘积转移而来，还有，这里的$x$应该不会搞混吧） 其次，$x_ix^i$和$h_jx^j$的乘积是一个次数为$k$的单项式。 所以，它只能由$x_0x^0\cdot h_kx^k,x_1x^1\cdot h_{k-1}x^{k-1}\cdots$得到。 而$y_kx^k$正好是这些多项式的和。 所以，$y_kx^k=\sum\limits_{i=0}^kx_ix^i\cdot h_{k-i}x^{k-i}$ 于是自然有y_k=\sum\limits_{i=0}^{k}x_ih_{k-i} 这就是一个卷积的形式啊！ 于是，我们可以显然的知道，多项式乘法就是卷积。 回到正题，先定义几个符号： $F(x)$代表一个多项式，叫做“多项式$F$”。 比如说，设$F(x)=x^3+x^2-1$，如果以后说$x^3+x^2-1$，就直接提$F(x)$就好啦。 于是开始进入多项式乘法这个问题。 如果让你把两个$n$次多项式$F(x)$与$G(x)$乘起来，怎么办？ 你首先所想到的，肯定是像上面那样，把两个多项式暴力地乘起来。 但是，这样做时间复杂度是多少呢？ 我每一次从$F(x)$中拿出一个单项式与$G(x)$相乘，时间复杂度是$O(n)$的，但是$F(x)$从$x^0$到$x^n$有$n+1$个单项式，所以总的来说是$O(n^2)$的。 所以说，有没有更快一点的方法呢？ 还真有！！ 首先看一个问题。 给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求F(x)呢？ 先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？ 比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有： \begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}解得 \begin{cases}a_0=2 \\ a_1=1\end{cases}而当$F(x)$为二次多项式时，即$F(x)=a_0x^2+a_1x+a_2$，那么可列出如下式子： \begin{cases}a_2=1 \\ a_0+a_1+a_2=3\end{cases}这样子我们最多得到 \begin{cases}a_0+a_1=2 \\ a_2=3\end{cases}$F(x)$为二次多项式就已经不能精确解出系数的值了，那么更高次多项式更不行了。 所以说给两个点的值能确定一个一次多项式。 可以尝试一下$3$个点，它是可以确定一个二次多项式的（可能不能确定一个一次多项式，因为方程组可能无解）。 根据以上的实验和常识可知，$n$个点最多确定一个$n-1$次多项式。 所以说，一个$n-1$次多项式与它的曲线上的$n$个点的集合是等价的，而这个集合，叫做多项式的点值表达。]]></content>
+      <tags>
+        <tag>多项式</tag>
+        <tag>学习笔记</tag>
         <tag>FFT</tag>
       </tags>
   </entry>
@@ -56,9 +69,9 @@
     <content type="text"><![CDATA[给定$n$个点以及它们的点权，要求写一种数据结构支持以下操作：求$x$到$y$路径上点权的$operatorname{xor}$和，连接或删除一条边，以及修改某个点的点权。 链接题解一道LCT裸题。坑。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=3e5+51;ll cnt,qcnt,op,x,y;ll num[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace LCT&#123; struct Node&#123; ll fa,val,tag; ll ch[2]; &#125;; struct LinkCutTree&#123; Node nd[MAXN]; ll st[MAXN]; inline bool nroot(ll x) &#123; return nd[nd[x].fa].ch[0]==x||nd[nd[x].fa].ch[1]==x; &#125; inline void update(ll x) &#123; nd[x].val=nd[nd[x].ch[0]].val^nd[nd[x].ch[1]].val^num[x]; &#125; inline void reverse(ll x) &#123; swap(nd[x].ch[0],nd[x].ch[1]),nd[x].tag^=1; &#125; inline void spread(ll x) &#123; if(nd[x].tag) &#123; if(nd[x].ch[0]) &#123; reverse(nd[x].ch[0]); &#125; if(nd[x].ch[1]) &#123; reverse(nd[x].ch[1]); &#125; nd[x].tag=0; &#125; &#125; inline void rotate(ll x) &#123; ll fa=nd[x].fa,gfa=nd[fa].fa; ll dir=nd[fa].ch[1]==x,son=nd[x].ch[!dir]; if(nroot(fa)) &#123; nd[gfa].ch[nd[gfa].ch[1]==fa]=x; &#125; nd[x].ch[!dir]=fa,nd[fa].ch[dir]=son; if(son) &#123; nd[son].fa=fa; &#125; nd[fa].fa=x,nd[x].fa=gfa; update(fa); &#125; inline void splay(ll x) &#123; ll fa=x,gfa,cur=0; st[++cur]=fa; while(nroot(fa)) &#123; st[++cur]=fa=nd[fa].fa; &#125; while(cur) &#123; spread(st[cur--]); &#125; while(nroot(x)) &#123; fa=nd[x].fa,gfa=nd[fa].fa; if(nroot(fa)) &#123; rotate((nd[fa].ch[0]==x)^(nd[gfa].ch[0]==fa)?x:fa); &#125; rotate(x); &#125; update(x); &#125; inline void access(ll x) &#123; for(register int i=0;x;x=nd[i=x].fa) &#123; splay(x),nd[x].ch[1]=i,update(x); &#125; &#125; inline void makeRoot(ll x) &#123; access(x),splay(x),reverse(x); &#125; inline ll findRoot(ll x) &#123; access(x),splay(x); while(nd[x].ch[0]) &#123; spread(x),x=nd[x].ch[0]; &#125; return x; &#125; inline void split(ll x,ll y) &#123; makeRoot(x),access(y),splay(y); &#125; inline void link(ll x,ll y) &#123; makeRoot(x); if(findRoot(y)!=x) &#123; nd[x].fa=y; &#125; &#125; inline void cut(ll x,ll y) &#123; makeRoot(x); if(findRoot(y)==x&amp;&amp;nd[x].fa==y&amp;&amp;!nd[x].ch[1]) &#123; nd[x].fa=nd[y].ch[0]=0; update(y); &#125; &#125; &#125;;&#125;LCT::LinkCutTree lct;int main()&#123; cnt=read(),qcnt=read(); for(register int i=1;i&lt;=cnt;i++) &#123; num[i]=read(); &#125; for(register int i=0;i&lt;qcnt;i++) &#123; op=read(),x=read(),y=read(); if(!op) &#123; lct.split(x,y); printf("%d\n",lct.nd[y].val); &#125; if(op==1) &#123; lct.link(x,y); &#125; if(op==2) &#123; lct.cut(x,y); &#125; if(op==3) &#123; lct.splay(x),num[x]=y; &#125; &#125;&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
-        <tag>树链剖分</tag>
         <tag>平衡树</tag>
         <tag>Splay</tag>
+        <tag>树链剖分</tag>
         <tag>模板</tag>
         <tag>Link Cut Tree</tag>
       </tags>
@@ -95,8 +108,8 @@
         <tag>BZOJ</tag>
         <tag>HAOI</tag>
         <tag>各省省选</tag>
-        <tag>CodeVS</tag>
         <tag>数论</tag>
+        <tag>CodeVS</tag>
       </tags>
   </entry>
   <entry>
@@ -116,9 +129,9 @@
     <content type="text"><![CDATA[给定一个数列$a$，对于$a_i$，寻找一个$a_j$使得$i&gt;j$且$\vert a_i-a_j\vert$最小。 题解一道近乎Splay裸题的题。很显然可以将最小的$\vert a_i-a_j\vert$拆成$a_i$与其前驱的差和与其后继的差的最小值。所以说就可以用Splay维护啦qwq。论手贱，你是比不过我的，今天又把while打成if啦 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=4e4+51,inf=0x3f3f3f3f;ll cnt,num,res,prv,nxt;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace Splay&#123; struct Node&#123; ll fa,val,size,temp; ll ch[2]; inline void reset(ll val=0,ll fa=0) &#123; this-&gt;fa=fa,this-&gt;val=val,this-&gt;temp=this-&gt;size=1; this-&gt;ch[0]=this-&gt;ch[1]=0; &#125; &#125;; struct Splay&#123; ll tot,root; Node nd[MAXN]; inline bool id(ll x) &#123; return nd[nd[x].fa].ch[1]==x; &#125; inline void update(ll x) &#123; nd[x].size=nd[nd[x].ch[0]].size+nd[nd[x].ch[1]].size+nd[x].temp; &#125; inline void connect(ll x,ll fa,ll dir) &#123; nd[x].fa=fa,nd[fa].ch[dir]=x; &#125; inline void rotate(ll x) &#123; ll fa=nd[x].fa,gfa=nd[fa].fa,dir=id(x); connect(x,gfa,id(fa)); connect(nd[x].ch[dir^1],fa,dir); connect(fa,x,dir^1); update(fa),update(x); &#125; inline void splay(ll cur,ll target) &#123; while(nd[cur].fa!=target) &#123; ll fa=nd[cur].fa,gfa=nd[fa].fa; if(gfa!=target) &#123; rotate(id(cur)^id(fa)?cur:fa); &#125; rotate(cur); &#125; if(!target) &#123; root=cur; &#125; &#125; inline void insert(ll val) &#123; ll cur=root,fa=0; while(cur&amp;&amp;nd[cur].val!=val) &#123; fa=cur,cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; if(cur) &#123; nd[cur].temp++; &#125; else &#123; cur=++tot; if(fa) &#123; nd[fa].ch[val&gt;nd[fa].val]=cur; &#125; nd[cur].reset(val,fa); &#125; splay(cur,0); &#125; inline void find(ll val) &#123; ll cur=root; if(!cur) &#123; return; &#125; while(nd[cur].ch[val&gt;nd[cur].val]&amp;&amp;val!=nd[cur].val) &#123; cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; splay(cur,0); &#125; inline ll prev(ll val) &#123; find(val); ll cur=root; if(nd[cur].val&lt;=val) &#123; return nd[cur].val; &#125; cur=nd[cur].ch[0]; while(nd[cur].ch[1]) &#123; cur=nd[cur].ch[1]; &#125; return nd[cur].val; &#125; inline ll next(ll val) &#123; find(val); ll cur=root; if(nd[cur].val&gt;=val) &#123; return nd[cur].val; &#125; cur=nd[cur].ch[1]; while(nd[cur].ch[0]) &#123; cur=nd[cur].ch[0]; &#125; return nd[cur].val; &#125; &#125;;&#125;Splay::Splay splay;int main()&#123; cnt=read(); splay.insert(inf),splay.insert(-inf); splay.insert(res=read()); for(register int i=1;i&lt;cnt;i++) &#123; num=read(); prv=splay.prev(num),nxt=splay.next(num); res+=min(num-prv,nxt-num); splay.insert(num); &#125; printf("%d",res);&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>平衡树</tag>
         <tag>Splay</tag>
+        <tag>各省省选</tag>
         <tag>HNOI</tag>
       </tags>
   </entry>
@@ -155,8 +168,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -188,8 +201,8 @@
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>权值线段树</tag>
-        <tag>组合数学</tag>
         <tag>UVa</tag>
+        <tag>组合数学</tag>
         <tag>康托展开</tag>
       </tags>
   </entry>
@@ -226,8 +239,8 @@
     <url>%2F2018%2F11%2F10%2F%E3%80%8CLuogu-P2532%E3%80%8D-AHOI2012-%E6%A0%91%E5%B1%8B%E9%98%B6%E6%A2%AF%2F</url>
     <content type="text"><![CDATA[引言NOIP rp++! 链接Luogu P2532 题解考虑$f_i$表示搭$i$层高的阶梯的方案数，$g_{i,j}$表示最左下角的钢材上面有$i$层高，右边有$j$层高的方案数，那么如图$f_n=\sum^{n-1}_{i=1}g_{i,j}$而$i+j=n$且$g_{i,j}=f_if_j$$\therefore f_n=\sum^{n-1}_{i=1}f_if_{n-i}$显然是卡特兰的递推式，所以就可以用卡特兰数求，但是要用高精度…… 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e4+51; struct BigInt&#123; ll digit; ll num[MAXN]; BigInt() &#123; memset(num,0,sizeof(num)); &#125; inline void operator =(ll x) &#123; while(x) &#123; num[digit++]=x%10000,x/=10000; &#125; &#125; inline void op() &#123; printf("%d",num[digit-1]); for(register int i=digit-2;i&gt;=0;i--) &#123; if(!num[i]) &#123; printf("0000"); continue; &#125; ll rest=3-(ll)(log10(num[i])); for(register int j=rest;j;j--) &#123; putchar('0'); &#125; printf("%d",num[i]); &#125; &#125; inline bool operator &gt;(const BigInt &amp;rhs)const &#123; if(digit!=rhs.digit) &#123; return digit&gt;rhs.digit; &#125; for(register int i=digit-1;i&gt;=0;i--) &#123; if(num[i]!=rhs.num[i]) &#123; return num[i]&gt;rhs.num[i]; &#125; &#125; return 0; &#125;&#125;; ll num;BigInt res;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline BigInt operator +(BigInt x,BigInt y)&#123; BigInt res; ll carry=0; res.digit=max(x.digit,y.digit)+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]+y.num[i]+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator *(BigInt x,ll y)&#123; BigInt res; ll carry=0; res.digit=x.digit+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]*y+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator /(BigInt x,ll y)&#123; BigInt res; ll cur=0; res.digit=x.digit; for(register int i=x.digit-1;i&gt;=0;i--) &#123; cur=cur*10000+x.num[i]; if(cur&gt;=y) &#123; res.num[i]=cur/y,cur%=y; &#125; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;int main()&#123; num=read(); res=1; for(register int i=1;i&lt;=2*num;i++) &#123; res=res*i; &#125; res=res/(num+1); for(register int i=1;i&lt;=num;i++) &#123; res=res/i/i; &#125; res.op();&#125;]]></content>
       <tags>
-        <tag>数论</tag>
         <tag>高精</tag>
+        <tag>数论</tag>
         <tag>卡特兰</tag>
       </tags>
   </entry>
@@ -364,9 +377,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -378,8 +391,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -389,8 +402,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -412,8 +425,8 @@
     <content type="text"><![CDATA[怎么说呢，有点裸的树链剖分加上一些常用小技巧…… 链接Luogu P3950]]></content>
       <tags>
         <tag>数据结构</tag>
-        <tag>未完待续</tag>
         <tag>线段树</tag>
+        <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
       </tags>
@@ -449,8 +462,8 @@
     <url>%2F2018%2F08%2F13%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%2F</url>
     <content type="text"><![CDATA[树链剖分是一种将一颗树通过划分不相交的来维护树上路径信息的算法。它保证每一个点仅在一个链上，并通过毒瘤数据结构来维护节点信息。树链剖分是干什么用的呢？很简单，借助树链剖分，可以任意修改树上两点最短路径的点权和子树点权，根本用不着树上差分。如果这棵树是一条链，支持修改和查询，那么我们可以重新按深度编号，这样子每棵子树上的编号都是连续的了，就可以用毒瘤数据结构来解决。但是，事实上，连洛谷模板的样例都不是一条链。尽管有人说可以用LCA+树上差分过，但你觉得数据可能是纯随机的么qwq。所以说，我们应该用树链剖分。 前置技能第一个是刚才标粗的毒瘤数据结构，树链剖分是依靠毒瘤数据结构，比如线段树，树状数组，平衡树等来修改和查询，否则就GG了……第二个是LCA，即最近公共祖先。第三个是树的DFS序，这个有什么用后面会讲。]]></content>
       <tags>
-        <tag>未完待续</tag>
         <tag>线段树</tag>
+        <tag>未完待续</tag>
         <tag>树链剖分</tag>
         <tag>学习笔记</tag>
       </tags>
