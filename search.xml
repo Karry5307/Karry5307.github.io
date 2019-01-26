@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「Luogu P4245」【模板】任意模数NTT]]></title>
     <url>%2F2019%2F01%2F26%2F%E3%80%8CLuogu-P4245%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BB%BB%E6%84%8F%E6%A8%A1%E6%95%B0NTT%2F</url>
-    <content type="text"><![CDATA[给定两个$n$次多项式$F(x),G(x)$的系数数列$a,b$和一个整数$p$，求$F(x)G(x)$在$\bmod p$意义下的值，不保证$p$可以分解成$a\cdot 2^k+1$的形式。 Data Range：$1\leq n\leq 10^5,0\leq a_i,b_i\leq 10^9,2\leq p\leq 10^9+9$ 链接Luogu P4245 题解如果$p$是形如$a\cdot 2^k+1$的质数，可以直接刚$\texttt{NTT}$，但是布星啊，样例中的$p$都不是质数，所以说怎么办呢？ 坑。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;const ll MAXN=4e5+51,G=3;const ll MOD1=469762049,MOD2=998244353,MOD3=1004535809;const ll MOD=468937312667959297;struct Polynomial&#123; ll deg; ll coeff[MAXN];&#125;;Polynomial x,y,res1,res2,res3;ll cnt,mod;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline ll qadd(ll x,ll y,ll mod)&#123; return x+y&gt;mod?x+y-mod:x+y;&#125;inline ll qmin(ll x,ll y,ll mod)&#123; return x-y&lt;0?x-y+mod:x-y;&#125;inline ll qmul(ll x,ll y,ll mod)&#123; x%=mod,y%=mod; return ((x*y-(ll)((ll)((long double)x/mod*y+0.5)*mod))%mod+mod)%mod;&#125;inline ll qpow(ll base,ll exponent,ll mod)&#123; if(!exponent) &#123; return 1; &#125; ll temp=qpow(base,exponent&gt;&gt;1,mod),res=temp*temp%mod; if(exponent&amp;1) &#123; res=res*base%mod; &#125; return res;&#125;inline void NTT(ll *cp,ll cnt,ll inv,ll mod)&#123; ll lim=0,cur=0,res=0,omg=0; while((1&lt;&lt;lim)&lt;cnt) &#123; lim++; &#125; for(register int i=0;i&lt;cnt;i++) &#123; cur=0; for(register int j=0;j&lt;lim;j++) &#123; if((i&gt;&gt;j)&amp;1) &#123; cur|=(1&lt;&lt;(lim-j-1)); &#125; &#125; if(i&lt;cur) &#123; swap(cp[i],cp[cur]); &#125; &#125; for(register int i=2;i&lt;=cnt;i&lt;&lt;=1) &#123; cur=i&gt;&gt;1,res=qpow(G,(mod-1)/i,mod); for(register ll *p=cp;p!=cp+cnt;p+=i) &#123; omg=1; for(register int j=0;j&lt;cur;j++) &#123; ll t=omg*p[j+cur]%mod; p[j+cur]=qmin(p[j],t,mod); p[j]=qadd(p[j],t,mod); omg=omg*res%mod; &#125; &#125; &#125;&#125;inline Polynomial mul(Polynomial x,Polynomial y,ll mod)&#123; Polynomial res; ll cnt=1,inv; static ll cpx[MAXN],cpy[MAXN]; memset(cpx,0,sizeof(cpx)),memset(cpy,0,sizeof(cpy)); for(register int i=0;i&lt;=x.deg;i++) &#123; cpx[i]=x.coeff[i]; &#125; for(register int i=0;i&lt;=y.deg;i++) &#123; cpy[i]=y.coeff[i]; &#125; while(cnt&lt;=x.deg+y.deg) &#123; cnt&lt;&lt;=1; &#125; NTT(cpx,cnt,1,mod),NTT(cpy,cnt,1,mod); for(register int i=0;i&lt;=cnt;i++) &#123; cpx[i]=cpx[i]*cpy[i]%mod; &#125; NTT(cpx,cnt,-1,mod); res.deg=x.deg+y.deg,inv=qpow(cnt,mod-2,mod); cpx[0]=cpx[0]*inv%mod; for(register int i=1;i&lt;=cnt&gt;&gt;1;i++) &#123; cpx[i]=cpx[i]*inv%mod; if(i!=cnt-i) &#123; cpx[cnt-i]=cpx[cnt-i]*inv%mod; &#125; swap(cpx[i],cpx[cnt-i]); &#125; for(register int i=0;i&lt;=res.deg;i++) &#123; res.coeff[i]=qmin(cpx[i],0,mod); &#125; return res;&#125;inline ll CRT(ll r1,ll r2,ll r3,ll mod)&#123; ll inv1=208783132,inv2=395249030; ll r=qadd(qmul(qmul(qmin(r1,r2,MOD1),inv1,MOD1),MOD2,MOD),r2,MOD); ll k=qmul(qmin(r3,r,MOD3),inv2,MOD3); return ((k%mod)*(MOD%mod)%mod+r)%mod;&#125;int main()&#123; x.deg=read(),y.deg=read(),mod=read(); for(register int i=0;i&lt;=x.deg;i++) &#123; x.coeff[i]=read()%mod; &#125; for(register int i=0;i&lt;=y.deg;i++) &#123; y.coeff[i]=read()%mod; &#125; res1=mul(x,y,MOD1),res2=mul(x,y,MOD2),res3=mul(x,y,MOD3); for(register int i=0;i&lt;=res1.deg;i++) &#123; printf("%lld ",CRT(res1.coeff[i],res2.coeff[i],res3.coeff[i],mod)); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[给定两个$n$次多项式$F(x),G(x)$的系数数列$a,b$和一个整数$p$，求$F(x)G(x)$在$\bmod p$意义下的值，不保证$p$可以分解成$a\cdot 2^k+1$的形式。 Data Range：$1\leq n\leq 10^5,0\leq a_i,b_i\leq 10^9,2\leq p\leq 10^9+9$ 链接Luogu P4245 题解如果$p$是形如$a\cdot 2^k+1$的质数，可以直接刚$\texttt{NTT}$，但是布星啊，样例中的$p$都不是质数，所以说怎么办呢？ 用$\texttt{NTT}$计算多项式乘法的最终结果是取模后的，所以考虑采用$\texttt{CRT}$合并答案。 但是，答案要在$\texttt{long long}$范围内唯一，所以取两个模数布星，要取三个，即所谓的三模数$\texttt{NTT}$。 这里我个人倾向于取$p_1=469762049$，$p_2=998244353$和$p_3=1004535809$，因为这三个数的原根是$3$。 于是可以通过$\texttt{NTT}$算出所给的多项式在模$p_1,p_2,p_3$意义下的乘积。 坑。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;const ll MAXN=4e5+51,G=3;const ll MOD1=469762049,MOD2=998244353,MOD3=1004535809;const ll MOD=468937312667959297;struct Polynomial&#123; ll deg; ll coeff[MAXN];&#125;;Polynomial x,y,res1,res2,res3;ll cnt,mod;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline ll qadd(ll x,ll y,ll mod)&#123; return x+y&gt;mod?x+y-mod:x+y;&#125;inline ll qmin(ll x,ll y,ll mod)&#123; return x-y&lt;0?x-y+mod:x-y;&#125;inline ll qmul(ll x,ll y,ll mod)&#123; x%=mod,y%=mod; return ((x*y-(ll)((ll)((long double)x/mod*y+0.5)*mod))%mod+mod)%mod;&#125;inline ll qpow(ll base,ll exponent,ll mod)&#123; if(!exponent) &#123; return 1; &#125; ll temp=qpow(base,exponent&gt;&gt;1,mod),res=temp*temp%mod; if(exponent&amp;1) &#123; res=res*base%mod; &#125; return res;&#125;inline void NTT(ll *cp,ll cnt,ll inv,ll mod)&#123; ll lim=0,cur=0,res=0,omg=0; while((1&lt;&lt;lim)&lt;cnt) &#123; lim++; &#125; for(register int i=0;i&lt;cnt;i++) &#123; cur=0; for(register int j=0;j&lt;lim;j++) &#123; if((i&gt;&gt;j)&amp;1) &#123; cur|=(1&lt;&lt;(lim-j-1)); &#125; &#125; if(i&lt;cur) &#123; swap(cp[i],cp[cur]); &#125; &#125; for(register int i=2;i&lt;=cnt;i&lt;&lt;=1) &#123; cur=i&gt;&gt;1,res=qpow(G,(mod-1)/i,mod); for(register ll *p=cp;p!=cp+cnt;p+=i) &#123; omg=1; for(register int j=0;j&lt;cur;j++) &#123; ll t=omg*p[j+cur]%mod; p[j+cur]=qmin(p[j],t,mod); p[j]=qadd(p[j],t,mod); omg=omg*res%mod; &#125; &#125; &#125;&#125;inline Polynomial mul(Polynomial x,Polynomial y,ll mod)&#123; Polynomial res; ll cnt=1,inv; static ll cpx[MAXN],cpy[MAXN]; memset(cpx,0,sizeof(cpx)),memset(cpy,0,sizeof(cpy)); for(register int i=0;i&lt;=x.deg;i++) &#123; cpx[i]=x.coeff[i]; &#125; for(register int i=0;i&lt;=y.deg;i++) &#123; cpy[i]=y.coeff[i]; &#125; while(cnt&lt;=x.deg+y.deg) &#123; cnt&lt;&lt;=1; &#125; NTT(cpx,cnt,1,mod),NTT(cpy,cnt,1,mod); for(register int i=0;i&lt;=cnt;i++) &#123; cpx[i]=cpx[i]*cpy[i]%mod; &#125; NTT(cpx,cnt,-1,mod); res.deg=x.deg+y.deg,inv=qpow(cnt,mod-2,mod); cpx[0]=cpx[0]*inv%mod; for(register int i=1;i&lt;=cnt&gt;&gt;1;i++) &#123; cpx[i]=cpx[i]*inv%mod; if(i!=cnt-i) &#123; cpx[cnt-i]=cpx[cnt-i]*inv%mod; &#125; swap(cpx[i],cpx[cnt-i]); &#125; for(register int i=0;i&lt;=res.deg;i++) &#123; res.coeff[i]=qmin(cpx[i],0,mod); &#125; return res;&#125;inline ll CRT(ll r1,ll r2,ll r3,ll mod)&#123; ll inv1=208783132,inv2=395249030; ll r=qadd(qmul(qmul(qmin(r1,r2,MOD1),inv1,MOD1),MOD2,MOD),r2,MOD); ll k=qmul(qmin(r3,r,MOD3),inv2,MOD3); return ((k%mod)*(MOD%mod)%mod+r)%mod;&#125;int main()&#123; x.deg=read(),y.deg=read(),mod=read(); for(register int i=0;i&lt;=x.deg;i++) &#123; x.coeff[i]=read()%mod; &#125; for(register int i=0;i&lt;=y.deg;i++) &#123; y.coeff[i]=read()%mod; &#125; res1=mul(x,y,MOD1),res2=mul(x,y,MOD2),res3=mul(x,y,MOD3); for(register int i=0;i&lt;=res1.deg;i++) &#123; printf("%lld ",CRT(res1.coeff[i],res2.coeff[i],res3.coeff[i],mod)); &#125;&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
         <tag>模板</tag>
@@ -38,8 +38,8 @@
     <url>%2F2018%2F12%2F31%2F%E3%80%8CLuogu-P5159%E3%80%8DWD%E4%B8%8E%E7%9F%A9%E9%98%B5%2F</url>
     <content type="text"><![CDATA[求有多少个$n\times m$的矩阵，使得每行每列异或值都是$0$。 Data Range：$T\leq 10^5,1\leq n,m\leq 10^9$ Solution先声明一下，$(n,m)$表示$n\times m$矩阵的答案，这里假定$n\leq m$，因为$(n,m)=(m,n)$。 不知道有没有人在看到这题的时候想到了NOIP 2018的填数游戏，按照这个思路，可以写一个爆搜跑一下小数据，这里记录一下我得到的小数据的答案： $(2,2)=2,(2,3)=4,(2,4)=8,(2,5)=16,(2,6)=32\cdots$ $(3,3)=16,(3,4)=64,(3,5)=256,(3,6)=1024\cdots$ $(4,4)=512,(4,5)=4096,(4,6)=32768\cdots$ $(5,5)=65536\cdots$ 首先考虑$(n,m)\div (n,m-1)$，把这个值记为$\operatorname{grow}(n)$，于是有： $\operatorname{grow}(2)=2,\operatorname{grow}(3)=4,\operatorname{grow}(4)=8,\operatorname{grow}(5)=16\cdots$ 所以$\operatorname{grow}(n)=2^{n-1}$。 接下来算$(n,n)$，有： $(2,2)=2,(3,3)=16,(4,4)=512,(5,5)=65536$。 乍一看，没什么规律，所以将这些式子变个形： $(2,2)=2^1,(3,3)=2^4,(4,4)=2^9,(5,5)=2^{16}\cdots$ 啊哈！这样就有规律啦qwq！ 于是就有$(n,n)=2^{(n-1)^2}$ 综上，可以得出$(n,m)\equiv 2^{(n-1)^2}\times(2^{n-1})^{m-n}$。 于是就可以用快速幂做啦qwq。 但是这样子$\texttt{Subtask 3}$会TLE，所以考虑优化。 不是有欧拉定理吗？ 所以说可以把$(n-1)^2$模个$\varphi(998244353)=998244352$，就可以完结撒花啦qwq！ Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;const ll MOD=998244353;ll test,length,width,base,grow;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline ll qpow(ll base,ll exponent,ll mod)&#123; if(!exponent) &#123; return 1; &#125; ll temp=qpow(base,exponent&gt;&gt;1,mod),res=temp*temp%mod; if(exponent&amp;1) &#123; res=res*base%mod; &#125; return res;&#125;int main()&#123; test=read(); for(register int i=0;i&lt;test;i++) &#123; length=read(),width=read(); if(length&gt;width) &#123; swap(length,width); &#125; base=qpow(2,(length-1)*(length-1)%(MOD-1),MOD); grow=qpow(2,length-1,MOD); printf("%lld\n",base*qpow(grow,width-length,MOD)%MOD); &#125;&#125;]]></content>
       <tags>
-        <tag>找规律</tag>
         <tag>打表</tag>
+        <tag>找规律</tag>
         <tag>数学</tag>
       </tags>
   </entry>
@@ -168,8 +168,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -377,9 +377,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -391,8 +391,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -402,8 +402,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -521,11 +521,11 @@
     <url>%2F2018%2F08%2F08%2F%E3%80%8CLuogu-P3128%E3%80%8D%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
     <content type="text"><![CDATA[给出一棵树和一些操作，每次操作都将两点间所有经过的点的点权+1，求出点权最大的点的权值。 链接Luogu P3128 题解怎么说呢，一道树上点差分模板题，当然树链剖分也可以做。定义$diff[i]$为点$i$的差分值，那么对于每一次修改的参数$start$和$end$，将$diff[start++,diff[end++,diff[\operatorname{lca}(start,end)—]$。为了不让路线修改蔓延到祖先，把LCA的父节点的差分值-1。最后用DFS求出子树差分数组的和就得到该节点修改后的点权啦。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev; &#125;;ll nc,ec,query,root,from,to;ll depth[500010],anc[500010][31],last[500010],diff[500010],LCA,maxn;edge ed[500010*2];inline void addEdge(ll from,ll to)&#123; ed[++ec].prev=last[from]; ed[ec].to=to; last[from]=ec;&#125;inline void dfs(ll node)&#123; ll son; for(register int i=last[node];i!=0;i=ed[i].prev) &#123; son=ed[i].to; if(!depth[son]) &#123; depth[son]=depth[node]+1; anc[son][0]=node; dfs(son); &#125; &#125;&#125;inline void LCASetup()&#123; depth[1]=1; anc[1][0]=0; dfs(1); for(register int i=1;i&lt;=21;i++) &#123; for(register int j=1;j&lt;=nc;j++) &#123; anc[j][i]=anc[anc[j][i-1]][i-1]; &#125; &#125;&#125;inline ll lca(ll x,ll y)&#123; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; for(register int i=21;i&gt;=0;i--) &#123; if(depth[anc[y][i]]&gt;=depth[x]) &#123; y=anc[y][i]; &#125; &#125; if(x==y) &#123; return x; &#125; for(register int i=21;i&gt;=0;i--) &#123; if(anc[x][i]!=anc[y][i]) &#123; x=anc[x][i]; y=anc[y][i]; &#125; &#125; return anc[x][0];&#125;inline ll ddfs(ll node)&#123; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; ddfs(ed[i].to); diff[node]+=diff[ed[i].to]; &#125; maxn=max(maxn,diff[node]);&#125;int main()&#123; scanf("%d%d",&amp;nc,&amp;query); for(register int i=0;i&lt;nc-1;i++) &#123; scanf("%d%d",&amp;from,&amp;to); addEdge(from,to); addEdge(to,from); &#125; LCASetup(); for(register int i=0;i&lt;query;i++) &#123; scanf("%d%d",&amp;from,&amp;to); LCA=lca(from,to); diff[from]++,diff[to]++,diff[LCA]--,diff[anc[LCA][0]]--; &#125; ddfs(1); cout&lt;&lt;maxn;&#125;]]></content>
       <tags>
+        <tag>LCA</tag>
+        <tag>树上差分</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
         <tag>USACO</tag>
-        <tag>LCA</tag>
-        <tag>树上差分</tag>
       </tags>
   </entry>
   <entry>
