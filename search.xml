@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[近期的一些计划]]></title>
     <url>%2F2019%2F01%2F26%2F%E8%BF%91%E6%9C%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92%2F</url>
-    <content type="text"><![CDATA[我太菜了，天天被又强又巨，还全方位的吊打我的tbr爆踩，所以要里一些计划了。 1.多项式全家桶 [x] Luogu P3803 【模板】多项式乘法（FFT） [x] Luogu P4245 【模板】任意模数NTT [ ] Luogu P4238 【模板】多项式求逆 [ ] Luogu P4512 【模板】多项式除法]]></content>
+    <content type="text"><![CDATA[我太菜了，天天被又强又巨，还全方位的吊打我的tbr爆踩，所以要列一些计划了。1.多项式全家桶 [x] Luogu P3803 【模板】多项式乘法（FFT） [x] Luogu P4245 【模板】任意模数NTT [ ] Luogu P4238 【模板】多项式求逆 [ ] Luogu P4512 【模板】多项式除法]]></content>
   </entry>
   <entry>
     <title><![CDATA[「Luogu P4245」【模板】任意模数NTT]]></title>
@@ -113,8 +113,8 @@
         <tag>BZOJ</tag>
         <tag>HAOI</tag>
         <tag>各省省选</tag>
-        <tag>CodeVS</tag>
         <tag>数论</tag>
+        <tag>CodeVS</tag>
       </tags>
   </entry>
   <entry>
@@ -173,8 +173,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -244,8 +244,8 @@
     <url>%2F2018%2F11%2F10%2F%E3%80%8CLuogu-P2532%E3%80%8D-AHOI2012-%E6%A0%91%E5%B1%8B%E9%98%B6%E6%A2%AF%2F</url>
     <content type="text"><![CDATA[引言NOIP rp++! 链接Luogu P2532 题解考虑$f_i$表示搭$i$层高的阶梯的方案数，$g_{i,j}$表示最左下角的钢材上面有$i$层高，右边有$j$层高的方案数，那么如图$f_n=\sum^{n-1}_{i=1}g_{i,j}$而$i+j=n$且$g_{i,j}=f_if_j$$\therefore f_n=\sum^{n-1}_{i=1}f_if_{n-i}$显然是卡特兰的递推式，所以就可以用卡特兰数求，但是要用高精度…… 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e4+51; struct BigInt&#123; ll digit; ll num[MAXN]; BigInt() &#123; memset(num,0,sizeof(num)); &#125; inline void operator =(ll x) &#123; while(x) &#123; num[digit++]=x%10000,x/=10000; &#125; &#125; inline void op() &#123; printf("%d",num[digit-1]); for(register int i=digit-2;i&gt;=0;i--) &#123; if(!num[i]) &#123; printf("0000"); continue; &#125; ll rest=3-(ll)(log10(num[i])); for(register int j=rest;j;j--) &#123; putchar('0'); &#125; printf("%d",num[i]); &#125; &#125; inline bool operator &gt;(const BigInt &amp;rhs)const &#123; if(digit!=rhs.digit) &#123; return digit&gt;rhs.digit; &#125; for(register int i=digit-1;i&gt;=0;i--) &#123; if(num[i]!=rhs.num[i]) &#123; return num[i]&gt;rhs.num[i]; &#125; &#125; return 0; &#125;&#125;; ll num;BigInt res;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline BigInt operator +(BigInt x,BigInt y)&#123; BigInt res; ll carry=0; res.digit=max(x.digit,y.digit)+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]+y.num[i]+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator *(BigInt x,ll y)&#123; BigInt res; ll carry=0; res.digit=x.digit+1; for(register int i=0;i&lt;=res.digit;i++) &#123; res.num[i]=x.num[i]*y+carry; carry=res.num[i]/10000,res.num[i]%=10000; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;inline BigInt operator /(BigInt x,ll y)&#123; BigInt res; ll cur=0; res.digit=x.digit; for(register int i=x.digit-1;i&gt;=0;i--) &#123; cur=cur*10000+x.num[i]; if(cur&gt;=y) &#123; res.num[i]=cur/y,cur%=y; &#125; &#125; if(!res.num[res.digit-1]) &#123; res.digit--; &#125; return res;&#125;int main()&#123; num=read(); res=1; for(register int i=1;i&lt;=2*num;i++) &#123; res=res*i; &#125; res=res/(num+1); for(register int i=1;i&lt;=num;i++) &#123; res=res/i/i; &#125; res.op();&#125;]]></content>
       <tags>
-        <tag>数论</tag>
         <tag>高精</tag>
+        <tag>数论</tag>
         <tag>卡特兰</tag>
       </tags>
   </entry>
@@ -382,9 +382,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -396,8 +396,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -407,8 +407,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
