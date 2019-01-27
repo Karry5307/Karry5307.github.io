@@ -3,14 +3,17 @@
   <entry>
     <title><![CDATA[「Luogu P2144」[FJOI2007]轮状病毒]]></title>
     <url>%2F2019%2F01%2F27%2F%E3%80%8CLuogu-P2144%E3%80%8D-FJOI2007-%E8%BD%AE%E7%8A%B6%E7%97%85%E6%AF%92%2F</url>
-    <content type="text"><![CDATA[有$n$个点组成一个无向图，其中$n-1$个点组成一个环，剩下一个点向着$n-1$个点连边，求这个图不同的生成树个个数。 Data Range：$n\leq 100$ 题解既然这个题要你生成树数量，那么就可以用$Matrix-Tree$定理乱搞了。]]></content>
+    <content type="text"><![CDATA[有$n+1$个点组成一个无向图，其中$n$个点组成一个环，剩下一个点向这$n$个点各连一条边，求这个图不同的生成树个数。 Data Range：$n\leq 100$ 链接题解既然这个题要你生成树数量，那么就可以用$\texttt{Matrix-Tree}$定理乱搞了。]]></content>
       <tags>
         <tag>图论</tag>
         <tag>洛谷</tag>
         <tag>BZOJ</tag>
         <tag>组合数学</tag>
+        <tag>生成树</tag>
         <tag>Matrix-Tree定理</tag>
         <tag>高精</tag>
+        <tag>打表</tag>
+        <tag>找规律</tag>
       </tags>
   </entry>
   <entry>
@@ -66,8 +69,8 @@
     <url>%2F2018%2F12%2F28%2F%E3%80%8CLuogu-P5110%E3%80%8D%E5%9D%97%E9%80%9F%E9%80%92%E6%8E%A8%2F</url>
     <content type="text"><![CDATA[给定一个数列$a$，满足如下递推式： $a_n=233a_{n-1}+666a_{n-2}$。 求出这个数列第$n$项$a_n\bmod 10^9+7$的值，一共有$T$组数据，为了减少输出量，请输出这些答案的异或和。 Data Range：$T\leq 5\times 10^7,0\leq n&lt;2^{64}$ 11 Solution首先求$a_n=233a_{n-1}+666a_{n-2}$的通项式。 考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\cfrac{233+\sqrt{56953}}{2},x_2=\cfrac{233-\sqrt{56953}}{2}$。 所以可以设这个数列的通项式为$a_n=p(\cfrac{233+\sqrt{56953}}{2})^n+q(\cfrac{233-\sqrt{56953}}{2})^n$。 可别忘了，$a_0=0,a_1=1$，所以解出$p=\cfrac{1}{\sqrt{56953}},q=-\cfrac{1}{\sqrt{56953}}$。 所以$a_n=\cfrac{1}{\sqrt{56953}}[(\cfrac{233+\sqrt{56953}}{2})^n-(\cfrac{233-\sqrt{56953}}{2})^n]$ 现在来解决除号以及根号。首先，枚举得$\sqrt{56953}\equiv 188305837\pmod {10^9+7}$。 所以说 a_n=\cfrac{1}{188305037}(94153035^n-905847205^n)$ 而$188305837^{-1}\equiv 233230706\pmod {10^9+7}所以，最终的通项式就是 a_n=233230706(94153035^n-905847205^n)。 但是，由于毒瘤出题人的毒瘤给分制度，前面六个点每点$1 pts$，所以用龟速幂只能水$6 pts$。我尝试用$O(1)$的按位龟速乘优化了一下后，还是只有$6 pts$。看来我们只能优化计算上面的两个幂的过程。 很明显可以先优化一下指数，由欧拉定理得： $a_{n+\varphi(10^9+7)}\equiv a_n\pmod {10^9+7}$ 于是可以把指数模$\varphi(10^9+7)=10^9+6$，但是还是只能得$6 pts$。 于是考虑$100 pts$的分块打表大法。由上面的结论可知，可以将指数控制在$10^9+6$以内，所以可以考虑分块打表。 可以知道，$\lceil\sqrt{10^9+6}\rceil=31623$，所以以这个数作为块长分块，将它记为$k$。 首先，预处理出 $94153035^0,94153035^1\cdots 94153035^{k-1}$ 和$905847205^0,905847205^1\cdots 905847205^{k-1}$ 然后，用龟速幂可算出 $94153035^k\equiv 37348318\pmod {10^9+7}$，$905847205^k\equiv 482464047\pmod {10^9+7}$ 最后，预处理出 $94153035^k,94153035^2k\cdots 94153035^{k(k-1)}$ 和$905847205^k,905847205^k\cdots 905847205^{k(k-1)}$ 显然，这些步骤的时间复杂度为$O(k)$的。 把询问$m$拆成$ak+b$的形式，其中$0\leq b\leq k-1$。用数学化的语言来讲，$a=\lfloor \frac{m}{k}\rfloor,b=m\bmod k$，所以可以拆成整块和散块来做到$O(1)$查询啦qwq。 时间复杂度为$O(T+\sqrt{10^9+6})$。 Code12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;bits/stdc++.h&gt;using namespace std;typedef unsigned long long int ll;const ll MAXN=31651,MOD=1e9+7,blockSize=31623;ll test,num,res,resx,resy;ll blockx[MAXN],powx[MAXN],blocky[MAXN],powy[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void setup()&#123; blockx[0]=powx[0]=blocky[0]=powy[0]=1; for(register int i=1;i&lt;blockSize;i++) &#123; blockx[i]=blockx[i-1]*37348318ull%MOD; blocky[i]=blocky[i-1]*482464047ull%MOD; powx[i]=powx[i-1]*94153035ll%MOD; powy[i]=powy[i-1]*905847205ll%MOD; &#125;&#125;namespace maker&#123; ll sa,sb,sc; inline void setup() &#123; sa=read(),sb=read(),sc=read(); &#125; inline ll randInt() &#123; sa^=sa&lt;&lt;32,sa^=sa&gt;&gt;13,sa^=sa&lt;&lt;1; ll t=sa; sa=sb,sb=sc,sc^=t^sa; return sc; &#125;&#125;int main()&#123; test=read(); maker::setup(),setup(); for(register int i=0;i&lt;test;i++) &#123; num=maker::randInt()%(MOD-1); resx=blockx[num/blockSize]*powx[num%blockSize]%MOD; resy=blocky[num/blockSize]*powy[num%blockSize]%MOD; res^=(233230706*((resx-resy+MOD)%MOD)%MOD); &#125; printf("%llu",res);&#125;]]></content>
       <tags>
-        <tag>数论，数学</tag>
         <tag>打表</tag>
+        <tag>数论，数学</tag>
         <tag>分块</tag>
       </tags>
   </entry>
