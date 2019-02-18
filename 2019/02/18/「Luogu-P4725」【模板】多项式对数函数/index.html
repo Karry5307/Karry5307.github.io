@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244353]$范围内。">
+<meta name="description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。">
 <meta name="keywords" content="洛谷,模板,数论，数学,多项式,NTT,FFT,微积分初步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P4725」【模板】多项式对数函数">
 <meta property="og:url" content="http://yoursite.com/2019/02/18/「Luogu-P4725」【模板】多项式对数函数/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244353]$范围内。">
+<meta property="og:description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T05:05:29.304Z">
+<meta property="og:updated_time" content="2019-02-18T11:02:36.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P4725」【模板】多项式对数函数">
-<meta name="twitter:description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244353]$范围内。">
+<meta name="twitter:description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。">
 
 
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  148
+                  236
                 </span>
               
 
@@ -458,12 +458,15 @@
 
       
         <p>给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=\ln F(x)$。</p>
-<p>在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244353]$范围内。<br><a id="more"></a></p>
+<p>在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。<br><a id="more"></a></p>
 <h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.org/problemnew/show/P4725" target="_blank" rel="noopener">Luogu P4725</a></p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>首先声明，这题要使用微积分知识。（不会的可以看我的微积分初步的笔记（一个大坑））</p>
 <p>自然对数直接求感觉很不对劲，但是有这样一个好东西：</p>
-<script type="math/tex; mode=display">\cfrac{\mathrm{d}}{\mathrm{d}x}\ln x=\cfrac{1}{x}</script><p>所以说可以考虑将$F(x)$求导，得到$F^\prime(x)$。</p>
-
+<script type="math/tex; mode=display">\cfrac{\mathrm{d}}{\mathrm{d}x}\ln x=\cfrac{1}{x}</script><p>所以说可以考虑将等式两边求导，右边用链式求导法则搞一下，会得到这个</p>
+<p>$$\G^\prime(x)=$\cfrac{F^\prime(x)}{F(x)}$</p>
+<p>右边很明显，是$F(x)$逆乘上它的导数，使用多项式求导，求逆即可。左边是$G(x)$的导数，而右边是可以求出的多项式，所以可以对右边求不定积分求出$G(x)$。</p>
+<p>坑。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3>
       
     </div>
     
@@ -678,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
@@ -712,7 +715,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30k</span>
+    <span title="Site words total count">30.1k</span>
   
 </div>
 
