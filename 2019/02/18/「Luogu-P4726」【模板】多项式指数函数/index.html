@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="洛谷,模板,数论，数学,多项式,NTT,FFT,微积分初步,倍增," />
+  <meta name="keywords" content="洛谷,模板,数论，数学,多项式,NTT,倍增,FFT,微积分初步," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=e^{F(x)}$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。">
-<meta name="keywords" content="洛谷,模板,数论，数学,多项式,NTT,FFT,微积分初步,倍增">
+<meta name="keywords" content="洛谷,模板,数论，数学,多项式,NTT,倍增,FFT,微积分初步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P4726」【模板】多项式指数函数">
 <meta property="og:url" content="http://yoursite.com/2019/02/18/「Luogu-P4726」【模板】多项式指数函数/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=e^{F(x)}$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T14:07:07.840Z">
+<meta property="og:updated_time" content="2019-03-01T11:48:19.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P4726」【模板】多项式指数函数">
 <meta name="twitter:description" content="给定一个$n-1$次整系数多项式$F(x)$，求在$\bmod x^n$意义下的整系数多项式$G(x)$，使得$G(x)=e^{F(x)}$。 在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  163
+                  175
                 </span>
               
 
@@ -461,6 +461,7 @@
 <p>在$\bmod 998244353$下进行，且$F(x)$系数均在$[0,998244352]$范围内。<br><a id="more"></a><br>首先考虑与多项式对数函数一样的做法，两边求导，会得到这样一个式子：</p>
 <script type="math/tex; mode=display">G^\prime(x)=F^\prime(x)e^{F(x)}</script><p>但是$e^{F(x)}$没有消去，所以这种方法就这样活生生地被搞掉了。</p>
 <p>然后考虑与多项式求逆一样去倍增。假设知道$H(x)=e^{F(x)}\pmod x^{\lceil\frac{n}{2}\rceil}$，想推出$G(x)$，那么肿么办？</p>
+<p>一个常见的策略是牛顿迭代。</p>
 
       
     </div>
@@ -493,11 +494,11 @@
           
             <a href="/tags/NTT/" rel="tag"># NTT</a>
           
+            <a href="/tags/倍增/" rel="tag"># 倍增</a>
+          
             <a href="/tags/FFT/" rel="tag"># FFT</a>
           
             <a href="/tags/微积分初步/" rel="tag"># 微积分初步</a>
-          
-            <a href="/tags/倍增/" rel="tag"># 倍增</a>
           
         </div>
       
@@ -519,6 +520,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/10/「Luogu-P4213」【模板】杜教筛（Sum）/" rel="prev" title="「Luogu P4213」【模板】杜教筛（Sum）">
+                「Luogu P4213」【模板】杜教筛（Sum） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -589,7 +594,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -602,7 +607,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
