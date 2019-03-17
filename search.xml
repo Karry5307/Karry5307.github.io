@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「Luogu P4213」【模板】杜教筛（Sum）]]></title>
     <url>%2F2019%2F03%2F10%2F%E3%80%8CLuogu-P4213%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9D%9C%E6%95%99%E7%AD%9B%EF%BC%88Sum%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[一共有$T$组数据，对于每组数据，求$\sum\limits_{i=1}^{n}\varphi(i)$和$\sum\limits_{i=1}^{n}\mu(i)$ $\texttt{Data Range:}T\leq 10,n\leq 2^{31}-1$ 链接前置知识积性函数对于一个数论函数$f$，如果对于任意的互质整数$i,j$，使得$f(ij)=f(i)f(j)$，那么说$f$是一个积性函数。 如果对于任意的整数$i,j$，使得$f(ij)=f(i)f(j)$，那么说$f$是一个完全积性函数。 常见的积性函数：$\varphi,\mu,\sigma,d$ 常见的完全积性函数：$\epsilon,\id,I$]]></content>
+    <content type="text"><![CDATA[一共有$T$组数据，对于每组数据，求$\sum\limits_{i=1}^{n}\varphi(i)$和$\sum\limits_{i=1}^{n}\mu(i)$ $\texttt{Data Range:}T\leq 10,n\leq 2^{31}-1$ 链接前置知识积性函数对于一个数论函数$f$，如果对于任意的互质整数$i,j$，使得$f(ij)=f(i)f(j)$，那么说$f$是一个积性函数。 如果对于任意的整数$i,j$，使得$f(ij)=f(i)f(j)$，那么说$f$是一个完全积性函数。 常见的积性函数：$\varphi,\mu,\sigma,d$ 常见的完全积性函数：$\epsilon,id,I$ 这里解释一下完全积性函数下的三个函数。 $\epsilon(n)=[n=1],I(n)=1,id(n)=n$ 狄利克雷卷积对于两个数论函数$f,g$，]]></content>
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
