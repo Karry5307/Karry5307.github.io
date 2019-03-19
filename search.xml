@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[学习笔记·多项式专题（二）]]></title>
     <url>%2F2019%2F03%2F19%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B8%93%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[这一片文章讲的呢，都是一些板子。 多项式的求导与积分$\cfrac{\mathrm{d}}{\mathrm{d}x}x^n=nx^{n-1},\int x^n=\cfrac{x^{n+1}}{n+1}\mathrm{d}x$，所以直接套公式即可。12345678910111213141516inline void deriv(ll fd,ll *f,ll *res)&#123; for(register int i=1;i&lt;fd;++i) &#123; res[i-1]=(li)f[i]*i%MOD; &#125; res[fd-1]=0;&#125;inline void integ(ll fd,ll *f,ll *res)&#123; for(register int i=1;i&lt;fd;++i) &#123; res[i]=(li)f[i-1]*qpow(i,MOD-2)%MOD; &#125; res[0]=0;&#125; 多项式乘法略 多项式求逆考虑递归做，假设已经求出了$\bmod {x^{\lfloor\frac{n}{2}\rfloor}$意义下的答案$H(x)$，考虑推出$\bmod {x^n}$意义下的答案$G(x)$，于是有：]]></content>
+    <content type="text"><![CDATA[这一片文章讲的呢，都是一些板子。 多项式的求导与不定积分$\cfrac{\mathrm{d}}{\mathrm{d}x}x^n=nx^{n-1},\int x^n=\cfrac{x^{n+1}}{n+1}\mathrm{d}x$，所以直接套公式即可。12345678910111213141516inline void deriv(ll fd,ll *f,ll *res)&#123; for(register int i=1;i&lt;fd;++i) &#123; res[i-1]=(li)f[i]*i%MOD; &#125; res[fd-1]=0;&#125;inline void integ(ll fd,ll *f,ll *res)&#123; for(register int i=1;i&lt;fd;++i) &#123; res[i]=(li)f[i-1]*qpow(i,MOD-2)%MOD; &#125; res[0]=0;&#125; 多项式乘法略 多项式求逆考虑递归做，假设已经求出了$\bmod {x^{\lfloor\frac{n}{2}\rfloor}}$意义下的答案$H(x)$，考虑推出$\bmod {x^n}$意义下的答案$G(x)$，于是有：]]></content>
       <tags>
         <tag>数论，数学</tag>
         <tag>多项式</tag>
@@ -36,9 +36,9 @@
         <tag>数论，数学</tag>
         <tag>多项式</tag>
         <tag>NTT</tag>
-        <tag>倍增</tag>
         <tag>FFT</tag>
         <tag>微积分初步</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -73,13 +73,13 @@
         <tag>BZOJ</tag>
         <tag>图论</tag>
         <tag>洛谷</tag>
-        <tag>高精</tag>
         <tag>CodeVS</tag>
-        <tag>打表</tag>
-        <tag>找规律</tag>
         <tag>组合数学</tag>
         <tag>生成树</tag>
         <tag>Matrix-Tree定理</tag>
+        <tag>高精</tag>
+        <tag>打表</tag>
+        <tag>找规律</tag>
       </tags>
   </entry>
   <entry>
@@ -116,8 +116,8 @@
     <url>%2F2019%2F01%2F01%2F%E3%80%8CLuogu-P5160%E3%80%8DWD%E4%B8%8E%E5%BE%AA%E7%8E%AF%2F</url>
     <content type="text"><![CDATA[给定$n,m$，求以下代码的运行结果：12345678910111213int cnt=0;for(register int a_1=0;a_1&lt;=m;a_1++)&#123; for(register int a_2=0;a_1+a_2&lt;=m;a_2++) &#123; ... for(register int a_n=0;a_1+a_2+...+a_n&lt;=m;a_n++) &#123; cnt=(cnt+1)%19491001; &#125; &#125;&#125;printf("%d\n", cnt); Solution先声明：$19491001$是质数！质数的日子一般都会发生大事，比如说以1开头的某个8位质数如同第一题一样，可以考虑爆搜出小样例。（程序是个坑）还是一样，设$(n,m)$表示循环个数为$n$，上界为$m$时的答案]]></content>
       <tags>
-        <tag>找规律</tag>
         <tag>组合数学</tag>
+        <tag>找规律</tag>
         <tag>Lucas定理</tag>
       </tags>
   </entry>
@@ -136,8 +136,8 @@
     <url>%2F2018%2F12%2F28%2F%E3%80%8CLuogu-P5110%E3%80%8D%E5%9D%97%E9%80%9F%E9%80%92%E6%8E%A8%2F</url>
     <content type="text"><![CDATA[给定一个数列$a$，满足如下递推式： $a_n=233a_{n-1}+666a_{n-2}$。 求出这个数列第$n$项$a_n\bmod 10^9+7$的值，一共有$T$组数据，为了减少输出量，请输出这些答案的异或和。 Data Range：$T\leq 5\times 10^7,0\leq n&lt;2^{64}$ 11 Solution首先求$a_n=233a_{n-1}+666a_{n-2}$的通项式。 考虑这个数列的特征方程，为$x^2=233x+666$，于是解出$x_1=\cfrac{233+\sqrt{56953}}{2},x_2=\cfrac{233-\sqrt{56953}}{2}$。 所以可以设这个数列的通项式为$a_n=p(\cfrac{233+\sqrt{56953}}{2})^n+q(\cfrac{233-\sqrt{56953}}{2})^n$。 可别忘了，$a_0=0,a_1=1$，所以解出$p=\cfrac{1}{\sqrt{56953}},q=-\cfrac{1}{\sqrt{56953}}$。 所以$a_n=\cfrac{1}{\sqrt{56953}}[(\cfrac{233+\sqrt{56953}}{2})^n-(\cfrac{233-\sqrt{56953}}{2})^n]$ 现在来解决除号以及根号。首先，枚举得$\sqrt{56953}\equiv 188305837\pmod {10^9+7}$。 所以说 a_n=\cfrac{1}{188305037}(94153035^n-905847205^n)$ 而$188305837^{-1}\equiv 233230706\pmod {10^9+7}所以，最终的通项式就是 a_n=233230706(94153035^n-905847205^n)。 但是，由于毒瘤出题人的毒瘤给分制度，前面六个点每点$1 pts$，所以用龟速幂只能水$6 pts$。我尝试用$O(1)$的按位龟速乘优化了一下后，还是只有$6 pts$。看来我们只能优化计算上面的两个幂的过程。 很明显可以先优化一下指数，由欧拉定理得： $a_{n+\varphi(10^9+7)}\equiv a_n\pmod {10^9+7}$ 于是可以把指数模$\varphi(10^9+7)=10^9+6$，但是还是只能得$6 pts$。 于是考虑$100 pts$的分块打表大法。由上面的结论可知，可以将指数控制在$10^9+6$以内，所以可以考虑分块打表。 可以知道，$\lceil\sqrt{10^9+6}\rceil=31623$，所以以这个数作为块长分块，将它记为$k$。 首先，预处理出 $94153035^0,94153035^1\cdots 94153035^{k-1}$ 和$905847205^0,905847205^1\cdots 905847205^{k-1}$ 然后，用龟速幂可算出 $94153035^k\equiv 37348318\pmod {10^9+7}$，$905847205^k\equiv 482464047\pmod {10^9+7}$ 最后，预处理出 $94153035^k,94153035^2k\cdots 94153035^{k(k-1)}$ 和$905847205^k,905847205^k\cdots 905847205^{k(k-1)}$ 显然，这些步骤的时间复杂度为$O(k)$的。 把询问$m$拆成$ak+b$的形式，其中$0\leq b\leq k-1$。用数学化的语言来讲，$a=\lfloor \frac{m}{k}\rfloor,b=m\bmod k$，所以可以拆成整块和散块来做到$O(1)$查询啦qwq。 时间复杂度为$O(T+\sqrt{10^9+6})$。 Code12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;bits/stdc++.h&gt;using namespace std;typedef unsigned long long int ll;const ll MAXN=31651,MOD=1e9+7,blockSize=31623;ll test,num,res,resx,resy;ll blockx[MAXN],powx[MAXN],blocky[MAXN],powy[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void setup()&#123; blockx[0]=powx[0]=blocky[0]=powy[0]=1; for(register int i=1;i&lt;blockSize;i++) &#123; blockx[i]=blockx[i-1]*37348318ull%MOD; blocky[i]=blocky[i-1]*482464047ull%MOD; powx[i]=powx[i-1]*94153035ll%MOD; powy[i]=powy[i-1]*905847205ll%MOD; &#125;&#125;namespace maker&#123; ll sa,sb,sc; inline void setup() &#123; sa=read(),sb=read(),sc=read(); &#125; inline ll randInt() &#123; sa^=sa&lt;&lt;32,sa^=sa&gt;&gt;13,sa^=sa&lt;&lt;1; ll t=sa; sa=sb,sb=sc,sc^=t^sa; return sc; &#125;&#125;int main()&#123; test=read(); maker::setup(),setup(); for(register int i=0;i&lt;test;i++) &#123; num=maker::randInt()%(MOD-1); resx=blockx[num/blockSize]*powx[num%blockSize]%MOD; resy=blocky[num/blockSize]*powy[num%blockSize]%MOD; res^=(233230706*((resx-resy+MOD)%MOD)%MOD); &#125; printf("%llu",res);&#125;]]></content>
       <tags>
-        <tag>数论，数学</tag>
         <tag>打表</tag>
+        <tag>数论，数学</tag>
         <tag>分块</tag>
       </tags>
   </entry>
@@ -171,8 +171,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -194,10 +194,10 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
-        <tag>数论</tag>
+        <tag>各省省选</tag>
         <tag>CodeVS</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -257,8 +257,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -276,8 +276,8 @@
     <url>%2F2018%2F11%2F19%2F%E3%80%8CCodeForces-501D%E3%80%8DMisha-and-Permutations-Summation%2F</url>
     <content type="text"><![CDATA[设$P$是一个长度为$n$的排列，定义$\operatorname{ord}P$为$P$在所有排列中的名次。给定两个长度为$n$的排列$P_1,P_2$，求第$\operatorname{ord}P_1+\operatorname{ord}P_2 \bmod n!$小的排列。 前置技能康托展开这里讲从排列映射到数的过程，还是假设这个排列长度为$n$。对于第$i$次操作，统计这个数后面有多少个比它小的数，记为$a_i$那么答案是$\sum_{i=1}^{n}a_i(n-i)!$ 题解这一个题和UVa 11525很像，不会做的可以参考一下本蒟蒻的题解，做法就是用一颗权值线段树维护全局没被放进排列中的第$k$小，所以做这个题可以先把它转化为上面那个题。首先把两个排列映射到整数，这里要统计后面有多少个比第$i$个数$a_i$小的数。如果暴力找的话是$O(n^2)$的。但是，可以发现排列是由$0,1\cdots n-1$组成的，那么排列里比这个数小的数的个数就是这个数。这句话不是很好懂，但是很重要。因为排列里比这个数$x$小的只有$0,1\cdots x-1$，共有$x$个，所以有$x$个数比$x$小。所以可以显然推出后面比$a_i$小的数的个$=$总共比$a_i$小的数$-$在$a_i$前面比$a_i$小的数。而排在前面比$a_i$小的数可以用树状数组维护。用一个树状数组维护第$i$个数是否出现过。对于当前的数，统计$1$到当前数$-1$中的和，就是在这个数前面比它小的数。所以说，可以用$O(n\log n)$的时间复杂度把$a_{P_1,i}$和$a_{P_2,i}$（$a$指的是前置技能里的$a$数组）求出来，记$S_i=a_{P_1,i}+a_{P_2,i}$。接下来化简$S$，由于$(x+1)\cdot x!=(x+1)!$，于是可以用这个性质化简$S_i$，使得$0\leq S_i\leq n-i$。具体方法是，对于$S_i$，$S_{i+1}+=S_i \% n-i,S_i\%=n-i$就可以简化$S$数组了。最后我们就把问题转化为上面的那个题了，用那个题的方法做就可以了qwq。时间复杂度$O(n\log n)$，常数不大除了权值线段树，跑了$2270$ms，拿了最优解qwq。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e5+51;struct BIT&#123; ll size; ll num[MAXN]; inline ll lowbit(ll x) &#123; return x&amp;-x; &#125; inline void add(ll pos,ll val) &#123; for(;pos&lt;=size;pos+=lowbit(pos)) &#123; num[pos]+=val; &#125; &#125; inline ll queryPrefix(ll pos) &#123; ll res=0; for(;pos;pos-=lowbit(pos)) &#123; res+=num[pos]; &#125; return res; &#125;&#125;;struct SegmentTree&#123; ll l,r,size;&#125;;BIT bit,bit2;SegmentTree tree[MAXN&lt;&lt;2];ll cnt,num;ll perm[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void update(ll node)&#123; tree[node].size=tree[node&lt;&lt;1].size+tree[(node&lt;&lt;1)|1].size;&#125;inline void create(ll l,ll r,ll node)&#123; tree[node].l=l,tree[node].r=r; if(l==r) &#123; tree[node].size=1; return; &#125; ll mid=(l+r)&gt;&gt;1; create(l,mid,node&lt;&lt;1); create(mid+1,r,(node&lt;&lt;1)|1); update(node);&#125;inline ll findVal(ll rk,ll node)&#123; if(tree[node].l==tree[node].r) &#123; tree[node].size=0; return tree[node].l; &#125; ll res=0; if(rk&lt;=tree[node&lt;&lt;1].size) &#123; res=findVal(rk,node&lt;&lt;1); &#125; else &#123; res=findVal(rk-tree[node&lt;&lt;1].size,(node&lt;&lt;1)|1); &#125; update(node); return res;&#125;int main()&#123; bit.size=bit2.size=cnt=read(); for(register int i=1;i&lt;=cnt;i++) &#123; num=read(); perm[i]=num-bit.queryPrefix(num),bit.add(num+1,1); &#125; for(register int i=1;i&lt;=cnt;i++) &#123; num=read(); perm[i]+=num-bit2.queryPrefix(num),bit2.add(num+1,1); &#125; for(register int i=cnt,j=0;i;i--,j++) &#123; perm[i-1]+=perm[i]/(j+1),perm[i]%=(j+1); &#125; create(1,cnt,1); for(register int i=1;i&lt;=cnt;i++) &#123; printf("%d ",findVal(perm[i]+1,1)-1); &#125; &#125;]]></content>
       <tags>
-        <tag>CodeForces</tag>
         <tag>待修改</tag>
+        <tag>CodeForces</tag>
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>权值线段树</tag>
@@ -479,9 +479,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -493,8 +493,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -504,8 +504,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -543,8 +543,8 @@
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -588,8 +588,8 @@
     <content type="text"><![CDATA[给你一个$n*n$大小的矩阵，问你是否有一个正整数$k$使得这个矩阵的$k$次幂均为正数。未完，贴代码 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev;&#125;;edge ed[5000001];ll tot,num,dist,top,cnt,nc;ll last[5000001],dfn[5000001],low[5000001],ins[5000001],belong[5000001],size[5000001];stack&lt;ll&gt;st;inline void addEdge(ll from,ll to)&#123; ed[++tot].to=to; ed[tot].prev=last[from]; last[from]=tot;&#125;inline void tarjan(ll node)&#123; dfn[node]=low[node]=++num; st.push(node),ins[node]=1; ll flag=0,to; for(register int i=last[node];i;i=ed[i].prev) &#123; to=ed[i].to; if(!dfn[to]) &#123; tarjan(to); low[node]=min(low[node],low[to]); &#125; else &#123; if(ins[to]) &#123; low[node]=min(low[node],dfn[to]); &#125; &#125; &#125; if(dfn[node]==low[node]) &#123; cnt++; ll nd; do &#123; nd=st.top(),st.pop(); ins[nd]=0; belong[nd]=cnt; size[cnt]++; &#125; while(node!=nd); &#125;&#125;int main()&#123; scanf("%d",&amp;nc); for(register int i=0;i&lt;nc;i++) &#123; for(register int j=0;j&lt;nc;j++) &#123; scanf("%d",&amp;dist); if(dist) &#123; addEdge(i+1,j+1); &#125; &#125; &#125; for(register int i=1;i&lt;=nc;i++) &#123; if(!dfn[i]) &#123; tarjan(i); &#125; &#125; cnt==1?printf("YES\n"):printf("NO\n");&#125;]]></content>
       <tags>
         <tag>未完待续</tag>
-        <tag>CodeForces</tag>
         <tag>待修改</tag>
+        <tag>CodeForces</tag>
         <tag>图论</tag>
         <tag>强连通分量</tag>
         <tag>邻接矩阵</tag>
@@ -639,10 +639,10 @@
     <url>%2F2018%2F08%2F07%2F%E3%80%8CCodeForces-191C%E3%80%8DFools-and-Roads%2F</url>
     <content type="text"><![CDATA[给一棵有根树和一些路线，路线上的边权都+1，求所有边的权值 链接CodeForces 191C 题解这个题目的输出是每一条边所经过的次数，所以想到树上边差分。在差分之后确实是晕了，没有想到好的方法，但是突然想到了DFS求树上前缀和，对于每一条边，只要计算深度小的前缀和-深度大的前缀和即得答案。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev; &#125;;ll nc,ec,query,root,from,to;ll depth[500010],anc[500010][31],last[500010],diff[500010],prefix[500010],LCA,maxn;ll From[500010],To[500010];edge ed[500010*2];inline void addEdge(ll from,ll to)&#123; ed[++ec].prev=last[from]; ed[ec].to=to; last[from]=ec;&#125;inline void dfs(ll node)&#123; ll son; for(register int i=last[node];i!=0;i=ed[i].prev) &#123; son=ed[i].to; if(!depth[son]) &#123; depth[son]=depth[node]+1; anc[son][0]=node; dfs(son); &#125; &#125;&#125;inline void LCASetup()&#123; depth[1]=1; anc[1][0]=0; dfs(1); for(register int i=1;i&lt;=21;i++) &#123; for(register int j=1;j&lt;=nc;j++) &#123; anc[j][i]=anc[anc[j][i-1]][i-1]; &#125; &#125;&#125;inline ll lca(ll x,ll y)&#123; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; for(register int i=21;i&gt;=0;i--) &#123; if(depth[anc[y][i]]&gt;=depth[x]) &#123; y=anc[y][i]; &#125; &#125; if(x==y) &#123; return x; &#125; for(register int i=21;i&gt;=0;i--) &#123; if(anc[x][i]!=anc[y][i]) &#123; x=anc[x][i]; y=anc[y][i]; &#125; &#125; return anc[x][0];&#125;inline void ddfs(ll node)&#123; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; ddfs(ed[i].to); diff[node]+=diff[ed[i].to]; &#125;&#125;inline void dffs(ll node,ll val)&#123; prefix[node]=diff[node]+val; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; dffs(ed[i].to,prefix[node]); &#125;&#125;int main()&#123; scanf("%d",&amp;nc); for(register int i=0;i&lt;nc-1;i++) &#123; scanf("%d%d",&amp;from,&amp;to); From[i]=from,To[i]=to; addEdge(from,to); addEdge(to,from); &#125; LCASetup(); scanf("%d",&amp;query); for(register int i=0;i&lt;query;i++) &#123; scanf("%d%d",&amp;from,&amp;to); LCA=lca(from,to); diff[from]++,diff[to]++,diff[LCA]-=2; &#125; ddfs(1); dffs(1,0); for(register int i=0;i&lt;nc-1;i++) &#123; if(depth[From[i]]&lt;depth[To[i]]) &#123; swap(From[i],To[i]); &#125; printf("%d ",prefix[From[i]]-prefix[To[i]]); &#125;&#125;]]></content>
       <tags>
+        <tag>待修改</tag>
         <tag>CodeForces</tag>
         <tag>LCA</tag>
         <tag>树上差分</tag>
-        <tag>待修改</tag>
       </tags>
   </entry>
 </search>
