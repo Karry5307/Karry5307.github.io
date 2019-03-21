@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="这一片文章讲的呢，都是一些板子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-19T14:09:39.759Z">
+<meta property="og:updated_time" content="2019-03-19T14:38:40.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（二）">
 <meta name="twitter:description" content="这一片文章讲的呢，都是一些板子。">
@@ -265,7 +265,7 @@
         <li class="menu-item menu-item-resources">
           <a href="/resources" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
             resources
           </a>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  183
+                  535
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -458,10 +458,18 @@
 
       
         <p>这一片文章讲的呢，都是一些<del>板子</del>。<br><a id="more"></a></p>
-<h3 id="多项式的求导与不定积分"><a href="#多项式的求导与不定积分" class="headerlink" title="多项式的求导与不定积分"></a>多项式的求导与不定积分</h3><p>$\cfrac{\mathrm{d}}{\mathrm{d}x}x^n=nx^{n-1},\int x^n=\cfrac{x^{n+1}}{n+1}\mathrm{d}x$，所以直接套公式即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">deriv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i<span class="number">-1</span>]=(li)f[i]*i%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[fd<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">integ</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)f[i<span class="number">-1</span>]*qpow(i,MOD<span class="number">-2</span>)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="多项式的求导与不定积分"><a href="#多项式的求导与不定积分" class="headerlink" title="多项式的求导与不定积分"></a>多项式的求导与不定积分</h3><p>$\frac{\mathrm{d}}{\mathrm{d}x}x^n=nx^{n-1},\int x^n=\frac{x^{n+1}}{n+1}\mathrm{d}x$，所以直接套公式即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">deriv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i<span class="number">-1</span>]=(li)f[i]*i%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[fd<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">integ</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)f[i<span class="number">-1</span>]*qpow(i,MOD<span class="number">-2</span>)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="多项式乘法"><a href="#多项式乘法" class="headerlink" title="多项式乘法"></a>多项式乘法</h3><p><del>略</del></p>
-<h3 id="多项式求逆"><a href="#多项式求逆" class="headerlink" title="多项式求逆"></a>多项式求逆</h3><p>考虑递归做，假设已经求出了$\bmod {x^{\lfloor\frac{n}{2}\rfloor}}$意义下的答案$H(x)$，考虑推出$\bmod {x^n}$意义下的答案$G(x)$，于是有：</p>
+<h3 id="多项式求逆"><a href="#多项式求逆" class="headerlink" title="多项式求逆"></a>多项式求逆</h3><p>如果$F(x)$只有一项，那么答案是它的逆元。</p>
+<p>剩下的情况考虑递归做，假设已经求出了$\bmod{x^{\lceil\frac{n}{2}\rceil}}$意义下的答案$H(x)$，考虑推出$\bmod{x^n}$意义下的答案$G(x)$，于是有：</p>
+<script type="math/tex; mode=display">F(x)H(x)\equiv 1\pmod{x^{\lceil\frac{n}{2}\rceil}}</script><script type="math/tex; mode=display">F(x)G(x)\equiv 1\pmod{x^n}</script><script type="math/tex; mode=display">\therefore F(x)(G(x)-H(x))\equiv 0\pmod{x^{\lceil\frac{n}{2}\rceil}}</script><script type="math/tex; mode=display">\therefore G(x)-H(x)\equiv 0\pmod{x^{\lceil\frac{n}{2}\rceil}}</script><script type="math/tex; mode=display">\therefore G(x)^2-2G(x)H(x)+H(x)^2\equiv 0\pmod{x^n}</script><script type="math/tex; mode=display">\therefore G(x)\equiv 2H(x)-F(x)H(x)^2\pmod{x^n}</script><p>于是可以快活地上板子啦qwq<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll tmp[MAXN];</span><br><span class="line">    <span class="keyword">if</span>(fd==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        res[<span class="number">0</span>]=qpow(f[<span class="number">0</span>],MOD<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inv((fd+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,f,res);</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=i&lt;fd?f[i]:<span class="number">0</span>;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmp,cnt,<span class="number">1</span>),NTT(res,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)(<span class="number">2</span>-(li)tmp[i]*res[i]%MOD+MOD)%MOD*res[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=fd;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="多项式对数函数"><a href="#多项式对数函数" class="headerlink" title="多项式对数函数"></a>多项式对数函数</h3><p>大力推一波公式：</p>
+<script type="math/tex; mode=display">G(x)=\ln F(x)</script><script type="math/tex; mode=display">\therefore G^\prime(x)=(\ln F(x))^\prime</script><p>根据链式求导法则$\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\mathrm{d}y}{\mathrm{d}u}\frac{\mathrm{d}u}{\mathrm{d}x}$和基本公式$\frac{\mathrm{d}}{\mathrm{d}x}\ln x=\frac{1}{x}$，有</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}}{\mathrm{d}x}G(x)=$frac{F^\prime(x)}{F(x)}$
 
+再积分回来
+
+$$\therefore G(x)=</script>
       
     </div>
     
@@ -674,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式的求导与不定积分"><span class="nav-number">1.</span> <span class="nav-text">多项式的求导与不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">3.</span> <span class="nav-text">多项式求逆</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式的求导与不定积分"><span class="nav-number">1.</span> <span class="nav-text">多项式的求导与不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">3.</span> <span class="nav-text">多项式求逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式对数函数"><span class="nav-number">4.</span> <span class="nav-text">多项式对数函数</span></a></li></ol></div>
             
 
           </div>
@@ -708,7 +716,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">31.4k</span>
+    <span title="Site words total count">31.8k</span>
   
 </div>
 
