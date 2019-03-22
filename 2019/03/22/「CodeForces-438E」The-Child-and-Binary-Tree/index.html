@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个元素个数为$n$的集合$c$和一个整数$m$，称一棵二叉树是好的当且仅当这棵二叉树的所有点的权值都属于$c$，规定一棵带点权二叉树的权值是该树中所有点权的总和。对于任意的整数$s$满足$1\leq s\leq m$，求出权值为$s$的好的二叉树的数量，答案对$998244353$取模。 $\texttt{Data Range:}1\leq n,m,c_i\leq 10^5$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-22T14:10:23.747Z">
+<meta property="og:updated_time" content="2019-03-22T14:15:55.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「CodeForces 438E」The Child and Binary Tree">
 <meta name="twitter:description" content="给定一个元素个数为$n$的集合$c$和一个整数$m$，称一棵二叉树是好的当且仅当这棵二叉树的所有点的权值都属于$c$，规定一棵带点权二叉树的权值是该树中所有点权的总和。对于任意的整数$s$满足$1\leq s\leq m$，求出权值为$s$的好的二叉树的数量，答案对$998244353$取模。 $\texttt{Data Range:}1\leq n,m,c_i\leq 10^5$">
@@ -462,9 +462,9 @@
 <h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一道很好的<del>计数$\texttt{dp}$</del>多项式花样板子题。</p>
 <p>首先考虑计数$\texttt{dp}$，其实这个应该不难想。</p>
 <p>考虑根节点的点权，枚举一下左子树点权，那么有</p>
-<script type="math/tex; mode=display">dp_i=\begin{cases}1 & (n=0)\\ \sum\limits_{i=1}^{n}g_i\sum\limits_{j=0}^{n-i}dp_j dp_{n-i-j}\end{cases} & (n\geq 1)</script><p>这里，$g_i=[i\in c]$。</p>
+<script type="math/tex; mode=display">dp_i=\begin{cases}1 & (n=0)\\ \sum\limits_{i=1}^{n}g_i\sum\limits_{j=0}^{n-i}dp_j dp_{n-i-j} & (n\geq 1)\end{cases}</script><p>这里，$g_i=[i\in c]$。</p>
 <p>但是这个算法复杂度不对啊qwq，考虑使用生成函数优化一下。</p>
-<p>设$F(x)$为序列$dp$的生成函数，$G(x)$为序列$g$的生成函数，那么很明显的可以看到，上面的式子是卷积的形式，于是就再搞一搞，就会有</p>
+<p>设$F(x)$为序列$dp$的生成函数（很明显是$\texttt{OGF}$），$G(x)$为序列$g$的生成函数，那么很明显的可以看到，上面的式子是卷积的形式，于是就再搞一搞，就会有</p>
 <script type="math/tex; mode=display">F=GF^2+1</script><p>再整理一下</p>
 <script type="math/tex; mode=display">GF^2-F+1=0</script><p>解一下这样一个方程，得到两个根</p>
 <script type="math/tex; mode=display">F=\frac{2}{1\pm\sqrt{1-4G}}</script><p>这个正负号看起来就觉得很不爽，所以看一下这个是加号还是减号。</p>
