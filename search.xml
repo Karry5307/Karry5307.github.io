@@ -78,11 +78,11 @@
         <tag>BZOJ</tag>
         <tag>图论</tag>
         <tag>洛谷</tag>
-        <tag>高精</tag>
         <tag>CodeVS</tag>
         <tag>组合数学</tag>
         <tag>生成树</tag>
         <tag>Matrix-Tree定理</tag>
+        <tag>高精</tag>
         <tag>打表</tag>
         <tag>找规律</tag>
       </tags>
@@ -162,9 +162,9 @@
     <content type="text"><![CDATA[给定$n$个点以及它们的点权，要求写一种数据结构支持以下操作：求$x$到$y$路径上点权的$operatorname{xor}$和，连接或删除一条边，以及修改某个点的点权。 链接题解一道LCT裸题。坑。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=3e5+51;ll cnt,qcnt,op,x,y;ll num[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace LCT&#123; struct Node&#123; ll fa,val,tag; ll ch[2]; &#125;; struct LinkCutTree&#123; Node nd[MAXN]; ll st[MAXN]; inline bool nroot(ll x) &#123; return nd[nd[x].fa].ch[0]==x||nd[nd[x].fa].ch[1]==x; &#125; inline void update(ll x) &#123; nd[x].val=nd[nd[x].ch[0]].val^nd[nd[x].ch[1]].val^num[x]; &#125; inline void reverse(ll x) &#123; swap(nd[x].ch[0],nd[x].ch[1]),nd[x].tag^=1; &#125; inline void spread(ll x) &#123; if(nd[x].tag) &#123; if(nd[x].ch[0]) &#123; reverse(nd[x].ch[0]); &#125; if(nd[x].ch[1]) &#123; reverse(nd[x].ch[1]); &#125; nd[x].tag=0; &#125; &#125; inline void rotate(ll x) &#123; ll fa=nd[x].fa,gfa=nd[fa].fa; ll dir=nd[fa].ch[1]==x,son=nd[x].ch[!dir]; if(nroot(fa)) &#123; nd[gfa].ch[nd[gfa].ch[1]==fa]=x; &#125; nd[x].ch[!dir]=fa,nd[fa].ch[dir]=son; if(son) &#123; nd[son].fa=fa; &#125; nd[fa].fa=x,nd[x].fa=gfa; update(fa); &#125; inline void splay(ll x) &#123; ll fa=x,gfa,cur=0; st[++cur]=fa; while(nroot(fa)) &#123; st[++cur]=fa=nd[fa].fa; &#125; while(cur) &#123; spread(st[cur--]); &#125; while(nroot(x)) &#123; fa=nd[x].fa,gfa=nd[fa].fa; if(nroot(fa)) &#123; rotate((nd[fa].ch[0]==x)^(nd[gfa].ch[0]==fa)?x:fa); &#125; rotate(x); &#125; update(x); &#125; inline void access(ll x) &#123; for(register int i=0;x;x=nd[i=x].fa) &#123; splay(x),nd[x].ch[1]=i,update(x); &#125; &#125; inline void makeRoot(ll x) &#123; access(x),splay(x),reverse(x); &#125; inline ll findRoot(ll x) &#123; access(x),splay(x); while(nd[x].ch[0]) &#123; spread(x),x=nd[x].ch[0]; &#125; return x; &#125; inline void split(ll x,ll y) &#123; makeRoot(x),access(y),splay(y); &#125; inline void link(ll x,ll y) &#123; makeRoot(x); if(findRoot(y)!=x) &#123; nd[x].fa=y; &#125; &#125; inline void cut(ll x,ll y) &#123; makeRoot(x); if(findRoot(y)==x&amp;&amp;nd[x].fa==y&amp;&amp;!nd[x].ch[1]) &#123; nd[x].fa=nd[y].ch[0]=0; update(y); &#125; &#125; &#125;;&#125;LCT::LinkCutTree lct;int main()&#123; cnt=read(),qcnt=read(); for(register int i=1;i&lt;=cnt;i++) &#123; num[i]=read(); &#125; for(register int i=0;i&lt;qcnt;i++) &#123; op=read(),x=read(),y=read(); if(!op) &#123; lct.split(x,y); printf("%d\n",lct.nd[y].val); &#125; if(op==1) &#123; lct.link(x,y); &#125; if(op==2) &#123; lct.cut(x,y); &#125; if(op==3) &#123; lct.splay(x),num[x]=y; &#125; &#125;&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
+        <tag>树链剖分</tag>
         <tag>平衡树</tag>
         <tag>Splay</tag>
-        <tag>树链剖分</tag>
         <tag>模板</tag>
         <tag>Link Cut Tree</tag>
       </tags>
@@ -201,8 +201,8 @@
         <tag>洛谷</tag>
         <tag>HAOI</tag>
         <tag>各省省选</tag>
-        <tag>数论</tag>
         <tag>CodeVS</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -211,9 +211,9 @@
     <content type="text"><![CDATA[咕着先…… 前言开始写题解的今天，正是$12$月$13$日。今天，是南京大屠杀的$81$周年的纪念日。$81$年前，即$1937$年$12$月$13$日。日本侵略者在南京制造了震惊中外的南京大屠杀惨案。这是中华民族的血泪史，饱含着中华人民对日本侵略者的仇恨。现在，我们生活在伟大富强的新中国，与现代的日本作为隔海相望的邻邦，历史的悲剧已平和下来，但是我们不能忘记这次国家的耻辱。所以，我们要以史为鉴，吸取教训，努力学习，奋发图强，不让历史悲剧再次重演。 代码]]></content>
       <tags>
         <tag>洛谷</tag>
+        <tag>USACO</tag>
         <tag>DP</tag>
         <tag>树形DP</tag>
-        <tag>USACO</tag>
       </tags>
   </entry>
   <entry>
@@ -222,9 +222,9 @@
     <content type="text"><![CDATA[给定一个数列$a$，对于$a_i$，寻找一个$a_j$使得$i&gt;j$且$\vert a_i-a_j\vert$最小。 题解一道近乎Splay裸题的题。很显然可以将最小的$\vert a_i-a_j\vert$拆成$a_i$与其前驱的差和与其后继的差的最小值。所以说就可以用Splay维护啦qwq。论手贱，你是比不过我的，今天又把while打成if啦 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=4e4+51,inf=0x3f3f3f3f;ll cnt,num,res,prv,nxt;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace Splay&#123; struct Node&#123; ll fa,val,size,temp; ll ch[2]; inline void reset(ll val=0,ll fa=0) &#123; this-&gt;fa=fa,this-&gt;val=val,this-&gt;temp=this-&gt;size=1; this-&gt;ch[0]=this-&gt;ch[1]=0; &#125; &#125;; struct Splay&#123; ll tot,root; Node nd[MAXN]; inline bool id(ll x) &#123; return nd[nd[x].fa].ch[1]==x; &#125; inline void update(ll x) &#123; nd[x].size=nd[nd[x].ch[0]].size+nd[nd[x].ch[1]].size+nd[x].temp; &#125; inline void connect(ll x,ll fa,ll dir) &#123; nd[x].fa=fa,nd[fa].ch[dir]=x; &#125; inline void rotate(ll x) &#123; ll fa=nd[x].fa,gfa=nd[fa].fa,dir=id(x); connect(x,gfa,id(fa)); connect(nd[x].ch[dir^1],fa,dir); connect(fa,x,dir^1); update(fa),update(x); &#125; inline void splay(ll cur,ll target) &#123; while(nd[cur].fa!=target) &#123; ll fa=nd[cur].fa,gfa=nd[fa].fa; if(gfa!=target) &#123; rotate(id(cur)^id(fa)?cur:fa); &#125; rotate(cur); &#125; if(!target) &#123; root=cur; &#125; &#125; inline void insert(ll val) &#123; ll cur=root,fa=0; while(cur&amp;&amp;nd[cur].val!=val) &#123; fa=cur,cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; if(cur) &#123; nd[cur].temp++; &#125; else &#123; cur=++tot; if(fa) &#123; nd[fa].ch[val&gt;nd[fa].val]=cur; &#125; nd[cur].reset(val,fa); &#125; splay(cur,0); &#125; inline void find(ll val) &#123; ll cur=root; if(!cur) &#123; return; &#125; while(nd[cur].ch[val&gt;nd[cur].val]&amp;&amp;val!=nd[cur].val) &#123; cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; splay(cur,0); &#125; inline ll prev(ll val) &#123; find(val); ll cur=root; if(nd[cur].val&lt;=val) &#123; return nd[cur].val; &#125; cur=nd[cur].ch[0]; while(nd[cur].ch[1]) &#123; cur=nd[cur].ch[1]; &#125; return nd[cur].val; &#125; inline ll next(ll val) &#123; find(val); ll cur=root; if(nd[cur].val&gt;=val) &#123; return nd[cur].val; &#125; cur=nd[cur].ch[1]; while(nd[cur].ch[0]) &#123; cur=nd[cur].ch[0]; &#125; return nd[cur].val; &#125; &#125;;&#125;Splay::Splay splay;int main()&#123; cnt=read(); splay.insert(inf),splay.insert(-inf); splay.insert(res=read()); for(register int i=1;i&lt;cnt;i++) &#123; num=read(); prv=splay.prev(num),nxt=splay.next(num); res+=min(num-prv,nxt-num); splay.insert(num); &#125; printf("%d",res);&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
+        <tag>各省省选</tag>
         <tag>平衡树</tag>
         <tag>Splay</tag>
-        <tag>各省省选</tag>
         <tag>HNOI</tag>
       </tags>
   </entry>
@@ -262,8 +262,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -484,9 +484,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -498,8 +498,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -509,8 +509,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
