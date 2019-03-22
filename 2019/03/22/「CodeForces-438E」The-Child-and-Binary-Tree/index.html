@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CodeForces,多项式,生成函数,FFT,NTT,DP,计数," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="给定一个元素个数为$n$的集合$c$和一个整数$m$，称一棵二叉树是好的当且仅当这棵二叉树的所有点的权值都属于$c$，规定一棵带点权二叉树的权值是该树中所有点权的总和。对于任意的整数$s$满足$1\leq s\leq m$，求出权值为$s$的好的二叉树的数量，答案对$998244353$取模。 $\texttt{Data Range:}1\leq n,m,c_i\leq 10^5$">
+<meta name="keywords" content="CodeForces,多项式,生成函数,FFT,NTT,DP,计数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「CodeForces 438E」The Child and Binary Tree">
 <meta property="og:url" content="http://yoursite.com/2019/03/22/「CodeForces-438E」The-Child-and-Binary-Tree/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
+<meta property="og:description" content="给定一个元素个数为$n$的集合$c$和一个整数$m$，称一棵二叉树是好的当且仅当这棵二叉树的所有点的权值都属于$c$，规定一棵带点权二叉树的权值是该树中所有点权的总和。对于任意的整数$s$满足$1\leq s\leq m$，求出权值为$s$的好的二叉树的数量，答案对$998244353$取模。 $\texttt{Data Range:}1\leq n,m,c_i\leq 10^5$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-22T13:34:08.066Z">
+<meta property="og:updated_time" content="2019-03-22T14:10:23.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「CodeForces 438E」The Child and Binary Tree">
+<meta name="twitter:description" content="给定一个元素个数为$n$的集合$c$和一个整数$m$，称一棵二叉树是好的当且仅当这棵二叉树的所有点的权值都属于$c$，规定一棵带点权二叉树的权值是该树中所有点权的总和。对于任意的整数$s$满足$1\leq s\leq m$，求出权值为$s$的好的二叉树的数量，答案对$998244353$取模。 $\texttt{Data Range:}1\leq n,m,c_i\leq 10^5$">
 
 
 
@@ -416,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  1.4k
                 </span>
               
 
@@ -432,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  7
                 </span>
               
             </div>
@@ -453,7 +457,21 @@
       
 
       
-        
+        <p>给定一个元素个数为$n$的集合$c$和一个整数$m$，称一棵二叉树是好的当且仅当这棵二叉树的所有点的权值都属于$c$，规定一棵带点权二叉树的权值是该树中所有点权的总和。对于任意的整数$s$满足$1\leq s\leq m$，求出权值为$s$的好的二叉树的数量，答案对$998244353$取模。</p>
+<p>$\texttt{Data Range:}1\leq n,m,c_i\leq 10^5$<br><a id="more"></a></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一道很好的<del>计数$\texttt{dp}$</del>多项式花样板子题。</p>
+<p>首先考虑计数$\texttt{dp}$，其实这个应该不难想。</p>
+<p>考虑根节点的点权，枚举一下左子树点权，那么有</p>
+<script type="math/tex; mode=display">dp_i=\begin{cases}1 & (n=0)\\ \sum\limits_{i=1}^{n}g_i\sum\limits_{j=0}^{n-i}dp_j dp_{n-i-j}\end{cases} & (n\geq 1)</script><p>这里，$g_i=[i\in c]$。</p>
+<p>但是这个算法复杂度不对啊qwq，考虑使用生成函数优化一下。</p>
+<p>设$F(x)$为序列$dp$的生成函数，$G(x)$为序列$g$的生成函数，那么很明显的可以看到，上面的式子是卷积的形式，于是就再搞一搞，就会有</p>
+<script type="math/tex; mode=display">F=GF^2+1</script><p>再整理一下</p>
+<script type="math/tex; mode=display">GF^2-F+1=0</script><p>解一下这样一个方程，得到两个根</p>
+<script type="math/tex; mode=display">F=\frac{2}{1\pm\sqrt{1-4G}}</script><p>这个正负号看起来就觉得很不爽，所以看一下这个是加号还是减号。</p>
+<p>题目保证了$1\leq c_i\leq 10^5$，所以可以知道$G_0=0$，代入一下是加号。</p>
+<p>既然$F$是$dp$的生成函数，那么只需要输出$F_1,F_2,\cdots,F_m$就可以啦qwq。</p>
+<p>时间复杂度$O(n\log n)$。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> li;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">3e5</span>+<span class="number">51</span>,MOD=<span class="number">998244353</span>,G=<span class="number">3</span>,INVG=<span class="number">332748118</span>;</span><br><span class="line">ll cnt,ccnt=<span class="number">1</span>,fd;</span><br><span class="line">ll f[MAXN],res[MAXN],g[MAXN],rev[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qpow</span><span class="params">(ll base,ll exponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    li res=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(exponent)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(exponent&amp;<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res=(li)res*base%MOD;</span><br><span class="line">        &#125;</span><br><span class="line">        base=(li)base*base%MOD,exponent&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(ll *cp,ll cnt,ll inv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll cur=<span class="number">0</span>,res=<span class="number">0</span>,omg=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;rev[i])</span><br><span class="line">        &#123;</span><br><span class="line">            swap(cp[i],cp[rev[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=cnt;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cur=i&gt;&gt;<span class="number">1</span>,res=qpow(inv==<span class="number">1</span>?G:INVG,(MOD<span class="number">-1</span>)/i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> ll *p=cp;p!=cp+cnt;p+=i)</span><br><span class="line">        &#123;</span><br><span class="line">            omg=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cur;++j)</span><br><span class="line">            &#123;</span><br><span class="line">                ll t=(li)omg*p[j+cur]%MOD,t2=p[j];</span><br><span class="line">                p[j+cur]=(t2-t+MOD)%MOD,p[j]=(t2+t)%MOD;</span><br><span class="line">                omg=(li)omg*res%MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(inv==<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ll invl=qpow(cnt,MOD<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            cp[i]=(li)cp[i]*invl%MOD;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">deriv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i<span class="number">-1</span>]=(li)f[i]*i%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[fd<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">integ</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)f[i<span class="number">-1</span>]*qpow(i,MOD<span class="number">-2</span>)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll tmp[MAXN];</span><br><span class="line">    <span class="keyword">if</span>(fd==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        res[<span class="number">0</span>]=qpow(f[<span class="number">0</span>],MOD<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inv((fd+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,f,res);</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=i&lt;fd?f[i]:<span class="number">0</span>;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmp,cnt,<span class="number">1</span>),NTT(res,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)(<span class="number">2</span>-(li)tmp[i]*res[i]%MOD+MOD)%MOD*res[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=fd;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ln</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll pinv[MAXN],der[MAXN];</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    inv(fd,f,pinv),deriv(fd,f,der);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(pinv,cnt,<span class="number">1</span>),NTT(der,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        der[i]=(li)der[i]*pinv[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(der,cnt,<span class="number">-1</span>),integ(fd,der,res);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        der[i]=pinv[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">exp</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll texp[MAXN];</span><br><span class="line">    <span class="keyword">if</span>(fd==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        res[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exp</span>((fd+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,f,res),ln(fd,res,texp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line"> 		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    texp[<span class="number">0</span>]=(f[<span class="number">0</span>]+<span class="number">1</span>-texp[<span class="number">0</span>]+MOD)%MOD;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        texp[i]=(f[i]-texp[i]+MOD)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(texp,cnt,<span class="number">1</span>),NTT(res,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)res[i]*texp[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        texp[i]=<span class="number">0</span>,res[i]=i&lt;fd?res[i]:<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">sqrt</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll tsqrt[MAXN];</span><br><span class="line">    ln(fd,f,tsqrt);</span><br><span class="line">    ll cnt=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        tsqrt[i]=tsqrt[i]&amp;<span class="number">1</span>?(tsqrt[i]+MOD)&gt;&gt;<span class="number">1</span>:tsqrt[i]&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exp</span>(fd,tsqrt,res);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tsqrt[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cnt=read(),fd=read()+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        ++f[read()];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ccnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        ccnt&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ccnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i]=(MOD-((li)<span class="number">4</span>*f[i]%MOD))%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    ++f[<span class="number">0</span>],<span class="built_in">sqrt</span>(fd,f,g);</span><br><span class="line">    g[<span class="number">0</span>]=(g[<span class="number">0</span>]+<span class="number">1</span>)%MOD,inv(fd,g,res);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,(res[i]&lt;&lt;<span class="number">1</span>)%MOD);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -472,6 +490,24 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CodeForces/" rel="tag"># CodeForces</a>
+          
+            <a href="/tags/多项式/" rel="tag"># 多项式</a>
+          
+            <a href="/tags/生成函数/" rel="tag"># 生成函数</a>
+          
+            <a href="/tags/FFT/" rel="tag"># FFT</a>
+          
+            <a href="/tags/NTT/" rel="tag"># NTT</a>
+          
+            <a href="/tags/DP/" rel="tag"># DP</a>
+          
+            <a href="/tags/计数/" rel="tag"># 计数</a>
+          
+        </div>
       
 
       
@@ -545,8 +581,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -574,7 +619,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -632,6 +677,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -659,7 +720,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">31.8k</span>
+    <span title="Site words total count">33.1k</span>
   
 </div>
 
@@ -1217,6 +1278,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
