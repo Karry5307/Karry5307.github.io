@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定整数$n$，求$\sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)\times 2^j\times j!\bmod{998244353}$，其中$S(i,j)$为第二类$\texttt{Stirling}$数。 $\texttt{Data Range:}n\leq 10^5$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-28T14:00:34.242Z">
+<meta property="og:updated_time" content="2019-03-28T14:09:58.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P4091」[HEOI2016&#x2F;TJOI2016]求和">
 <meta name="twitter:description" content="给定整数$n$，求$\sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)\times 2^j\times j!\bmod{998244353}$，其中$S(i,j)$为第二类$\texttt{Stirling}$数。 $\texttt{Data Range:}n\leq 10^5$">
@@ -463,7 +463,7 @@
 <p><a href="https://www.luogu.org/problemnew/show/P4091" target="_blank" rel="noopener">Luogu P4091</a></p>
 <p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=4555" target="_blank" rel="noopener">BZOJ 4555</a></p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>这么一长串式子看起来挺不爽，所以可以考虑推公式。</p>
-<p>根据当$m&nbsp;n$时$S(n,m)=0$，考虑将$j$的范围改一下</p>
+<p>根据当$m&lt;n$时$S(n,m)=0$，考虑将$j$的范围改一下</p>
 <script type="math/tex; mode=display">\sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)2^jj!</script>
       
     </div>
