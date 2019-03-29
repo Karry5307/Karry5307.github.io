@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「Luogu P4091」[HEOI2016/TJOI2016]求和]]></title>
     <url>%2F2019%2F03%2F28%2F%E3%80%8CLuogu-P4091%E3%80%8D-HEOI2016-TJOI2016-%E6%B1%82%E5%92%8C%2F</url>
-    <content type="text"><![CDATA[给定整数$n$，求$\sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)\times 2^j\times j!\bmod{998244353}$，其中$S(i,j)$为第二类$\texttt{Stirling}$数。 $\texttt{Data Range:}n\leq 10^5$ 链接之前的题目好多都没放链接，之后再补qwq。 Luogu P4091 BZOJ 4555 题解这么一长串式子看起来挺不爽，所以可以考虑推公式。 根据当$n&lt;m$时$S(n,m)=0$，考虑将$j$的范围改一下 \sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)\times 2^j\times j!换个枚举顺序，再把$2^j\times j$提出来 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{i=0}^{i}S(i,j)把$\texttt{Stirling}$数展开 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{i=0}^{i}\frac{1}{j!}\sum\limits_{k=0}^{n}(-1)^kC^k_j(j-k)^i代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;typedef long long int li;const ll MAXN=3e5+51,MOD=998244353,G=3,INVG=332748118;ll fd,ccnt,limit,rres;ll f[MAXN],g[MAXN],res[MAXN],rev[MAXN],inv[MAXN],fact[MAXN],finv[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline ll qpow(ll base,ll exponent)&#123; li res=1; while(exponent) &#123; if(exponent&amp;1) &#123; res=(li)res*base%MOD; &#125; base=(li)base*base%MOD,exponent&gt;&gt;=1; &#125; return res;&#125;inline void setup(ll ccnt)&#123; fact[0]=fact[1]=finv[0]=finv[1]=inv[1]=1; for(register int i=2;i&lt;=ccnt;i++) &#123; fact[i]=(li)fact[i-1]*i%MOD; inv[i]=(li)inv[MOD%i]*(MOD-MOD/i)%MOD; finv[i]=(li)finv[i-1]*inv[i]%MOD; &#125;&#125;inline void NTT(ll *cp,ll cnt,ll inv)&#123; ll cur=0,res=0,omg=0; for(register int i=0;i&lt;cnt;i++) &#123; if(i&lt;rev[i]) &#123; swap(cp[i],cp[rev[i]]); &#125; &#125; for(register int i=2;i&lt;=cnt;i&lt;&lt;=1) &#123; cur=i&gt;&gt;1,res=qpow(inv==1?G:INVG,(MOD-1)/i); for(register ll *p=cp;p!=cp+cnt;p+=i) &#123; omg=1; for(register int j=0;j&lt;cur;j++) &#123; ll t=(li)omg*p[j+cur]%MOD,t2=p[j]; p[j+cur]=(t2-t+MOD)%MOD,p[j]=(t2+t)%MOD; omg=(li)omg*res%MOD; &#125; &#125; &#125; if(inv==-1) &#123; ll invl=qpow(cnt,MOD-2); for(register int i=0;i&lt;=cnt;i++) &#123; cp[i]=(li)cp[i]*invl%MOD; &#125; &#125;&#125;int main()&#123; fd=read(),ccnt=1,limit=-1; while(ccnt&lt;(fd&lt;&lt;1)) &#123; ccnt&lt;&lt;=1,limit++; &#125; setup(ccnt); for(register int i=0;i&lt;=fd;i++) &#123; f[i]=i&amp;1?MOD-finv[i]:finv[i]; g[i]=i==0?1:(i==1?fd+1:(li)(qpow(i,fd+1)-1)*inv[i-1]%MOD*finv[i]%MOD); &#125; for(register int i=0;i&lt;ccnt;i++) &#123; rev[i]=(rev[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;limit); &#125; NTT(f,ccnt,1),NTT(g,ccnt,1); for(register int i=0;i&lt;=ccnt;i++) &#123; res[i]=(li)f[i]*g[i]%MOD; &#125; NTT(res,ccnt,-1); for(register int i=0;i&lt;=fd;i++) &#123; rres=(rres+(li)qpow(2,i)*fact[i]%MOD*res[i]%MOD)%MOD; &#125; printf("%d",rres);&#125;]]></content>
+    <content type="text"><![CDATA[给定整数$n$，求$\sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)\times 2^j\times j!\bmod{998244353}$，其中$S(i,j)$为第二类$\texttt{Stirling}$数。 $\texttt{Data Range:}n\leq 10^5$ 链接之前的题目好多都没放链接，之后再补qwq。 Luogu P4091 BZOJ 4555 题解这么一长串式子看起来挺不爽，所以可以考虑推公式。 根据当$n&lt;m$时$S(n,m)=0$，考虑将$j$的范围改一下 \sum\limits_{i=0}^{n}\sum\limits_{j=0}^{i}S(i,j)\times 2^j\times j!换个枚举顺序，再把$2^j\times j$提出来 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{i=0}^{n}S(i,j)把$\texttt{Stirling}$数展开 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{i=0}^{n}\frac{1}{j!}\sum\limits_{k=0}^{n}(-1)^kC^k_j(j-k)^i这个组合数看起来极其不好，展开一下，顺便把$j!$消掉 \sum\limits_{j=0}^{n}2^j\sum\limits_{i=0}^{n}\sum\limits_{k=0}^{n}(-1)^k\frac{j!(j-k)^i}{k!(j-k)!}交换一下$k$和$i$的枚举顺序，把与$i$无关的提出来 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{k=0}^{n}(-1)^k\frac{1}{k!(j-k)!}\sum\limits_{i=0}^{n}(j-k)^i把$j-k$提进去，顺便用等比数列求和消掉关与$i$的枚举 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{k=0}^{n}(-1)^k\frac{1}{k!}\times\frac{(j-k)^{n+1}-1}{(j-k)!(j-k+1)}设$f_i=\frac{(-1)^i}{i!},g_i=\frac{i^{n+1}-1}{i!(i-1)}$，那么就会有 \sum\limits_{j=0}^{n}2^j\times j!\sum\limits_{k=0}^{n}f_kg_{j-k}发现右边是一个卷积，使用$\texttt{NTT}$计算即可，时间复杂度$O(n\log n)$。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;typedef long long int li;const ll MAXN=3e5+51,MOD=998244353,G=3,INVG=332748118;ll fd,ccnt,limit,rres;ll f[MAXN],g[MAXN],res[MAXN],rev[MAXN],inv[MAXN],fact[MAXN],finv[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline ll qpow(ll base,ll exponent)&#123; li res=1; while(exponent) &#123; if(exponent&amp;1) &#123; res=(li)res*base%MOD; &#125; base=(li)base*base%MOD,exponent&gt;&gt;=1; &#125; return res;&#125;inline void setup(ll ccnt)&#123; fact[0]=fact[1]=finv[0]=finv[1]=inv[1]=1; for(register int i=2;i&lt;=ccnt;i++) &#123; fact[i]=(li)fact[i-1]*i%MOD; inv[i]=(li)inv[MOD%i]*(MOD-MOD/i)%MOD; finv[i]=(li)finv[i-1]*inv[i]%MOD; &#125;&#125;inline void NTT(ll *cp,ll cnt,ll inv)&#123; ll cur=0,res=0,omg=0; for(register int i=0;i&lt;cnt;i++) &#123; if(i&lt;rev[i]) &#123; swap(cp[i],cp[rev[i]]); &#125; &#125; for(register int i=2;i&lt;=cnt;i&lt;&lt;=1) &#123; cur=i&gt;&gt;1,res=qpow(inv==1?G:INVG,(MOD-1)/i); for(register ll *p=cp;p!=cp+cnt;p+=i) &#123; omg=1; for(register int j=0;j&lt;cur;j++) &#123; ll t=(li)omg*p[j+cur]%MOD,t2=p[j]; p[j+cur]=(t2-t+MOD)%MOD,p[j]=(t2+t)%MOD; omg=(li)omg*res%MOD; &#125; &#125; &#125; if(inv==-1) &#123; ll invl=qpow(cnt,MOD-2); for(register int i=0;i&lt;=cnt;i++) &#123; cp[i]=(li)cp[i]*invl%MOD; &#125; &#125;&#125;int main()&#123; fd=read(),ccnt=1,limit=-1; while(ccnt&lt;(fd&lt;&lt;1)) &#123; ccnt&lt;&lt;=1,limit++; &#125; setup(ccnt); for(register int i=0;i&lt;=fd;i++) &#123; f[i]=i&amp;1?MOD-finv[i]:finv[i]; g[i]=i==0?1:(i==1?fd+1:(li)(qpow(i,fd+1)-1)*inv[i-1]%MOD*finv[i]%MOD); &#125; for(register int i=0;i&lt;ccnt;i++) &#123; rev[i]=(rev[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;limit); &#125; NTT(f,ccnt,1),NTT(g,ccnt,1); for(register int i=0;i&lt;=ccnt;i++) &#123; res[i]=(li)f[i]*g[i]%MOD; &#125; NTT(res,ccnt,-1); for(register int i=0;i&lt;=fd;i++) &#123; rres=(rres+(li)qpow(2,i)*fact[i]%MOD*res[i]%MOD)%MOD; &#125; printf("%d",rres);&#125;]]></content>
       <tags>
         <tag>BZOJ</tag>
         <tag>多项式</tag>
@@ -221,8 +221,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -244,8 +244,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>CodeVS</tag>
         <tag>数论</tag>
       </tags>
@@ -307,8 +307,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -529,9 +529,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -543,8 +543,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -554,8 +554,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -593,8 +593,8 @@
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
