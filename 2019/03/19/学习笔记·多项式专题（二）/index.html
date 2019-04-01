@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="这一片文章讲的呢，都是一些板子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-19T14:38:40.137Z">
+<meta property="og:updated_time" content="2019-04-01T12:14:52.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（二）">
 <meta name="twitter:description" content="这一片文章讲的呢，都是一些板子。">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  535
+                  542
                 </span>
               
 
@@ -465,11 +465,9 @@
 <script type="math/tex; mode=display">F(x)H(x)\equiv 1\pmod{x^{\lceil\frac{n}{2}\rceil}}</script><script type="math/tex; mode=display">F(x)G(x)\equiv 1\pmod{x^n}</script><script type="math/tex; mode=display">\therefore F(x)(G(x)-H(x))\equiv 0\pmod{x^{\lceil\frac{n}{2}\rceil}}</script><script type="math/tex; mode=display">\therefore G(x)-H(x)\equiv 0\pmod{x^{\lceil\frac{n}{2}\rceil}}</script><script type="math/tex; mode=display">\therefore G(x)^2-2G(x)H(x)+H(x)^2\equiv 0\pmod{x^n}</script><script type="math/tex; mode=display">\therefore G(x)\equiv 2H(x)-F(x)H(x)^2\pmod{x^n}</script><p>于是可以快活地上板子啦qwq<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll tmp[MAXN];</span><br><span class="line">    <span class="keyword">if</span>(fd==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        res[<span class="number">0</span>]=qpow(f[<span class="number">0</span>],MOD<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inv((fd+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,f,res);</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=i&lt;fd?f[i]:<span class="number">0</span>;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmp,cnt,<span class="number">1</span>),NTT(res,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)(<span class="number">2</span>-(li)tmp[i]*res[i]%MOD+MOD)%MOD*res[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=fd;i&lt;cnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="多项式对数函数"><a href="#多项式对数函数" class="headerlink" title="多项式对数函数"></a>多项式对数函数</h3><p>大力推一波公式：</p>
 <script type="math/tex; mode=display">G(x)=\ln F(x)</script><script type="math/tex; mode=display">\therefore G^\prime(x)=(\ln F(x))^\prime</script><p>根据链式求导法则$\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\mathrm{d}y}{\mathrm{d}u}\frac{\mathrm{d}u}{\mathrm{d}x}$和基本公式$\frac{\mathrm{d}}{\mathrm{d}x}\ln x=\frac{1}{x}$，有</p>
-<script type="math/tex; mode=display">\frac{\mathrm{d}}{\mathrm{d}x}G(x)=$frac{F^\prime(x)}{F(x)}$
+<script type="math/tex; mode=display">\frac{\mathrm{d}}{\mathrm{d}x}G(x)=\frac{F^\prime(x)}{F(x)}</script><p>再积分回来</p>
+<p>$$\therefore G(x)=$\int\frac{F^\prime(x)}{F(x)} $</p>
 
-再积分回来
-
-$$\therefore G(x)=</script>
       
     </div>
     
@@ -606,7 +604,7 @@ $$\therefore G(x)=</script>
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -619,7 +617,7 @@ $$\therefore G(x)=</script>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">88</span>
+                  <span class="site-state-item-count">89</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -720,7 +718,7 @@ $$\therefore G(x)=</script>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">36.3k</span>
+    <span title="Site words total count">36.8k</span>
   
 </div>
 
