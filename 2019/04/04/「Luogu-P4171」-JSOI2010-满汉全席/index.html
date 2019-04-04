@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="BZOJ,图论,强连通分量,洛谷,各省省选,JSOI,2-SAT," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Karry5307&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/学习笔记/index.html">
+<meta name="description" content="有$n$种食材和$m$位评委。每一位选手要将$n$种食材全部做成满式或汉式料理。如果一位选手做出的菜符合每位评委所喜好的两种菜品中的一种，那么说这位选手是通过考核的。 一共有$T$组数据，对于每组数据，给定$m$位评委所喜好的菜品，问是否有一种做法，使得能通过考核。 $\texttt{Data Range:}T\leq 10,n\leq 100,m\leq 1000$">
+<meta name="keywords" content="BZOJ,图论,强连通分量,洛谷,各省省选,JSOI,2-SAT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Luogu P4171」[JSOI2010]满汉全席">
+<meta property="og:url" content="http://yoursite.com/2019/04/04/「Luogu-P4171」-JSOI2010-满汉全席/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
+<meta property="og:description" content="有$n$种食材和$m$位评委。每一位选手要将$n$种食材全部做成满式或汉式料理。如果一位选手做出的菜符合每位评委所喜好的两种菜品中的一种，那么说这位选手是通过考核的。 一共有$T$组数据，对于每组数据，给定$m$位评委所喜好的菜品，问是否有一种做法，使得能通过考核。 $\texttt{Data Range:}T\leq 10,n\leq 100,m\leq 1000$">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-04T13:01:36.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Karry5307&#39;s Blog">
+<meta name="twitter:title" content="「Luogu P4171」[JSOI2010]满汉全席">
+<meta name="twitter:description" content="有$n$种食材和$m$位评委。每一位选手要将$n$种食材全部做成满式或汉式料理。如果一位选手做出的菜符合每位评委所喜好的两种菜品中的一种，那么说这位选手是通过考核的。 一共有$T$组数据，对于每组数据，给定$m$位评委所喜好的菜品，问是否有一种做法，使得能通过考核。 $\texttt{Data Range:}T\leq 10,n\leq 100,m\leq 1000$">
 
 
 
@@ -126,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/学习笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/04/「Luogu-P4171」-JSOI2010-满汉全席/"/>
 
 
 
 
 
-  <title>标签: 学习笔记 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>「Luogu P4171」[JSOI2010]满汉全席 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -151,7 +156,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -329,166 +334,216 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>学习笔记<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/「Luogu-P4171」-JSOI2010-满汉全席/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karry5307">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Karry5307's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/19/学习笔记·多项式专题（二）/" itemprop="url">
-              
-                <span itemprop="name">学习笔记·多项式专题（二）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">「Luogu P4171」[JSOI2010]满汉全席</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-19T20:17:55+08:00"
-              content="2019-03-19" >
-          03-19
-        </time>
-      </div>
+        <div class="post-meta">
+         
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-04T20:26:10+08:00">
+                2019-04-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/04/「Luogu-P4171」-JSOI2010-满汉全席/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/04/「Luogu-P4171」-JSOI2010-满汉全席/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  254
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/20/学习笔记·多项式专题（一）/" itemprop="url">
-              
-                <span itemprop="name">学习笔记·多项式专题（一）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-20T20:55:28+08:00"
-              content="2019-01-20" >
-          01-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/01/学习笔记·平衡树/" itemprop="url">
-              
-                <span itemprop="name">学习笔记·平衡树</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-01T13:25:20+08:00"
-              content="2018-12-01" >
-          12-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/24/学习笔记·网络流/" itemprop="url">
-              
-                <span itemprop="name">学习笔记·网络流</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-24T08:34:02+08:00"
-              content="2018-09-24" >
-          09-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/13/学习笔记·树链剖分/" itemprop="url">
-              
-                <span itemprop="name">学习笔记·树链剖分</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-13T14:35:36+08:00"
-              content="2018-08-13" >
-          08-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>有$n$种食材和$m$位评委。每一位选手要将$n$种食材全部做成满式或汉式料理。如果一位选手做出的菜符合每位评委所喜好的两种菜品中的一种，那么说这位选手是通过考核的。</p>
+<p>一共有$T$组数据，对于每组数据，给定$m$位评委所喜好的菜品，问是否有一种做法，使得能通过考核。</p>
+<p>$\texttt{Data Range:}T\leq 10,n\leq 100,m\leq 1000$<br><a id="more"></a></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.org/problemnew/show/P4171" target="_blank" rel="noopener">Luogu P4171</a></p>
+<p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1823" target="_blank" rel="noopener">BZOJ 1823</a></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>设$x_i$为$[$第$i$种食材做汉式$]$，那么评委的限制就变成$x_i$为真或者$x_j$为假这样的形式了。</p>
+<p>于是，可以把题意转换成是否存在一组$x_i$的取值，使得这些取值能满足所有约束条件。</p>
+<p>这就是个$\texttt{2-SAT}$的板子题了。</p>
+<p>唯一需要注意的是<strong>多组数据记得清零！！！</strong></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>```cpp</p>
+<h1 id="include"><a href="#include" class="headerlink" title="include"></a>include<bits stdc++.h=""></bits></h1><p>using namespace std;<br>typedef int ll;<br>const ll MAXN=1e4+51;<br>struct Edge{<br>    ll to,prev;<br>};<br>Edge ed[MAXN&lt;<1]; stack<ll="">st;<br>ll test,cnt,ccnt,tot,num,sccCnt,x,y,vx,vy;<br>ll last[MAXN&lt;&lt;1],dfn[MAXN&lt;&lt;1],low[MAXN&lt;&lt;1],belong[MAXN&lt;&lt;1],ins[MAXN&lt;&lt;1];<br>inline ll read()<br>{<br>    register ll num=0,neg=1;<br>    register char ch=getchar();<br>    while(!isdigit(ch)&amp;&amp;ch!=’-‘)<br>    {<br>        ch=getchar();<br>    }<br>    if(ch==’-‘)<br>    {<br>        neg=-1;<br>        ch=getchar();<br>    }<br>    while(isdigit(ch))<br>    {<br>        num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-‘0’);<br>        ch=getchar();<br>    }<br>    return num<em>neg;<br>}<br>inline ll getType()<br>{<br>    register char ch=getchar();<br>    while(ch!=’m’&amp;&amp;ch!=’h’)<br>    {<br>        ch=getchar();<br>    }<br>    return ch==’h’;<br>}<br>inline void addEdge(ll from,ll to)<br>{<br>    ed[++tot].prev=last[from];<br>    ed[tot].to=to;<br>    last[from]=tot;<br>}<br>inline void addOr(ll x,ll y,ll vx,ll vy)<br>{<br>    addEdge(y+cnt</em>(vy^1),x+cnt<em>(vx&amp;1));<br>    addEdge(x+cnt</em>(vx^1),y+cnt*(vy&amp;1));<br>}<br>inline void Tarjan(ll node)<br>{<br>    ll nd;<br>    dfn[node]=low[node]=++num;<br>    st.push(node),ins[node]=1;<br>    for(register int i=last[node];i;i=ed[i].prev)<br>    {<br>        if(!dfn[ed[i].to])<br>        {<br>            Tarjan(ed[i].to);<br>            low[node]=min(low[node],low[ed[i].to]);<br>        }<br>        else<br>        {<br>            if(ins[ed[i].to])<br>            {<br>                low[node]=min(low[node],dfn[ed[i].to]);<br>            }<br>        }<br>    }<br>    if(dfn[node]==low[node])<br>    {<br>        sccCnt++;<br>        do<br>        {<br>            nd=st.top(),st.pop();<br>            ins[nd]=0,belong[nd]=sccCnt;<br>        }<br>        while(node!=nd);<br>    }<br>}<br>inline void solve()<br>{<br>    cnt=read(),ccnt=read();<br>    for(register int i=0;i&lt;ccnt;i++)<br>    {<br>        vx=getType(),x=read(),vy=getType(),y=read();<br>        addOr(x,y,vx,vy);<br>    }<br>    for(register int i=1;i&lt;=(cnt&lt;&lt;1);i++)<br>    {<br>        if(!dfn[i])<br>        {<br>            Tarjan(i);<br>        }<br>    }<br>    for(register int i=1;i&lt;=cnt;i++)<br>    {<br>        if(belong[i]==belong[i+cnt])<br>        {<br>            puts(“BAD”);<br>            return;<br>        }<br>    }<br>    puts(“GOOD”);<br>}<br>inline void clear()<br>{<br>    memset(ed,0,sizeof(ed)),memset(last,0,sizeof(last));<br>    memset(dfn,0,sizeof(dfn)),memset(low,0,sizeof(low));<br>    memset(belong,0,sizeof(belong)),memset(ins,0,sizeof(ins));<br>    tot=num=sccCnt=0;<br>    while(!st.empty())<br>    {<br>        st.pop();<br>    }<br>}<br>int main()<br>{<br>    test=read();<br>    for(register int i=0;i&lt;test;i++)<br>    {<br>        solve(),clear();<br>    }<br>}</1];></p>
 
       
     </div>
+    
+    
+    
 
+    
+	  <div>
+		
+	  </div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+          
+            <a href="/tags/图论/" rel="tag"># 图论</a>
+          
+            <a href="/tags/强连通分量/" rel="tag"># 强连通分量</a>
+          
+            <a href="/tags/洛谷/" rel="tag"># 洛谷</a>
+          
+            <a href="/tags/各省省选/" rel="tag"># 各省省选</a>
+          
+            <a href="/tags/JSOI/" rel="tag"># JSOI</a>
+          
+            <a href="/tags/2-SAT/" rel="tag"># 2-SAT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/01/「Luogu-P4555」-国家集训队-最长双回文串/" rel="next" title="「Luogu P4555」[国家集训队]最长双回文串">
+                <i class="fa fa-chevron-left"></i> 「Luogu P4555」[国家集训队]最长双回文串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -496,6 +551,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -516,8 +578,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -602,6 +673,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number"></span> <span class="nav-text">include</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -788,6 +875,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="这一片文章讲的呢，都是一些板子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-01T12:14:52.693Z">
+<meta property="og:updated_time" content="2019-04-04T14:16:29.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（二）">
 <meta name="twitter:description" content="这一片文章讲的呢，都是一些板子。">
@@ -369,6 +369,10 @@
         
 
         <div class="post-meta">
+          
+         <i class="fa fa-thumb-tack"></i> 
+         <font color=8E44AD>置顶</font> 
+         <span class="post-meta-divider">|</span> 
          
           <span class="post-time">
             
@@ -420,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  542
+                  1.2k
                 </span>
               
 
@@ -436,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  6
                 </span>
               
             </div>
@@ -466,7 +470,24 @@
 <h3 id="多项式对数函数"><a href="#多项式对数函数" class="headerlink" title="多项式对数函数"></a>多项式对数函数</h3><p>大力推一波公式：</p>
 <script type="math/tex; mode=display">G(x)=\ln F(x)</script><script type="math/tex; mode=display">\therefore G^\prime(x)=(\ln F(x))^\prime</script><p>根据链式求导法则$\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\mathrm{d}y}{\mathrm{d}u}\frac{\mathrm{d}u}{\mathrm{d}x}$和基本公式$\frac{\mathrm{d}}{\mathrm{d}x}\ln x=\frac{1}{x}$，有</p>
 <script type="math/tex; mode=display">\frac{\mathrm{d}}{\mathrm{d}x}G(x)=\frac{F^\prime(x)}{F(x)}</script><p>再积分回来</p>
-<p>$$\therefore G(x)=$\int\frac{F^\prime(x)}{F(x)} $</p>
+<script type="math/tex; mode=display">\therefore G(x)=\int\frac{F^\prime(x)}{F(x)}</script><p>于是又可以快活地上板子啦qwq<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ln</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll pinv[MAXN],der[MAXN];</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    inv(fd,f,pinv),deriv(fd,f,der);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(pinv,cnt,<span class="number">1</span>),NTT(der,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        der[i]=(li)der[i]*pinv[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(der,cnt,<span class="number">-1</span>),integ(fd,der,res);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        der[i]=pinv[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="多项式指数函数"><a href="#多项式指数函数" class="headerlink" title="多项式指数函数"></a>多项式指数函数</h3><p>还是大力推公式：</p>
+<script type="math/tex; mode=display">G(x)=e^{F(x)}</script><p>先考虑求导，有</p>
+<script type="math/tex; mode=display">G^\prime(x)=F^\prime(x)e^F(x)</script><p>指数函数还是没有消去，看来这种方法布星。</p>
+<p>两边取个对数，再把$F(x)$移过去</p>
+<script type="math/tex; mode=display">\ln G(x)-F(x)=0</script><p>强行解这个方程布星，考虑牛顿迭代。在膜$x^n$意义下的牛顿迭代式子是这样的（这里不证明）</p>
+<script type="math/tex; mode=display">F(x)=F_0(x)-\frac{G(F_0(x))}{G^\prime(F_0(x))}\bmod {x^n}</script><p>其中，$F_0(x)$是$\bmod x^{\lceil\frac{n}{2}\rceil}$意义下的答案</p>
+<p>所以，设$H(x)=\ln x-F(x)$，有</p>
+<script type="math/tex; mode=display">G(x)\equiv G_0(x)-\frac{H(G_0(x))}{H^\prime(G_0(x))}</script><script type="math/tex; mode=display">G(x)\equiv G_0(x)(1-\ln G_0(x)+F(x))\pmod x^n</script><p>又因为保证了$F(0)=0$，所以$G(x)$常数项为$1$</p>
+<p>于是可以愉快的上板子了qwq</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">exp</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll texp[MAXN];</span><br><span class="line">    <span class="keyword">if</span>(fd==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        res[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exp</span>((fd+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>,f,res),ln(fd,res,texp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    texp[<span class="number">0</span>]=(f[<span class="number">0</span>]+<span class="number">1</span>-texp[<span class="number">0</span>]+MOD)%MOD;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        texp[i]=(f[i]-texp[i]+MOD)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(texp,cnt,<span class="number">1</span>),NTT(res,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)res[i]*texp[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        texp[i]=<span class="number">0</span>,res[i]=i&lt;fd?res[i]:<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多项式三角函数"><a href="#多项式三角函数" class="headerlink" title="多项式三角函数"></a>多项式三角函数</h3><p>像求导积分之类的肯定布星，因为</p>
+<script type="math/tex; mode=display">\frac{\mathrm{d}}{\mathrm{d}x}\sin x=\cos x,frac{\mathrm{d}}{\mathrm{d}x}\cos x=-\sin x</script><p>而且链式法则的存在会使式子更加复杂。</p>
+<p>牛顿迭代也会把你劝退，因为式子也会很复杂，这里就不推导了。</p>
+<p>$\texttt{So?}$</p>
+<p>考虑使用欧拉公式，将$F(x)$代入</p>
+<script type="math/tex; mode=display">e^{F(x)}=\cos F(x)+\mathrm{i}\sin F(x)</script><p>再把$-F(x)$代入</p>
+<p>$e^{-F(x)}=\cos -F(x)+\mathrm{i}\sin -F(x)$</p>
 
       
     </div>
@@ -604,7 +625,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -617,7 +638,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -684,7 +705,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式的求导与不定积分"><span class="nav-number">1.</span> <span class="nav-text">多项式的求导与不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">3.</span> <span class="nav-text">多项式求逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式对数函数"><span class="nav-number">4.</span> <span class="nav-text">多项式对数函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式的求导与不定积分"><span class="nav-number">1.</span> <span class="nav-text">多项式的求导与不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">3.</span> <span class="nav-text">多项式求逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式对数函数"><span class="nav-number">4.</span> <span class="nav-text">多项式对数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式指数函数"><span class="nav-number">5.</span> <span class="nav-text">多项式指数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式三角函数"><span class="nav-number">6.</span> <span class="nav-text">多项式三角函数</span></a></li></ol></div>
             
 
           </div>
@@ -718,7 +739,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">36.9k</span>
+    <span title="Site words total count">37.7k</span>
   
 </div>
 
