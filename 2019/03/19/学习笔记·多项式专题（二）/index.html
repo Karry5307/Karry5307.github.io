@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="这一片文章讲的呢，都是一些板子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-05T03:09:46.261Z">
+<meta property="og:updated_time" content="2019-04-05T03:16:26.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（二）">
 <meta name="twitter:description" content="这一片文章讲的呢，都是一些板子。">
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.2k
+                  3.3k
                 </span>
               
 
@@ -462,6 +462,8 @@
 
       
         <p>这一片文章讲的呢，都是一些<del>板子</del>。<br><a id="more"></a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>以下代码多项式系数均对$998244353(7\times 17\times 2^{23}+1)$取膜，如果想对于$1004535809$等其他模数通用的话，请将原根，原根的逆和虚数单位，以及三角函数代码里的$\texttt{inv2}$更改即可。</p>
+<p>此文章破$\texttt{3k}$字祭！（源代码$581$行，大小$\texttt{14KB}$）</p>
 <h3 id="多项式的求导与不定积分"><a href="#多项式的求导与不定积分" class="headerlink" title="多项式的求导与不定积分"></a>多项式的求导与不定积分</h3><p>$\frac{\mathrm{d}}{\mathrm{d}x}x^n=nx^{n-1},\int x^n=\frac{x^{n+1}}{n+1}\mathrm{d}x$，所以直接套公式即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">deriv</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i<span class="number">-1</span>]=(li)f[i]*i%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[fd<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">integ</span><span class="params">(ll fd,ll *f,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;fd;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)f[i<span class="number">-1</span>]*qpow(i,MOD<span class="number">-2</span>)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    res[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="多项式乘法"><a href="#多项式乘法" class="headerlink" title="多项式乘法"></a>多项式乘法</h3><p><del>略</del></p>
 <h3 id="多项式求逆"><a href="#多项式求逆" class="headerlink" title="多项式求逆"></a>多项式求逆</h3><p>如果$F(x)$只有一项，那么答案是它的逆元。</p>
@@ -746,7 +748,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式的求导与不定积分"><span class="nav-number">1.</span> <span class="nav-text">多项式的求导与不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">3.</span> <span class="nav-text">多项式求逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式除法"><span class="nav-number">4.</span> <span class="nav-text">多项式除法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式对数函数"><span class="nav-number">5.</span> <span class="nav-text">多项式对数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式指数函数"><span class="nav-number">6.</span> <span class="nav-text">多项式指数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式开根"><span class="nav-number">7.</span> <span class="nav-text">多项式开根</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式快速幂"><span class="nav-number">8.</span> <span class="nav-text">多项式快速幂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式三角函数"><span class="nav-number">9.</span> <span class="nav-text">多项式三角函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式反三角函数"><span class="nav-number">10.</span> <span class="nav-text">多项式反三角函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式的求导与不定积分"><span class="nav-number">2.</span> <span class="nav-text">多项式的求导与不定积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">3.</span> <span class="nav-text">多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">4.</span> <span class="nav-text">多项式求逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式除法"><span class="nav-number">5.</span> <span class="nav-text">多项式除法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式对数函数"><span class="nav-number">6.</span> <span class="nav-text">多项式对数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式指数函数"><span class="nav-number">7.</span> <span class="nav-text">多项式指数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式开根"><span class="nav-number">8.</span> <span class="nav-text">多项式开根</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式快速幂"><span class="nav-number">9.</span> <span class="nav-text">多项式快速幂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式三角函数"><span class="nav-number">10.</span> <span class="nav-text">多项式三角函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式反三角函数"><span class="nav-number">11.</span> <span class="nav-text">多项式反三角函数</span></a></li></ol></div>
             
 
           </div>
@@ -780,7 +782,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">39.8k</span>
+    <span title="Site words total count">39.9k</span>
   
 </div>
 
