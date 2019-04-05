@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="洛谷,字符串,后缀自动机，SAM," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Karry5307&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Splay/index.html">
+<meta name="description" content="给定一个只用小写字母组成的串$S$，求出$S$中所有出现次数大于$1$的子串的出现次数与它的长度的乘积的最大值。 $\texttt{Data Range:}\vert S\vert \leq 10^6$">
+<meta name="keywords" content="洛谷,字符串,后缀自动机，SAM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Luogu P3804」【模板】后缀自动机">
+<meta property="og:url" content="http://yoursite.com/2019/04/05/「Luogu-P3804」【模板】后缀自动机/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
+<meta property="og:description" content="给定一个只用小写字母组成的串$S$，求出$S$中所有出现次数大于$1$的子串的出现次数与它的长度的乘积的最大值。 $\texttt{Data Range:}\vert S\vert \leq 10^6$">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-05T05:10:14.670Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Karry5307&#39;s Blog">
+<meta name="twitter:title" content="「Luogu P3804」【模板】后缀自动机">
+<meta name="twitter:description" content="给定一个只用小写字母组成的串$S$，求出$S$中所有出现次数大于$1$的子串的出现次数与它的长度的乘积的最大值。 $\texttt{Data Range:}\vert S\vert \leq 10^6$">
 
 
 
@@ -126,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Splay/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/「Luogu-P3804」【模板】后缀自动机/"/>
 
 
 
 
 
-  <title>标签: Splay | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>「Luogu P3804」【模板】后缀自动机 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -151,7 +156,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -329,138 +334,202 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Splay<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/「Luogu-P3804」【模板】后缀自动机/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karry5307">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Karry5307's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/12/22/「Luogu-P3690」【模板】Link-Cut-Tree-（动态树）/" itemprop="url">
-              
-                <span itemprop="name">「Luogu P3690」【模板】Link Cut Tree （动态树）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">「Luogu P3804」【模板】后缀自动机</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-22T21:12:32+08:00"
-              content="2018-12-22" >
-          12-22
-        </time>
-      </div>
+        <div class="post-meta">
+         
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T12:17:37+08:00">
+                2019-04-05
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/05/「Luogu-P3804」【模板】后缀自动机/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/05/「Luogu-P3804」【模板】后缀自动机/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  494
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/03/「Luogu-P2234」-HNOI2002-营业额统计/" itemprop="url">
-              
-                <span itemprop="name">「Luogu P2234」[HNOI2002]营业额统计</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-03T20:45:22+08:00"
-              content="2018-12-03" >
-          12-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/01/学习笔记·平衡树/" itemprop="url">
-              
-                <span itemprop="name">学习笔记·平衡树</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-01T13:25:20+08:00"
-              content="2018-12-01" >
-          12-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/30/「Luogu-P3391」【模板】文艺平衡树（Splay）/" itemprop="url">
-              
-                <span itemprop="name">「Luogu P3391」【模板】文艺平衡树（Splay）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-11-30T21:41:43+08:00"
-              content="2018-11-30" >
-          11-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>给定一个只用小写字母组成的串$S$，求出$S$中所有出现次数大于$1$的子串的出现次数与它的长度的乘积的最大值。</p>
+<p>$\texttt{Data Range:}\vert S\vert \leq 10^6$<br><a id="more"></a></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>首先把后缀自动机建出来，然后考虑对每个自动机上的节点求一遍$\texttt{size}$，答案就是$\max\{len\times size\}$啦qwq</p>
+<p>顺便说一句，这种方法会在后面的文章上频繁使用，注意！</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> li;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">2e6</span>+<span class="number">51</span>;</span><br><span class="line">ll length,k,cur;</span><br><span class="line">li res;</span><br><span class="line">ll prefix[MAXN],barrel[MAXN],size[MAXN];</span><br><span class="line"><span class="keyword">char</span> str[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> SuffixAutomaton&#123;</span><br><span class="line">    <span class="keyword">const</span> ll sigmaSize=<span class="number">27</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">        ll son[sigmaSize];</span><br><span class="line">        ll fa,length;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SuffixAutomaton</span>&#123;</span></span><br><span class="line">        Node nd[MAXN];</span><br><span class="line">        ll last,tot;</span><br><span class="line">        SuffixAutomaton()</span><br><span class="line">        &#123;</span><br><span class="line">            last=tot=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">extend</span><span class="params">(ll ch)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            ll p=last,nxt=++tot,nxt2,k;</span><br><span class="line">            last=nxt,nd[nxt].length=nd[p].length+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(p&amp;&amp;!nd[p].son[ch])</span><br><span class="line">            &#123;</span><br><span class="line">                nd[p].son[ch]=nxt,p=nd[p].fa;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!p)</span><br><span class="line">            &#123;</span><br><span class="line">                nd[nxt].fa=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                k=nd[p].son[ch];</span><br><span class="line">                <span class="keyword">if</span>(nd[p].length+<span class="number">1</span>==nd[k].length)</span><br><span class="line">                &#123;</span><br><span class="line">                    nd[nxt].fa=k;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    nxt2=++tot,nd[nxt2]=nd[k];</span><br><span class="line">                    nd[nxt2].length=nd[p].length+<span class="number">1</span>,nd[k].fa=nd[nxt].fa=nxt2;</span><br><span class="line">                    <span class="keyword">while</span>(p&amp;&amp;nd[p].son[ch]==k)</span><br><span class="line">                    &#123;</span><br><span class="line">                        nd[p].son[ch]=nxt2,p=nd[p].fa;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            size[nxt]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">SuffixAutomaton::SuffixAutomaton sam;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,str+<span class="number">1</span>);</span><br><span class="line">    length=<span class="built_in">strlen</span>(str+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sam.extend(str[i]<span class="number">-97</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    k=sam.tot;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        prefix[sam.nd[i].length]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        prefix[i]+=prefix[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        barrel[prefix[sam.nd[i].length]--]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=k;i;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        cur=barrel[i];</span><br><span class="line">        size[sam.nd[cur].fa]+=size[cur];</span><br><span class="line">        <span class="keyword">if</span>(size[cur]&gt;<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res=max(res,(li)size[cur]*sam.nd[cur].length);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+	  <div>
+		
+	  </div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/洛谷/" rel="tag"># 洛谷</a>
+          
+            <a href="/tags/字符串/" rel="tag"># 字符串</a>
+          
+            <a href="/tags/后缀自动机，SAM/" rel="tag"># 后缀自动机，SAM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/「Luogu-P4171」-JSOI2010-满汉全席/" rel="next" title="「Luogu P4171」[JSOI2010]满汉全席">
+                <i class="fa fa-chevron-left"></i> 「Luogu P4171」[JSOI2010]满汉全席
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -468,6 +537,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -488,8 +564,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -574,6 +659,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -760,6 +861,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1156,26 +1261,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
