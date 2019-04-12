@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-12T09:07:52.856Z">
+<meta property="og:updated_time" content="2019-04-12T09:13:47.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5268」[SNOI2017]一个简单的询问">
 <meta name="twitter:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  173
+                  292
                 </span>
               
 
@@ -462,7 +462,9 @@
 <p><strong>注意：答案有可能超过$\texttt{int}$的最大值。</strong></p>
 <p>$\texttt{Data Range:}n,q\leq 5\times 10^4,1\leq a_i\leq n,1\leq l_1\leq r_1\leq n,1\leq l_2\leq r_2\leq n$<br><a id="more"></a><br>首先，显然会有</p>
 <script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\sum\limits_{i=l}^{r}[a_i=x]</script><p>右边的和式是可以拆成前缀和的形式的，就暴力拆一下，于是有</p>
-<script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\operatorname{get}(1,r,x)-\operatorname{get}(1,l-1,x)</script>
+<script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\operatorname{get}(1,r,x)-\operatorname{get}(1,l-1,x)</script><p>我们定义一个$\operatorname{g}(r,x)=\operatornamr{get}(1,r,x)$，拆一下式子，有</p>
+<script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}(\operatorname{g}(r_1,x)-\operatorname{g}(l_1-1,x))\cdot(\operatorname{g}(r_2,x)-\operatorname{g}(l_2-1,x))</script><p>展开一下里面的括号</p>
+<script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}(\operatorname{g}(r_1,x)-\operatorname{g}(l_1-1,x))\cdot(\operatorname{g}(r_2,x)-\operatorname{g}(l_2-1,x))</script><script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}\operatorname{g}(r_1,x)\operatorname{g}(r_2,x)-\operatorname{g}(r_1,x)\operatorname{g}(l_2-1,x)-\operatorname{g}(r_2,x)\operatorname{g}(l_1-1,x)+\operatorname{g}(l_2-1,x)\operatorname{g}(l_1-1,x)</script>
       
     </div>
     
@@ -702,7 +704,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.6k</span>
+    <span title="Site words total count">41.7k</span>
   
 </div>
 
