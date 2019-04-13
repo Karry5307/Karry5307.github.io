@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「Luogu P5068」[Ynoi2015]我回来了]]></title>
     <url>%2F2019%2F04%2F13%2F%E3%80%8CLuogu-P5068%E3%80%8D-Ynoi2015-%E6%88%91%E5%9B%9E%E6%9D%A5%E4%BA%86%2F</url>
-    <content type="text"><![CDATA[这里没有珂朵莉的图片啊qwq 给定一个$n$个点$m$条边的无向图和$q$组询问。每组询问给定$k$个二元组$(x_i,y_i)$，求出图上有多少个点$u$与至少一个这次询问的二元组满足$u$到$x_i$的距离小于等于$y_i$。 $\texttt{Data Range:}n\leq 10^3,m\leq 10^5,q\leq 10^5,\sum a\leq 2.1\times 10^6$ 题解生平第一次做Ynoi诶qwq 设$rch_{i,j}$为到$i$的最短距离为$j$的点组成的点集，很显然拿$texttt{bitset}$维护。]]></content>
+    <content type="text"><![CDATA[这里没有珂朵莉的图片啊qwq 给定一个$n$个点$m$条边的无向图和$q$组询问。每组询问给定$k$个二元组$(x_i,y_i)$，求出图上有多少个点$u$与至少一个这次询问的二元组满足$u$到$x_i$的距离小于等于$y_i$。 $\texttt{Data Range:}n\leq 10^3,m\leq 10^5,q\leq 10^5,\sum a\leq 2.1\times 10^6$ 题解生平第一次做Ynoi诶qwq 设$rch_{i,j}$为到$i$的最短距离为$j$的点组成的点集，很显然拿$\texttt{bitset}$维护。]]></content>
       <tags>
         <tag>图论</tag>
         <tag>洛谷</tag>
@@ -149,8 +149,8 @@
         <tag>洛谷</tag>
         <tag>模板</tag>
         <tag>数论，数学</tag>
-        <tag>微积分初步</tag>
         <tag>倍增</tag>
+        <tag>微积分初步</tag>
       </tags>
   </entry>
   <entry>
@@ -280,8 +280,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -292,8 +292,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>CodeVS</tag>
         <tag>数论</tag>
       </tags>
@@ -374,8 +374,8 @@
     <url>%2F2018%2F11%2F19%2F%E3%80%8CCodeForces-501D%E3%80%8DMisha-and-Permutations-Summation%2F</url>
     <content type="text"><![CDATA[设$P$是一个长度为$n$的排列，定义$\operatorname{ord}P$为$P$在所有排列中的名次。给定两个长度为$n$的排列$P_1,P_2$，求第$\operatorname{ord}P_1+\operatorname{ord}P_2 \bmod n!$小的排列。 前置技能康托展开这里讲从排列映射到数的过程，还是假设这个排列长度为$n$。对于第$i$次操作，统计这个数后面有多少个比它小的数，记为$a_i$那么答案是$\sum_{i=1}^{n}a_i(n-i)!$ 题解这一个题和UVa 11525很像，不会做的可以参考一下本蒟蒻的题解，做法就是用一颗权值线段树维护全局没被放进排列中的第$k$小，所以做这个题可以先把它转化为上面那个题。首先把两个排列映射到整数，这里要统计后面有多少个比第$i$个数$a_i$小的数。如果暴力找的话是$O(n^2)$的。但是，可以发现排列是由$0,1\cdots n-1$组成的，那么排列里比这个数小的数的个数就是这个数。这句话不是很好懂，但是很重要。因为排列里比这个数$x$小的只有$0,1\cdots x-1$，共有$x$个，所以有$x$个数比$x$小。所以可以显然推出后面比$a_i$小的数的个$=$总共比$a_i$小的数$-$在$a_i$前面比$a_i$小的数。而排在前面比$a_i$小的数可以用树状数组维护。用一个树状数组维护第$i$个数是否出现过。对于当前的数，统计$1$到当前数$-1$中的和，就是在这个数前面比它小的数。所以说，可以用$O(n\log n)$的时间复杂度把$a_{P_1,i}$和$a_{P_2,i}$（$a$指的是前置技能里的$a$数组）求出来，记$S_i=a_{P_1,i}+a_{P_2,i}$。接下来化简$S$，由于$(x+1)\cdot x!=(x+1)!$，于是可以用这个性质化简$S_i$，使得$0\leq S_i\leq n-i$。具体方法是，对于$S_i$，$S_{i+1}+=S_i \% n-i,S_i\%=n-i$就可以简化$S$数组了。最后我们就把问题转化为上面的那个题了，用那个题的方法做就可以了qwq。时间复杂度$O(n\log n)$，常数不大除了权值线段树，跑了$2270$ms，拿了最优解qwq。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e5+51;struct BIT&#123; ll size; ll num[MAXN]; inline ll lowbit(ll x) &#123; return x&amp;-x; &#125; inline void add(ll pos,ll val) &#123; for(;pos&lt;=size;pos+=lowbit(pos)) &#123; num[pos]+=val; &#125; &#125; inline ll queryPrefix(ll pos) &#123; ll res=0; for(;pos;pos-=lowbit(pos)) &#123; res+=num[pos]; &#125; return res; &#125;&#125;;struct SegmentTree&#123; ll l,r,size;&#125;;BIT bit,bit2;SegmentTree tree[MAXN&lt;&lt;2];ll cnt,num;ll perm[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void update(ll node)&#123; tree[node].size=tree[node&lt;&lt;1].size+tree[(node&lt;&lt;1)|1].size;&#125;inline void create(ll l,ll r,ll node)&#123; tree[node].l=l,tree[node].r=r; if(l==r) &#123; tree[node].size=1; return; &#125; ll mid=(l+r)&gt;&gt;1; create(l,mid,node&lt;&lt;1); create(mid+1,r,(node&lt;&lt;1)|1); update(node);&#125;inline ll findVal(ll rk,ll node)&#123; if(tree[node].l==tree[node].r) &#123; tree[node].size=0; return tree[node].l; &#125; ll res=0; if(rk&lt;=tree[node&lt;&lt;1].size) &#123; res=findVal(rk,node&lt;&lt;1); &#125; else &#123; res=findVal(rk-tree[node&lt;&lt;1].size,(node&lt;&lt;1)|1); &#125; update(node); return res;&#125;int main()&#123; bit.size=bit2.size=cnt=read(); for(register int i=1;i&lt;=cnt;i++) &#123; num=read(); perm[i]=num-bit.queryPrefix(num),bit.add(num+1,1); &#125; for(register int i=1;i&lt;=cnt;i++) &#123; num=read(); perm[i]+=num-bit2.queryPrefix(num),bit2.add(num+1,1); &#125; for(register int i=cnt,j=0;i;i--,j++) &#123; perm[i-1]+=perm[i]/(j+1),perm[i]%=(j+1); &#125; create(1,cnt,1); for(register int i=1;i&lt;=cnt;i++) &#123; printf("%d ",findVal(perm[i]+1,1)-1); &#125; &#125;]]></content>
       <tags>
-        <tag>待修改</tag>
         <tag>CodeForces</tag>
+        <tag>待修改</tag>
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>权值线段树</tag>
@@ -629,8 +629,8 @@
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
@@ -674,8 +674,8 @@
     <content type="text"><![CDATA[给你一个$n*n$大小的矩阵，问你是否有一个正整数$k$使得这个矩阵的$k$次幂均为正数。未完，贴代码 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev;&#125;;edge ed[5000001];ll tot,num,dist,top,cnt,nc;ll last[5000001],dfn[5000001],low[5000001],ins[5000001],belong[5000001],size[5000001];stack&lt;ll&gt;st;inline void addEdge(ll from,ll to)&#123; ed[++tot].to=to; ed[tot].prev=last[from]; last[from]=tot;&#125;inline void tarjan(ll node)&#123; dfn[node]=low[node]=++num; st.push(node),ins[node]=1; ll flag=0,to; for(register int i=last[node];i;i=ed[i].prev) &#123; to=ed[i].to; if(!dfn[to]) &#123; tarjan(to); low[node]=min(low[node],low[to]); &#125; else &#123; if(ins[to]) &#123; low[node]=min(low[node],dfn[to]); &#125; &#125; &#125; if(dfn[node]==low[node]) &#123; cnt++; ll nd; do &#123; nd=st.top(),st.pop(); ins[nd]=0; belong[nd]=cnt; size[cnt]++; &#125; while(node!=nd); &#125;&#125;int main()&#123; scanf("%d",&amp;nc); for(register int i=0;i&lt;nc;i++) &#123; for(register int j=0;j&lt;nc;j++) &#123; scanf("%d",&amp;dist); if(dist) &#123; addEdge(i+1,j+1); &#125; &#125; &#125; for(register int i=1;i&lt;=nc;i++) &#123; if(!dfn[i]) &#123; tarjan(i); &#125; &#125; cnt==1?printf("YES\n"):printf("NO\n");&#125;]]></content>
       <tags>
         <tag>未完待续</tag>
-        <tag>待修改</tag>
         <tag>CodeForces</tag>
+        <tag>待修改</tag>
         <tag>图论</tag>
         <tag>强连通分量</tag>
         <tag>邻接矩阵</tag>
@@ -725,10 +725,10 @@
     <url>%2F2018%2F08%2F07%2F%E3%80%8CCodeForces-191C%E3%80%8DFools-and-Roads%2F</url>
     <content type="text"><![CDATA[给一棵有根树和一些路线，路线上的边权都+1，求所有边的权值 链接CodeForces 191C 题解这个题目的输出是每一条边所经过的次数，所以想到树上边差分。在差分之后确实是晕了，没有想到好的方法，但是突然想到了DFS求树上前缀和，对于每一条边，只要计算深度小的前缀和-深度大的前缀和即得答案。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev; &#125;;ll nc,ec,query,root,from,to;ll depth[500010],anc[500010][31],last[500010],diff[500010],prefix[500010],LCA,maxn;ll From[500010],To[500010];edge ed[500010*2];inline void addEdge(ll from,ll to)&#123; ed[++ec].prev=last[from]; ed[ec].to=to; last[from]=ec;&#125;inline void dfs(ll node)&#123; ll son; for(register int i=last[node];i!=0;i=ed[i].prev) &#123; son=ed[i].to; if(!depth[son]) &#123; depth[son]=depth[node]+1; anc[son][0]=node; dfs(son); &#125; &#125;&#125;inline void LCASetup()&#123; depth[1]=1; anc[1][0]=0; dfs(1); for(register int i=1;i&lt;=21;i++) &#123; for(register int j=1;j&lt;=nc;j++) &#123; anc[j][i]=anc[anc[j][i-1]][i-1]; &#125; &#125;&#125;inline ll lca(ll x,ll y)&#123; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; for(register int i=21;i&gt;=0;i--) &#123; if(depth[anc[y][i]]&gt;=depth[x]) &#123; y=anc[y][i]; &#125; &#125; if(x==y) &#123; return x; &#125; for(register int i=21;i&gt;=0;i--) &#123; if(anc[x][i]!=anc[y][i]) &#123; x=anc[x][i]; y=anc[y][i]; &#125; &#125; return anc[x][0];&#125;inline void ddfs(ll node)&#123; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; ddfs(ed[i].to); diff[node]+=diff[ed[i].to]; &#125;&#125;inline void dffs(ll node,ll val)&#123; prefix[node]=diff[node]+val; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; dffs(ed[i].to,prefix[node]); &#125;&#125;int main()&#123; scanf("%d",&amp;nc); for(register int i=0;i&lt;nc-1;i++) &#123; scanf("%d%d",&amp;from,&amp;to); From[i]=from,To[i]=to; addEdge(from,to); addEdge(to,from); &#125; LCASetup(); scanf("%d",&amp;query); for(register int i=0;i&lt;query;i++) &#123; scanf("%d%d",&amp;from,&amp;to); LCA=lca(from,to); diff[from]++,diff[to]++,diff[LCA]-=2; &#125; ddfs(1); dffs(1,0); for(register int i=0;i&lt;nc-1;i++) &#123; if(depth[From[i]]&lt;depth[To[i]]) &#123; swap(From[i],To[i]); &#125; printf("%d ",prefix[From[i]]-prefix[To[i]]); &#125;&#125;]]></content>
       <tags>
-        <tag>待修改</tag>
         <tag>CodeForces</tag>
         <tag>LCA</tag>
         <tag>树上差分</tag>
+        <tag>待修改</tag>
       </tags>
   </entry>
 </search>
