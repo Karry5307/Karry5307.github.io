@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-12T09:22:47.223Z">
+<meta property="og:updated_time" content="2019-04-13T01:18:56.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5268」[SNOI2017]一个简单的询问">
 <meta name="twitter:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  383
+                  433
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -466,10 +466,10 @@
 <script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}(\operatorname{g}(r_1,x)-\operatorname{g}(l_1-1,x))\cdot(\operatorname{g}(r_2,x)-\operatorname{g}(l_2-1,x))</script><p>展开一下里面的括号</p>
 <script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}(\operatorname{g}(r_1,x)-\operatorname{g}(l_1-1,x))\cdot(\operatorname{g}(r_2,x)-\operatorname{g}(l_2-1,x))</script><script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}\operatorname{g}(r_1,x)\operatorname{g}(r_2,x)-\operatorname{g}(r_1,x)\operatorname{g}(l_2-1,x)-\operatorname{g}(r_2,x)\operatorname{g}(l_1-1,x)+\operatorname{g}(l_2-1,x)\operatorname{g}(l_1-1,x)</script><p>拆成四个询问维护一下<del>就好了</del></p>
 <p>这里说说转移。</p>
-<p>首先考虑$\operatorname{g}(l,x)\operatorname{g}(r,x)$到$\operatorname{g}(l+1,x)\operatorname{g}(r,x)$会发生什么。</p>
-<p>为了接下来的好懂，这里开两个数组，$cntl$和$cntr$。</p>
-<p>$cntl_i$指$a_1\sim a_l$中$i$的出现次数，$cntr_i$，相应的为$a_1\sim a_r$中$i$的出现次数。</p>
-
+<p>首先考虑从$\sum\limits_{x=0}^{\infty}\operatorname{g}(l,x)\operatorname{g}(r,x)$转移到$\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)$会发生什么。</p>
+<p>为了接下来好懂，这里开两个数组，$cntl$和$cntr$。$cntl_i$指$a_1\sim a_l$中$i$的出现次数，$cntr_i$，相应的为$a_1\sim a_r$中$i$的出现次数。</p>
+<p>不难发现</p>
+<script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)-\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)=\operatorname{g}(r,a_{l+1})</script>
       
     </div>
     
@@ -709,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.8k</span>
+    <span title="Site words total count">41.9k</span>
   
 </div>
 
