@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据结构,洛谷,各省省选,分块,SNOI,莫队," />
+  <meta name="keywords" content="数据结构,洛谷,分块,BZOJ，各省省选,SNOI,莫队," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
-<meta name="keywords" content="数据结构,洛谷,各省省选,分块,SNOI,莫队">
+<meta name="keywords" content="数据结构,洛谷,分块,BZOJ，各省省选,SNOI,莫队">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P5268」[SNOI2017]一个简单的询问">
 <meta property="og:url" content="http://karry5307.github.io/2019/04/12/「Luogu-P5268」-SNOI2017-一个简单的询问/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-13T01:18:56.075Z">
+<meta property="og:updated_time" content="2019-04-13T01:29:11.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5268」[SNOI2017]一个简单的询问">
 <meta name="twitter:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  433
+                  921
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -460,7 +460,10 @@
         <p>给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求</p>
 <script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)</script><p>其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。</p>
 <p><strong>注意：答案有可能超过$\texttt{int}$的最大值。</strong></p>
-<p>$\texttt{Data Range:}n,q\leq 5\times 10^4,1\leq a_i\leq n,1\leq l_1\leq r_1\leq n,1\leq l_2\leq r_2\leq n$<br><a id="more"></a><br>首先，显然会有</p>
+<p>$\texttt{Data Range:}n,q\leq 5\times 10^4,1\leq a_i\leq n,1\leq l_1\leq r_1\leq n,1\leq l_2\leq r_2\leq n$<br><a id="more"></a></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.org/problemnew/show/P5268" target="_blank" rel="noopener">Luogu P5268</a></p>
+<p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5016" target="_blank" rel="noopener">BZOJ 5016</a></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>首先，显然会有</p>
 <script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\sum\limits_{i=l}^{r}[a_i=x]</script><p>右边的和式是可以拆成前缀和的形式的，就暴力拆一下，于是有</p>
 <script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\operatorname{get}(1,r,x)-\operatorname{get}(1,l-1,x)</script><p>我们定义一个$\operatorname{g}(r,x)=\operatorname{get}(1,r,x)$，拆一下式子，有</p>
 <script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}(\operatorname{g}(r_1,x)-\operatorname{g}(l_1-1,x))\cdot(\operatorname{g}(r_2,x)-\operatorname{g}(l_2-1,x))</script><p>展开一下里面的括号</p>
@@ -469,7 +472,11 @@
 <p>首先考虑从$\sum\limits_{x=0}^{\infty}\operatorname{g}(l,x)\operatorname{g}(r,x)$转移到$\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)$会发生什么。</p>
 <p>为了接下来好懂，这里开两个数组，$cntl$和$cntr$。$cntl_i$指$a_1\sim a_l$中$i$的出现次数，$cntr_i$，相应的为$a_1\sim a_r$中$i$的出现次数。</p>
 <p>不难发现</p>
-<script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)-\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)=\operatorname{g}(r,a_{l+1})</script>
+<script type="math/tex; mode=display">\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)-\sum\limits_{x=0}^{\infty}\operatorname{g}(l+1,x)\operatorname{g}(r,x)=\operatorname{g}(r,a_{l+1})</script><p>这个的话，把求和符号展开一下就行了。</p>
+<p>所以说，这样的转移应该是$++cntl_{a_{l+1}},res+=cntr_{a_{l+1}}$的。</p>
+<p>剩下三种情况在这里就不详细解释了，推的方法也是这个样子的。</p>
+<p>于是就可以完结撒花了qwq!</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> li;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">5e4</span>+<span class="number">51</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span>&#123;</span></span><br><span class="line">    ll l,r,ord,sign;</span><br><span class="line">    <span class="keyword">inline</span> <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Query &amp;rhs)<span class="keyword">const</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Query qry[MAXN&lt;&lt;<span class="number">2</span>];</span><br><span class="line">ll cnt,qcnt,qtot,blockSize,l,r,lx,rx,ptrl,ptrr;</span><br><span class="line">li ress;</span><br><span class="line">ll num[MAXN],cntl[MAXN&lt;&lt;<span class="number">2</span>],cntr[MAXN&lt;&lt;<span class="number">2</span>];</span><br><span class="line">li res[MAXN&lt;&lt;<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">bool</span> Query::<span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Query &amp;rhs)<span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (r/blockSize)==(rhs.r/blockSize)?l&lt;rhs.l:r&lt;rhs.r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(ll cur,ll op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    op?++cntr[num[cur]]:++cntl[num[cur]];</span><br><span class="line">    ress+=op?cntl[num[cur]]:cntr[num[cur]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(ll cur,ll op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ress-=op?cntl[num[cur]]:cntr[num[cur]];</span><br><span class="line">    op?cntr[num[cur]]--:cntl[num[cur]]--;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    blockSize=<span class="built_in">sqrt</span>((cnt=read()));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num[i]=read();</span><br><span class="line">    &#125;</span><br><span class="line">    qcnt=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;qcnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        l=read(),r=read(),lx=read(),rx=read();</span><br><span class="line">        qry[++qtot]=(Query)&#123;r,rx,i,<span class="number">1</span>&#125;;</span><br><span class="line">        qry[++qtot]=(Query)&#123;l<span class="number">-1</span>,rx,i,<span class="number">-1</span>&#125;;</span><br><span class="line">        qry[++qtot]=(Query)&#123;r,lx<span class="number">-1</span>,i,<span class="number">-1</span>&#125;;</span><br><span class="line">        qry[++qtot]=(Query)&#123;l<span class="number">-1</span>,lx<span class="number">-1</span>,i,<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=qtot;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(qry[i].l&lt;qry[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            swap(qry[i].l,qry[i].r);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(qry+<span class="number">1</span>,qry+qtot+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=qtot;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(ptrl&lt;qry[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            add(++ptrl,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ptrl&gt;qry[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            del(ptrl--,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ptrr&lt;qry[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            add(++ptrr,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(ptrr&gt;qry[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            del(ptrr--,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        res[qry[i].ord]+=qry[i].sign*ress;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;qcnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,res[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -513,9 +520,9 @@
           
             <a href="/tags/洛谷/" rel="tag"># 洛谷</a>
           
-            <a href="/tags/各省省选/" rel="tag"># 各省省选</a>
-          
             <a href="/tags/分块/" rel="tag"># 分块</a>
+          
+            <a href="/tags/BZOJ，各省省选/" rel="tag"># BZOJ，各省省选</a>
           
             <a href="/tags/SNOI/" rel="tag"># SNOI</a>
           
@@ -595,8 +602,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -624,7 +640,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -682,6 +698,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -709,7 +741,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.9k</span>
+    <span title="Site words total count">42.3k</span>
   
 </div>
 
