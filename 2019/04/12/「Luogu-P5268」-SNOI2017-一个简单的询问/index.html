@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-13T01:39:08.086Z">
+<meta property="og:updated_time" content="2019-04-13T05:19:50.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5268」[SNOI2017]一个简单的询问">
 <meta name="twitter:description" content="给定一个长度为$n$的序列$a$和$q$组询问，对于每组询问，给定$l_1,r_1,l_2,r_2$，求 \sum\limits_{x=0}^{\infty}\operatorname{get}(l_1,r_1,x)\cdot\operatorname{get}(l_2,r_2,x)其中，$\operatorname{get}(l,r,x)$表示在区间$[l,r]$中，数字$x$出现的次数。 注意">
@@ -463,7 +463,7 @@
 <p>$\texttt{Data Range:}n,q\leq 5\times 10^4,1\leq a_i\leq n,1\leq l_1\leq r_1\leq n,1\leq l_2\leq r_2\leq n$<br><a id="more"></a></p>
 <h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.org/problemnew/show/P5268" target="_blank" rel="noopener">Luogu P5268</a></p>
 <p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5016" target="_blank" rel="noopener">BZOJ 5016</a></p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p><del>文化课选手\texttt{Karry5307}终于更博了qwq!</del></p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p><del>文化课选手$\texttt{Karry5307}$终于更博了qwq!</del></p>
 <p>首先，显然会有</p>
 <script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\sum\limits_{i=l}^{r}[a_i=x]</script><p>右边的和式是可以拆成前缀和的形式的，就暴力拆一下，于是有</p>
 <script type="math/tex; mode=display">\operatorname{get}(l,r,x)=\operatorname{get}(1,r,x)-\operatorname{get}(1,l-1,x)</script><p>我们定义一个$\operatorname{g}(r,x)=\operatorname{get}(1,r,x)$，拆一下式子，有</p>
@@ -550,6 +550,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/13/「Luogu-P5068」-Ynoi2015-我回来了/" rel="prev" title="「Luogu P5068」[Ynoi2015]我回来了">
+                「Luogu P5068」[Ynoi2015]我回来了 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -628,7 +632,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -742,7 +746,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">42.4k</span>
+    <span title="Site words total count">42.3k</span>
   
 </div>
 
