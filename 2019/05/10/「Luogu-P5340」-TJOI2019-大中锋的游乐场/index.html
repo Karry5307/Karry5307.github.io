@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="一共有$T$组数据，每组数据给定一张有$n$个点，$m$条边的无向图，点$i$的类型为$type_i$，其中$type_1$要么为$1$，要么为$2$。一个人想从$s$走到$t$，如果他经过的点$i$中$type_i=1$，则$p_1++$，否则$p_2++$。求出在任何时候，$\vert p_1-p_2\vert\leq k$，为条件下的最短路径。（有点牵强，理解就好） $\texttt{Dat">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-10T11:47:51.101Z">
+<meta property="og:image" content="http://karry5307.github.io/2019/05/10/「Luogu-P5340」-TJOI2019-大中锋的游乐场/graph.jpg">
+<meta property="og:updated_time" content="2019-05-11T01:57:03.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P5340」[TJOI2019]大中锋的游乐场">
 <meta name="twitter:description" content="一共有$T$组数据，每组数据给定一张有$n$个点，$m$条边的无向图，点$i$的类型为$type_i$，其中$type_1$要么为$1$，要么为$2$。一个人想从$s$走到$t$，如果他经过的点$i$中$type_i=1$，则$p_1++$，否则$p_2++$。求出在任何时候，$\vert p_1-p_2\vert\leq k$，为条件下的最短路径。（有点牵强，理解就好） $\texttt{Dat">
+<meta name="twitter:image" content="http://karry5307.github.io/2019/05/10/「Luogu-P5340」-TJOI2019-大中锋的游乐场/graph.jpg">
 
 
 
@@ -420,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  929
+                  956
                 </span>
               
 
@@ -461,10 +463,12 @@
 <p>$\texttt{Data Range:}T\leq 10,n\leq 10^4,m\leq 10^5,k\leq 10$<br><a id="more"></a></p>
 <h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.org/problemnew/show/P5340" target="_blank" rel="noopener">Luogu P5340</a></p>
 <p><a href="https://loj.ac/problem/3107" target="_blank" rel="noopener">LOJ 3107</a></p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>设可乐的权值为$-1$，汉堡的权值为$1$，喝掉的可乐的数量减去吃掉的汉堡的数量为$p$。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>去搞生地会考了，所以近一个月没有更博客。（这就是理由？？）</p>
+<p>设可乐的权值为$-1$，汉堡的权值为$1$，喝掉的可乐的数量减去吃掉的汉堡的数量为$p$。</p>
 <p>由于$k\leq 10$，所以可以考虑将一个点$i$拆成$2k+1$个点$i_{-k},i_{-k+1},\cdots ,i_{-1},i_0,\cdots ,i_k$，这里，$i_l$是指到达$i$且$p=l$时的最短路总长。</p>
 <p>加边的话就这么做：（这里假设现在加的边是$(i,j)$）</p>
-<p>如果$j$卖汉堡的话，就从$i_l$连到$j_{l-1}$，其中$i_{-k}$不要连边。</p>
+<p>如果$j$卖汉堡的话，就从$i_l$连到$j_{l-1}$，其中$i_{-k}$不要连边，就像这样：</p>
+<p><img src="/2019/05/10/「Luogu-P5340」-TJOI2019-大中锋的游乐场/graph.jpg" alt=""></p>
 <p>如果$j$卖可乐的话，就从$i_l$连到$j_{l+1}$，其中$i_{k}$不要连边。</p>
 <p>但是，这是个无向图啊，按照上面的连边方式，连出来的是个有向图，而这题的边又不对称。</p>
 <p>所以说，在加边$(i,j)$时，按照上面的方法先加一条边，在把$i,j$换一下，就行了。</p>

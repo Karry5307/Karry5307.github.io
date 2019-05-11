@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「Luogu P5340」[TJOI2019]大中锋的游乐场]]></title>
     <url>%2F2019%2F05%2F10%2F%E3%80%8CLuogu-P5340%E3%80%8D-TJOI2019-%E5%A4%A7%E4%B8%AD%E9%94%8B%E7%9A%84%E6%B8%B8%E4%B9%90%E5%9C%BA%2F</url>
-    <content type="text"><![CDATA[一共有$T$组数据，每组数据给定一张有$n$个点，$m$条边的无向图，点$i$的类型为$type_i$，其中$type_1$要么为$1$，要么为$2$。一个人想从$s$走到$t$，如果他经过的点$i$中$type_i=1$，则$p_1++$，否则$p_2++$。求出在任何时候，$\vert p_1-p_2\vert\leq k$，为条件下的最短路径。（有点牵强，理解就好） $\texttt{Data Range:}T\leq 10,n\leq 10^4,m\leq 10^5,k\leq 10$ 链接Luogu P5340 LOJ 3107 题解设可乐的权值为$-1$，汉堡的权值为$1$，喝掉的可乐的数量减去吃掉的汉堡的数量为$p$。 由于$k\leq 10$，所以可以考虑将一个点$i$拆成$2k+1$个点$i_{-k},i_{-k+1},\cdots ,i_{-1},i_0,\cdots ,i_k$，这里，$i_l$是指到达$i$且$p=l$时的最短路总长。 加边的话就这么做：（这里假设现在加的边是$(i,j)$） 如果$j$卖汉堡的话，就从$i_l$连到$j_{l-1}$，其中$i_{-k}$不要连边。 如果$j$卖可乐的话，就从$i_l$连到$j_{l+1}$，其中$i_{k}$不要连边。 但是，这是个无向图啊，按照上面的连边方式，连出来的是个有向图，而这题的边又不对称。 所以说，在加边$(i,j)$时，按照上面的方法先加一条边，在把$i,j$换一下，就行了。 于是在新的图上跑一遍最短路就做完了。 但是，这里有一些地方需要注意： 首先是起点的问题，这个应该不用多说，在起点或终点也要买可乐或汉堡。 然后是终点的问题，答案是终点拆出来的每一个点的最短路的最小值。 最后，要特判$k=0$的情况！！！ 最最最后，多组数据，记得清零！！！ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;typedef long long int li;typedef pair&lt;li,ll&gt; pii;const ll MAXN=2.1e5+51;const li inf=0x3f3f3f3f3f3f3f3f;struct Edge&#123; ll to,prev,dist;&#125;;priority_queue&lt;pii,vector&lt;pii&gt;,greater&lt;pii&gt; &gt;pq;Edge ed[MAXN*10];ll test,nc,ec,tot,k,from,to,dist;li res=inf;ll last[MAXN],type[MAXN],inQueue[MAXN];li minn[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125; inline void addEdge(ll from,ll to,ll dist)&#123; ed[++tot].prev=last[from]; ed[tot].to=to; ed[tot].dist=dist; last[from]=tot;&#125;inline ll getID(ll node,ll wt)&#123; return (node-1)*(k*2+1)+wt+k+1;&#125;inline void Dijkstra(ll source)&#123; ll top; pq.push(make_pair(0,source)),inQueue[source]=1,minn[source]=0; while(!pq.empty()) &#123; top=pq.top().second,pq.pop(),inQueue[top]=0; for(register int i=last[top];i;i=ed[i].prev) &#123; if(minn[ed[i].to]&gt;minn[top]+ed[i].dist) &#123; minn[ed[i].to]=minn[top]+ed[i].dist; if(!inQueue[ed[i].to]) &#123; pq.push(make_pair(minn[ed[i].to],ed[i].to)); inQueue[ed[i].to]=1; &#125; &#125; &#125; &#125;&#125;inline void solve()&#123; nc=read(),ec=read(),k=read(); if(k==0) &#123; puts("-1"); return; &#125; for(register int i=1;i&lt;=nc;i++) &#123; type[i]=read()==1?1:-1; &#125; for(register int i=0;i&lt;ec;i++) &#123; from=read(),to=read(),dist=read(); for(register int j=-k;j&lt;=k;j++) &#123; if((type[to]==-1&amp;&amp;j==-k)||(type[to]==1&amp;&amp;j==k)) &#123; continue; &#125; addEdge(getID(from,j),getID(to,j+type[to]),dist); &#125; swap(from,to); for(register int j=-k;j&lt;=k;j++) &#123; if((type[to]==-1&amp;&amp;j==-k)||(type[to]==1&amp;&amp;j==k)) &#123; continue; &#125; addEdge(getID(from,j),getID(to,j+type[to]),dist); &#125; &#125; from=read(),to=read(),memset(minn,0x3f,sizeof(minn)); Dijkstra(getID(from,type[from])); for(register int i=-k;i&lt;=k;i++) &#123; res=min(res,minn[getID(to,i)]); &#125; res==inf?puts("-1"):printf("%lld\n",res);&#125;int main()&#123; test=read(); for(register int i=0;i&lt;test;i++) &#123; solve(); tot=0,memset(last,0,sizeof(last)); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[一共有$T$组数据，每组数据给定一张有$n$个点，$m$条边的无向图，点$i$的类型为$type_i$，其中$type_1$要么为$1$，要么为$2$。一个人想从$s$走到$t$，如果他经过的点$i$中$type_i=1$，则$p_1++$，否则$p_2++$。求出在任何时候，$\vert p_1-p_2\vert\leq k$，为条件下的最短路径。（有点牵强，理解就好） $\texttt{Data Range:}T\leq 10,n\leq 10^4,m\leq 10^5,k\leq 10$ 链接Luogu P5340 LOJ 3107 题解去搞生地会考了，所以近一个月没有更博客。（这就是理由？？） 设可乐的权值为$-1$，汉堡的权值为$1$，喝掉的可乐的数量减去吃掉的汉堡的数量为$p$。 由于$k\leq 10$，所以可以考虑将一个点$i$拆成$2k+1$个点$i_{-k},i_{-k+1},\cdots ,i_{-1},i_0,\cdots ,i_k$，这里，$i_l$是指到达$i$且$p=l$时的最短路总长。 加边的话就这么做：（这里假设现在加的边是$(i,j)$） 如果$j$卖汉堡的话，就从$i_l$连到$j_{l-1}$，其中$i_{-k}$不要连边，就像这样： 如果$j$卖可乐的话，就从$i_l$连到$j_{l+1}$，其中$i_{k}$不要连边。 但是，这是个无向图啊，按照上面的连边方式，连出来的是个有向图，而这题的边又不对称。 所以说，在加边$(i,j)$时，按照上面的方法先加一条边，在把$i,j$换一下，就行了。 于是在新的图上跑一遍最短路就做完了。 但是，这里有一些地方需要注意： 首先是起点的问题，这个应该不用多说，在起点或终点也要买可乐或汉堡。 然后是终点的问题，答案是终点拆出来的每一个点的最短路的最小值。 最后，要特判$k=0$的情况！！！ 最最最后，多组数据，记得清零！！！ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;typedef long long int li;typedef pair&lt;li,ll&gt; pii;const ll MAXN=2.1e5+51;const li inf=0x3f3f3f3f3f3f3f3f;struct Edge&#123; ll to,prev,dist;&#125;;priority_queue&lt;pii,vector&lt;pii&gt;,greater&lt;pii&gt; &gt;pq;Edge ed[MAXN*10];ll test,nc,ec,tot,k,from,to,dist;li res=inf;ll last[MAXN],type[MAXN],inQueue[MAXN];li minn[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125; inline void addEdge(ll from,ll to,ll dist)&#123; ed[++tot].prev=last[from]; ed[tot].to=to; ed[tot].dist=dist; last[from]=tot;&#125;inline ll getID(ll node,ll wt)&#123; return (node-1)*(k*2+1)+wt+k+1;&#125;inline void Dijkstra(ll source)&#123; ll top; pq.push(make_pair(0,source)),inQueue[source]=1,minn[source]=0; while(!pq.empty()) &#123; top=pq.top().second,pq.pop(),inQueue[top]=0; for(register int i=last[top];i;i=ed[i].prev) &#123; if(minn[ed[i].to]&gt;minn[top]+ed[i].dist) &#123; minn[ed[i].to]=minn[top]+ed[i].dist; if(!inQueue[ed[i].to]) &#123; pq.push(make_pair(minn[ed[i].to],ed[i].to)); inQueue[ed[i].to]=1; &#125; &#125; &#125; &#125;&#125;inline void solve()&#123; nc=read(),ec=read(),k=read(); if(k==0) &#123; puts("-1"); return; &#125; for(register int i=1;i&lt;=nc;i++) &#123; type[i]=read()==1?1:-1; &#125; for(register int i=0;i&lt;ec;i++) &#123; from=read(),to=read(),dist=read(); for(register int j=-k;j&lt;=k;j++) &#123; if((type[to]==-1&amp;&amp;j==-k)||(type[to]==1&amp;&amp;j==k)) &#123; continue; &#125; addEdge(getID(from,j),getID(to,j+type[to]),dist); &#125; swap(from,to); for(register int j=-k;j&lt;=k;j++) &#123; if((type[to]==-1&amp;&amp;j==-k)||(type[to]==1&amp;&amp;j==k)) &#123; continue; &#125; addEdge(getID(from,j),getID(to,j+type[to]),dist); &#125; &#125; from=read(),to=read(),memset(minn,0x3f,sizeof(minn)); Dijkstra(getID(from,type[from])); for(register int i=-k;i&lt;=k;i++) &#123; res=min(res,minn[getID(to,i)]); &#125; res==inf?puts("-1"):printf("%lld\n",res);&#125;int main()&#123; test=read(); for(register int i=0;i&lt;test;i++) &#123; solve(); tot=0,memset(last,0,sizeof(last)); &#125;&#125;]]></content>
       <tags>
         <tag>图论</tag>
         <tag>建图</tag>
@@ -95,9 +95,9 @@
         <tag>洛谷</tag>
         <tag>各省省选</tag>
         <tag>组合数学</tag>
-        <tag>数论，数学</tag>
         <tag>HEOI</tag>
         <tag>TJOI</tag>
+        <tag>数论，数学</tag>
         <tag>Stirling数</tag>
       </tags>
   </entry>
@@ -302,8 +302,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -314,8 +314,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>CodeVS</tag>
         <tag>数论</tag>
       </tags>
@@ -377,8 +377,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -587,9 +587,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -601,8 +601,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -612,8 +612,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -651,8 +651,8 @@
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>HAOI</tag>
+        <tag>各省省选</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
