@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="这一片文章讲的呢，都是一些板子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-19T09:13:32.695Z">
+<meta property="og:updated_time" content="2019-06-19T09:22:08.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（二）">
 <meta name="twitter:description" content="这一片文章讲的呢，都是一些板子。">
@@ -531,10 +531,10 @@
 <p>$\texttt{So?}$</p>
 <p>考虑使用欧拉公式，将$F(x)$代入</p>
 <script type="math/tex; mode=display">e^{\mathrm{i}F(x)}=\cos F(x)+\mathrm{i}\sin F(x)</script><p>再把$-F(x)$代入</p>
-<script type="math/tex; mode=display">e^{\mathrm{i}-F(x)}=\cos (-F(x))+\mathrm{i}\sin (-F(x))</script><p>诱导公式搞一下</p>
-<script type="math/tex; mode=display">e^{\mathrm{i}-F(x)}=\cos F(x)-\mathrm{i}\sin F(x)</script><p>两式相加相减</p>
-<script type="math/tex; mode=display">e^{\mathrm{i}F(x)}+e^{\mathrm{i}-F(x)}=2\cos F(x)</script><script type="math/tex; mode=display">e^{\mathrm{i}F(x)}-e^{\mathrm{i}-F(x)}=2\mathrm{i}\sin F(x)</script><p>把那些系数除过去</p>
-<script type="math/tex; mode=display">\cos F(x)=\frac{e^{\mathrm{i}F(x)}+e^{\mathrm{i}-F(x)}}{2}</script><script type="math/tex; mode=display">\sin F(x)=\frac{\mathrm{i}e^{F(x)}-e^{\mathrm{i}-F(x)}}{2\mathrm{i}}</script><p>等等，这个$\mathrm{i}$是怎么回事，乱搞一下</p>
+<script type="math/tex; mode=display">e^{-\mathrm{i}F(x)}=\cos (-F(x))+\mathrm{i}\sin (-F(x))</script><p>诱导公式搞一下</p>
+<script type="math/tex; mode=display">e^{-\mathrm{i}F(x)}=\cos F(x)-\mathrm{i}\sin F(x)</script><p>两式相加相减</p>
+<script type="math/tex; mode=display">e^{\mathrm{i}F(x)}+e^{-\mathrm{i}F(x)}=2\cos F(x)</script><script type="math/tex; mode=display">e^{\mathrm{i}F(x)}-e^{-\mathrm{i}F(x)}=2\mathrm{i}\sin F(x)</script><p>把那些系数除过去</p>
+<script type="math/tex; mode=display">\cos F(x)=\frac{e^{\mathrm{i}F(x)}+e^{-\mathrm{i}F(x)}}{2}</script><script type="math/tex; mode=display">\sin F(x)=\frac{e^{\mathrm{i}F(x)}-e^{-\mathrm{i}F(x)}}{2\mathrm{i}}</script><p>等等，这个$\mathrm{i}$是怎么回事，乱搞一下</p>
 <script type="math/tex; mode=display">i^2\equiv -1\pmod {998244353}</script><script type="math/tex; mode=display">i^2\equiv 998244352\pmod {998244353}</script><p>很明显蒯一个$\texttt{Cipolla}$的板子，算出来答案是$86583718$（$911660635$也是可以滴）</p>
 <p>于是就可以考虑上代码啦qwq</p>
 <p>这里窝把$\sin$和$\cos$放在一起，为了节省空间<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">trig</span><span class="params">(ll fd,ll *f,ll *res,ll type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll inv2=<span class="number">499122177</span>,inv2i=qpow(I&lt;&lt;<span class="number">1</span>,MOD<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">static</span> ll tmp[MAXN],tmp2[MAXN],texp[MAXN],texp2[MAXN];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=(li)I*f[i]%MOD,tmp2[i]=MOD-tmp[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exp</span>(fd,tmp,texp),<span class="built_in">exp</span>(fd,tmp2,texp2);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=type?(texp[i]+texp2[i])%MOD:(texp[i]-texp2[i]+MOD)%MOD;</span><br><span class="line">        res[i]=(li)res[i]*(type?inv2:inv2i)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
