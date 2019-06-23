@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式以及一些优美的结论。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-23T04:11:10.149Z">
+<meta property="og:updated_time" content="2019-06-23T04:21:19.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（三）">
 <meta name="twitter:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式以及一些优美的结论。">
@@ -460,7 +460,7 @@
         <p>在这一篇文章里，我们来谈一谈上升幂，下降幂多项式以及一些优美的结论。</p>
 <a id="more"></a>
 <h3 id="下降幂多项式"><a href="#下降幂多项式" class="headerlink" title="下降幂多项式"></a>下降幂多项式</h3><p>首先，看一下下降幂单项式的递归定义：</p>
-<script type="math/tex; mode=display">x^{\underline n}=\{\begin{matrix}1 & n=0\\x\times (x-1)^{n-1} & n\geq 1\end{matrix}</script><p>所以说，$x^{\underline 0}=1$，那么$x^{\underline 1}$呢？</p>
+<script type="math/tex; mode=display">x^{\underline n}=\begin{cases}1 & n=0\\x\times (x-1)^{n-1} & n\geq 1\end{cases}</script><p>所以说，$x^{\underline 0}=1$，那么$x^{\underline 1}$呢？</p>
 <script type="math/tex; mode=display">x^{\underline 1}=x\times (x-1)^{\underline 0}=x</script><p>那么有</p>
 <script type="math/tex; mode=display">x^{\underline 2}=x\times (x-1)^{\underline 1}=x(x-1)</script><script type="math/tex; mode=display">x^{\underline 3}=x\times (x-1)^{\underline 2}=x(x-1)(x-2)</script><p>于是可以得出一个普遍的结论，就是</p>
 <script type="math/tex; mode=display">x^{\underline n}=x(x-1)\cdots(x-n+1)=\frac{x!}{(x-n)!}=n!C_x^n</script>
