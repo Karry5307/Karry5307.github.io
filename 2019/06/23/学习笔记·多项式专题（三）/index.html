@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式以及一些优美的结论。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-23T04:28:53.376Z">
+<meta property="og:updated_time" content="2019-06-26T14:37:30.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（三）">
 <meta name="twitter:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式以及一些优美的结论。">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  156
+                  955
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -459,11 +459,26 @@
       
         <p>在这一篇文章里，我们来谈一谈上升幂，下降幂多项式以及一些优美的结论。</p>
 <a id="more"></a>
-<h3 id="下降幂多项式"><a href="#下降幂多项式" class="headerlink" title="下降幂多项式"></a>下降幂多项式</h3><p>首先，看一下下降幂单项式的递归定义：</p>
+<h3 id="下降幂多项式的定义"><a href="#下降幂多项式的定义" class="headerlink" title="下降幂多项式的定义"></a>下降幂多项式的定义</h3><p>下降幂多项式（$\texttt{Falling Factorial Polynomial}$，也即$\texttt{FFP}$），也称下降阶乘幂多项式，是一类特殊的多项式。</p>
+<p>首先，看一下下降幂单项式的递归定义：</p>
 <script type="math/tex; mode=display">x^{\underline n}=\begin{cases}1, & n=0\\x\times (x-1)^{n-1} & n\geq 1,\end{cases}</script><p>所以说，$x^{\underline 0}=1$，那么$x^{\underline 1}$呢？</p>
 <script type="math/tex; mode=display">x^{\underline 1}=x\times (x-1)^{\underline 0}=x</script><p>那么有</p>
-<script type="math/tex; mode=display">x^{\underline 2}=x\times (x-1)^{\underline 1}=x(x-1)</script><script type="math/tex; mode=display">x^{\underline 3}=x\times (x-1)^{\underline 2}=x(x-1)(x-2)</script><p>于是可以得出一个普遍的结论，就是</p>
-<script type="math/tex; mode=display">x^{\underline n}=x(x-1)\cdots(x-n+1)=\frac{x!}{(x-n)!}=n!C_x^n</script>
+<script type="math/tex; mode=display">x^{\underline 2}=x\times (x-1)^{\underline 1}=x(x-1)=x^2-x</script><script type="math/tex; mode=display">x^{\underline 3}=x\times (x-1)^{\underline 2}=x(x-1)(x-2)=x^3-3x^2+2x</script><p>于是可以得出一个普遍的结论，就是</p>
+<script type="math/tex; mode=display">x^{\underline n}=x(x-1)\cdots(x-n+1)</script><p>那么，下降幂多项式，是由许多个下降幂单项式相加得来的，如</p>
+<script type="math/tex; mode=display">3x^{\underline 2}+2x^{\underline 1}+1=3x(x-1)+2x+1=3x^2-x+1</script><h3 id="下降幂多项式乘法"><a href="#下降幂多项式乘法" class="headerlink" title="下降幂多项式乘法"></a>下降幂多项式乘法</h3><p><a href="https://www.luogu.org/problemnew/show/P5394" target="_blank" rel="noopener">Luogu P5394</a></p>
+<p>首先，拿题目的样例来解释一下：</p>
+<p>$\quad(3x^{\underline 2}+2x^{\underline 1}+1)(4x^{\underline 3}+3x^{\underline 2}+2x^{\underline 1}+1)$<br>$=(3x^2-x+1)(4x^3-9x^2+7x+1)$<br>$=12x^5-30x^4+34x^3-12x^2+6x+1$<br>$=12x^{\underline 5}+89x^{\underline 4}+148^{\underline 3}+52x^{\underline 2}+8x^{\underline 1}+1$</p>
+<p>难道要普通多项式与下降幂多项式的转换吗？题目难度告诉我们不要。但又怎么做呢？</p>
+<p>考虑通过$\texttt{EGF}$将普通多项式与下降幂多项式建立联系，自然考虑下降幂单项式$x^{\underline n}$的$\texttt{EGF}$，设它为$g(x)$，那么有：</p>
+<script type="math/tex; mode=display">g(x)=\sum\limits_{i=n}^{\infty}\frac{i!}{(i-n)!i!}x^i</script><p>把$x^n$提出来并约分</p>
+<script type="math/tex; mode=display">g(x)=x^n\sum\limits_{i=n}^{\infty}\frac{1}{(i-n)!}x^{i-n}</script><p>改变求和符号的变量</p>
+<script type="math/tex; mode=display">g(x)=x^n\sum\limits_{i=0}^{\infty}\frac{x^i}{i!}</script><p>和式就是$e^x$的麦克劳林级数，所以</p>
+<script type="math/tex; mode=display">g(x)=x^ne^x</script><p>设$F(x)$为下降幂多项式$f(x)$点值的$\texttt{EGF}$，$G(x)$为下降幂多项式$f(x)$系数的$\texttt{EGF}$，$f$是$f(x)$的系数数组，因为</p>
+<script type="math/tex; mode=display">f(x)=\sum\limits_{i=0}^{n}f_ix^{\underline i}</script><p>所以</p>
+<script type="math/tex; mode=display">F(x)=\sum\limits_{i=0}^{n}f_ie^xx^i</script><p>把$e^x$提出来</p>
+<script type="math/tex; mode=display">F(x)=e^x\sum\limits_{i=0}^{n}f_ix^i</script><script type="math/tex; mode=display">F(x)=e^xG(x)</script><p>所以说，下降幂多项式的点值和系数是可以互相转换的。只要得到两个下降幂多项式的点值，把对应点值乘起来再转系数就可以了，这些操作都可以通过简单的多项式乘法实现。</p>
+<p>于是上一个令人身心愉悦的代码qwq（包括预处理）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fact[<span class="number">0</span>]=finv[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;MAXN;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        fact[i]=(li)fact[i<span class="number">-1</span>]*i%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    finv[MAXN<span class="number">-1</span>]=qpow(fact[MAXN<span class="number">-1</span>],MOD<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=MAXN<span class="number">-2</span>;i;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        finv[i]=(li)finv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FFPMul</span><span class="params">(ll fd,ll gd,ll *f,ll *g,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll tmp[MAXN],tmpf[MAXN],tmpg[MAXN];</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmpf[i]=f[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;gd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmpg[i]=g[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fd+gd<span class="number">-1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=finv[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd+gd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmpf,cnt,<span class="number">1</span>),NTT(tmpg,cnt,<span class="number">1</span>),NTT(tmp,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        tmpf[i]=(li)tmpf[i]*tmp[i]%MOD,tmpg[i]=(li)tmpg[i]*tmp[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmpf,cnt,<span class="number">-1</span>),NTT(tmpg,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=i&lt;fd+gd<span class="number">-1</span>?(i&amp;<span class="number">1</span>?(MOD-finv[i]):finv[i]):<span class="number">0</span>;</span><br><span class="line">        tmpf[i]=i&lt;fd+gd<span class="number">-1</span>?(li)tmpf[i]*tmpg[i]%MOD*fact[i]%MOD:<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmpf,cnt,<span class="number">1</span>),NTT(tmp,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)tmpf[i]*tmp[i]%MOD,tmpf[i]=tmpg[i]=tmp[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -662,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式"><span class="nav-number">1.</span> <span class="nav-text">下降幂多项式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">1.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式乘法</span></a></li></ol></div>
             
 
           </div>
@@ -696,7 +711,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">45.8k</span>
+    <span title="Site words total count">46.6k</span>
   
 </div>
 
