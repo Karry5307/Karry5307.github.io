@@ -487,8 +487,8 @@ pre,
   margin: 20px 0;
   padding: 0;
   font-size: 13px;
-  color: #151515;
-  background: #fff;
+  color: #eaeaea;
+  background: #000;
   line-height: 1.6;
 }
 pre,
@@ -508,7 +508,7 @@ pre {
 }
 pre code {
   padding: 0;
-  color: #151515;
+  color: #eaeaea;
   background: none;
   text-shadow: none;
 }
@@ -531,7 +531,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #151515;
+  color: #eaeaea;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -545,23 +545,23 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #151515;
+  color: #eaeaea;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #151515;
+  border-bottom-color: #eaeaea;
 }
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #fff;
+  color: #666;
   text-align: right;
-  background-color: #fff;
+  background-color: #292929;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #fff;
+  background-color: #000;
 }
 .highlight .line {
   height: 20px;
@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #70daff;
+  background: #756cd7;
 }
 .links-of-blogroll {
   font-size: 13px;
