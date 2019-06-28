@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式，斯特林数以及一些优美的结论。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-27T14:29:23.303Z">
+<meta property="og:updated_time" content="2019-06-28T10:27:41.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（三）">
 <meta name="twitter:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式，斯特林数以及一些优美的结论。">
@@ -466,7 +466,8 @@
 <script type="math/tex; mode=display">x^{\underline 1}=x\times (x-1)^{\underline 0}=x</script><p>那么有</p>
 <script type="math/tex; mode=display">x^{\underline 2}=x\times (x-1)^{\underline 1}=x(x-1)=x^2-x</script><script type="math/tex; mode=display">x^{\underline 3}=x\times (x-1)^{\underline 2}=x(x-1)(x-2)=x^3-3x^2+2x</script><p>于是可以得出一个普遍的结论，就是</p>
 <script type="math/tex; mode=display">x^{\underline n}=x(x-1)\cdots(x-n+1)=\frac{x!}{(x-n)!}=n!C_x^n</script><p>那么，下降幂多项式，是由许多个下降幂单项式相加得来的，如</p>
-<script type="math/tex; mode=display">3x^{\underline 2}+2x^{\underline 1}+1=3x(x-1)+2x+1=3x^2-x+1</script><h3 id="普通多项式转下降幂多项式"><a href="#普通多项式转下降幂多项式" class="headerlink" title="普通多项式转下降幂多项式"></a>普通多项式转下降幂多项式</h3><p>首先看一个简单的性质：</p>
+<script type="math/tex; mode=display">3x^{\underline 2}+2x^{\underline 1}+1=3x(x-1)+2x+1=3x^2-x+1</script><h3 id="普通多项式转下降幂多项式"><a href="#普通多项式转下降幂多项式" class="headerlink" title="普通多项式转下降幂多项式"></a>普通多项式转下降幂多项式</h3><p><a href="https://www.luogu.org/problemnew/show/P5383" target="_blank" rel="noopener">Luogu P5383</a></p>
+<p>首先看一个简单的性质：</p>
 <script type="math/tex; mode=display">n^m=\sum\limits_{i=0}^{m}i!S^i_mC^i_n</script><p>其中$S$表示第二类斯特林数。</p>
 <p>为什么呢？考虑等号两边的组合意义。</p>
 <p>左边是$n$个球任意放$m$个盒子的答案，右边的话枚举非空盒子的数量，用组合数枚举一下，最后由于盒子不同，所以要乘个$i!$。</p>
@@ -511,6 +512,7 @@
 <script type="math/tex; mode=display">S^n_m=\sum\limits_{i=0}^n\frac{(-1)^{n-i}i^m}{i!(n-i)!}</script><p>然后再拆一下</p>
 <script type="math/tex; mode=display">S^n_m=\sum\limits_{i=0}^n\frac{(-1)^{n-i}}{(n-i)!}\cdot\frac{i^m}{i!}</script><p>很明显的卷积形式啊。。。$\texttt{NTT}$做就行啦qwq</p>
 <p>代码呢？不见了。。。</p>
+<h3 id="第二类斯特林数·列"><a href="#第二类斯特林数·列" class="headerlink" title="第二类斯特林数·列"></a>第二类斯特林数·列</h3><p><a href="https://www.luogu.org/problemnew/show/P5396" target="_blank" rel="noopener">Luogu P5396</a></p>
 
       
     </div>
@@ -710,7 +712,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通多项式转下降幂多项式"><span class="nav-number">3.</span> <span class="nav-text">普通多项式转下降幂多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">4.</span> <span class="nav-text">下降幂多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·行"><span class="nav-number">5.</span> <span class="nav-text">第二类斯特林数·行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通多项式转下降幂多项式"><span class="nav-number">3.</span> <span class="nav-text">普通多项式转下降幂多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">4.</span> <span class="nav-text">下降幂多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·行"><span class="nav-number">5.</span> <span class="nav-text">第二类斯特林数·行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·列"><span class="nav-number">6.</span> <span class="nav-text">第二类斯特林数·列</span></a></li></ol></div>
             
 
           </div>
