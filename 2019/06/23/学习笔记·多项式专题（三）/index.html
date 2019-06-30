@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式，斯特林数以及一些优美的结论。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-28T10:27:41.518Z">
+<meta property="og:updated_time" content="2019-06-30T00:59:13.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（三）">
 <meta name="twitter:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式，斯特林数以及一些优美的结论。">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  2.4k
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  11
                 </span>
               
             </div>
@@ -465,9 +465,10 @@
 <script type="math/tex; mode=display">x^{\underline n}=\begin{cases}1, & n=0\\x\times (x-1)^{n-1} & n\geq 1,\end{cases}</script><p>所以说，$x^{\underline 0}=1$，那么$x^{\underline 1}$呢？</p>
 <script type="math/tex; mode=display">x^{\underline 1}=x\times (x-1)^{\underline 0}=x</script><p>那么有</p>
 <script type="math/tex; mode=display">x^{\underline 2}=x\times (x-1)^{\underline 1}=x(x-1)=x^2-x</script><script type="math/tex; mode=display">x^{\underline 3}=x\times (x-1)^{\underline 2}=x(x-1)(x-2)=x^3-3x^2+2x</script><p>于是可以得出一个普遍的结论，就是</p>
-<script type="math/tex; mode=display">x^{\underline n}=x(x-1)\cdots(x-n+1)=\frac{x!}{(x-n)!}=n!C_x^n</script><p>那么，下降幂多项式，是由许多个下降幂单项式相加得来的，如</p>
+<script type="math/tex; mode=display">x^{\underline n}=x(x-1)\cdots(x-n+1)=\frac{x!}{(x-n)!}=n!C_x^n</script><p>$x^{\underline n}=n!C^n_x$这个公式很重要，因为$x^{\underline n}$与两类斯特林数有强关联。</p>
+<p>那么，下降幂多项式，是由许多个下降幂单项式相加得来的，如</p>
 <script type="math/tex; mode=display">3x^{\underline 2}+2x^{\underline 1}+1=3x(x-1)+2x+1=3x^2-x+1</script><h3 id="普通多项式转下降幂多项式"><a href="#普通多项式转下降幂多项式" class="headerlink" title="普通多项式转下降幂多项式"></a>普通多项式转下降幂多项式</h3><p><a href="https://www.luogu.org/problemnew/show/P5383" target="_blank" rel="noopener">Luogu P5383</a></p>
-<p>首先看一个简单的性质：</p>
+<p>首先看一个简单的结论：</p>
 <script type="math/tex; mode=display">n^m=\sum\limits_{i=0}^{m}i!S^i_mC^i_n</script><p>其中$S$表示第二类斯特林数。</p>
 <p>为什么呢？考虑等号两边的组合意义。</p>
 <p>左边是$n$个球任意放$m$个盒子的答案，右边的话枚举非空盒子的数量，用组合数枚举一下，最后由于盒子不同，所以要乘个$i!$。</p>
@@ -501,7 +502,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FFPMul</span><span class="params">(ll fd,ll gd,ll *f,ll *g,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ll tmp[MAXN],tmpf[MAXN],tmpg[MAXN];</span><br><span class="line">    ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmpf[i]=f[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;gd;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmpg[i]=g[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fd+gd<span class="number">-1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=finv[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(cnt&lt;(fd+gd&lt;&lt;<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmpf,cnt,<span class="number">1</span>),NTT(tmpg,cnt,<span class="number">1</span>),NTT(tmp,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        tmpf[i]=(li)tmpf[i]*tmp[i]%MOD,tmpg[i]=(li)tmpg[i]*tmp[i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmpf,cnt,<span class="number">-1</span>),NTT(tmpg,cnt,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i]=i&lt;fd+gd<span class="number">-1</span>?(i&amp;<span class="number">1</span>?(MOD-finv[i]):finv[i]):<span class="number">0</span>;</span><br><span class="line">        tmpf[i]=i&lt;fd+gd<span class="number">-1</span>?(li)tmpf[i]*tmpg[i]%MOD*fact[i]%MOD:<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(tmpf,cnt,<span class="number">1</span>),NTT(tmp,cnt,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        res[i]=(li)tmpf[i]*tmp[i]%MOD,tmpf[i]=tmpg[i]=tmp[i]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(res,cnt,<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="第二类斯特林数·行"><a href="#第二类斯特林数·行" class="headerlink" title="第二类斯特林数·行"></a>第二类斯特林数·行</h3><p><a href="https://www.luogu.org/problemnew/show/P5395" target="_blank" rel="noopener">Luogu P5395</a></p>
 <p>不知道第二类斯特林数的去看组合专题（大坑）。</p>
-<p>还记得上面那个有关于第二类斯特林数的性质吗？</p>
+<p>还记得上面那个有关于第二类斯特林数的结论吗？</p>
 <p>可是这又与这题有什么关系呢？</p>
 <p>很明显，$m\leq n$，所以把和式上界改一下，为后续做准备</p>
 <script type="math/tex; mode=display">n^m=\sum\limits_{i=0}^{n}i!S^i_mC^i_n</script><p>然后再设$f(n)=n^m,g(i)=i!S^i_m$，那么有</p>
@@ -511,8 +512,27 @@
 <script type="math/tex; mode=display">S^n_m=\sum\limits_{i=0}^n\frac{1}{n!}\cdot\frac{n!}{i!(n-i)!}(-1)^{n-i}i^m</script><p>约个分</p>
 <script type="math/tex; mode=display">S^n_m=\sum\limits_{i=0}^n\frac{(-1)^{n-i}i^m}{i!(n-i)!}</script><p>然后再拆一下</p>
 <script type="math/tex; mode=display">S^n_m=\sum\limits_{i=0}^n\frac{(-1)^{n-i}}{(n-i)!}\cdot\frac{i^m}{i!}</script><p>很明显的卷积形式啊。。。$\texttt{NTT}$做就行啦qwq</p>
+<p>时间复杂度$O(n\log n)$</p>
 <p>代码呢？不见了。。。</p>
 <h3 id="第二类斯特林数·列"><a href="#第二类斯特林数·列" class="headerlink" title="第二类斯特林数·列"></a>第二类斯特林数·列</h3><p><a href="https://www.luogu.org/problemnew/show/P5396" target="_blank" rel="noopener">Luogu P5396</a></p>
+<p>我们先从一个小结论入手（从维基百科蒯的）:</p>
+<script type="math/tex; mode=display">\sum\limits_{i=n}^{\infty}\frac{S_i^n}{i!}x^i=\frac{(e^x-1)^n}{n!}</script><p>证明留给读者做练习<del>这掩盖不了我不会证的事实</del></p>
+<p>这里主要讲讲求法。</p>
+<p>很明显的把$e^x-1$拆开</p>
+<script type="math/tex; mode=display">e^x-1=\sum\limits_{i=1}^\infty\frac{x^n}{n!}</script><p>构造这样一个多项式，$n$次方之后对每一个系数乘上$n!$的逆元，再对于$x^i$的系数乘上$i!$就没了</p>
+<p>时间复杂度$O(n\log n)$，代码无。</p>
+<h3 id="第一类斯特林数·列"><a href="#第一类斯特林数·列" class="headerlink" title="第一类斯特林数·列"></a>第一类斯特林数·列</h3><p>先看一个恒等式</p>
+<script type="math/tex; mode=display">(x+1)^n=(x+1)^n</script><p>你可能会想，这样一个恒等式与斯特林数有啥关系嘛。且听我慢慢道来。</p>
+<p>左边二项式展开，右边化成指数形式，有</p>
+<script type="math/tex; mode=display">\sum\limits_{i=0}^{n}C_n^ix^i=e^{n\ln (x+1)}</script><p>当$i&gt;n$时，显然，$C_n^i=0$，所以左边改变求和上界，右边泰勒展开，有</p>
+<script type="math/tex; mode=display">\sum\limits_{i=0}^{\infty}C_n^ix^i=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>把组合数拆成下降幂的形式</p>
+<script type="math/tex; mode=display">\sum\limits_{i=0}^{\infty}\frac{x^i}{i!}
+n^{\underline i}=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>下降幂拆成第一类斯特林数</p>
+<script type="math/tex; mode=display">\sum\limits_{i=0}^{\infty}\frac{x^i}{i!}
+\sum\limits_{j=0}^{i}(-1)^{i-j}s_i^jn^i=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>整理一下</p>
+<script type="math/tex; mode=display">\sum\limits_{i=0}^{\infty}n^i
+\sum\limits_{j=i}^{\infty}\frac{(-1)^{j-i}s_j^ix^j}{j!}=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>两边约掉</p>
+<script type="math/tex; mode=display">\sum\limits_{j=i}^{\infty}\frac{(-1)^{j-i}s_j^ix^j}{j!}=\frac{\ln(x+1)^i}{i!}</script><p>这样就没了啊。。。用多项式$\ln$和快速幂做，时间复杂度$O(n\log n)$</p>
 
       
     </div>
@@ -712,7 +732,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通多项式转下降幂多项式"><span class="nav-number">3.</span> <span class="nav-text">普通多项式转下降幂多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">4.</span> <span class="nav-text">下降幂多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·行"><span class="nav-number">5.</span> <span class="nav-text">第二类斯特林数·行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·列"><span class="nav-number">6.</span> <span class="nav-text">第二类斯特林数·列</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通多项式转下降幂多项式"><span class="nav-number">3.</span> <span class="nav-text">普通多项式转下降幂多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">4.</span> <span class="nav-text">下降幂多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·行"><span class="nav-number">5.</span> <span class="nav-text">第二类斯特林数·行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·列"><span class="nav-number">6.</span> <span class="nav-text">第二类斯特林数·列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一类斯特林数·列"><span class="nav-number">7.</span> <span class="nav-text">第一类斯特林数·列</span></a></li></ol></div>
             
 
           </div>
@@ -746,7 +766,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">47.5k</span>
+    <span title="Site words total count">48k</span>
   
 </div>
 
