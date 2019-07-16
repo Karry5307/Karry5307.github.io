@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定一个$n$个点的有向图和一个常数$c$，其中对于任意的$i$和$j$，有一条边权$(i\operatorname{xor}j)\times C$的边。还给定$m$条边，第$i$条边从$u_i$到$v_i$，边权为$w_i$，求出$s$到$t$的最短路。 $\texttt{Data Range:}n\leq 10^5,m\leq 5\times 10^5,1\leq u_i,v_i\leq n,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-15T14:15:41.302Z">
+<meta property="og:updated_time" content="2019-07-16T13:15:41.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P4366」[Code+#4]最短路">
 <meta name="twitter:description" content="给定一个$n$个点的有向图和一个常数$c$，其中对于任意的$i$和$j$，有一条边权$(i\operatorname{xor}j)\times C$的边。还给定$m$条边，第$i$条边从$u_i$到$v_i$，边权为$w_i$，求出$s$到$t$的最短路。 $\texttt{Data Range:}n\leq 10^5,m\leq 5\times 10^5,1\leq u_i,v_i\leq n,">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  553
+                  603
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -467,9 +467,7 @@
 <p>为什么呢？</p>
 <p>因为对于每一次异或，只会修改一个位置上的数，对别的位置没有影响。所以说从$x$到$y$只需要这样一个一个走即可，对答案没有影响</p>
 <p>所以只需要对任意的点$i$向$2^j$连$i\operatorname{xor}2^j$的边，再跑最短路即可，边数立马降至$n\log n+m$级别。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>```cpp<br>// luogu-judger-enable-o2</p>
-<h1 id="include"><a href="#include" class="headerlink" title="include"></a>include<bits stdc++.h=""></bits></h1><p>using namespace std;<br>typedef int ll;<br>const ll MAXN=1e5+51,MAXM=2.2e6+51;<br>struct Edge{<br>    ll to,prev,dist;<br>};<br>struct Tuple{<br>    ll node,dist;<br>    inline bool operator &lt;(const Tuple &amp;rhs)const<br>    {<br>        return this-&gt;dist&gt;rhs.dist;<br>    }<br>};<br>Edge ed[MAXM];<br>priority_queue<tuple>pq;<br>ll nc,ec,tot,from,to,dist,wt,source;<br>ll last[MAXN],minn[MAXN],inQueue[MAXN];<br>inline ll read()<br>{<br>    register ll num=0,neg=1;<br>    register char ch=getchar();<br>    while(!isdigit(ch)&amp;&amp;ch!=’-‘)<br>    {<br>        ch=getchar();<br>    }<br>    if(ch==’-‘)<br>    {<br>        neg=-1;<br>        ch=getchar();<br>    }<br>    while(isdigit(ch))<br>    {<br>        num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-‘0’);<br>        ch=getchar();<br>    }<br>    return num<em>neg;<br>}<br>inline void addEdge(ll from,ll to,ll dist)<br>{<br>    ed[++tot].prev=last[from];<br>    ed[tot].to=to;<br>    ed[tot].dist=dist;<br>    last[from]=tot;<br>}<br>inline void Dijkstra(ll source)<br>{<br>    ll top;<br>    memset(minn,0x3f,sizeof(minn));<br>    pq.push((Tuple){source,0}),minn[source]=0,inQueue[source]=1;<br>    while(!pq.empty())<br>    {<br>        top=pq.top().node,pq.pop();<br>        for(register int i=last[top];i;i=ed[i].prev)<br>        {<br>            if(minn[top]+ed[i].dist&lt;minn[ed[i].to])<br>            {<br>                minn[ed[i].to]=minn[top]+ed[i].dist;<br>                pq.push((Tuple){ed[i].to,minn[ed[i].to]});<br>            }<br>        }<br>    }<br>}<br>int main()<br>{<br>    nc=read(),ec=read(),wt=read();<br>    for(register int i=0;i&lt;ec;i++)<br>    {<br>        from=read(),to=read(),dist=read();<br>        addEdge(from,to,dist);<br>    }<br>    for(register int i=0;i&lt;=nc;i++)<br>    {<br>        for(register int j=1;j&lt;=nc;j&lt;&lt;=1)<br>        {<br>            if((i^j)&lt;=nc)<br>            {<br>                addEdge(i,i^j,j</em>wt);<br>            }<br>        }<br>    }<br>    Dijkstra(source=read());<br>    printf(“%d\n”,minn[to=read()]);<br>}<br>···</tuple></p>
-
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// luogu-judger-enable-o2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">1e5</span>+<span class="number">51</span>,MAXM=<span class="number">2.2e6</span>+<span class="number">51</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    ll to,prev,dist;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Tuple</span>&#123;</span></span><br><span class="line">    ll node,dist;</span><br><span class="line">    <span class="keyword">inline</span> <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> Tuple &amp;rhs)<span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;dist&gt;rhs.dist;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Edge ed[MAXM];</span><br><span class="line">priority_queue&lt;Tuple&gt;pq;</span><br><span class="line">ll nc,ec,tot,from,to,dist,wt,source;</span><br><span class="line">ll last[MAXN],minn[MAXN],inQueue[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(ll from,ll to,ll dist)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ed[++tot].prev=last[from];</span><br><span class="line">    ed[tot].to=to;</span><br><span class="line">    ed[tot].dist=dist;</span><br><span class="line">    last[from]=tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(ll source)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll top;</span><br><span class="line">    <span class="built_in">memset</span>(minn,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(minn));</span><br><span class="line">    pq.push((Tuple)&#123;source,<span class="number">0</span>&#125;),minn[source]=<span class="number">0</span>,inQueue[source]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(!pq.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        top=pq.top().node,pq.pop();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=last[top];i;i=ed[i].prev)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(minn[top]+ed[i].dist&lt;minn[ed[i].to])</span><br><span class="line">            &#123;</span><br><span class="line">                minn[ed[i].to]=minn[top]+ed[i].dist;</span><br><span class="line">                pq.push((Tuple)&#123;ed[i].to,minn[ed[i].to]&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nc=read(),ec=read(),wt=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ec;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        from=read(),to=read(),dist=read();</span><br><span class="line">        addEdge(from,to,dist);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=nc;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=nc;j&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>((i^j)&lt;=nc)</span><br><span class="line">            &#123;</span><br><span class="line">                addEdge(i,i^j,j*wt);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Dijkstra(source=read());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,minn[to=read()]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -666,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number"></span> <span class="nav-text">include</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
@@ -700,7 +698,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">48.6k</span>
+    <span title="Site words total count">48.7k</span>
   
 </div>
 
@@ -1258,6 +1256,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
