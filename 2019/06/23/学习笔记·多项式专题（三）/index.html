@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式，斯特林数以及一些优美的结论。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-30T00:59:13.244Z">
+<meta property="og:updated_time" content="2019-07-16T13:39:10.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（三）">
 <meta name="twitter:description" content="在这一篇文章里，我们来谈一谈上升幂，下降幂多项式，斯特林数以及一些优美的结论。">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.4k
+                  2.6k
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  12
                 </span>
               
             </div>
@@ -533,6 +533,18 @@ n^{\underline i}=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>�
 <script type="math/tex; mode=display">\sum\limits_{i=0}^{\infty}n^i
 \sum\limits_{j=i}^{\infty}\frac{(-1)^{j-i}s_j^ix^j}{j!}=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>两边约掉</p>
 <script type="math/tex; mode=display">\sum\limits_{j=i}^{\infty}\frac{(-1)^{j-i}s_j^ix^j}{j!}=\frac{\ln(x+1)^i}{i!}</script><p>这样就没了啊。。。用多项式$\ln$和快速幂做，时间复杂度$O(n\log n)$</p>
+<h3 id="第一类斯特林数·行"><a href="#第一类斯特林数·行" class="headerlink" title="第一类斯特林数·行"></a>第一类斯特林数·行</h3><p><a href="https://www.luogu.org/problemnew/show/P5408" target="_blank" rel="noopener">Luogu P5408</a></p>
+<p>应$\texttt{M}\color{red}\texttt{_sea}$的要求，这里终于不咕咕了。</p>
+<p>这里可是最最最卡常的地方了！</p>
+<p>首先，我们可以自然的想到一个做法。原理是这样</p>
+<script type="math/tex; mode=display">x^{\overline n}=\sum\limits_{i=0}^ns_n^ix^i</script><p>而</p>
+<script type="math/tex; mode=display">x^{\overline n}=\prod_{i=0}^{n-1}(x+i)</script><p>所以考虑直接分治乘法即可，时间复杂度$O(n\log^2n)$</p>
+<p>可是这样过不去。考虑倍增，有</p>
+<p>$x^{\overline{2n}}=x^{\overline n}(x+n)^{\overline n}$</p>
+<p>假设$F(x)=x^{\overline n}$，我们当前的目标是求出$F(x+n)$，所以</p>
+<script type="math/tex; mode=display">F(x+n)=\sum\limits_{i=0}^{n}f_i(x+n)^i</script><p>强行展开</p>
+<script type="math/tex; mode=display">F(x+n)=\sum\limits_{i=0}^{n}f_i\sum\limits_{j=0}^{i}C_i^jn^{i-j}x^j</script><p>合并一下</p>
+<script type="math/tex; mode=display">F(x+n)=\sum\limits_{j=0}^{n}\frac{x^j}{j!}\sum\limits_{i=0}^{j}i!f_i\frac{n^{j-i}}{(j-i)!}</script><p>把$i!f_i$翻转一下做一次卷积即可。时间复杂度$O(n\log n)$，要卡卡常。</p>
 
       
     </div>
@@ -736,7 +748,7 @@ n^{\underline i}=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通多项式转下降幂多项式"><span class="nav-number">3.</span> <span class="nav-text">普通多项式转下降幂多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">4.</span> <span class="nav-text">下降幂多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·行"><span class="nav-number">5.</span> <span class="nav-text">第二类斯特林数·行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·列"><span class="nav-number">6.</span> <span class="nav-text">第二类斯特林数·列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一类斯特林数·列"><span class="nav-number">7.</span> <span class="nav-text">第一类斯特林数·列</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式的定义"><span class="nav-number">2.</span> <span class="nav-text">下降幂多项式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#普通多项式转下降幂多项式"><span class="nav-number">3.</span> <span class="nav-text">普通多项式转下降幂多项式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下降幂多项式乘法"><span class="nav-number">4.</span> <span class="nav-text">下降幂多项式乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·行"><span class="nav-number">5.</span> <span class="nav-text">第二类斯特林数·行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二类斯特林数·列"><span class="nav-number">6.</span> <span class="nav-text">第二类斯特林数·列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一类斯特林数·列"><span class="nav-number">7.</span> <span class="nav-text">第一类斯特林数·列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一类斯特林数·行"><span class="nav-number">8.</span> <span class="nav-text">第一类斯特林数·行</span></a></li></ol></div>
             
 
           </div>
@@ -770,7 +782,7 @@ n^{\underline i}=\sum\limits_{i=0}^{\infty}\frac{n^i\ln(x+1)^i}{i!}</script><p>�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">48.7k</span>
+    <span title="Site words total count">48.9k</span>
   
 </div>
 
