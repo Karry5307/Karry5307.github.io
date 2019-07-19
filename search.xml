@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[学习笔记·KD Tree]]></title>
+    <url>%2F2019%2F07%2F19%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7KD-Tree%2F</url>
+    <content type="text"><![CDATA[博客日日咕系列。 等我做完简单题再来更吧。 机房里的人全会就我不会系列。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[「Luogu P4389」[APIO2013]出题人]]></title>
     <url>%2F2019%2F07%2F19%2F%E3%80%8CLuogu-P3640%E3%80%8D-APIO2013-%E5%87%BA%E9%A2%98%E4%BA%BA%2F</url>
     <content type="text"><![CDATA[题面不会解释。 链接题解前言对于给出的三份$\texttt{SSSP}$的程序，考虑分析其时间复杂度。 $\texttt{Floyd:}$无论如何都是$O(n^3)$，与询问无关。 $\texttt{Dijkstra:}$搞了个堆优化，$O(n\log n)$，一上负权图就$\texttt{GG}$。 $\texttt{Bellman-Ford:}$一旦有负权照样退化成$O(qnm)$。 $\texttt{Subtask 1}$卡$\texttt{Floyd}$，让$\texttt{Dijkstra}$过。 由于$\texttt{Floyd}$总是$O(n^3)$，所以考虑构造一个$101$个点的图，没有边，就可以卡掉了。 $\texttt{Subtask 2}$卡$\texttt{Bellman-Ford}$，让$\texttt{Floyd}$过。 要让$\texttt{Floyd}$过，$n=100$即可。然后每个点随机连一些负权边，让$\texttt{Bellman-Ford}$不断的进行松弛操作，再带上$10$组询问就可以卡掉了。 这里我的策略是前$50$个点随机连$11$条边，后$50$个点随机连$10$条边，在这种随机图上很容易卡掉。 $\texttt{Subtask 3}$跟$\texttt{Subtask 1}$一样。 $\texttt{Subtask 4}$卡$\texttt{Dijkstra}$，让$\texttt{Floyd}$过。 先来看一个图： 这样一个图诱导$\texttt{Dijkstra}$走边权为$0$的边，走着走着就发现原来的那条不是最短路，就白白走了许多路径。用这种方法卡掉即可。 $\texttt{Subtask 5}$卡$\texttt{Bellman-Ford}$，让$\texttt{Dijkstra}$过。 考虑到代码中的一个性质：每一次都是所有顶点进行松弛操作，而且只要有改变最短路就可以再松弛一遍，所以考虑构造一堆自己连向自己的负环，再在$0$和$1$之间连重边就可以卡掉啦qwq。 $\texttt{Subtask 6}$只要你$\texttt{Subtask 4}$做得好的话，这个点也是一样的。 $\texttt{Subtask 7}$染色问题，让你卡爆搜。 生成一个随机图就可以啦。 $\texttt{Subtask 8}$让你构造数据使得爆搜通过。 考虑把点染色，异色的点之间连边，同色点之间不连边，于是就完了。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=1e5+51;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125; inline void hack1()&#123; puts("101"); for(register int i=0;i&lt;101;i++) &#123; puts("0"); &#125; puts("1\n1 100");&#125;inline void hack2()&#123; ll edges; puts("100"); for(register int i=0;i&lt;100;i++) &#123; edges=i&lt;50?11:10; printf("%d ",edges); for(register int j=0;j&lt;edges;j++) &#123; printf("%d %d ",rand()%100,-1); &#125; puts(""); &#125; puts("10"); for(register int i=0;i&lt;10;i++) &#123; puts("0 99"); &#125;&#125;inline void hack3()&#123; puts("101"); for(register int i=0;i&lt;101;i++) &#123; puts("0"); &#125; puts("1\n1 100");&#125;inline void hack4()&#123; ll k=131072; puts("33"); for(register int i=0;i&lt;32;i++) &#123; if(i&amp;1) &#123; printf("1 %d %d",i+1,-(k&lt;&lt;1)),k&gt;&gt;=1; &#125; else &#123; printf("2 %d 0 %d %d",i+2,i+1,k); &#125; puts(""); &#125; puts("0\n6"); for(register int i=0;i&lt;6;i++) &#123; puts("0 32"); &#125;&#125;inline void hack5()&#123; puts("300\n1 1 1\n0"); for(register int i=2;i&lt;300;i++) &#123; printf("%d ",i&lt;6?12:1); for(register int j=0;j&lt;(i&lt;6?12:1);j++) &#123; printf("%d -1 ",i); &#125; puts(""); &#125; puts("10"); for(register int i=0;i&lt;10;i++) &#123; puts("0 1"); &#125;&#125;inline void hack6()&#123; ll k=131072; puts("33"); for(register int i=0;i&lt;32;i++) &#123; if(i&amp;1) &#123; printf("1 %d %d",i+1,-(k&lt;&lt;1)),k&gt;&gt;=1; &#125; else &#123; printf("2 %d 0 %d %d",i+2,i+1,k); &#125; puts(""); &#125; puts("0\n6"); for(register int i=0;i&lt;6;i++) &#123; puts("0 32"); &#125;&#125;inline void hack7()&#123; ll x,y; static ll vis[75][75]; puts("71 1501"); for(register int i=0;i&lt;1501;i++) &#123; x=rand()%71,y=rand()%71; while(vis[x][y]||x==y) &#123; x=rand()%71,y=rand()%71; &#125; printf("%d %d\n",x,y),vis[x][y]=vis[y][x]=1; &#125;&#125;inline void hack8()&#123; ll x,y; static ll color[151],vis[151][151]; puts("101 1501"); for(register int i=0;i&lt;101;i++) &#123; color[i]=i%2; &#125; for(register int i=0;i&lt;1501;i++) &#123; x=rand()%101,y=rand()%101; while(vis[x][y]||x==y||color[x]==color[y]) &#123; x=rand()%101,y=rand()%101; &#125; printf("%d %d\n",x,y),vis[x][y]=vis[y][x]=1; &#125;&#125; int main()&#123;&#125;]]></content>
@@ -248,8 +253,8 @@
         <tag>洛谷</tag>
         <tag>模板</tag>
         <tag>数论，数学</tag>
-        <tag>微积分初步</tag>
         <tag>倍增</tag>
+        <tag>微积分初步</tag>
       </tags>
   </entry>
   <entry>
@@ -379,8 +384,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>BFS</tag>
       </tags>
   </entry>
@@ -391,8 +396,8 @@
       <tags>
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>CodeVS</tag>
         <tag>数论</tag>
       </tags>
@@ -728,8 +733,8 @@
         <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
-        <tag>HAOI</tag>
         <tag>各省省选</tag>
+        <tag>HAOI</tag>
         <tag>树链剖分</tag>
       </tags>
   </entry>
