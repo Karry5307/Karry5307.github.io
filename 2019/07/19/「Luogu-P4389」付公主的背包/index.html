@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="多项式,生成函数,FFT,NTT,洛谷," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="给定$n$种物品，每种物品的体积为$w_i$，有无限个。对于$c\in[1,m]$，求出用这些物品正好装满体积为$c$的背包的总数。 $\texttt{Data Range:}n,m\leq 10^5,w_i\leq m$">
+<meta name="keywords" content="多项式,生成函数,FFT,NTT,洛谷">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Luogu P4389」付公主的背包">
 <meta property="og:url" content="http://karry5307.github.io/2019/07/19/「Luogu-P4389」付公主的背包/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="给定$n$种物品，每种物品的体积为$w_i$，有无限个。对于$c\in[1,m]$，求出用这些物品正好装满体积为$c$的背包的总数。 $\texttt{Data Range:}n,m\leq 10^5,w_i\leq m$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-19T06:02:01.550Z">
+<meta property="og:updated_time" content="2019-07-19T07:15:34.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「Luogu P4389」付公主的背包">
 <meta name="twitter:description" content="给定$n$种物品，每种物品的体积为$w_i$，有无限个。对于$c\in[1,m]$，求出用这些物品正好装满体积为$c$的背包的总数。 $\texttt{Data Range:}n,m\leq 10^5,w_i\leq m$">
@@ -512,6 +513,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/多项式/" rel="tag"># 多项式</a>
+          
+            <a href="/tags/生成函数/" rel="tag"># 生成函数</a>
+          
+            <a href="/tags/FFT/" rel="tag"># FFT</a>
+          
+            <a href="/tags/NTT/" rel="tag"># NTT</a>
+          
+            <a href="/tags/洛谷/" rel="tag"># 洛谷</a>
+          
+        </div>
+      
 
       
       
@@ -530,6 +545,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/19/「Luogu-P3640」-APIO2013-出题人/" rel="prev" title=" 「Luogu P4389」[APIO2013]出题人">
+                 「Luogu P4389」[APIO2013]出题人 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -609,7 +628,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1247,6 +1266,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
