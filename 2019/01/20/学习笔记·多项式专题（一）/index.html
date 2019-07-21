@@ -89,7 +89,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/1.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/2.JPG">
-<meta property="og:updated_time" content="2019-07-21T08:26:26.501Z">
+<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/3.JPG">
+<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/4.JPG">
+<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/5.JPG">
+<meta property="og:updated_time" content="2019-07-21T14:19:04.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -427,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k
+                  2k
                 </span>
               
 
@@ -443,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  8
                 </span>
               
             </div>
@@ -524,7 +527,34 @@
 <p>横着的那根轴叫做<strong>实轴</strong>，用来记录复数的实部。与实轴垂直的轴叫做<strong>虚轴</strong>，记录复数的虚部。</p>
 <p>于是我们就可以用一个复平面来表示复数了。如下图</p>
 <p><img src="/2019/01/20/学习笔记·多项式专题（一）/2.JPG" alt=""></p>
-
+<p>红点表示的复数为$-1+2\mathrm{i}$，蓝点表示的复数则为$2+4\mathrm{i}$。</p>
+<p>加减法的话不多说。乘法当一次多项式成就可以了。除法的话有套路。</p>
+<p>首先求$\frac{1}{a+b\mathrm{i}}$。</p>
+<p>考虑分母有理化，分子分母同乘共轭复数，有</p>
+<script type="math/tex; mode=display">\frac{1}{a+b\mathrm{i}}=\frac{a-b\mathrm{i}}{a^2+b^2}</script><p>所以有</p>
+<script type="math/tex; mode=display">\frac{a+b\mathrm{i}}{c+d\mathrm{i}}=\frac{(a+b\mathrm{i})(c-d\mathrm{i})}{c^2+d^2}=\frac{ac+bd}{c^2+d^2}+\frac{bc-ad}{c^2+d^2}\mathrm{i}</script><p>接着是模长和辐角的概念。</p>
+<p>模长是什么？说白了，就是复数所对应的复平面上的点到原点的距离。也即复数$a+b\mathrm{i}$的模长为$\sqrt{a^2+b^2}$。</p>
+<p>辐角的话呢，就是如下图</p>
+<p><img src="/2019/01/20/学习笔记·多项式专题（一）/3.JPG" alt=""></p>
+<p>所谓辐角，就是红点与原点的连线和实轴上那根黑线所成的夹角。</p>
+<p>如果红点对应的复数为$z$，那么$z$的辐角记作$\arg z$。</p>
+<p>接下来就是终点了。</p>
+<p>负数的乘法：<strong>模长相乘，辐角相加</strong>。</p>
+<p>我们用一个图形说明这一点。</p>
+<p><img src="/2019/01/20/学习笔记·多项式专题（一）/4.JPG" alt=""></p>
+<p>设$A,B$代表的复数依次为$a+b\mathrm{i},c+d\mathrm{i}$，则</p>
+<script type="math/tex; mode=display">\vert\overrightarrow{OA}\vert=\sqrt{a^2+b^2}</script><script type="math/tex; mode=display">\vert\overrightarrow{OB}\vert=\sqrt{c^2+d^2}</script><p>乘起来，有</p>
+<script type="math/tex; mode=display">\vert\overrightarrow{OA}\vert\cdot\vert\overrightarrow{OB}\vert=\sqrt{(a^2+b^2)(c^2+d^2)}</script><p>还有</p>
+<script type="math/tex; mode=display">\vert\overrightarrow{OC}\vert=\sqrt{(ac-bd)^2+(bc+ad)^2}</script><p>所以，只需要证明$(ac-bd)^2+(bc+ad)^2=(a^2+b^2)(c^2+d^2)$</p>
+<p>左边展开，有</p>
+<script type="math/tex; mode=display">(ac-bd)^2+(bc+ad)^2=a^2c^2+a^2d^2+b^2c^2+b^2d^2=(a^2+c^2)(b^2+d^2)</script><p>命题得证。</p>
+<p>要想证明第二个命题，我们得取点$D(1,0)$，连接$BC,AO,DO$，如图，则</p>
+<p><img src="/2019/01/20/学习笔记·多项式专题（一）/5.JPG" alt=""></p>
+<p>只需证$\triangle ODA\sim\triangle OBC$即可。</p>
+<p>由于$OA\cdot OB=OC,OD=1$，那么有</p>
+<script type="math/tex; mode=display">\frac{OC}{OB}=\frac{OA}{OD}</script><p>只需证明$\frac{OA}{AD}=\frac{OC}{CB}$即可，令$ac-bd=p,bc+ad=q$，则</p>
+<script type="math/tex; mode=display">\frac{OA}{AD}=\frac{\sqrt{a^2+b^2}}{b}</script><script type="math/tex; mode=display">\frac{OC}{CB}=\frac{\sqrt{p^2+q^2}}{\sqrt{(c-p)^2+(d-q)^2}}</script><p>分母有理化，有</p>
+<script type="math/tex; mode=display">\frac{OC}{CB}=\frac{\sqrt{p^2+q^2}\cdot\sqrt{(c-p)^2+(d-q)^2}}{(c-p)^2+(d-q)^2}</script>
       
     </div>
     
@@ -753,7 +783,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.8k</span>
+    <span title="Site words total count">53.3k</span>
   
 </div>
 
