@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="多项式，爽！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-21T08:08:48.651Z">
+<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/1.JPG">
+<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/2.JPG">
+<meta property="og:updated_time" content="2019-07-21T08:26:26.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
+<meta name="twitter:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/1.JPG">
 
 
 
@@ -424,7 +427,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.5k
                 </span>
               
 
@@ -440,7 +443,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -492,7 +495,7 @@
 <p>给定$m$个值$a_i$和$n$次多项式$F(x)$，求$F(a_i)$。</p>
 <p>考虑把它写成矩阵的形式，有</p>
 <script type="math/tex; mode=display">\begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}\times\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}</script><p>所以</p>
-<script type="math/tex; mode=display">\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}\times \begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}^{-1}</script><p>只有在右边的矩阵为方阵，即为范德蒙德矩阵时它才可能有逆。</p>
+<script type="math/tex; mode=display">\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}\times \begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}^{-1}</script><p>根据基本线代常识，<strong>只有方阵才是可逆矩阵</strong>，所以只有右边的矩阵为方阵，即为范德蒙德矩阵时它才可能有逆，也即可以解出系数数列$f$。</p>
 <p>所以$n+1=m$，即$n=m-1$，即确定的多项式为$m-1$次。</p>
 <p>所以说，一个$n-1$次多项式与它的曲线上的$n$个点的集合是等价的，而这个集合，叫做多项式的<strong>点值表达</strong>。</p>
 <p>下面说点值表达是怎么优化多项式乘法的。</p>
@@ -511,6 +514,16 @@
 <p>但这时，有一位搞复数的$\texttt{dalao}$横空出世，他就是傅里叶。</p>
 <p>这人啊，把单位根代入多项式想求点值表达，可是由于单位根有一些优秀的性质，就可以分治做到$O(n\log n)$。</p>
 <p>接着，我们来介绍复数。</p>
+<p>数轴可以表示任意实数，对吧。</p>
+<p>可是尽管有数轴还不足以解决问题。比如说解方程$x^2=-1$。</p>
+<p>数轴上没有数的平方等于$-1$。于是数学家们提出了一个东西叫做$\mathrm{i}$，规定了$\mathrm{i}^2=-1$。</p>
+<p>所以说，刚刚的方程就有了两个解$x_1=\mathrm{i},x_2=-\mathrm{i}$。</p>
+<p>而这个$\mathrm{i}$就叫做<strong>虚数单位</strong>。数学家们把形如$z=a+b\mathrm{i}$的数叫做<strong>复数</strong>，其中$a$叫做<strong>实部</strong>，$b$叫做<strong>虚部</strong>。</p>
+<p>可是仅仅有一根数轴无法表示复数，于是就出现了一根轴，两根轴共同组成了一个平面，叫做<strong>复平面</strong>。就像这样</p>
+<p><img src="/2019/01/20/学习笔记·多项式专题（一）/1.JPG" alt=""></p>
+<p>横着的那根轴叫做<strong>实轴</strong>，用来记录复数的实部。与实轴垂直的轴叫做<strong>虚轴</strong>，记录复数的虚部。</p>
+<p>于是我们就可以用一个复平面来表示复数了。如下图</p>
+<p><img src="/2019/01/20/学习笔记·多项式专题（一）/2.JPG" alt=""></p>
 
       
     </div>
@@ -740,7 +753,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.5k</span>
+    <span title="Site words total count">52.8k</span>
   
 </div>
 
