@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「Luogu P4148」简单题]]></title>
+    <url>%2F2019%2F07%2F21%2F%E3%80%8CLuogu-P4148%E3%80%8D%E7%AE%80%E5%8D%95%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[给定一个$n\times n$的矩阵$a$，初始状态下所有元素均为$0$，还有$m$个操作，这些操作分为以下$3$种： 1 x y z：将$a_{x,y}$加上$z$ 2 x1 y1 x2 y2：求出$\sum\limits_{i=x_1}^{x_2}\sum\limits_{j=y_1}^{y_2}a_{i,j}$。 3：终止程序。 对于所有的修改和询问要求强制在线。 $\texttt{Data Range:}n\leq 5\times 10^5,m\leq 2\times 10^5$ 链接题解一道$\texttt{kdt}$的模板题因为参数次序出问题让我调了好久 如果不要求强制在线，那么可以考虑$\texttt{cdq}$分治或整体二分。 可是既然强制在线，那么这就变成了一道$\texttt{KD Tree}$的模板题。 没什么好说的，所以这里放一张图： 呵呵。 代码```cpp includeusing namespace std;typedef int ll;const ll MAXN=2e5+51;const double alpha=0.75;ll dim;struct Node{ ll d[2]; ll val; inline bool operator &lt;(const Node &amp;rhs)const;};struct KDTree{ Node nd; ll sum,size; ll minn[2],maxn[2],ch[2]; inline void clear() { minn[0]=minn[1]=maxn[0]=maxn[1]=sum=size=nd.d[0]=nd.d[1]=nd.val=0; }};Node nd[MAXN];KDTree tree[MAXN];ll cnt,ptr,ptr2,tot,x,y,xx,yy,z,op,lastAns,rt;ll pool[MAXN];inline ll read(){ register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!=’-‘) { ch=getchar(); } if(ch==’-‘) { neg=-1; ch=getchar(); } while(isdigit(ch)) { num=(num&lt;]]></content>
+      <tags>
+        <tag>BZOJ</tag>
+        <tag>数据结构</tag>
+        <tag>洛谷</tag>
+        <tag>KD Tree</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[学习笔记·KD Tree]]></title>
     <url>%2F2019%2F07%2F19%2F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%C2%B7KD-Tree%2F</url>
     <content type="text"><![CDATA[博客日日咕系列。 等我做完简单题再来更吧。 机房里的人全会就我不会系列。]]></content>
@@ -253,8 +264,8 @@
         <tag>洛谷</tag>
         <tag>模板</tag>
         <tag>数论，数学</tag>
-        <tag>倍增</tag>
         <tag>微积分初步</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -459,8 +470,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -669,9 +680,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -683,8 +694,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -694,8 +705,8 @@
       <tags>
         <tag>未完待续</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
