@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="多项式，爽！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-21T07:18:51.822Z">
+<meta property="og:updated_time" content="2019-07-21T08:08:48.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  783
+                  1.2k
                 </span>
               
 
@@ -440,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -462,7 +462,7 @@
 
       
         <p><del>多项式，爽！</del><br><a id="more"></a></p>
-<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><p>FFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求<strong>卷积</strong>的方法。</p>
+<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><h4 id="texttt-DFT-IDFT-的思想"><a href="#texttt-DFT-IDFT-的思想" class="headerlink" title="$\texttt{DFT,IDFT}$的思想"></a>$\texttt{DFT,IDFT}$的思想</h4><p>$\texttt{FFT}$，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求<strong>卷积</strong>的方法。</p>
 <p>卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。</p>
 <p>形如$h_n=\sum\limits_{i}f_ig_{n-i}$的式子，将$h$称为$f$和$g$的卷积。</p>
 <p>但是这个东西有一个更直观的名字：<strong>多项式乘法</strong>！</p>
@@ -473,23 +473,14 @@
 <p>为了凑一个$x^i$，如果$F(x)$出$f_jx^j$的话，那么$G(x)$只能出$g_{i-j}x^{i-j}$。</p>
 <p>所以，$h_ix^i=\sum\limits_{j=0}^{i}f_jx^j\cdot g_{i-j}x^{i-j}$</p>
 <p>把$x^i$约去，有</p>
-<script type="math/tex; mode=display">h_i=\sum\limits_{j}f_jg_{i-j}$$。
-
-然而，普通的多项式乘法要对$F(x)$和$G(x)$每一项进行相乘，时间复杂度为$O(n^2)$，布星。
-
-所以说，有没有更快一点的方法呢？
-
-还真有！！
-
-首先看一个问题。
-
-给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求$F(x)$呢？
-
-先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？
-
-比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有：
-
-$$\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
+<script type="math/tex; mode=display">h_i=\sum\limits_{j}f_jg_{i-j}</script><p>然而，普通的多项式乘法要对$F(x)$和$G(x)$每一项进行相乘，时间复杂度为$O(n^2)$，布星。</p>
+<p>所以说，有没有更快一点的方法呢？</p>
+<p>还真有！！</p>
+<p>首先看一个问题。</p>
+<p>给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求$F(x)$呢？</p>
+<p>先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？</p>
+<p>比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有：</p>
+<script type="math/tex; mode=display">\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
 <script type="math/tex; mode=display">\begin{cases}a_0=2 \\ a_1=1\end{cases}</script><p>而当$F(x)$为二次多项式时，即$F(x)=a_0x^2+a_1x+a_2$，那么可列出如下式子：</p>
 <script type="math/tex; mode=display">\begin{cases}a_2=1 \\ a_0+a_1+a_2=3\end{cases}</script><p>这样子我们最多得到</p>
 <script type="math/tex; mode=display">\begin{cases}a_0+a_1=2 \\ a_2=3\end{cases}</script><p>$F(x)$为二次多项式就已经不能精确解出系数的值了，那么更高次多项式更不行了。</p>
@@ -502,8 +493,24 @@ $$\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
 <p>考虑把它写成矩阵的形式，有</p>
 <script type="math/tex; mode=display">\begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}\times\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}</script><p>所以</p>
 <script type="math/tex; mode=display">\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}\times \begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}^{-1}</script><p>只有在右边的矩阵为方阵，即为范德蒙德矩阵时它才可能有逆。</p>
+<p>所以$n+1=m$，即$n=m-1$，即确定的多项式为$m-1$次。</p>
 <p>所以说，一个$n-1$次多项式与它的曲线上的$n$个点的集合是等价的，而这个集合，叫做多项式的<strong>点值表达</strong>。</p>
 <p>下面说点值表达是怎么优化多项式乘法的。</p>
+<p>两个多项式相乘，如果是用系数乘法，是$O(n^2)$的，但点值乘法只需对应的点值相乘，时间复杂度为$O(n)$。</p>
+<p>但是你插值的时候会出问题。</p>
+<p>两个$n$次多项式相乘，乘出来的多项式明摆的是$2n$次的，可是两个$n$次多项式给出的点值只有$n+1$个。在称完之后插不出确定的多项式。怎么办？</p>
+<p>考虑扔一些点上去凑即可。这些点只是起到附加作用，并没有对原来的多项式有影响。</p>
+<p>所以点值表达有什么用？还不是加速多项式乘法。</p>
+<p>于是自然的考虑<strong>先求点值，相乘后插值即可</strong>。这就是$\texttt{FFT}$的流程。</p>
+<p>把<strong>系数</strong>表达转换为<strong>点值</strong>表达叫做$\texttt{DFT}$，</p>
+<p>把<strong>点值</strong>表达转换为<strong>系数</strong>表达叫做$\texttt{IDFT}$。</p>
+<p>什么鬼！！求值是$O(n^2)$的，插值是$O(n^3)$的，你跟我讲这个？？</p>
+<p>别着急。你只要代的数好的话就可以大大简化。</p>
+<h4 id="复数的性质以及单位根的引入"><a href="#复数的性质以及单位根的引入" class="headerlink" title="复数的性质以及单位根的引入"></a>复数的性质以及单位根的引入</h4><p>先来回答上面的问题。</p>
+<p>想我们这种小蒟蒻只会代入人畜无害的有理数，但这对计算无益。</p>
+<p>但这时，有一位搞复数的$\texttt{dalao}$横空出世，他就是傅里叶。</p>
+<p>这人啊，把单位根代入多项式想求点值表达，可是由于单位根有一些优秀的性质，就可以分治做到$O(n\log n)$。</p>
+<p>接着，我们来介绍复数。</p>
 
       
     </div>
@@ -699,7 +706,7 @@ $$\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FFT"><span class="nav-number">1.</span> <span class="nav-text">FFT</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FFT"><span class="nav-number">1.</span> <span class="nav-text">FFT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#texttt-DFT-IDFT-的思想"><span class="nav-number">1.1.</span> <span class="nav-text">$\texttt{DFT,IDFT}$的思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复数的性质以及单位根的引入"><span class="nav-number">1.2.</span> <span class="nav-text">复数的性质以及单位根的引入</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -733,7 +740,7 @@ $$\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.1k</span>
+    <span title="Site words total count">52.5k</span>
   
 </div>
 
