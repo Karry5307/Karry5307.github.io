@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="多项式，爽！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-21T02:21:32.976Z">
+<meta property="og:updated_time" content="2019-07-21T07:18:51.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -369,6 +369,10 @@
         
 
         <div class="post-meta">
+          
+         <i class="fa fa-thumb-tack"></i> 
+         <font color=8E44AD>置顶</font> 
+         <span class="post-meta-divider">|</span> 
          
           <span class="post-time">
             
@@ -420,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  783
                 </span>
               
 
@@ -436,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  3
                 </span>
               
             </div>
@@ -460,49 +464,44 @@
         <p><del>多项式，爽！</del><br><a id="more"></a></p>
 <h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><p>FFT，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求<strong>卷积</strong>的方法。</p>
 <p>卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。</p>
-<p>形如$y_n=\sum\limits_{i}x_ih_{n-i}$（表示所有$x_i$和$h_{n-i}$有意义时$x_i$）的式子，将$y$称为$xh$的卷积。</p>
+<p>形如$h_n=\sum\limits_{i}f_ig_{n-i}$的式子，将$h$称为$f$和$g$的卷积。</p>
 <p>但是这个东西有一个更直观的名字：<strong>多项式乘法</strong>！</p>
-<p>为什么呢？可以看一个直观的解析。</p>
-<p>比如说，设$f(x)=1x^2+3x-1,g(x)=3x^2+1x-5$计算$f(x)g(x)$（这里故意加上了这个系数）。</p>
-<p>原式$=1x^2(3x^2+1x-5)+3x(3x^2+1x-5)-1(3x^2+1x-5)$</p>
-<p>$\quad {=(1\times 3)x^4+(1\times 1+3\times 3)x^3+[1\times -5+3\times 1+(-1)\times(-5)]x^2+}$</p>
-<p>$\quad\quad[3\times -5+(-1)\times 1]x+(-1)\times (-5)$。</p>
-<p>抽出$x^2$项，将$f(x)$和$g(x)$的系数看做$x$和$h$，结果的系数看做$y$，其中$x_k$表示$x$这个多项式的$x^k$的系数（其实这个数列$x$叫做多项式$x$的系数数列），那么有：</p>
-<p>$y_2=x_0h_2+x_1h_1+x_2h_0$</p>
-<p>$\quad=\sum\limits_{i}x_ih_{2-i}$</p>
-<p>有没有发现这是一个卷积的形式！</p>
-<p>再试别的一些多项式，会发现抽出任何项都会发现是卷积的形式。</p>
-<p>为什么呢？</p>
-<p>考虑$y_k$的求法，即$y_kx^k$是怎么得到的。</p>
-<p>首先，它只能是一些$x_ix^i$和$h_jx^j$的乘积组成的。（不能由一个多项式的两个单项式的乘积转移而来，还有，这里的$x$应该不会搞混吧）</p>
-<p>其次，$x_ix^i$和$h_jx^j$的乘积是一个次数为$k$的单项式。</p>
-<p>所以，它只能由$x_0x^0\cdot h_kx^k,x_1x^1\cdot h_{k-1}x^{k-1}\cdots$得到。</p>
-<p>而$y_kx^k$正好是这些多项式的和。</p>
-<p>所以，$y_kx^k=\sum\limits_{i=0}^kx_ix^i\cdot h_{k-i}x^{k-i}$</p>
-<p>于是自然有<script type="math/tex">y_k=\sum\limits_{i=0}^{k}x_ih_{k-i}</script></p>
-<p>这就是一个卷积的形式啊！</p>
-<p>于是，我们可以显然的知道，<strong>多项式乘法就是卷积</strong>。</p>
-<p>回到正题，先定义几个符号：</p>
-<p>$F(x)$代表一个多项式，叫做“多项式$F$”。</p>
-<p>比如说，设$F(x)=x^3+x^2-1$，如果以后说$x^3+x^2-1$，就直接提$F(x)$就好啦。</p>
-<p>于是开始进入多项式乘法这个问题。</p>
-<p>如果让你把两个$n$次多项式$F(x)$与$G(x)$乘起来，怎么办？</p>
-<p>你首先所想到的，肯定是像上面那样，把两个多项式暴力地乘起来。</p>
-<p>但是，这样做时间复杂度是多少呢？</p>
-<p>我每一次从$F(x)$中拿出一个单项式与$G(x)$相乘，时间复杂度是$O(n)$的，但是$F(x)$从$x^0$到$x^n$有$n+1$个单项式，所以总的来说是$O(n^2)$的。</p>
-<p>所以说，有没有更快一点的方法呢？</p>
-<p>还真有！！</p>
-<p>首先看一个问题。</p>
-<p>给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求F(x)呢？</p>
-<p>先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？</p>
-<p>比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有：</p>
-<script type="math/tex; mode=display">\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
+<p>为什么呢？这里解释一下。</p>
+<p>比如说有两个$n$次的多项式$F(x)$和$G(x)$，它们乘起来为$H(x)$，这些多项式的系数数列依次为$f,g,h$，有</p>
+<script type="math/tex; mode=display">h_i=\sum\limits_{j}f_jg_{i-j}</script><p>为什么呢？</p>
+<p>众所周知，$H(x)=\sum\limits_{i=0}^{n}h_ix^i$。</p>
+<p>为了凑一个$x^i$，如果$F(x)$出$f_jx^j$的话，那么$G(x)$只能出$g_{i-j}x^{i-j}$。</p>
+<p>所以，$h_ix^i=\sum\limits_{j=0}^{i}f_jx^j\cdot g_{i-j}x^{i-j}$</p>
+<p>把$x^i$约去，有</p>
+<script type="math/tex; mode=display">h_i=\sum\limits_{j}f_jg_{i-j}$$。
+
+然而，普通的多项式乘法要对$F(x)$和$G(x)$每一项进行相乘，时间复杂度为$O(n^2)$，布星。
+
+所以说，有没有更快一点的方法呢？
+
+还真有！！
+
+首先看一个问题。
+
+给定有$n$个点$(a_i,F(a_i))$。$F(x)$是几次多项式呢？怎么求$F(x)$呢？
+
+先考虑一个简单的，比如说给出了两个点,$(0,1)$和$(1,3)$，怎么求$F(x)$？
+
+比如说，假设$F(x)$是一次的。那么设$F(x)=a_0x+a_1$，于是将$(0,1),(1,3)$代入$F(x)$，那么有：
+
+$$\begin{cases}a_1=1 \\ a_0+a_1=3\end{cases}</script><p>解得</p>
 <script type="math/tex; mode=display">\begin{cases}a_0=2 \\ a_1=1\end{cases}</script><p>而当$F(x)$为二次多项式时，即$F(x)=a_0x^2+a_1x+a_2$，那么可列出如下式子：</p>
 <script type="math/tex; mode=display">\begin{cases}a_2=1 \\ a_0+a_1+a_2=3\end{cases}</script><p>这样子我们最多得到</p>
 <script type="math/tex; mode=display">\begin{cases}a_0+a_1=2 \\ a_2=3\end{cases}</script><p>$F(x)$为二次多项式就已经不能精确解出系数的值了，那么更高次多项式更不行了。</p>
 <p>所以说给两个点的值能确定一个一次多项式。</p>
 <p>可以尝试一下$3$个点，它是可以确定一个二次多项式的（可能不能确定一个一次多项式，因为方程组可能无解）。</p>
 <p>根据以上的实验<del>和常识</del>可知，$n$个点最多确定一个$n-1$次多项式。</p>
+<p>那么我们现在理论上证明一下。</p>
+<p>首先看一个小问题。</p>
+<p>给定$m$个值$a_i$和$n$次多项式$F(x)$，求$F(a_i)$。</p>
+<p>考虑把它写成矩阵的形式，有</p>
+<script type="math/tex; mode=display">\begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}\times\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}\times \begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}^{-1}</script><p>只有在右边的矩阵为方阵，即为范德蒙德矩阵时它才可能有逆。</p>
 <p>所以说，一个$n-1$次多项式与它的曲线上的$n$个点的集合是等价的，而这个集合，叫做多项式的<strong>点值表达</strong>。</p>
 <p>下面说点值表达是怎么优化多项式乘法的。</p>
 
@@ -734,7 +733,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.4k</span>
+    <span title="Site words total count">52.1k</span>
   
 </div>
 
