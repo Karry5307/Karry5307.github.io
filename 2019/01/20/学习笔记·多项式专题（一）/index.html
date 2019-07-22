@@ -91,8 +91,7 @@
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/2.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/3.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/4.JPG">
-<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/5.JPG">
-<meta property="og:updated_time" content="2019-07-21T14:19:04.214Z">
+<meta property="og:updated_time" content="2019-07-22T14:55:07.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -548,13 +547,11 @@
 <script type="math/tex; mode=display">\vert\overrightarrow{OC}\vert=\sqrt{(ac-bd)^2+(bc+ad)^2}</script><p>所以，只需要证明$(ac-bd)^2+(bc+ad)^2=(a^2+b^2)(c^2+d^2)$</p>
 <p>左边展开，有</p>
 <script type="math/tex; mode=display">(ac-bd)^2+(bc+ad)^2=a^2c^2+a^2d^2+b^2c^2+b^2d^2=(a^2+c^2)(b^2+d^2)</script><p>命题得证。</p>
-<p>要想证明第二个命题，我们得取点$D(1,0)$，连接$BC,AO,DO$，如图，则</p>
-<p><img src="/2019/01/20/学习笔记·多项式专题（一）/5.JPG" alt=""></p>
-<p>只需证$\triangle ODA\sim\triangle OBC$即可。</p>
-<p>由于$OA\cdot OB=OC,OD=1$，那么有</p>
-<script type="math/tex; mode=display">\frac{OC}{OB}=\frac{OA}{OD}</script><p>只需证明$\frac{OA}{AD}=\frac{OC}{CB}$即可，令$ac-bd=p,bc+ad=q$，则</p>
-<script type="math/tex; mode=display">\frac{OA}{AD}=\frac{\sqrt{a^2+b^2}}{b}</script><script type="math/tex; mode=display">\frac{OC}{CB}=\frac{\sqrt{p^2+q^2}}{\sqrt{(c-p)^2+(d-q)^2}}</script><p>分母有理化，有</p>
-<script type="math/tex; mode=display">\frac{OC}{CB}=\frac{\sqrt{p^2+q^2}\cdot\sqrt{(c-p)^2+(d-q)^2}}{(c-p)^2+(d-q)^2}</script>
+<p>要想证明第二个命题，我们得用一个公式。</p>
+<script type="math/tex; mode=display">\tan (\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}</script><p>暴力拆开，得</p>
+<script type="math/tex; mode=display">\frac{bc+ad}{ac-bd}=\frac{\frac{b}{a}+\frac{d}{c}}{1-\frac{bd}{ac}}</script><p>右边展开，有</p>
+<script type="math/tex; mode=display">\frac{\frac{b}{a}+\frac{d}{c}}{1-\frac{bd}{ac}}=\frac{\frac{bc+ad}{ac}}{\frac{ac-bd}{ac}}=\frac{bc+ad}{ac-bd}</script><p>命题得证。</p>
+
       
     </div>
     
