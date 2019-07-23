@@ -91,7 +91,8 @@
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/2.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/3.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/4.JPG">
-<meta property="og:updated_time" content="2019-07-22T14:55:07.288Z">
+<meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/5.JPG">
+<meta property="og:updated_time" content="2019-07-23T13:51:59.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k
+                  2.5k
                 </span>
               
 
@@ -445,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  10
                 </span>
               
             </div>
@@ -467,7 +468,7 @@
 
       
         <p><del>多项式，爽！</del><br><a id="more"></a></p>
-<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><h4 id="texttt-DFT-IDFT-的思想"><a href="#texttt-DFT-IDFT-的思想" class="headerlink" title="$\texttt{DFT,IDFT}$的思想"></a>$\texttt{DFT,IDFT}$的思想</h4><p>$\texttt{FFT}$，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求<strong>卷积</strong>的方法。</p>
+<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><h4 id="卷积与-texttt-DFT-IDFT-的思想"><a href="#卷积与-texttt-DFT-IDFT-的思想" class="headerlink" title="卷积与$\texttt{DFT,IDFT}$的思想"></a>卷积与$\texttt{DFT,IDFT}$的思想</h4><p>$\texttt{FFT}$，即快速傅里叶变换（英文名$\texttt{Fast Fourier Transform}$），是一个用来求<strong>卷积</strong>的方法。</p>
 <p>卷积这个词以后会经常用到，所以先普及一下这个词到底是什么意思。</p>
 <p>形如$h_n=\sum\limits_{i}f_ig_{n-i}$的式子，将$h$称为$f$和$g$的卷积。</p>
 <p>但是这个东西有一个更直观的名字：<strong>多项式乘法</strong>！</p>
@@ -491,13 +492,16 @@
 <script type="math/tex; mode=display">\begin{cases}a_0+a_1=2 \\ a_2=3\end{cases}</script><p>$F(x)$为二次多项式就已经不能精确解出系数的值了，那么更高次多项式更不行了。</p>
 <p>所以说给两个点的值能确定一个一次多项式。</p>
 <p>可以尝试一下$3$个点，它是可以确定一个二次多项式的（可能不能确定一个一次多项式，因为方程组可能无解）。</p>
-<p>根据以上的实验<del>和常识</del>可知，$n$个点最多确定一个$n-1$次多项式。</p>
+<p>根据以上的实验<del>和常识</del>可知，$n$个点<strong>最多</strong>确定一个$n-1$次多项式。</p>
 <p>那么我们现在理论上证明一下。</p>
 <p>首先看一个小问题。</p>
 <p>给定$m$个值$a_i$和$n$次多项式$F(x)$，求$F(a_i)$。</p>
 <p>考虑把它写成矩阵的形式，有</p>
 <script type="math/tex; mode=display">\begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}\times\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}</script><p>所以</p>
 <script type="math/tex; mode=display">\begin{pmatrix}f_0 \\ \vdots \\ f_n \end{pmatrix}=\begin{pmatrix}F(a_1) \\ \vdots \\ F(a_n) \end{pmatrix}\times \begin{pmatrix}1  & \cdots & a_1^n\\ \vdots & \ddots &  \vdots \\ 1 & \cdots & a_m^n \end{pmatrix}^{-1}</script><p>根据基本线代常识，<strong>只有方阵才是可逆矩阵</strong>，所以只有右边的矩阵为方阵，即为范德蒙德矩阵时它才可能有逆，也即可以解出系数数列$f$。</p>
+<p>然而，范德蒙德矩阵吗一定可逆吗？</p>
+<p>由范德蒙德矩阵的行列式公式可知，矩阵可逆当且仅当$a_1,a_2\cdots a_m$两两不等。</p>
+<p>这里就证明了<code>最多</code>这个条件。</p>
 <p>所以$n+1=m$，即$n=m-1$，即确定的多项式为$m-1$次。</p>
 <p>所以说，一个$n-1$次多项式与它的曲线上的$n$个点的集合是等价的，而这个集合，叫做多项式的<strong>点值表达</strong>。</p>
 <p>下面说点值表达是怎么优化多项式乘法的。</p>
@@ -551,7 +555,27 @@
 <script type="math/tex; mode=display">\tan (\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}</script><p>暴力拆开，得</p>
 <script type="math/tex; mode=display">\frac{bc+ad}{ac-bd}=\frac{\frac{b}{a}+\frac{d}{c}}{1-\frac{bd}{ac}}</script><p>右边展开，有</p>
 <script type="math/tex; mode=display">\frac{\frac{b}{a}+\frac{d}{c}}{1-\frac{bd}{ac}}=\frac{\frac{bc+ad}{ac}}{\frac{ac-bd}{ac}}=\frac{bc+ad}{ac-bd}</script><p>命题得证。</p>
-
+<p>这里下发一个<a href="https://www.desmos.com/calculator/11nqysfvyc" target="_blank" rel="noopener">$\texttt{demo}$</a>，以上的图片就是基于它而绘制的。</p>
+<p>于是讲讲<strong>单位根</strong>这种东西。</p>
+<p>首先证明欧拉公式：$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$</p>
+<p>左边泰勒展开，有</p>
+<script type="math/tex; mode=display">e^{\mathrm{i}\theta}=\sum\limits_{j=0}^{\infty}\frac{(\mathrm{i}\theta)^j}{j!}</script><p>右边那东西，直观地看，就是这样的</p>
+<script type="math/tex; mode=display">e^{\mathrm{i}\theta}=1+\mathrm{i}\theta-\frac{\theta^2}{2!}-\frac{\mathrm{i}\theta^3}{3!}+\frac{\theta^4}{4!}+\cdots</script><p>分组，有</p>
+<script type="math/tex; mode=display">e^{\mathrm{i}\theta}=(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots)+\mathrm{i}(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots)</script><p>然后可以发现括号内的东西为$\cos\theta$和$\sin\theta$的麦克劳林级数，于是命题得证。</p>
+<p>接着可以看到，复数$\cos\theta+\mathrm{i}\sin\theta$所对应的复平面的点为$(\cos\theta,\sin\theta)$，这个点有一个特殊的性质，那就是</p>
+<p>无论$\theta$为多少，这个点总在一个半径为$1$的单位圆上！</p>
+<p>不仅如此，我们还有一个小小的推论，就是$(\cos\theta+\mathrm{i}\sin\theta)^n=\cos(n\theta)+\mathrm{i}\sin(n\theta)$</p>
+<p>然后要解一个有$n$个解的方程：$z^n=1$，其中$z$为复数。</p>
+<p>我们知道，$z=1$为一合法解，但剩下的解呢？？</p>
+<p>考虑换元做。设$z=a+b\mathrm{i}$，那么它的模长为$\sqrt{a^2+b^2}$，于是$z^n$的模长就为$(\sqrt{a^2+b^2})^n$，而它又要等于$1$，所以，$z$的模长就是$1$了，也即$z$在一个单位圆上。</p>
+<p>所以可设$z=\cos\theta+\mathrm{i}\sin\theta$，所以</p>
+<script type="math/tex; mode=display">z^n=\cos(n\theta)+\mathrm{i}\sin(n\theta)=1+0\mathrm{i}</script><p>所以</p>
+<script type="math/tex; mode=display">\begin{cases}\cos(n\theta)=1 \\ \mathrm{i}\sin(n\theta)=0\end{cases}</script><p><img src="/2019/01/20/学习笔记·多项式专题（一）/5.JPG" alt=""></p>
+<p>在<font color="#c74440">$\cos x$</font>和<font color="2d70b3">$\sin x$</font>的一个周期内，满足上述方程组的$n\theta$只能为$0$。</p>
+<p>所以上述方程组等价于$n\theta=2k\pi$，所以解为</p>
+<script type="math/tex; mode=display">z=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script><p>其中，$0\leq k\leq n-1$。</p>
+<p>这些$z$就被叫做$n$次单位根，记作$\omega_n$，有</p>
+<script type="math/tex; mode=display">\omega_n^k=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script>
       
     </div>
     
@@ -746,7 +770,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FFT"><span class="nav-number">1.</span> <span class="nav-text">FFT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#texttt-DFT-IDFT-的思想"><span class="nav-number">1.1.</span> <span class="nav-text">$\texttt{DFT,IDFT}$的思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复数的性质以及单位根的引入"><span class="nav-number">1.2.</span> <span class="nav-text">复数的性质以及单位根的引入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FFT"><span class="nav-number">1.</span> <span class="nav-text">FFT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卷积与-texttt-DFT-IDFT-的思想"><span class="nav-number">1.1.</span> <span class="nav-text">卷积与$\texttt{DFT,IDFT}$的思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复数的性质以及单位根的引入"><span class="nav-number">1.2.</span> <span class="nav-text">复数的性质以及单位根的引入</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -780,7 +804,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.3k</span>
+    <span title="Site words total count">53.8k</span>
   
 </div>
 
