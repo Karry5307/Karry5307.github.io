@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/3.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/4.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/5.JPG">
-<meta property="og:updated_time" content="2019-07-23T13:51:59.474Z">
+<meta property="og:updated_time" content="2019-07-23T14:24:43.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.5k
+                  2.6k
                 </span>
               
 
@@ -446,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10
+                  11
                 </span>
               
             </div>
@@ -570,12 +570,24 @@
 <p>考虑换元做。设$z=a+b\mathrm{i}$，那么它的模长为$\sqrt{a^2+b^2}$，于是$z^n$的模长就为$(\sqrt{a^2+b^2})^n$，而它又要等于$1$，所以，$z$的模长就是$1$了，也即$z$在一个单位圆上。</p>
 <p>所以可设$z=\cos\theta+\mathrm{i}\sin\theta$，所以</p>
 <script type="math/tex; mode=display">z^n=\cos(n\theta)+\mathrm{i}\sin(n\theta)=1+0\mathrm{i}</script><p>所以</p>
-<script type="math/tex; mode=display">\begin{cases}\cos(n\theta)=1 \\ \mathrm{i}\sin(n\theta)=0\end{cases}</script><p><img src="/2019/01/20/学习笔记·多项式专题（一）/5.JPG" alt=""></p>
+<script type="math/tex; mode=display">\begin{cases}\cos(n\theta)=1 \\ \sin(n\theta)=0\end{cases}</script><p><img src="/2019/01/20/学习笔记·多项式专题（一）/5.JPG" alt=""></p>
 <p>在<font color="#c74440">$\cos x$</font>和<font color="2d70b3">$\sin x$</font>的一个周期内，满足上述方程组的$n\theta$只能为$0$。</p>
 <p>所以上述方程组等价于$n\theta=2k\pi$，所以解为</p>
 <script type="math/tex; mode=display">z=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script><p>其中，$0\leq k\leq n-1$。</p>
-<p>这些$z$就被叫做$n$次单位根，记作$\omega_n$，有</p>
-<script type="math/tex; mode=display">\omega_n^k=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script>
+<p>这些$z$就被叫做$n$次单位根，第$i$个记作$\omega_n^i$，有</p>
+<script type="math/tex; mode=display">\omega_n^k=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script><p>接着是单位根的性质（<del>满屏三角函数来袭</del>）</p>
+<ul>
+<li>对于任意的$n$，都有$\omega_n^0=1$</li>
+</ul>
+<p>显然的，有</p>
+<script type="math/tex; mode=display">\omega_n^0=\cos 0+\mathrm{i}\sin 0=1</script><ul>
+<li>消去引理：$\omega_{dn}^{dk}=\omega_n^k$</li>
+</ul>
+<p>左边暴力搞一搞，有</p>
+<script type="math/tex; mode=display">\omega_{dn}^{dk}=\cos(\frac{2dk\pi}{dn})+\mathrm{i}\sin(\frac{2dk\pi}{dn})=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})=\omega_n^k</script><ul>
+<li><strong>折半引理</strong></li>
+</ul>
+
       
     </div>
     
@@ -804,7 +816,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.8k</span>
+    <span title="Site words total count">53.9k</span>
   
 </div>
 
