@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/3.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/4.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/5.JPG">
-<meta property="og:updated_time" content="2019-07-24T13:40:09.390Z">
+<meta property="og:updated_time" content="2019-07-24T14:14:05.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.8k
+                  2.9k
                 </span>
               
 
@@ -446,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  12
                 </span>
               
             </div>
@@ -575,7 +575,8 @@
 <p>所以上述方程组等价于$n\theta=2k\pi$，所以解为</p>
 <script type="math/tex; mode=display">z=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script><p>其中，$0\leq k\leq n-1$。</p>
 <p>这些$z$就被叫做$n$次单位根，第$i$个记作$\omega_n^i$，有</p>
-<script type="math/tex; mode=display">\omega_n^k=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script><p>接着是单位根的性质（<del>满屏三角函数来袭</del>）</p>
+<script type="math/tex; mode=display">\omega_n^k=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})</script><p>这里下发一个帮助理解的<a href="https://www.desmos.com/calculator/6ymz2anh0x" target="_blank" rel="noopener">$\texttt{demo}$</a></p>
+<p>接着是单位根的性质（<del>满屏三角函数来袭</del>）</p>
 <ul>
 <li>对于任意的$n$，都有$\omega_n^0=1$</li>
 </ul>
@@ -592,7 +593,13 @@
 <script type="math/tex; mode=display">\cos(\frac{2k\pi+n\pi}{n})=\cos(\frac{2k\pi}{n}+\pi)=-\cos(\frac{2k\pi}{n})</script><p>和</p>
 <script type="math/tex; mode=display">\sin(\frac{2k\pi+n\pi}{n})=\sin(\frac{2k\pi}{n}+\pi)=-\sin(\frac{2k\pi}{n})</script><p>这样一来，就有</p>
 <script type="math/tex; mode=display">\cos(\frac{2k\pi+n\pi}{n})+\mathrm{i}\sin(\frac{2k\pi+n\pi}{n})=-(\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n}))=-\omega_n^k</script><p>命题得证。</p>
-
+<ul>
+<li>求和引理：$\sum\limits_{i=0}^{n-1}\omega_n^i=0$</li>
+</ul>
+<p>先证一个小小的引理：$\omega_n^k=(\omega_n^1)^k$</p>
+<p>证明如下</p>
+<script type="math/tex; mode=display">\omega_n^k=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})=e^{\frac{2\pi i}{n}\cdot k}=(e^\frac{2\pi i}{n})^k=(\omega_n^1)^k</script><p>所以，有</p>
+<script type="math/tex; mode=display">\sum\limits_{i=0}^{n-1}\omega_n^i=\sum\limits_{i=0}^{n-1}(\omega_n^1)^i=\frac{(\omega_n^1)^n-1}{\omega_n^1-1}=\frac{\omega_n^n-1}{\omega_n^1-1}=\frac{\omega_n^0-1}{\omega_n^1-1}=0</script>
       
     </div>
     
@@ -821,7 +828,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.7k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 

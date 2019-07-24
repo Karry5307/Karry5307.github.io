@@ -87,14 +87,10 @@
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
 <meta property="og:description" content="网络流是一种解决各种神仙问题的算法，通过合理地建图，可以解决各类神仙问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2018/09/24/5ba8c620b7987.png">
-<meta property="og:image" content="https://i.loli.net/2018/09/24/5ba8d1fa39e82.png">
-<meta property="og:image" content="https://i.loli.net/2018/09/24/5ba8d42f3ac8e.png">
-<meta property="og:updated_time" content="2019-07-21T02:21:46.225Z">
+<meta property="og:updated_time" content="2019-07-24T14:14:07.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·网络流">
 <meta name="twitter:description" content="网络流是一种解决各种神仙问题的算法，通过合理地建图，可以解决各类神仙问题。">
-<meta name="twitter:image" content="https://i.loli.net/2018/09/24/5ba8c620b7987.png">
 
 
 
@@ -424,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  293
+                  36
                 </span>
               
 
@@ -461,8 +457,8 @@
       
 
       
-        <p>网络流是一种解决各种神仙问题的算法，通过合理地建图，可以解决各类神仙问题。<br><a id="more"></a><br>网络流的概念也许会有点难懂，于是就先上几幅图，借助水流理解。<br>众所周知，你家的水是从自来水厂通过管道流过来的，假设s是自来水厂，t是你家，1,2,3是中转节点，管道连接如图所示。<br><img src="https://i.loli.net/2018/09/24/5ba8c620b7987.png" alt=""><br>每条边上的边权是该管道允许的最大流量，即容量，如果流进来的水流流量超过容量，管道就会炸掉，这既不是自来水厂所期望的事，也不是你家所期望的事。<br>现在，你希望自来水厂到你家的水最多，所以尝试找出一条s-&gt;t路径，比如这个<br><img src="https://i.loli.net/2018/09/24/5ba8d1fa39e82.png" alt=""><br>对于这条路径，可以通过的可行流为10，所以将这些边的可行流-10，像这样：<br><img src="https://i.loli.net/2018/09/24/5ba8d42f3ac8e.png" alt=""><br>对于这个网络，一次一次找s-&gt;t路径是可以得到最大流的，但对于别的网络呢？流错了怎么办？<br>这里给一个神仙技巧——加反向边，像这样</p>
-
+        <p>网络流是一种解决各种神仙问题的算法，通过合理地建图，可以解决各类神仙问题。<br><a id="more"></a></p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3>
       
     </div>
     
@@ -588,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -641,6 +646,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -668,7 +689,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.7k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 
