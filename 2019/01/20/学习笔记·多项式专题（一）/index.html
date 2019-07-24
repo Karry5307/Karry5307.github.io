@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/3.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/4.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2019/01/20/学习笔记·多项式专题（一）/5.JPG">
-<meta property="og:updated_time" content="2019-07-23T14:24:43.681Z">
+<meta property="og:updated_time" content="2019-07-24T13:40:09.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·多项式专题（一）">
 <meta name="twitter:description" content="多项式，爽！">
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k
+                  2.8k
                 </span>
               
 
@@ -585,8 +585,13 @@
 </ul>
 <p>左边暴力搞一搞，有</p>
 <script type="math/tex; mode=display">\omega_{dn}^{dk}=\cos(\frac{2dk\pi}{dn})+\mathrm{i}\sin(\frac{2dk\pi}{dn})=\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n})=\omega_n^k</script><ul>
-<li><strong>折半引理</strong></li>
+<li><strong>折半引理</strong>：$\omega_n^{k+\frac{n}{2}}=-\omega_n^k$，其中$n$为偶数。</li>
 </ul>
+<p>左边暴力搞一搞，有</p>
+<script type="math/tex; mode=display">\omega_n^{k+\frac{n}{2}}=\cos(\frac{2(k+\frac{n}{2})\pi}{n})+\mathrm{i}\sin(\frac{2(k+\frac{n}{2})\pi}{n})=\cos(\frac{2k\pi+n\pi}{n})+\mathrm{i}\sin(\frac{2k\pi+n\pi}{n})</script><p>于是有</p>
+<script type="math/tex; mode=display">\cos(\frac{2k\pi+n\pi}{n})=\cos(\frac{2k\pi}{n}+\pi)=-\cos(\frac{2k\pi}{n})</script><p>和</p>
+<script type="math/tex; mode=display">\sin(\frac{2k\pi+n\pi}{n})=\sin(\frac{2k\pi}{n}+\pi)=-\sin(\frac{2k\pi}{n})</script><p>这样一来，就有</p>
+<script type="math/tex; mode=display">\cos(\frac{2k\pi+n\pi}{n})+\mathrm{i}\sin(\frac{2k\pi+n\pi}{n})=-(\cos(\frac{2k\pi}{n})+\mathrm{i}\sin(\frac{2k\pi}{n}))=-\omega_n^k</script><p>命题得证。</p>
 
       
     </div>
@@ -816,7 +821,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.6k</span>
+    <span title="Site words total count">56.7k</span>
   
 </div>
 
