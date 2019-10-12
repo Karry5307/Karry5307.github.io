@@ -99,8 +99,8 @@
         <tag>LCA</tag>
         <tag>DP</tag>
         <tag>洛谷</tag>
-        <tag>树链剖分</tag>
         <tag>虚树</tag>
+        <tag>树链剖分</tag>
         <tag>树形dp</tag>
       </tags>
   </entry>
@@ -157,8 +157,8 @@
     <url>%2F2019%2F04%2F05%2F%E3%80%8CLuogu-P3804%E3%80%8D%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%2F</url>
     <content type="text"><![CDATA[给定一个只用小写字母组成的串$S$，求出$S$中所有出现次数大于$1$的子串的出现次数与它的长度的乘积的最大值。 $\texttt{Data Range:}\vert S\vert \leq 10^6$ 链接Luogu P3804 题解首先把后缀自动机建出来，然后考虑对每个自动机上的节点求一遍$\texttt{size}$，答案就是$\max\{len\times size\}$啦qwq 顺便说一句，这种方法会在后面的文章上频繁使用，注意！ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;typedef long long int li;const ll MAXN=2e6+51;ll length,k,cur;li res;ll prefix[MAXN],barrel[MAXN],size[MAXN];char str[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace SuffixAutomaton&#123; const ll sigmaSize=27; struct Node&#123; ll son[sigmaSize]; ll fa,length; &#125;; struct SuffixAutomaton&#123; Node nd[MAXN]; ll last,tot; SuffixAutomaton() &#123; last=tot=1; &#125; inline void extend(ll ch) &#123; ll p=last,nxt=++tot,nxt2,k; last=nxt,nd[nxt].length=nd[p].length+1; while(p&amp;&amp;!nd[p].son[ch]) &#123; nd[p].son[ch]=nxt,p=nd[p].fa; &#125; if(!p) &#123; nd[nxt].fa=1; &#125; else &#123; k=nd[p].son[ch]; if(nd[p].length+1==nd[k].length) &#123; nd[nxt].fa=k; &#125; else &#123; nxt2=++tot,nd[nxt2]=nd[k]; nd[nxt2].length=nd[p].length+1,nd[k].fa=nd[nxt].fa=nxt2; while(p&amp;&amp;nd[p].son[ch]==k) &#123; nd[p].son[ch]=nxt2,p=nd[p].fa; &#125; &#125; &#125; size[nxt]=1; &#125; &#125;;&#125;SuffixAutomaton::SuffixAutomaton sam;int main()&#123; scanf("%s",str+1); length=strlen(str+1); for(register int i=1;i&lt;=length;i++) &#123; sam.extend(str[i]-97); &#125; k=sam.tot; for(register int i=1;i&lt;=k;i++) &#123; prefix[sam.nd[i].length]++; &#125; for(register int i=1;i&lt;=k;i++) &#123; prefix[i]+=prefix[i-1]; &#125; for(register int i=1;i&lt;=k;i++) &#123; barrel[prefix[sam.nd[i].length]--]=i; &#125; for(register int i=k;i;i--) &#123; cur=barrel[i]; size[sam.nd[cur].fa]+=size[cur]; if(size[cur]&gt;1) &#123; res=max(res,(li)size[cur]*sam.nd[cur].length); &#125; &#125; printf("%lld",res);&#125;]]></content>
       <tags>
-        <tag>字符串</tag>
         <tag>洛谷</tag>
+        <tag>字符串</tag>
         <tag>后缀自动机，SAM</tag>
       </tags>
   </entry>
@@ -171,8 +171,8 @@
         <tag>图论</tag>
         <tag>强连通分量</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>JSOI</tag>
+        <tag>各省省选</tag>
         <tag>2-SAT</tag>
       </tags>
   </entry>
@@ -182,8 +182,8 @@
     <content type="text"><![CDATA[给定一个串$S$，求$S$中最长的子串$T$，使得可以将$T$分为两个长度大于等于$1$的回文串，只需输出$T$的长度即可。 $\texttt{Data Range:}2\leq \vert S\vert \leq 10^5$很明显的回文树题。只是因为窝不会马拉车 考虑枚举分的位置，假设以这个位置结尾的回文子串为$X$，这个位置开头的回文子串为$Y$，那么有 贪心地考虑，如果这个$X$或者$Y$的长度不是最大的话，那么它绝对不是答案，因为$X$或者$Y$还可以继续扩展。所以，这个位置的答案为$\max\{\vert X\vert +\vert Y\vert\}$。 于是预处理出位置$i$的$pre_i=\max\{\vert X\vert\}$和$suf_i=\max\{\vert Y\vert\}$。 然后很明显的扫一遍，求出$\max\{pre_i+suf_{i+1}\}$就好了。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e5+51;ll length,res;ll prefix[MAXN],suffix[MAXN]; char str[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace PalindromicTree&#123; const ll sigmaSize=27; struct Node&#123; ll son[sigmaSize]; ll fa,length; &#125;; struct PalindromicTree&#123; Node nd[MAXN]; ll last,tot; PalindromicTree() &#123; nd[0].fa=nd[1].fa=1; nd[tot=1].length=-1; &#125; inline void extend(ll ch,ll length,char *str) &#123; ll p=last,nxt,k; while(str[length-nd[p].length-1]!=str[length]) &#123; p=nd[p].fa; &#125; if(!nd[p].son[ch]) &#123; nxt=++tot,k=nd[p].fa; nd[nxt].length=nd[p].length+2; while(str[length-nd[k].length-1]!=str[length]) &#123; k=nd[k].fa; &#125; nd[nxt].fa=nd[k].son[ch],nd[p].son[ch]=nxt; &#125; last=nd[p].son[ch]; &#125; &#125;;&#125;PalindromicTree::PalindromicTree pt,pt2;int main()&#123; scanf("%s",str+1),length=strlen(str+1); for(register int i=1;i&lt;=length;i++) &#123; pt.extend(str[i]-97,i,str),prefix[i]=pt.nd[pt.last].length; &#125; reverse(&amp;str[1],&amp;str[length+1]); for(register int i=1;i&lt;=length;i++) &#123; pt2.extend(str[i]-97,i,str),suffix[length-i+1]=pt2.nd[pt2.last].length; &#125; for(register int i=1;i&lt;length;i++) &#123; res=max(res,prefix[i]+suffix[i+1]); &#125; printf("%d",res);&#125;]]></content>
       <tags>
         <tag>BZOJ</tag>
-        <tag>字符串</tag>
         <tag>洛谷</tag>
+        <tag>字符串</tag>
         <tag>回文树</tag>
       </tags>
   </entry>
@@ -197,8 +197,8 @@
         <tag>FFT</tag>
         <tag>NTT</tag>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>组合数学</tag>
+        <tag>各省省选</tag>
         <tag>HEOI</tag>
         <tag>TJOI</tag>
         <tag>数论，数学</tag>
@@ -275,8 +275,8 @@
         <tag>洛谷</tag>
         <tag>模板</tag>
         <tag>数论，数学</tag>
-        <tag>微积分初步</tag>
         <tag>倍增</tag>
+        <tag>微积分初步</tag>
       </tags>
   </entry>
   <entry>
@@ -418,8 +418,8 @@
         <tag>BZOJ</tag>
         <tag>洛谷</tag>
         <tag>HAOI</tag>
-        <tag>各省省选</tag>
         <tag>CodeVS</tag>
+        <tag>各省省选</tag>
         <tag>数论</tag>
       </tags>
   </entry>
@@ -440,9 +440,9 @@
     <content type="text"><![CDATA[给定一个数列$a$，对于$a_i$，寻找一个$a_j$使得$i&gt;j$且$\vert a_i-a_j\vert$最小。 题解一道近乎Splay裸题的题。很显然可以将最小的$\vert a_i-a_j\vert$拆成$a_i$与其前驱的差和与其后继的差的最小值。所以说就可以用Splay维护啦qwq。论手贱，你是比不过我的，今天又把while打成if啦 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=4e4+51,inf=0x3f3f3f3f;ll cnt,num,res,prv,nxt;inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;namespace Splay&#123; struct Node&#123; ll fa,val,size,temp; ll ch[2]; inline void reset(ll val=0,ll fa=0) &#123; this-&gt;fa=fa,this-&gt;val=val,this-&gt;temp=this-&gt;size=1; this-&gt;ch[0]=this-&gt;ch[1]=0; &#125; &#125;; struct Splay&#123; ll tot,root; Node nd[MAXN]; inline bool id(ll x) &#123; return nd[nd[x].fa].ch[1]==x; &#125; inline void update(ll x) &#123; nd[x].size=nd[nd[x].ch[0]].size+nd[nd[x].ch[1]].size+nd[x].temp; &#125; inline void connect(ll x,ll fa,ll dir) &#123; nd[x].fa=fa,nd[fa].ch[dir]=x; &#125; inline void rotate(ll x) &#123; ll fa=nd[x].fa,gfa=nd[fa].fa,dir=id(x); connect(x,gfa,id(fa)); connect(nd[x].ch[dir^1],fa,dir); connect(fa,x,dir^1); update(fa),update(x); &#125; inline void splay(ll cur,ll target) &#123; while(nd[cur].fa!=target) &#123; ll fa=nd[cur].fa,gfa=nd[fa].fa; if(gfa!=target) &#123; rotate(id(cur)^id(fa)?cur:fa); &#125; rotate(cur); &#125; if(!target) &#123; root=cur; &#125; &#125; inline void insert(ll val) &#123; ll cur=root,fa=0; while(cur&amp;&amp;nd[cur].val!=val) &#123; fa=cur,cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; if(cur) &#123; nd[cur].temp++; &#125; else &#123; cur=++tot; if(fa) &#123; nd[fa].ch[val&gt;nd[fa].val]=cur; &#125; nd[cur].reset(val,fa); &#125; splay(cur,0); &#125; inline void find(ll val) &#123; ll cur=root; if(!cur) &#123; return; &#125; while(nd[cur].ch[val&gt;nd[cur].val]&amp;&amp;val!=nd[cur].val) &#123; cur=nd[cur].ch[val&gt;nd[cur].val]; &#125; splay(cur,0); &#125; inline ll prev(ll val) &#123; find(val); ll cur=root; if(nd[cur].val&lt;=val) &#123; return nd[cur].val; &#125; cur=nd[cur].ch[0]; while(nd[cur].ch[1]) &#123; cur=nd[cur].ch[1]; &#125; return nd[cur].val; &#125; inline ll next(ll val) &#123; find(val); ll cur=root; if(nd[cur].val&gt;=val) &#123; return nd[cur].val; &#125; cur=nd[cur].ch[1]; while(nd[cur].ch[0]) &#123; cur=nd[cur].ch[0]; &#125; return nd[cur].val; &#125; &#125;;&#125;Splay::Splay splay;int main()&#123; cnt=read(); splay.insert(inf),splay.insert(-inf); splay.insert(res=read()); for(register int i=1;i&lt;cnt;i++) &#123; num=read(); prv=splay.prev(num),nxt=splay.next(num); res+=min(num-prv,nxt-num); splay.insert(num); &#125; printf("%d",res);&#125;]]></content>
       <tags>
         <tag>洛谷</tag>
-        <tag>各省省选</tag>
         <tag>平衡树</tag>
         <tag>Splay</tag>
+        <tag>各省省选</tag>
         <tag>HNOI</tag>
       </tags>
   </entry>
@@ -479,8 +479,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -682,9 +682,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
+        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
-        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -696,8 +696,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
       </tags>
   </entry>
   <entry>
@@ -706,8 +706,8 @@
     <content type="text"><![CDATA[网络流是一种解决各种神仙问题的算法，通过合理地建图，可以解决各类神仙问题。 概念]]></content>
       <tags>
         <tag>网络流</tag>
-        <tag>最大流</tag>
         <tag>Dinic</tag>
+        <tag>最大流</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -744,8 +744,8 @@
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>HAOI</tag>
-        <tag>各省省选</tag>
         <tag>树链剖分</tag>
+        <tag>各省省选</tag>
       </tags>
   </entry>
   <entry>
