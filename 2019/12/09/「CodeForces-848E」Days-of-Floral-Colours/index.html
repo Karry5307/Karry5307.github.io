@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CodeForces,多项式,生成函数,FFT,NTT,DP,分治 FFT,BM 算法,线性递推,微积分初步,思维题," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,21 +79,22 @@
 
 
 
-<meta name="description" content="呜呜呜，不会解释题意">
-<meta name="keywords" content="CodeForces,多项式,生成函数,FFT,NTT,DP,分治 FFT,BM 算法,线性递推,微积分初步,思维题">
+<meta name="description" content="我的翻译解释的挺详细的啦qwq（主要是这题不好写简要题面，建议对着我的翻译看） $\texttt{Data Range:}3\leq n\leq 5\times 10^4$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「CodeForces 848E」Days of Floral Colours">
+<meta property="og:title" content="Karry5307&#39;s Blog">
 <meta property="og:url" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="呜呜呜，不会解释题意">
+<meta property="og:description" content="我的翻译解释的挺详细的啦qwq（主要是这题不好写简要题面，建议对着我的翻译看） $\texttt{Data Range:}3\leq n\leq 5\times 10^4$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/1.png">
-<meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/2.png">
-<meta property="og:updated_time" content="2019-12-09T14:14:57.843Z">
+<meta property="og:image" content="https://codeforces.ml/predownloaded/4e/0e/4e0e0e8209dccb7251787215a5ad0e95731353ec.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/pic/52929.png">
+<meta property="og:image" content="https://codeforces.ml/predownloaded/d9/67/d96757b44bf71e4782cabc1d460ddaec697c7d2c.png">
+<meta property="og:image" content="https://codeforces.ml/predownloaded/98/2d/982d4f8ec07bdcfd468e112cd93f10978dd125ed.png">
+<meta property="og:updated_time" content="2019-12-11T04:44:24.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「CodeForces 848E」Days of Floral Colours">
-<meta name="twitter:description" content="呜呜呜，不会解释题意">
-<meta name="twitter:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/1.png">
+<meta name="twitter:title" content="Karry5307&#39;s Blog">
+<meta name="twitter:description" content="我的翻译解释的挺详细的啦qwq（主要是这题不好写简要题面，建议对着我的翻译看） $\texttt{Data Range:}3\leq n\leq 5\times 10^4$">
+<meta name="twitter:image" content="https://codeforces.ml/predownloaded/4e/0e/4e0e0e8209dccb7251787215a5ad0e95731353ec.png">
 
 
 
@@ -140,7 +141,7 @@
 
 
 
-  <title>「CodeForces 848E」Days of Floral Colours | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -368,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">「CodeForces 848E」Days of Floral Colours</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -423,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  233
+                  3k
                 </span>
               
 
@@ -439,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  14
                 </span>
               
             </div>
@@ -460,17 +461,68 @@
       
 
       
-        <p>呜呜呜，不会解释题意</p>
+        <p>我的翻译解释的挺详细的啦qwq（主要是这题不好写简要题面，建议对着我的翻译看）</p>
+<p>$\texttt{Data Range:}3\leq n\leq 5\times 10^4$</p>
 <a id="more"></a>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.com.cn/problem/CF848E" target="_blank" rel="noopener">Luogu</a></p>
+<p><a href="https://vjudge.net/problem/CodeForces-848E" target="_blank" rel="noopener">vjudge</a></p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>我 tm 终于上 <font color="blue">$\texttt{Expert}$</font> 啦qwq <del>（每日发牢骚）</del></p>
-<p>详细的讲解一下这个分治 $\texttt{FFT}$ 做法。（到时候会更新一个 BM 做法 + 图是蒯的）</p>
-<p>我们把一个环拆成两个半环，然后规定 $f_{0,i}$ 表示某两朵面对面的花中间夹着$i$朵花的答案，比如当 $i=7$ 的时候像这样：</p>
-<p><img src="/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/1.png" alt=""></p>
-<p>由对称性可知，我们可以从上面半环的情况推出下面半环的情况，所以只需要考虑上面半环的颜色分配情况即可。</p>
-<p>容易发现只有四种情况，如下图：（图片是蒯的，因为自己画功布星）</p>
-<p><img src="/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/2.png" alt=""></p>
-<p>首先我们设 $g_i$ 是仅仅用右上角和左下角的两种图形拼成长度为 $i$ 的段的方法数，那么这是个背包，有</p>
-<script type="math/tex; mode=display">g_i=g_{i-2}+g_{i-4},g_0=g_2=1,g_1=g_3=0</script>
+<p>非常考验你的生成函数功底呢（我的生成函数功底不好，并且我的画功也不行，一个圆都画不好）。</p>
+<p>详细的讲解一下这个分治 $\texttt{FFT}$ 做法，绝对不是对官方题解的翻译！（图是蒯的）</p>
+<p>由对称性可知，我们可以把一个环拆成两个半环，某一个半环的连线方式可以另一个半环的连线方式唯一确定的。</p>
+<p>然后规定 $f_{0,i}$ 表示某两朵花与它们对面的花连起来，中间夹着 $i$ 朵花的答案，这样的图形我们暂且称作长度为 $i$ 的<strong>段</strong>。长度为 $7$ 的段长这样：</p>
+<p><img src="https://codeforces.ml/predownloaded/4e/0e/4e0e0e8209dccb7251787215a5ad0e95731353ec.png" alt=""></p>
+<p>当然，后面还可能会出现连续段这个名词，意思与翻译一样。</p>
+<p>对于长度为 $i$ 的段，我们将灰色部分（<del>灰色的花朵</del>）编号如下：</p>
+<p>上面那些从左到右编号为 $0,1,\cdots i-1$，下面那些从左到右编号为 $0^\prime,1^\prime,\cdots (i-1)^\prime$。</p>
+<p>然后我们用<del>人类智慧</del>可以看出各种各样的合法连线方式都是由四种连线方式组成的，如下图（图是蒯的，我觉得 $\texttt{\color{black}s\color{red}hadowice1984}$ 比我画的好多了）</p>
+<p><img src="https://cdn.luogu.com.cn/upload/pic/52929.png" alt=""></p>
+<p>我们把这些方式从上到下，从左到右编号为 $1,2,3,4$（也就是说，左上角是 $1$，右上角是 $2$，以此类推）</p>
+<p>准备工作做好了之后，接下来是正式解题时间啦qwq，我们需要对某个 $n$ 来求出答案。这里分两个大类讨论。</p>
+<ul>
+<li><p>情况 $1$，不存在 $p(0\leq p\leq n-1)$ 使得 $p$ 与 $p^\prime$ 相连。</p>
+<p>  这个大类还是比较好讨论的。</p>
+<p>  设 $g_i$ 为长度为 $i$ 的段灰色部分的上部使用方式 $2,3$ 拼接起来（其实也是整个灰色部分）的方法数，我们可以发现是个背包（实质是斐波那契，$g_{2i}=Fib_i$），有两种物品，花费为 $2$ 和 $4$，可以简单写出方程：</p>
+<script type="math/tex; mode=display">g_i=g_{i-2}+g_{i-4},g_0=g_2=1,g_1=g_3=0</script><p>  然后我们发现这一个大类所带来的贡献为 $n^2g_n$。（因为灰色部分的上部和下部均为长度为 $n$ 的连续段）</p>
+</li>
+<li><p>情况 $2$，存在至少一个 $p(0\leq p\leq n-1)$ 使得 $p$ 与 $p^\prime$ 相连。</p>
+<p>  我们钦定最小的那个 $p$ 为 $j$（这个大类的讨论过程中所有给出的图中 $j$ 的位置由绿色标出）</p>
+<p>  这里要分两个小类，因为方式 $1$ 的左边和右边的两朵花属于两个不同的连续段。</p>
+<ul>
+<li><p>情况 $2.1$，$j$ 这个位置的连线方式为 $4$（也就是直接连到对面的点）。</p>
+<p>  这种情况如下图：</p>
+<p>  <img src="https://codeforces.ml/predownloaded/d9/67/d96757b44bf71e4782cabc1d460ddaec697c7d2c.png" alt=""></p>
+<p>  我们会发现由于 $j$ 是第一个与对面的点连起来的位置，所以 $j$ 左边的一段变成了情况 $1$，答案为 $j^2g_j$，但是右边又回归到了原问题，所以右边的答案为 $f_{0,n-j-1}$。</p>
+<p>  所以，由乘法原理，可以算出贡献为 $j^2g_jf_{0,n-j-1}$。</p>
+</li>
+<li><p>情况 $2.2$，$j$ 这个位置的连线方式为 $1$（敲黑板，划重点啦qwq）。</p>
+<p>  还是先给个图吧：</p>
+<pre><code> ![](https://codeforces.ml/predownloaded/97/27/9727064999c0333dbbdc7fc6328edbcb2ff9c7c4.png) 
+</code></pre><p>  $j$ 左边的子问题一如既往地为情况 $1$，但是规模变成了 $j-1$，因为 $j-1$ 已经连上去了。</p>
+<p>  右边我们变成新的一个子问题。看起来像一个段，但是左边变成了两个已配对的花。这样的话，左边那个已经配对的花与灰色部分为连续段，要计入答案。如果中间灰色部分长度为 $i$，我们把它记为 $f_{1,i}$。</p>
+<p>  这样我们就可以表示这个的答案了，为 $(j+1)^2g_{j}f_{1,i-j-3}$。（为了不出现一些奇奇怪怪的锅，这里下标做了调整）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>至此，我们的讨论已经完毕啦，现在我们来将结果整合一下，有</p>
+<script type="math/tex; mode=display">f_{0,n}=n^2g_n+\sum\limits_{j=0}^{n-1}j^2g_jf_{0,n-j-1}+\sum\limits_{j=0}^{n-3}(j+1)^2g_{j}f_{1,i-j-3}</script><p>同理，$f_{1,n}$ 类推，只不过有</p>
+<script type="math/tex; mode=display">f_{1,n}=(n+1)^2g_n+\sum\limits_{j=0}^{n-1}(j+1)^2g_jf_{0,n-j-1}+\sum\limits_{j=0}^{n-3}(j+2)^2g_{j}f_{1,i-j-3}</script><p>现在我们解决了段的问题。接下来是时候来解决真正的问题啦qwq！</p>
+<p>现在，由于这是个环，所以我们钦定一朵与它对面的花连在一起的花。这朵花我们编号为 $1$，然后顺时针编号为 $2,3,\cdots,2n$。容易发现，$p(1\leq p\leq n)$对面的那朵花是 $p+n$。</p>
+<p>但是要形成一个段，还要一朵与对面的花连起来的花。这里我们钦定最小的 $p(2\leq p\leq n)$ 使得 $p$ 与 $p+n$ 有边连接的为 $i$。当 $n=9$ 且 $i=5$ 时，如下图：</p>
+<p><img src="https://codeforces.ml/predownloaded/98/2d/982d4f8ec07bdcfd468e112cd93f10978dd125ed.png" alt=""></p>
+<p>然后我们可能不清楚 $1\sim i$ 之间是否有无距离为 $2$ 的两朵花连起来（如果不考虑的话我们会算漏），然后我们又开始讨论。</p>
+<p>讨论来，讨论去，最终发现我们出现了新的一个子问题，一个长度为 $n+2$ 的段，位置 $0$ 和位置 $n+1$ 已经配好对了，我们把它记做 $f_{2,n}$。</p>
+<p>有了上面的讨论过程，相信你也对推 $f_{2,n}$ 的方法不陌生了吧qwq，这里就直接给出答案。</p>
+<script type="math/tex; mode=display">f_{2,n}=(n+2)^2g_n+\sum\limits_{j=0}^{n-1}(j+1)^2g_jf_{1,n-j-1}+\sum\limits_{j=0}^{n-3}(j+2)^2g_{j}f_{2,i-j-3}</script><p>接着，我们来计算答案。这里又是一个大的分类讨论。</p>
+<p>如果只有一朵花连到对面的话，那么是两个连续段，长度为 $n-1$。</p>
+<p>如果这朵花的连线方式为 $1$ 的话，那么答案为 $g_{n-3}(n-1)^2$，否则为 $g_{n-1}(n-1)^2$。</p>
+<p>否则，那么存在更多的花连到对面。然后我们可以考虑钦定一个点 $1$ 来算。</p>
+<p>如果 $1$ 和 $n+1$ 连在一起就是直接算，否则就通过旋转来考虑。</p>
+<p>使用计数题的常用方法：枚举一个最小的旋转角度来算，然后乘上角度的贡献，我们得到</p>
+<script type="math/tex; mode=display">\sum\limits_{i=2}^{n-2}i(i-1)^2(g_{i-1}f_{0,n-i-1}+2g_{i-2}f_{1,n-i-2}+g_{i-3}f_{2,n-i-3})</script><p>然后把两个答案加起来就做完啦！使用分治 $\texttt{FFT}$ 即可达到 $O(n\log^2n)$ 的<del>优秀</del>复杂度。</p>
+<p>当然，神仙们可以用 $\texttt{Berlekamp-Massey}$ 来做，就是把前面几项算出之后代入就好了。<del>别叫我，我不会</del></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize(2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize(3)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize(<span class="meta-string">"Ofast"</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> li;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">262151</span>,MOD=<span class="number">998244353</span>,G=<span class="number">3</span>,INVG=<span class="number">332748118</span>;</span><br><span class="line">ll x,res,cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">ll g[MAXN],g0[MAXN],g1[MAXN],g2[MAXN],f0[MAXN],rev[MAXN];</span><br><span class="line">ll f1[MAXN],f2[MAXN],tmp1[MAXN],tmp2[MAXN],tmp3[MAXN],tmp4[MAXN];</span><br><span class="line">ll p0[MAXN],p1[MAXN],tmpg0[MAXN],tmpg1[MAXN],tmpg2[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qpow</span><span class="params">(ll base,ll exponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    li res=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(exponent)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(exponent&amp;<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res=(li)res*base%MOD;</span><br><span class="line">        &#125;</span><br><span class="line">        base=(li)base*base%MOD,exponent&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(ll *cp,ll cnt,ll inv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll cur=<span class="number">0</span>,res=<span class="number">0</span>,omg=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;rev[i])</span><br><span class="line">        &#123;</span><br><span class="line">            swap(cp[i],cp[rev[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=cnt;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cur=i&gt;&gt;<span class="number">1</span>,res=qpow(inv==<span class="number">1</span>?G:INVG,(MOD<span class="number">-1</span>)/i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> ll *p=cp;p!=cp+cnt;p+=i)</span><br><span class="line">        &#123;</span><br><span class="line">            omg=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cur;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                ll t=(li)omg*p[j+cur]%MOD,t2=p[j];</span><br><span class="line">                p[j+cur]=(t2-t+MOD)%MOD,p[j]=(t2+t)%MOD;</span><br><span class="line">                omg=(li)omg*res%MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(inv==<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ll invl=qpow(cnt,MOD<span class="number">-2</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=cnt;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cp[i]=(li)cp[i]*invl%MOD;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">calc</span><span class="params">(ll l,ll r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>,mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(cnt&lt;=(r-l+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt&gt;&gt;<span class="number">1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p0[i]=i+l&lt;=mid?f0[i+l]:<span class="number">0</span>,p1[i]=i+l&lt;=mid?f1[i+l]:<span class="number">0</span>;</span><br><span class="line">		tmpg0[i]=g0[i],tmpg1[i]=g1[i],tmpg2[i]=g2[i];</span><br><span class="line">		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=cnt&gt;&gt;<span class="number">1</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tmpg0[i]=tmpg1[i]=tmpg2[i]=p0[i]=p1[i]=<span class="number">0</span>;</span><br><span class="line">		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">	&#125;</span><br><span class="line">	NTT(tmpg0,cnt,<span class="number">1</span>),NTT(tmpg1,cnt,<span class="number">1</span>),NTT(tmpg2,cnt,<span class="number">1</span>);</span><br><span class="line">	NTT(p0,cnt,<span class="number">1</span>),NTT(p1,cnt,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tmp1[i]=(li)tmpg0[i]*p0[i]%MOD,tmp2[i]=(li)tmpg1[i]*p0[i]%MOD;</span><br><span class="line">		tmp3[i]=(li)tmpg1[i]*p1[i]%MOD,tmp4[i]=(li)tmpg2[i]*p1[i]%MOD;</span><br><span class="line">		tmpg0[i]=tmpg1[i]=tmpg2[i]=p0[i]=p1[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	NTT(tmp1,cnt,<span class="number">-1</span>),NTT(tmp2,cnt,<span class="number">-1</span>),NTT(tmp3,cnt,<span class="number">-1</span>),NTT(tmp4,cnt,<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt&gt;&gt;<span class="number">1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(i+l&gt;=mid&amp;&amp;i+l&lt;r)</span><br><span class="line">		&#123;</span><br><span class="line">			f0[i+l+<span class="number">1</span>]=(f0[i+l+<span class="number">1</span>]+tmp1[i])%MOD;</span><br><span class="line">			f1[i+l+<span class="number">1</span>]=(f1[i+l+<span class="number">1</span>]+tmp2[i])%MOD;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(i+l&gt;=mid<span class="number">-2</span>&amp;&amp;i+l&lt;r<span class="number">-2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			f0[i+l+<span class="number">3</span>]=(f0[i+l+<span class="number">3</span>]+tmp3[i])%MOD;</span><br><span class="line">			f1[i+l+<span class="number">3</span>]=(f1[i+l+<span class="number">3</span>]+tmp4[i])%MOD;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">cdqFFT</span><span class="params">(ll l,ll r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l==r)</span><br><span class="line">	&#123;</span><br><span class="line">		f0[l]=(f0[l]+g0[l])%MOD,f1[l]=(f1[l]+g1[l])%MOD;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	cdqFFT(l,mid),calc(l,r),cdqFFT(mid+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">calc2</span><span class="params">(ll l,ll r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll cnt=<span class="number">1</span>,limit=<span class="number">-1</span>,mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(cnt&lt;=(r-l+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt&gt;&gt;<span class="number">1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p0[i]=i+l&lt;=mid?f2[i+l]:<span class="number">0</span>,tmpg2[i]=g2[i],tmp2[i]=<span class="number">0</span>;</span><br><span class="line">		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=cnt&gt;&gt;<span class="number">1</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p0[i]=tmpg2[i]=tmp2[i]=<span class="number">0</span>;</span><br><span class="line">		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">	&#125;</span><br><span class="line">	NTT(p0,cnt,<span class="number">1</span>),NTT(tmpg2,cnt,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tmp2[i]=(li)p0[i]*tmpg2[i]%MOD,p0[i]=tmpg2[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	NTT(tmp2,cnt,<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt&gt;&gt;<span class="number">1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(i+l&gt;=mid<span class="number">-2</span>&amp;&amp;i+l&lt;r<span class="number">-2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			f2[i+l+<span class="number">3</span>]=(li)(f2[i+l+<span class="number">3</span>]+tmp2[i])%MOD;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">cdqFFT2</span><span class="params">(ll l,ll r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l==r)</span><br><span class="line">	&#123;</span><br><span class="line">		f2[l]=((f2[l]+g2[l])%MOD+(l&gt;=<span class="number">1</span>?tmp1[l<span class="number">-1</span>]:<span class="number">0</span>))%MOD;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ll mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	cdqFFT2(l,mid),calc2(l,r),cdqFFT2(mid+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x=read(),g[<span class="number">0</span>]=g[<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">4</span>;i&lt;=x;i+=<span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		g[i]=(g[i<span class="number">-4</span>]+g[i<span class="number">-2</span>])%MOD;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=x;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		g0[i]=(li)g[i]*i%MOD*i%MOD,g1[i]=(li)g[i]*(i+<span class="number">1</span>)%MOD*(i+<span class="number">1</span>)%MOD;</span><br><span class="line">		g2[i]=(li)g[i]*(i+<span class="number">2</span>)%MOD*(i+<span class="number">2</span>)%MOD;</span><br><span class="line">	&#125;</span><br><span class="line">	cdqFFT(<span class="number">0</span>,x);</span><br><span class="line">	<span class="keyword">while</span>(cnt&lt;=(x&lt;&lt;<span class="number">1</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">		tmpg0[i]=i&lt;cnt&gt;&gt;<span class="number">1</span>?f1[i]:<span class="number">0</span>,tmpg1[i]=i&lt;cnt&gt;&gt;<span class="number">1</span>?g1[i]:<span class="number">0</span>,tmp1[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	NTT(tmpg0,cnt,<span class="number">1</span>),NTT(tmpg1,cnt,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tmp1[i]=(li)tmpg0[i]*tmpg1[i]%MOD,tmpg0[i]=tmpg1[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	NTT(tmp1,cnt,<span class="number">-1</span>),cdqFFT2(<span class="number">0</span>,x);</span><br><span class="line">	res=(li)(g[x<span class="number">-1</span>]+g[x<span class="number">-3</span>])*(x<span class="number">-1</span>)%MOD*(x<span class="number">-1</span>)%MOD*x%MOD;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;x<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		res=(res+(li)g0[i<span class="number">-1</span>]*f0[x-i<span class="number">-1</span>]%MOD*i%MOD)%MOD;</span><br><span class="line">		res=(res+(li)g1[i<span class="number">-2</span>]*f1[x-i<span class="number">-2</span>]%MOD*<span class="number">2</span>%MOD*i%MOD)%MOD;</span><br><span class="line">		<span class="keyword">if</span>(i&gt;<span class="number">2</span>&amp;&amp;i&lt;x<span class="number">-2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			res=(res+(li)g2[i<span class="number">-3</span>]*f2[x-i<span class="number">-3</span>]%MOD*i%MOD)%MOD;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -495,7 +547,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/" title="「CodeForces 848E」Days of Floral Colours">http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/</a>
+    <a href="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/" title="">http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -507,32 +559,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/CodeForces/" rel="tag"><i class="fa fa-tag"></i> CodeForces</a>
-          
-            <a href="/tags/多项式/" rel="tag"><i class="fa fa-tag"></i> 多项式</a>
-          
-            <a href="/tags/生成函数/" rel="tag"><i class="fa fa-tag"></i> 生成函数</a>
-          
-            <a href="/tags/FFT/" rel="tag"><i class="fa fa-tag"></i> FFT</a>
-          
-            <a href="/tags/NTT/" rel="tag"><i class="fa fa-tag"></i> NTT</a>
-          
-            <a href="/tags/DP/" rel="tag"><i class="fa fa-tag"></i> DP</a>
-          
-            <a href="/tags/分治-FFT/" rel="tag"><i class="fa fa-tag"></i> 分治 FFT</a>
-          
-            <a href="/tags/BM-算法/" rel="tag"><i class="fa fa-tag"></i> BM 算法</a>
-          
-            <a href="/tags/线性递推/" rel="tag"><i class="fa fa-tag"></i> 线性递推</a>
-          
-            <a href="/tags/微积分初步/" rel="tag"><i class="fa fa-tag"></i> 微积分初步</a>
-          
-            <a href="/tags/思维题/" rel="tag"><i class="fa fa-tag"></i> 思维题</a>
-          
-        </div>
       
 
       
@@ -648,7 +674,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">110</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -681,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
@@ -715,7 +741,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">57.3k</span>
+    <span title="Site words total count">60k</span>
   
 </div>
 
@@ -1273,26 +1299,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
