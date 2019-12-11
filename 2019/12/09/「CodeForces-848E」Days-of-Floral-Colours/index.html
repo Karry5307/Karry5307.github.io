@@ -90,8 +90,9 @@
 <meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/1.png">
 <meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/2.png">
 <meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/3.png">
+<meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/4.png">
 <meta property="og:image" content="http://karry5307.github.io/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/5.png">
-<meta property="og:updated_time" content="2019-12-11T04:57:53.947Z">
+<meta property="og:updated_time" content="2019-12-11T05:01:51.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「CodeForces 848E」Days of Floral Colours">
 <meta name="twitter:description" content="我的翻译解释的挺详细的啦qwq（主要是这题不好写简要题面，建议对着我的翻译看） $\texttt{Data Range:}3\leq n\leq 5\times 10^4$">
@@ -498,8 +499,8 @@
 </li>
 <li><p>情况 $2.2$，$j$ 这个位置的连线方式为 $1$（敲黑板，划重点啦qwq）。</p>
 <p>  还是先给个图吧：</p>
-<pre><code> ![](「CodeForces-848E」Days-of-Floral-Colours/4.png)
-</code></pre><p>  $j$ 左边的子问题一如既往地为情况 $1$，但是规模变成了 $j-1$，因为 $j-1$ 已经连上去了。</p>
+<p>  <img src="/2019/12/09/「CodeForces-848E」Days-of-Floral-Colours/4.png" alt=""></p>
+<p>  $j$ 左边的子问题一如既往地为情况 $1$，但是规模变成了 $j-1$，因为 $j-1$ 已经连上去了。</p>
 <p>  右边我们变成新的一个子问题。看起来像一个段，但是左边变成了两个已配对的花。这样的话，左边那个已经配对的花与灰色部分为连续段，要计入答案。如果中间灰色部分长度为 $i$，我们把它记为 $f_{1,i}$。</p>
 <p>  这样我们就可以表示这个的答案了，为 $(j+1)^2g_{j}f_{1,i-j-3}$。（为了不出现一些奇奇怪怪的锅，这里下标做了调整）</p>
 </li>
