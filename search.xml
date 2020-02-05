@@ -83,8 +83,8 @@
     <url>%2F2019%2F07%2F21%2F%E3%80%8CLuogu-P4148%E3%80%8D%E7%AE%80%E5%8D%95%E9%A2%98%2F</url>
     <content type="text"><![CDATA[给定一个$n\times n$的矩阵$a$，初始状态下所有元素均为$0$，还有$m$个操作，这些操作分为以下$3$种： 1 x y z：将$a_{x,y}$加上$z$ 2 x1 y1 x2 y2：求出$\sum\limits_{i=x_1}^{x_2}\sum\limits_{j=y_1}^{y_2}a_{i,j}$。 3：终止程序。 对于所有的修改和询问要求强制在线。 $\texttt{Data Range:}n\leq 5\times 10^5,m\leq 2\times 10^5$ 链接题解一道$\texttt{kdt}$的模板题因为参数次序出问题让我调了好久 如果不要求强制在线，那么可以考虑$\texttt{cdq}$分治或整体二分。 可是既然强制在线，那么这就变成了一道$\texttt{KD Tree}$的模板题。 没什么好说的，所以这里放一张图： 呵呵。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;const ll MAXN=2e5+51;const double alpha=0.75;ll dim;struct Node&#123; ll d[2]; ll val; inline bool operator &lt;(const Node &amp;rhs)const;&#125;;struct KDTree&#123; Node nd; ll sum,size; ll minn[2],maxn[2],ch[2]; inline void clear() &#123; minn[0]=minn[1]=maxn[0]=maxn[1]=sum=size=nd.d[0]=nd.d[1]=nd.val=0; &#125;&#125;;Node nd[MAXN];KDTree tree[MAXN];ll cnt,ptr,ptr2,tot,x,y,xx,yy,z,op,lastAns,rt;ll pool[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125; inline void chkmin(ll &amp;x,ll y)&#123; if(x&gt;y) &#123; x=y; &#125;&#125;inline void chkmax(ll &amp;x,ll y)&#123; if(x&lt;y) &#123; x=y; &#125;&#125;inline bool Node::operator &lt;(const Node &amp;rhs)const&#123; return this-&gt;d[dim]&lt;rhs.d[dim]; &#125; inline ll newNode()&#123; if(!ptr) &#123; return ++tot; &#125; tree[pool[ptr]].clear(); return pool[ptr--];&#125;inline void update(ll x,ll y)&#123; chkmin(tree[x].minn[0],tree[y].minn[0]); chkmin(tree[x].minn[1],tree[y].minn[1]); chkmax(tree[x].maxn[0],tree[y].maxn[0]); chkmax(tree[x].maxn[1],tree[y].maxn[1]);&#125;inline void update(ll node)&#123; ll ls=tree[node].ch[0],rs=tree[node].ch[1]; tree[node].minn[0]=tree[node].maxn[0]=tree[node].nd.d[0]; tree[node].minn[1]=tree[node].maxn[1]=tree[node].nd.d[1]; tree[node].size=tree[ls].size+tree[rs].size+1; tree[node].sum=tree[ls].sum+tree[rs].sum+tree[node].nd.val; if(ls) &#123; update(node,ls); &#125; if(rs) &#123; update(node,rs); &#125;&#125;inline ll create(ll l,ll r,ll d)&#123; ll mid=(l+r)&gt;&gt;1; dim=d,nth_element(nd+l,nd+mid,nd+r+1); ll node=newNode(); tree[node].nd=nd[mid]; tree[node].ch[0]=l&lt;mid?create(l,mid-1,d^1):0; tree[node].ch[1]=r&gt;mid?create(mid+1,r,d^1):0; update(node); return node;&#125;inline void pia(ll node)&#123; if(tree[node].ch[0]) &#123; pia(tree[node].ch[0]); &#125; nd[++ptr2]=tree[node].nd; pool[++ptr]=node; if(tree[node].ch[1]) &#123; pia(tree[node].ch[1]); &#125;&#125;inline void check(ll &amp;node,ll d)&#123; ll ls=tree[node].ch[0],rs=tree[node].ch[1]; double sz=alpha*tree[node].size; if(sz&lt;tree[ls].size||sz&lt;tree[rs].size) &#123; ptr2=0,pia(node),node=create(1,ptr2,d); &#125;&#125;inline void insert(Node nd,ll d,ll &amp;node)&#123; if(!node) &#123; node=newNode(),tree[node].nd=nd,update(node); return; &#125; ll x=tree[node].nd.d[d]&lt;nd.d[d]; insert(nd,d^1,tree[node].ch[x]); update(node),check(node,d);&#125;inline ll check(KDTree nd,ll x,ll y,ll xx,ll yy)&#123; ll p=nd.minn[0],q=nd.minn[1],r=nd.maxn[0],s=nd.maxn[1]; if(x&lt;=p&amp;&amp;xx&gt;=r&amp;&amp;y&lt;=q&amp;&amp;yy&gt;=s) &#123; return 1; &#125; if((xx&lt;p||x&gt;r)||(yy&lt;q||y&gt;s)) &#123; return 0; &#125; return 2;&#125;inline ll query(ll x,ll y,ll xx,ll yy,ll node)&#123; ll chk,res=0,p=tree[node].nd.d[0],q=tree[node].nd.d[1]; ll ls=tree[node].ch[0],rs=tree[node].ch[1]; if(p&gt;=x&amp;&amp;p&lt;=xx&amp;&amp;q&gt;=y&amp;&amp;q&lt;=yy) &#123; res+=tree[node].nd.val; &#125; if(ls) &#123; chk=check(tree[ls],x,y,xx,yy); if(chk==1) &#123; res+=tree[ls].sum; &#125; if(chk==2) &#123; res+=query(x,y,xx,yy,ls); &#125; &#125; if(rs) &#123; chk=check(tree[rs],x,y,xx,yy); if(chk==1) &#123; res+=tree[rs].sum; &#125; if(chk==2) &#123; res+=query(x,y,xx,yy,rs); &#125; &#125; return res;&#125;int main()&#123; cnt=read(); while(1) &#123; op=read(); if(op==3) &#123; return 0; &#125; if(op==1) &#123; x=read()^lastAns,y=read()^lastAns,z=read()^lastAns; insert((Node)&#123;x,y,z&#125;,0,rt); &#125; else &#123; x=read()^lastAns,y=read()^lastAns; xx=read()^lastAns,yy=read()^lastAns; printf("%d\n",lastAns=query(x,y,xx,yy,rt)); &#125; &#125;&#125;]]></content>
       <tags>
-        <tag>数据结构</tag>
         <tag>BZOJ</tag>
+        <tag>数据结构</tag>
         <tag>洛谷</tag>
         <tag>KD Tree</tag>
       </tags>
@@ -163,8 +163,8 @@
     <content type="text"><![CDATA[给定一棵有$n$个节点的带边权树和$q$组询问，第$i$条边的边权为$w_i$。对于每组询问，给定$m$个关键点$k_i$，你要给出一个边集使得割掉这些边会$1$号节点无法到达任意一个关键点。为了方便，你只需要求出这个边集所包含的边的最小边权就行了。 $\texttt{Data Range}:2\leq 2\leq 2.5\times 10^5,m\geq 1,\sum k_i\leq 5\times 10^5,w_i\leq 10^5$ 前言生地终于考完了，我是不能阿克的。 链接Luogu P2495 BZOJ 2286 题解这道题普通$\texttt{dp}$显然是$O(nm)$的，布星，只有$\texttt{40 pts}$，吸氧后还是只有$\texttt{50 pts}$。 所以说，怎么做呢？ 注意到，$\sum k_i\leq 5\times 10^5$，所以，这道题能不能考虑对关键点动(luan)动(gao)手(yi)脚(xia)呢？ 没错，是可以的。手玩样例可以发现，有很多点是没有用到的，于是，何不建一棵新的树，使得这棵树只包含所有用到的点呢？ 这是可行的。我们想建的树，就叫做虚树。 虚树的建立首先，第一个问题，虚树上究竟会有哪些点？ 很明显，为了要维持原来的树的祖先关系，所有点间两两的$\texttt{lca}$也要算上。 所以说，建树的复杂度是$O(m^2\log n)$的？ 非也，非也。把所有的标记点按$\texttt{dfs}$序排序，在相邻两点求$\texttt{lca}$即可。证明略。 于是建树的复杂度变成了$O(m\log n)$。实际操作的话就用单调栈维护一下就好了，$\texttt{dp}$的话，还是原来那么做呀。 时间复杂度$O(\sum k\log \sum k)$ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;typedef long long int li;const ll MAXN=2.5e5+51;const li inf=0x3f3f3f3f3f3f3f3f;struct Edge&#123; ll to,prev; ll dist;&#125;;Edge ed[MAXN&lt;&lt;1];ll nc,qcnt,cnt,tot,cur,tp,from,to,dist;ll last[MAXN],fa[MAXN],depth[MAXN],size[MAXN],heavy[MAXN],top[MAXN];ll dfn[MAXN],st[MAXN],key[MAXN];li minn[MAXN];vector&lt;ll&gt; vtree[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void addEdge(ll from,ll to,ll dist)&#123; ed[++tot].prev=last[from]; ed[tot].to=to; ed[tot].dist=dist; last[from]=tot;&#125;inline void dfs(ll node,ll f,ll dep)&#123; fa[node]=f,depth[node]=dep,size[node]=1; ll maxn=-1; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to!=f) &#123; minn[ed[i].to]=min(minn[node],(li)ed[i].dist); dfs(ed[i].to,node,dep+1); size[node]+=size[ed[i].to]; if(size[ed[i].to]&gt;maxn) &#123; heavy[node]=ed[i].to,maxn=size[ed[i].to]; &#125; &#125; &#125;&#125;inline void ddfs(ll node,ll link)&#123; top[node]=link,dfn[node]=++cur; if(!heavy[node]) &#123; return; &#125; ddfs(heavy[node],link); for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to!=fa[node]&amp;&amp;ed[i].to!=heavy[node]) &#123; ddfs(ed[i].to,ed[i].to); &#125; &#125;&#125;inline ll LCA(ll x,ll y)&#123; while(top[x]!=top[y]) &#123; if(depth[top[x]]&lt;depth[top[y]]) &#123; swap(x,y); &#125; x=fa[top[x]]; &#125; return depth[x]&lt;depth[y]?x:y;&#125;inline void push(ll node)&#123; if(tp==1) &#123; st[++tp]=node; return; &#125; ll lca=LCA(node,st[tp]); if(lca==st[tp]) &#123; return; &#125; while(tp&gt;1&amp;&amp;dfn[st[tp-1]]&gt;=dfn[lca]) &#123; vtree[st[tp-1]].push_back(st[tp]),tp--; &#125; if(st[tp]!=lca) &#123; vtree[lca].push_back(st[tp]),st[tp]=lca; &#125; st[++tp]=node;&#125;inline bool cmp(ll x,ll y)&#123; return dfn[x]&lt;dfn[y];&#125;inline void createVirtualTree()&#123; sort(key,key+cnt,cmp); st[tp=1]=1; for(register int i=0;i&lt;cnt;i++) &#123; push(key[i]); &#125; while(tp&gt;0) &#123; vtree[st[tp-1]].push_back(st[tp]),tp--; &#125;&#125;inline li DP(ll node)&#123; li tmp=0; if(!vtree[node].size()) &#123; return minn[node]; &#125; for(register int i=0;i&lt;vtree[node].size();i++) &#123; tmp+=DP(vtree[node][i]); &#125; vtree[node].clear(); return min(minn[node],tmp);&#125;int main()&#123; nc=read(); for(register int i=0;i&lt;nc-1;i++) &#123; from=read(),to=read(),dist=read(); addEdge(from,to,dist),addEdge(to,from,dist); &#125; minn[1]=inf,dfs(1,0,1),ddfs(1,1),qcnt=read(); for(register int i=0;i&lt;qcnt;i++) &#123; cnt=read(); for(register int j=0;j&lt;cnt;j++) &#123; key[j]=read(); &#125; createVirtualTree(); printf("%lld\n",DP(1)); &#125;&#125;]]></content>
       <tags>
         <tag>BZOJ</tag>
-        <tag>DP</tag>
         <tag>LCA</tag>
+        <tag>DP</tag>
         <tag>洛谷</tag>
         <tag>树链剖分</tag>
         <tag>虚树</tag>
@@ -264,11 +264,11 @@
         <tag>FFT</tag>
         <tag>NTT</tag>
         <tag>洛谷</tag>
-        <tag>组合数学</tag>
         <tag>各省省选</tag>
-        <tag>数论，数学</tag>
+        <tag>组合数学</tag>
         <tag>HEOI</tag>
         <tag>TJOI</tag>
+        <tag>数论，数学</tag>
         <tag>Stirling数</tag>
       </tags>
   </entry>
@@ -342,8 +342,8 @@
         <tag>洛谷</tag>
         <tag>模板</tag>
         <tag>数论，数学</tag>
-        <tag>倍增</tag>
         <tag>微积分初步</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -365,9 +365,9 @@
     <url>%2F2019%2F01%2F27%2FBZOJ%E9%A2%98%E8%A7%A3%E5%90%88%E9%9B%86%2F</url>
     <content type="text"><![CDATA[较慢更新ing…… 1001-19991001-10991001-10091002 [FJOI2007]轮状病毒 简单的$\texttt{Matrix-Tree}$定理的运用，找规律+高精。 题解 1011-10191012 [JSOI2008]最大数maxnumber 线段树裸题。 题解 1013 [JSOI2008]球形空间产生器sphere 构造二次方程组，相邻两项作差得到一次方程组，高斯消元即可。 题解 1015 [JSOI2008]星球大战starwar 考虑逆推加边，并查集即可。 题解 1040-10491041 [HAOI2008]圆上的整点 比较复杂的神仙数论题。 题解 1042 [HAOI2008]硬币购物 DP+容斥。 题解 今天暂时更到这里。]]></content>
       <tags>
-        <tag>未完待续</tag>
         <tag>BZOJ</tag>
         <tag>合集</tag>
+        <tag>未完待续</tag>
       </tags>
   </entry>
   <entry>
@@ -486,8 +486,8 @@
         <tag>数论</tag>
         <tag>洛谷</tag>
         <tag>HAOI</tag>
-        <tag>CodeVS</tag>
         <tag>各省省选</tag>
+        <tag>CodeVS</tag>
       </tags>
   </entry>
   <entry>
@@ -546,8 +546,8 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -673,8 +673,8 @@
     <url>%2F2018%2F10%2F28%2F%E3%80%8CSPOJ-2713%E3%80%8DCan-you-answer-these-queries-IV%2F</url>
     <content type="text"><![CDATA[给一段正整数构成的区间，支持区间开平方以及询问区间和。 链接SPOJ 2713 题解考虑线段树，显然区间开平方是不能用lazy\ tag的，所以我们选择暴力修改。先证明一个引理，区间最大值为1的区间进行修改是没有意义的。（这个证明算是补了一个坑）证明：由于区间内所有数是正整数，所以区间最大值为1的区间内所有数均为1，而\sqrt{1}=1，故修改区间内的值没有意义，证毕。于是我们考虑在修改区间时判断一下当前区间最大值是不是1，如果是，就没有修改的必要。如果这个节点的左右端点重合，直接修改即可，这样可以少修改许多修改了也没用的区间，至于查询还是一样的。提醒大家有多组数据，记得初始化 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;const ll MAXN=1e5+51;struct SegmentTree&#123; ll l,r,sum,maxn;&#125;;SegmentTree tree[MAXN&lt;&lt;2];ll cnt,qcnt,op,l,r,ccnt;ll num[MAXN];inline ll read()&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void update(ll node)&#123; tree[node].sum=tree[node&lt;&lt;1].sum+tree[(node&lt;&lt;1)|1].sum; tree[node].maxn=max(tree[node&lt;&lt;1].maxn,tree[(node&lt;&lt;1)|1].maxn);&#125;inline void create(ll l,ll r,ll node)&#123; tree[node].l=l,tree[node].r=r; if(l==r) &#123; tree[node].sum=tree[node].maxn=num[l]; return; &#125; ll mid=(l+r)&gt;&gt;1; create(l,mid,node&lt;&lt;1); create(mid+1,r,(node&lt;&lt;1)|1); update(node);&#125;inline void change(ll l,ll r,ll node)&#123; if(tree[node].maxn&lt;=1) &#123; return; &#125; if(tree[node].l==tree[node].r) &#123; tree[node].sum=tree[node].maxn=sqrt(tree[node].sum); return; &#125; ll mid=(tree[node].l+tree[node].r)&gt;&gt;1; if(l&lt;=mid) &#123; change(l,r,node&lt;&lt;1); &#125; if(r&gt;mid) &#123; change(l,r,(node&lt;&lt;1)|1); &#125; update(node);&#125;inline ll querySum(ll l,ll r,ll node)&#123; if(l&lt;=tree[node].l&amp;&amp;r&gt;=tree[node].r) &#123; return tree[node].sum; &#125; ll mid=(tree[node].l+tree[node].r)&gt;&gt;1,res=0; if(l&lt;=mid) &#123; res+=querySum(l,r,node&lt;&lt;1); &#125; if(r&gt;mid) &#123; res+=querySum(l,r,(node&lt;&lt;1)|1); &#125; return res;&#125;inline ll queryMax(ll l,ll r,ll node)&#123; if(l&lt;=tree[node].l&amp;&amp;r&gt;=tree[node].r) &#123; return tree[node].maxn; &#125; ll mid=(tree[node].l+tree[node].r)&gt;&gt;1,res=0; if(l&lt;=mid) &#123; res=max(res,queryMax(l,r,node&lt;&lt;1)); &#125; if(r&gt;mid) &#123; res=max(res,queryMax(l,r,(node&lt;&lt;1)|1)); &#125; return res;&#125;int main()&#123; while(scanf("%lld",&amp;cnt)!=EOF) &#123; printf("Case #%lld:\n",++ccnt); for(register int i=1;i&lt;=cnt;i++) &#123; num[i]=read(); &#125; create(1,cnt,1); qcnt=read(); for(register int i=0;i&lt;qcnt;i++) &#123; op=read(),l=read(),r=read(); if(l&gt;r) &#123; swap(l,r); &#125; if(op) &#123; printf("%lld\n",querySum(l,r,1)); &#125; else &#123; if(queryMax(l,r,1)&gt;1) &#123; change(l,r,1); &#125; &#125; &#125; memset(num,0,sizeof(num)); memset(tree,0,sizeof(tree)); puts(""); &#125;&#125;]]></content>
       <tags>
-        <tag>数据结构</tag>
         <tag>待修改</tag>
+        <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>SPOJ</tag>
       </tags>
@@ -705,12 +705,12 @@
     <url>%2F2018%2F10%2F15%2F%E3%80%8CCodeForces-1060C%E3%80%8DMaximum-Subrectangle%2F</url>
     <content type="text"><![CDATA[给一个数x，序列a和另一个序列b，构造一个矩阵c使得c_{i,j}=a_{i}\times b_{j}。在矩阵中找出一个最大的矩形使得矩形内所有数的和小于x。因为要求子矩阵的和，所以考虑二维前缀和。但是由于矩阵的特殊性质c_{i,j}=a_{i}\times b_{j}，所以可以将二维前缀和转化为两个一维前缀和的乘积。]]></content>
       <tags>
+        <tag>未完待续</tag>
         <tag>CodeForces</tag>
         <tag>前缀和</tag>
         <tag>贪心</tag>
         <tag>two pointers</tag>
         <tag>数据结构</tag>
-        <tag>未完待续</tag>
       </tags>
   </entry>
   <entry>
@@ -749,9 +749,9 @@
       <tags>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
         <tag>二分图匹配</tag>
+        <tag>Dinic</tag>
         <tag>网络流24题</tag>
       </tags>
   </entry>
@@ -763,8 +763,8 @@
         <tag>未完待续</tag>
         <tag>洛谷</tag>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
       </tags>
   </entry>
   <entry>
@@ -773,8 +773,8 @@
     <content type="text"><![CDATA[网络流是一种解决各种神仙问题的算法，通过合理地建图，可以解决各类神仙问题。 概念]]></content>
       <tags>
         <tag>网络流</tag>
-        <tag>Dinic</tag>
         <tag>最大流</tag>
+        <tag>Dinic</tag>
         <tag>学习笔记</tag>
       </tags>
   </entry>
@@ -806,8 +806,8 @@
     <url>%2F2018%2F08%2F14%2F%E3%80%8CHAOI2015%E3%80%8D%E6%A0%91%E4%B8%8A%E6%93%8D%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[给定一棵树和多个操作，对于每一个操作3，回答该询问的答案。 链接Luogu P3178BZOJ 4034 题解树链剖分板子题。对于每一个1操作，直接将起点和终点设为这个点，执行路径修改。对于操作2和操作3，直接使用树剖板子。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long int ll;struct edge&#123; ll to,prev;&#125;;struct SegmentTree&#123; ll l,r,sum,tag;&#125;;edge ed[200051];SegmentTree tree[200051&lt;&lt;2];ll last[200051],val[200051],depth[200051],fa[200051],size[200051],heavy[200051];ll id[200051],pre[200051],top[200051];ll tot,nc,cnt,ccnt,op,x,y,from,to;inline ll read()//快读&#123; register ll num=0,neg=1; register char ch=getchar(); while(!isdigit(ch)&amp;&amp;ch!='-') &#123; ch=getchar(); &#125; if(ch=='-') &#123; neg=-1; ch=getchar(); &#125; while(isdigit(ch)) &#123; num=(num&lt;&lt;3)+(num&lt;&lt;1)+(ch-'0'); ch=getchar(); &#125; return num*neg;&#125;inline void addEdge(ll from,ll to)//邻接表基本操作&#123; ed[++tot].prev=last[from]; ed[tot].to=to; last[from]=tot;&#125;//线段树基本操作inline void update(ll node)//更新节点值，用位运算优化&#123; tree[node].sum=tree[node&lt;&lt;1].sum+tree[(node&lt;&lt;1)|1].sum;&#125;inline void create(ll l,ll r,ll node)//建树&#123; tree[node].l=l,tree[node].r=r; if(l==r) &#123; tree[node].sum=val[l]; return; &#125; ll mid=(l+r)&gt;&gt;1; create(l,mid,node&lt;&lt;1);//建左子树 create(mid+1,r,(node&lt;&lt;1)|1);//建右子树 update(node);//更新当前节点&#125;inline void spread(ll node)//下传懒标记&#123; if(tree[node].tag) &#123; //更新节点信息 tree[node&lt;&lt;1].sum+=tree[node].tag*(tree[node&lt;&lt;1].r-tree[node&lt;&lt;1].l+1); tree[(node&lt;&lt;1)|1].sum+=tree[node].tag*(tree[(node&lt;&lt;1)|1].r-tree[(node&lt;&lt;1)|1].l+1); //下传懒标记 tree[node&lt;&lt;1].tag+=tree[node].tag; tree[(node&lt;&lt;1)|1].tag+=tree[node].tag; //清除当前节点懒标记 tree[node].tag=0; &#125;&#125;inline void add(ll l,ll r,ll val,ll node)&#123; if(l&lt;=tree[node].l&amp;&amp;r&gt;=tree[node].r) &#123; tree[node].sum+=val*(tree[node].r-tree[node].l+1); //做标记 tree[node].tag+=val; return; &#125; spread(node);//标记下传 ll mid=(tree[node].l+tree[node].r)&gt;&gt;1; if(l&lt;=mid) &#123; add(l,r,val,node&lt;&lt;1); &#125; if(r&gt;mid) &#123; add(l,r,val,(node&lt;&lt;1)|1); &#125; update(node);&#125;inline ll query(ll l,ll r,ll node) &#123; if(l&lt;=tree[node].l&amp;&amp;r&gt;=tree[node].r) &#123; return tree[node].sum; &#125; spread(node);//标记下传 ll mid=(tree[node].l+tree[node].r)&gt;&gt;1,val=0; if(l&lt;=mid) &#123; val+=query(l,r,node&lt;&lt;1); &#125; if(r&gt;mid) &#123; val+=query(l,r,(node&lt;&lt;1)|1); &#125; return val;&#125;inline void dfs(ll node,ll f,ll dep)&#123; depth[node]=dep,fa[node]=f,size[node]=1;//更新节点深度，父节点，节点为根的子树大小 ll maxn=-1;//重儿子 for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to!=f)//遍历子节点 &#123; dfs(ed[i].to,node,dep+1); size[node]+=size[ed[i].to];//更新子树大小 if(size[ed[i].to]&gt;maxn) &#123; heavy[node]=ed[i].to,maxn=size[ed[i].to];//标记重儿子 &#125; &#125; &#125;&#125;inline void ddfs(ll node,ll link)&#123; id[node]=++ccnt,val[ccnt]=pre[node],top[node]=link;//标记节点新编号，赋初始值，更新节点所在重链的顶部 if(!heavy[node])//连重儿子都没有，肯定没有轻儿子，回溯 &#123; return; &#125; ddfs(heavy[node],link);//先遍历重儿子 for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to!=fa[node]&amp;&amp;ed[i].to!=heavy[node]) &#123; ddfs(ed[i].to,ed[i].to);//遍历轻儿子，该节点所在重链顶部节点为自己 &#125; &#125;&#125;//无脑操作inline ll queryPath(ll x,ll y)//查询路径点权和&#123; ll ans=0; while(top[x]!=top[y]) &#123; if(depth[top[x]]&lt;depth[top[y]]) &#123; swap(x,y); &#125; ans+=query(id[top[x]],id[x],1);//加上整个链的点权和 x=fa[top[x]];//爬到链顶 &#125; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; ans+=query(id[x],id[y],1); return ans;&#125;inline ll querySubtree(ll root)&#123; return query(id[root],id[root]+size[root]-1,1);&#125;inline void changePath(ll x,ll y,ll val)&#123; while(top[x]!=top[y]) &#123; if(depth[top[x]]&lt;depth[top[y]]) &#123; swap(x,y); &#125; add(id[top[x]],id[x],val,1); x=fa[top[x]]; &#125; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; add(id[x],id[y],val,1);&#125;inline void changeSubtree(ll root,ll val)&#123; add(id[root],id[root]+size[root]-1,val,1);&#125;int main()&#123; nc=read(),cnt=read(); for(register int i=1;i&lt;=nc;i++) &#123; pre[i]=read(); &#125; for(register int i=0;i&lt;nc-1;i++) &#123; from=read(),to=read(); addEdge(from,to),addEdge(to,from); &#125; dfs(1,0,1),ddfs(1,1),create(1,nc,1); for(register int i=0;i&lt;cnt;i++) &#123; op=read(); switch(op) &#123; case 1:&#123; x=read(),y=read(); changePath(x,x,y); break; &#125; case 2:&#123; x=read(),y=read(); changeSubtree(x,y); break; &#125; case 3:&#123; x=read(); cout&lt;&lt;queryPath(x,1)&lt;&lt;endl; break; &#125; &#125; &#125;&#125;]]></content>
       <tags>
-        <tag>数据结构</tag>
         <tag>BZOJ</tag>
+        <tag>数据结构</tag>
         <tag>线段树</tag>
         <tag>洛谷</tag>
         <tag>HAOI</tag>
@@ -900,8 +900,8 @@
     <url>%2F2018%2F08%2F07%2F%E3%80%8CCodeForces-191C%E3%80%8DFools-and-Roads%2F</url>
     <content type="text"><![CDATA[给一棵有根树和一些路线，路线上的边权都+1，求所有边的权值 链接CodeForces 191C 题解这个题目的输出是每一条边所经过的次数，所以想到树上边差分。在差分之后确实是晕了，没有想到好的方法，但是突然想到了DFS求树上前缀和，对于每一条边，只要计算深度小的前缀和-深度大的前缀和即得答案。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include&lt;bits/stdc++.h&gt;using namespace std;typedef int ll;struct edge&#123; ll to,prev; &#125;;ll nc,ec,query,root,from,to;ll depth[500010],anc[500010][31],last[500010],diff[500010],prefix[500010],LCA,maxn;ll From[500010],To[500010];edge ed[500010*2];inline void addEdge(ll from,ll to)&#123; ed[++ec].prev=last[from]; ed[ec].to=to; last[from]=ec;&#125;inline void dfs(ll node)&#123; ll son; for(register int i=last[node];i!=0;i=ed[i].prev) &#123; son=ed[i].to; if(!depth[son]) &#123; depth[son]=depth[node]+1; anc[son][0]=node; dfs(son); &#125; &#125;&#125;inline void LCASetup()&#123; depth[1]=1; anc[1][0]=0; dfs(1); for(register int i=1;i&lt;=21;i++) &#123; for(register int j=1;j&lt;=nc;j++) &#123; anc[j][i]=anc[anc[j][i-1]][i-1]; &#125; &#125;&#125;inline ll lca(ll x,ll y)&#123; if(depth[x]&gt;depth[y]) &#123; swap(x,y); &#125; for(register int i=21;i&gt;=0;i--) &#123; if(depth[anc[y][i]]&gt;=depth[x]) &#123; y=anc[y][i]; &#125; &#125; if(x==y) &#123; return x; &#125; for(register int i=21;i&gt;=0;i--) &#123; if(anc[x][i]!=anc[y][i]) &#123; x=anc[x][i]; y=anc[y][i]; &#125; &#125; return anc[x][0];&#125;inline void ddfs(ll node)&#123; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; ddfs(ed[i].to); diff[node]+=diff[ed[i].to]; &#125;&#125;inline void dffs(ll node,ll val)&#123; prefix[node]=diff[node]+val; for(register int i=last[node];i;i=ed[i].prev) &#123; if(ed[i].to==anc[node][0]) &#123; continue; &#125; dffs(ed[i].to,prefix[node]); &#125;&#125;int main()&#123; scanf("%d",&amp;nc); for(register int i=0;i&lt;nc-1;i++) &#123; scanf("%d%d",&amp;from,&amp;to); From[i]=from,To[i]=to; addEdge(from,to); addEdge(to,from); &#125; LCASetup(); scanf("%d",&amp;query); for(register int i=0;i&lt;query;i++) &#123; scanf("%d%d",&amp;from,&amp;to); LCA=lca(from,to); diff[from]++,diff[to]++,diff[LCA]-=2; &#125; ddfs(1); dffs(1,0); for(register int i=0;i&lt;nc-1;i++) &#123; if(depth[From[i]]&lt;depth[To[i]]) &#123; swap(From[i],To[i]); &#125; printf("%d ",prefix[From[i]]-prefix[To[i]]); &#125;&#125;]]></content>
       <tags>
-        <tag>CodeForces</tag>
         <tag>待修改</tag>
+        <tag>CodeForces</tag>
         <tag>LCA</tag>
         <tag>树上差分</tag>
       </tags>
