@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="[JSOI2010] 旅行链接Luogu BZOJ 题解动态规划。 先把边按照边权从小到大排序，然后钦定前 $x$ 条边在路径上。 于是我们可以考虑设 $dp_{i,j,k}$ 表示到了点 $i$ 经过 $j$ 条被钦定的边使用魔法次数为 $k$ 的最短路，于是就可以转移了： 假设我们现在考虑到的边是 $u\rightarrow v$，那么 如果钦定了这条边：$dp_{u,j,k}+w_{j+1}">
+<meta name="description" content="JSOI 解题报告">
 <meta name="keywords" content="各省省选,JSOI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSOI 套题乱做">
 <meta property="og:url" content="http://karry5307.github.io/2020/02/05/JSOI-套题乱做/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="[JSOI2010] 旅行链接Luogu BZOJ 题解动态规划。 先把边按照边权从小到大排序，然后钦定前 $x$ 条边在路径上。 于是我们可以考虑设 $dp_{i,j,k}$ 表示到了点 $i$ 经过 $j$ 条被钦定的边使用魔法次数为 $k$ 的最短路，于是就可以转移了： 假设我们现在考虑到的边是 $u\rightarrow v$，那么 如果钦定了这条边：$dp_{u,j,k}+w_{j+1}">
+<meta property="og:description" content="JSOI 解题报告">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-05T03:22:29.137Z">
+<meta property="og:updated_time" content="2020-02-05T03:30:00.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSOI 套题乱做">
-<meta name="twitter:description" content="[JSOI2010] 旅行链接Luogu BZOJ 题解动态规划。 先把边按照边权从小到大排序，然后钦定前 $x$ 条边在路径上。 于是我们可以考虑设 $dp_{i,j,k}$ 表示到了点 $i$ 经过 $j$ 条被钦定的边使用魔法次数为 $k$ 的最短路，于是就可以转移了： 假设我们现在考虑到的边是 $u\rightarrow v$，那么 如果钦定了这条边：$dp_{u,j,k}+w_{j+1}">
+<meta name="twitter:description" content="JSOI 解题报告">
 
 
 
@@ -457,7 +457,8 @@
       
 
       
-        <h2 id="JSOI2010-旅行"><a href="#JSOI2010-旅行" class="headerlink" title="[JSOI2010] 旅行"></a>[JSOI2010] 旅行</h2><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.com.cn/problem/P6029" target="_blank" rel="noopener">Luogu</a></p>
+        <p>JSOI 解题报告<br><a id="more"></a></p>
+<h2 id="JSOI2010-旅行"><a href="#JSOI2010-旅行" class="headerlink" title="[JSOI2010] 旅行"></a>[JSOI2010] 旅行</h2><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.com.cn/problem/P6029" target="_blank" rel="noopener">Luogu</a></p>
 <p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=4681" target="_blank" rel="noopener">BZOJ</a></p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>动态规划。</p>
 <p>先把边按照边权从小到大排序，然后钦定前 $x$ 条边在路径上。</p>
@@ -701,7 +702,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64.7k</span>
+    <span title="Site words total count">64.8k</span>
   
 </div>
 
@@ -1259,6 +1260,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
