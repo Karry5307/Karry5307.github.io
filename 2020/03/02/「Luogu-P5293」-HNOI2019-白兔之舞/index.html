@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多项式,FFT,原根,各省省选,HNOI,MTT,Luogu,dp,Bluestein's Algorithm,单位根反演,矩阵快速幂," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="题面有点长，而且还不好解释，所以不放简要题面了。">
+<meta name="keywords" content="多项式,FFT,原根,各省省选,HNOI,MTT,Luogu,dp,Bluestein&#39;s Algorithm,单位根反演,矩阵快速幂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Luogu P5293」[HNOI2019]白兔之舞">
+<meta property="og:url" content="http://karry5307.github.io/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/index.html">
+<meta property="og:site_name" content="Karry5307&#39;s Blog">
+<meta property="og:description" content="题面有点长，而且还不好解释，所以不放简要题面了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-02T04:25:43.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「Luogu P5293」[HNOI2019]白兔之舞">
+<meta name="twitter:description" content="题面有点长，而且还不好解释，所以不放简要题面了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://karry5307.github.io/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/"/>
+
+
+
+
+
+  <title>「Luogu P5293」[HNOI2019]白兔之舞 | Karry5307's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Karry5307's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技不如人，被吊打</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            有料
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            资源
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friends">
+          <a href="/friends" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-users"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://karry5307.github.io/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karry5307">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Karry5307's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「Luogu P5293」[HNOI2019]白兔之舞</h1>
+        
+
+        <div class="post-meta">
+         
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-02T11:29:59+08:00">
+                2020-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>题面有点长，而且还不好解释，所以不放简要题面了。</p>
+<a id="more"></a>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><a href="https://www.luogu.com.cn/problem/P5293" target="_blank" rel="noopener">Luogu P5293</a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>2019 年 4 月 7 日，HNOI2019 Day 2 赛场上，菜鸡 Karry5307 打了这题的 50 分部分分做法，可是下午出成绩的时候发现本题 boom 0。</p>
+<p>2019 年 7 月，菜鸡 Karry5307 看到了 memset0 的题解，但是由于太菜，并没有看懂。</p>
+<p>2019 年 10 月，菜鸡 Karry5307 学习了单位根反演，可是并没有学出什么所以然。</p>
+<p>2019 年 11 月，菜鸡 Karry5307 学习了 MTT，第一次失败了，但是最终还是成功的通过了 Luogu 的模板题。</p>
+<p>2020 年 1 月 21 日，菜鸡 Karry5307 成功 AC CF1286F，多项式 16 题只剩下 CF 901E 了，但是 CF901E 由于需要用到 Bluestein’s Algorithm，所以他放弃了。</p>
+<p>2020 年 2 月 27 日，菜鸡 Karry5307 看到神仙 x义x 讨论性能优化那题，发现 x义x 会 Bluestein’s Algorithm 而自己不会。</p>
+<p>2020 年 3 月 2 日，菜鸡 Karry5307 最终还是学习了 Bluestein’s Algorithm，并且在 30min 切掉此题。</p>
+<p>一年前我在 HNOI2019 的赛场上，折戟沉沙。一年后，我从倒下的地方爬起。</p>
+<p>我成功了。我不再是以前的那个我了。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>首先来看一个很傻逼的 $\texttt{dp}$。</p>
+<p>考虑 $f_{i,j}$ 表示走 $i$ 步到第 $j$ 行的<strong>任意合法位置</strong>的方案数，$g_{i,j}$ 表示走 $i$ 步到第 $j$ <strong>行</strong>的方案数（注意这里并没有钦定在哪个位置上）。</p>
+<p>转移比较显然，枚举一下上一次在哪一行，有</p>
+<script type="math/tex; mode=display">g_{i,j}=\sum\limits_{k=1}^{n}g_{i-1,k}w_{k,j}</script><p>然后注意到行数比较小，所以可以使用矩阵优化。</p>
+<p>一开始初始矩阵是 $G_0=\begin{pmatrix}1&amp;0&amp;0\end{pmatrix}$（相当于白兔在第一行），转移矩阵是</p>
+<script type="math/tex; mode=display">S=\begin{pmatrix}w_{1,1}&\cdots&w_{1,n}\\\vdots&\ddots&\vdots\\w_{n,1}&\cdots&w_{n,n}\end{pmatrix}</script><p>所以 $G_i=\begin{pmatrix}g_{i,1}&amp;\cdots&amp;g_{i,n}\end{pmatrix}=G_0S^i$。</p>
+<p>那么 $f_{i,j}$ 等价于白兔在 $1$ 到 $L$ 中选择 $i$ 个经过点进行跳舞，所以有</p>
+<script type="math/tex; mode=display">f_{i,j}=\binom{L}{i}g_{i,j}</script><p>所以我们要求的是</p>
+<script type="math/tex; mode=display">ans_t=\sum\limits_{i=1}^{L}[i\bmod k=t]f_{i,y}</script><p>发现这个不太好搞定，所以移项。</p>
+<script type="math/tex; mode=display">ans_t=\sum\limits_{i=1}^{L}[k\mid (i-t)]f_{i,y}</script><p>然后就是套路单位根反演。</p>
+<script type="math/tex; mode=display">ans_t=\sum\limits_{i=1}^{L}\frac{f_{i,y}}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{(i-t)j}</script><p>然后把 $k$ 提出来，单位根的括号拆掉，有</p>
+<script type="math/tex; mode=display">ans_t=\frac{1}{k}\sum\limits_{i=1}^{L}f_{i,y}\sum\limits_{j=0}^{k-1}\omega_{k}^{ij}\omega_{k}^{-tj}</script><p>交换一下求和符号就可以把单位根提出来了，顺便把之前的 $\texttt{dp}$ 式子代进来所以</p>
+<script type="math/tex; mode=display">ans_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-tj}\sum\limits_{i=1}^{L}\binom{L}{i}g_{i,y}\omega_{k}^{ij}</script><p>也就是说，我们要求</p>
+<script type="math/tex; mode=display">R_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-tj}\sum\limits_{i=1}^{L}\binom{L}{i}G_0S^i\omega_{k}^{ij}</script><p>的第 $y$ 项，也即</p>
+<script type="math/tex; mode=display">R_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-tj}G_0\sum\limits_{i=1}^{L}\binom{L}{i}S^i\omega_{k}^{ij}</script><p>然后发现是个二项式定理。更加形式化的来讲，是这样的</p>
+<script type="math/tex; mode=display">R_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-tj}G_0\sum\limits_{i=1}^{L}\binom{L}{i}(\omega_{k}^{j}S)^i</script><p>所以</p>
+<script type="math/tex; mode=display">R_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-tj}G_0(\omega_{k}^{j}S+I)^L</script><p>后面这一坨可以矩阵快速幂。</p>
+<p>设 $h_{j}=G_0(\omega_{k}^{j}S+I)^L$ 的第 $y$ 项，那么</p>
+<script type="math/tex; mode=display">ans_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-tj}h_{j}</script><p>如果熟悉任意长度循环卷积的套路的话可以考虑 $\texttt{Bluestein’s Algorithm}$。</p>
+<p>但是如果把 $ij$ 拆成 $\frac{(i+j)^2}{2}-\frac{j^2}{2}-\frac{j^2}{2}$ 的话会出现一个问题，在模意义下没有二次剩余。</p>
+<p>所以考虑把 $ij$ 拆成 $\binom{i+j}{2}-\binom{i}{2}-\binom{j}{2}$。</p>
+<p>比较显然，拆开就可以了，所以有</p>
+<script type="math/tex; mode=display">ans_t=\frac{1}{k}\sum\limits_{j=0}^{k-1}\omega_{k}^{-\binom{t+j}{2}+\binom{t}{2}+\binom{j}{2}}h_{j}</script><p>把一些奇奇怪怪的东西提到外面去</p>
+<script type="math/tex; mode=display">ans_t=\frac{\omega_{k}^{\binom{t}{2}}}{k}\sum\limits_{j=0}^{k-1}h_j\omega_{k}^{\binom{j}{2}}\omega_k^{-\binom{t+j}{2}}</script><p>然后设 $f_j=h_j\omega_{k}^{\binom{j}{2}},g_j=\omega_k^{-\binom{t+j}{2}}$，有</p>
+<script type="math/tex; mode=display">ans_t=\frac{\omega_{k}^{\binom{t}{2}}}{k}\sum\limits_{j=0}^{k-1}f_jg_{j+t}</script><p>这个随便搞搞就可以了。</p>
+<p>注意到，在模意义下的单位根是原根，所以要先求出原根，最后 MTT 即可。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">double</span> db;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">524291</span>;</span><br><span class="line"><span class="keyword">const</span> db PI=<span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Complex</span>&#123;</span></span><br><span class="line">	db re,im;</span><br><span class="line">	Complex(db x=<span class="number">0</span>,db y=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;re=x,<span class="keyword">this</span>-&gt;im=y;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> Complex <span class="title">conj</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Complex(re,-im);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span>&#123;</span></span><br><span class="line">	ll num[<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line">	Matrix()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(num,<span class="number">0</span>,<span class="keyword">sizeof</span>(num));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> ll* <span class="keyword">operator</span> [](<span class="keyword">const</span> ll &amp;x)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> num[x];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> <span class="keyword">const</span> ll* <span class="keyword">operator</span> [](<span class="keyword">const</span> ll &amp;x)<span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> num[x];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">Matrix p,m;</span><br><span class="line">ll n,kk,l,x,y,md,g,cnt,limit,zkdxl;</span><br><span class="line">ll w[<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line">ll rev[MAXN],pw[MAXN],f[MAXN],gg[MAXN],h[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qpow</span><span class="params">(ll base,ll exponent,ll md)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll res=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(exponent)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(exponent&amp;<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			res=res*base%md;	</span><br><span class="line">		&#125;	</span><br><span class="line">		base=base*base%md,exponent&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">inline</span> Complex <span class="keyword">operator</span> +(Complex x,Complex y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> Complex(x.re+y.re,x.im+y.im);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> Complex <span class="keyword">operator</span> -(Complex x,Complex y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> Complex(x.re-y.re,x.im-y.im);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> Complex <span class="keyword">operator</span> *(Complex x,Complex y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> Complex(x.re*y.re-x.im*y.im,x.re*y.im+x.im*y.re);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> Complex <span class="keyword">operator</span> /(Complex x,db y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> Complex(x.re/y,x.im/y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> Matrix <span class="title">id</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix res;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		res[i][i]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> Matrix <span class="keyword">operator</span> *(Matrix x,Matrix y)</span><br><span class="line">&#123;</span><br><span class="line">	Matrix res;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">			&#123;</span><br><span class="line">				res[i][j]=(res[i][j]+x[i][k]*y[k][j]%md)%md;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> Matrix <span class="title">qpow</span><span class="params">(Matrix base,ll exponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix res=id();</span><br><span class="line">	<span class="keyword">while</span>(exponent)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(exponent&amp;<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			res=res*base;</span><br><span class="line">		&#125;</span><br><span class="line">		base=base*base,exponent&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">getG</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> ll q[<span class="number">10051</span>];</span><br><span class="line">	ll top=<span class="number">0</span>,flg=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="built_in">sqrt</span>(x<span class="number">-1</span>);i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>((x<span class="number">-1</span>)%i==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			q[++top]=i;</span><br><span class="line">			<span class="keyword">if</span>(i*i!=x<span class="number">-1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				q[++top]=(x<span class="number">-1</span>)/i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		flg=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=top;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(qpow(i,q[j],x)==<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				flg=<span class="number">0</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(flg)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">calcP</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			p[i][j]=w[i][j]*x%md;</span><br><span class="line">		&#125;</span><br><span class="line">		p[i][i]++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">comb</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x&lt;=<span class="number">1</span>?<span class="number">0</span>:(x<span class="number">-1</span>)*x/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FFT</span><span class="params">(Complex *cp,ll cnt,ll inv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll cur=<span class="number">0</span>;</span><br><span class="line">	Complex res,omg;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&lt;rev[i])</span><br><span class="line">		&#123;</span><br><span class="line">			swap(cp[i],cp[rev[i]]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=cnt;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cur=i&gt;&gt;<span class="number">1</span>,res=Complex(<span class="built_in">cos</span>(<span class="number">2</span>*PI/i),inv*<span class="built_in">sin</span>(<span class="number">2</span>*PI/i));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> Complex *p=cp;p!=cp+cnt;p+=i)</span><br><span class="line">		&#123;</span><br><span class="line">			omg=Complex(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cur;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				Complex t=omg*p[j+cur],t2=p[j];</span><br><span class="line">				p[j+cur]=t2-t,p[j]=t+t2;</span><br><span class="line">				omg=omg*res;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(inv==<span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cp[i]=cp[i]/cnt;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">conv</span><span class="params">(ll cnt,ll *f,ll *g,ll *res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Complex p,q,r,s;</span><br><span class="line">	ll t;</span><br><span class="line">	ll t0,t1,t2,t3;</span><br><span class="line">	<span class="keyword">static</span> Complex tmpf[MAXN],tmpg[MAXN],p0[MAXN],p1[MAXN],p2[MAXN],p3[MAXN];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tmpf[i]=Complex(f[i]&amp;<span class="number">32767</span>,f[i]&gt;&gt;<span class="number">15</span>);</span><br><span class="line">		tmpg[i]=Complex(g[i]&amp;<span class="number">32767</span>,g[i]&gt;&gt;<span class="number">15</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	FFT(tmpf,cnt,<span class="number">1</span>),FFT(tmpg,cnt,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		t=(cnt-i)&amp;(cnt<span class="number">-1</span>);</span><br><span class="line">		p=(tmpf[i]+tmpf[t].conj())*Complex(<span class="number">0.5</span>,<span class="number">0</span>);</span><br><span class="line">		q=(tmpf[i]-tmpf[t].conj())*Complex(<span class="number">0</span>,<span class="number">-0.5</span>);</span><br><span class="line">		r=(tmpg[i]+tmpg[t].conj())*Complex(<span class="number">0.5</span>,<span class="number">0</span>);</span><br><span class="line">		s=(tmpg[i]-tmpg[t].conj())*Complex(<span class="number">0</span>,<span class="number">-0.5</span>);</span><br><span class="line">		p0[i]=p*r,p1[i]=p*s,p2[i]=q*r,p3[i]=q*s;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tmpf[i]=p0[i]+p1[i]*Complex(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">		tmpg[i]=p2[i]+p3[i]*Complex(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	FFT(tmpf,cnt,<span class="number">-1</span>),FFT(tmpg,cnt,<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		t0=(ll)(tmpf[i].re+<span class="number">0.5</span>)%md,t1=(ll)(tmpf[i].im+<span class="number">0.5</span>)%md;</span><br><span class="line">		t2=(ll)(tmpg[i].re+<span class="number">0.5</span>)%md,t3=(ll)(tmpg[i].im+<span class="number">0.5</span>)%md;</span><br><span class="line">		res[i]=(t0+(t1+t2)*<span class="number">32768</span>%md+t3*<span class="number">1073741824l</span>l%md)%md;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=read(),kk=read(),l=read(),x=read(),y=read(),md=read();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			w[i][j]=read();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	g=qpow(getG(md),(md<span class="number">-1</span>)/kk,md),pw[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;kk;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pw[i]=pw[i<span class="number">-1</span>]*g%md;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>,omg=<span class="number">1</span>;i&lt;kk;i++,omg=omg*g%md)</span><br><span class="line">	&#123;</span><br><span class="line">		calcP(omg),p=qpow(p,l),gg[i]=p[x][y]*pw[comb(i)%kk]%md;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=(kk&lt;&lt;<span class="number">1</span>);i++)</span><br><span class="line">	&#123;</span><br><span class="line">		f[i]=pw[(kk-comb(i)%kk)%kk];</span><br><span class="line">	&#125;</span><br><span class="line">	reverse(f,f+((kk&lt;&lt;<span class="number">1</span>)|<span class="number">1</span>)),cnt=<span class="number">1</span>,limit=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span>(cnt&lt;=((kk&lt;&lt;<span class="number">1</span>)+kk+<span class="number">1</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		cnt&lt;&lt;=<span class="number">1</span>,limit++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;limit);</span><br><span class="line">	&#125;</span><br><span class="line">	conv(cnt,f,gg,h),zkdxl=qpow(kk,md<span class="number">-2</span>,md);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;kk;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,h[(kk&lt;&lt;<span class="number">1</span>)-i]*zkdxl%md*pw[comb(i)%kk]%md);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+	  <div>
+		
+	  </div>
+	
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Karry5307
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://karry5307.github.io/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/" title="「Luogu P5293」[HNOI2019]白兔之舞">http://karry5307.github.io/2020/03/02/「Luogu-P5293」-HNOI2019-白兔之舞/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多项式/" rel="tag"><i class="fa fa-tag"></i> 多项式</a>
+          
+            <a href="/tags/FFT/" rel="tag"><i class="fa fa-tag"></i> FFT</a>
+          
+            <a href="/tags/原根/" rel="tag"><i class="fa fa-tag"></i> 原根</a>
+          
+            <a href="/tags/各省省选/" rel="tag"><i class="fa fa-tag"></i> 各省省选</a>
+          
+            <a href="/tags/HNOI/" rel="tag"><i class="fa fa-tag"></i> HNOI</a>
+          
+            <a href="/tags/MTT/" rel="tag"><i class="fa fa-tag"></i> MTT</a>
+          
+            <a href="/tags/Luogu/" rel="tag"><i class="fa fa-tag"></i> Luogu</a>
+          
+            <a href="/tags/dp/" rel="tag"><i class="fa fa-tag"></i> dp</a>
+          
+            <a href="/tags/Bluestein-s-Algorithm/" rel="tag"><i class="fa fa-tag"></i> Bluestein's Algorithm</a>
+          
+            <a href="/tags/单位根反演/" rel="tag"><i class="fa fa-tag"></i> 单位根反演</a>
+          
+            <a href="/tags/矩阵快速幂/" rel="tag"><i class="fa fa-tag"></i> 矩阵快速幂</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/05/JSOI-套题乱做/" rel="next" title="JSOI 套题乱做">
+                <i class="fa fa-chevron-left"></i> JSOI 套题乱做
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Karry5307</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">123</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Karry5307</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">72.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<span id="sitetime"></span>
+<script language=javascript>
+  function siteTime(){
+    window.setTimeout("siteTime()", 1000);
+    var seconds = 1000;
+    var minutes = seconds * 60;
+    var hours = minutes * 60;
+    var days = hours * 24;
+    var years = days * 365;
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var t1 = Date.UTC(2018,08,07,15,00,00);
+    var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = t2-t1;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+    document.getElementById("sitetime").innerHTML=" 已运行"+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+  }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+  siteTime();
+</script>
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'mlmUVeASiTWOUnRQNRuaovKF-gzGzoHsz',
+        appKey: 'YYSNVzGgsMj176NiixLLQ3kE',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+
+  
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+	
+</body>
+</html>
