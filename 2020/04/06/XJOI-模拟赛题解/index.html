@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="贪心,DP,数论,博弈论,XJOI,构造,树的直径,背包,整除分块," />
+  <meta name="keywords" content="数论,贪心,DP,博弈论,XJOI,构造,树的直径,背包,整除分块," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="T1大胆猜想答案为 $n(n+1)-1$。 对于 $n$ 为奇数我们可以按照如下方法构造：  也就是从 $(1,1)$ 出发走到 $(1,n+1)$，然后每一次往下走一步之后反复横跳即可。 但是如果 $n$ 为偶数呢？ 可以这么构造：  也就是先从 $(n,1)$ 走到 $(1,1)$，每一次往右走之后反复横跳即可。 容易证明不存在比这种解法更优的解了。 T2注意到我们对于每个点只需要拿他与离它最">
-<meta name="keywords" content="贪心,DP,数论,博弈论,XJOI,构造,树的直径,背包,整除分块">
+<meta name="keywords" content="数论,贪心,DP,博弈论,XJOI,构造,树的直径,背包,整除分块">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XJOI 模拟赛题解">
 <meta property="og:url" content="http://karry5307.github.io/2020/04/06/XJOI-模拟赛题解/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://karry5307.github.io/2020/04/06/XJOI-模拟赛题解/1.JPG">
 <meta property="og:image" content="http://karry5307.github.io/2020/04/06/XJOI-模拟赛题解/2.JPG">
-<meta property="og:updated_time" content="2020-04-06T07:50:59.032Z">
+<meta property="og:updated_time" content="2020-04-06T07:54:12.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XJOI 模拟赛题解">
 <meta name="twitter:description" content="T1大胆猜想答案为 $n(n+1)-1$。 对于 $n$ 为奇数我们可以按照如下方法构造：  也就是从 $(1,1)$ 出发走到 $(1,n+1)$，然后每一次往下走一步之后反复横跳即可。 但是如果 $n$ 为偶数呢？ 可以这么构造：  也就是先从 $(n,1)$ 走到 $(1,1)$，每一次往右走之后反复横跳即可。 容易证明不存在比这种解法更优的解了。 T2注意到我们对于每个点只需要拿他与离它最">
@@ -541,11 +541,11 @@ g(n)=\sum\limits_{i=1}^{n}\left\lfloor\frac{n}{i}\right\rfloor=\sum\limits_{i=1}
       
         <div class="post-tags">
           
+            <a href="/tags/数论/" rel="tag"><i class="fa fa-tag"></i> 数论</a>
+          
             <a href="/tags/贪心/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
           
             <a href="/tags/DP/" rel="tag"><i class="fa fa-tag"></i> DP</a>
-          
-            <a href="/tags/数论/" rel="tag"><i class="fa fa-tag"></i> 数论</a>
           
             <a href="/tags/博弈论/" rel="tag"><i class="fa fa-tag"></i> 博弈论</a>
           
@@ -1296,6 +1296,26 @@ g(n)=\sum\limits_{i=1}^{n}\left\lfloor\frac{n}{i}\right\rfloor=\sum\limits_{i=1}
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
