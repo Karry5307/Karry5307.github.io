@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="这一片文章我们来谈谈 LCT 在实际操作中的应用。 维护链上信息「Luogu P3690」【模板】Link Cut Tree一道模板题，会讲的比较详细。 考虑维护一个 $val_x$ 代表 $x$ 所在 $\texttt{Splay}$ 中 $x$ 的子树异或和。 在查询 $x$ 到 $y$ 的点权和的时候，我们必须先 split(x,y)，也即将 $x$ 到 $y$ 的路径上的边全部抠出来扔到一">
+<meta name="description" content="这一片文章我们来谈谈 LCT 在实际操作中的应用。">
 <meta name="keywords" content="数据结构,Link Cut Tree,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记·Link Cut Tree">
 <meta property="og:url" content="http://karry5307.github.io/2020/06/01/学习笔记·Link-Cut-Tree/index.html">
 <meta property="og:site_name" content="Karry5307&#39;s Blog">
-<meta property="og:description" content="这一片文章我们来谈谈 LCT 在实际操作中的应用。 维护链上信息「Luogu P3690」【模板】Link Cut Tree一道模板题，会讲的比较详细。 考虑维护一个 $val_x$ 代表 $x$ 所在 $\texttt{Splay}$ 中 $x$ 的子树异或和。 在查询 $x$ 到 $y$ 的点权和的时候，我们必须先 split(x,y)，也即将 $x$ 到 $y$ 的路径上的边全部抠出来扔到一">
+<meta property="og:description" content="这一片文章我们来谈谈 LCT 在实际操作中的应用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-01T14:16:11.448Z">
+<meta property="og:updated_time" content="2020-06-01T14:22:16.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记·Link Cut Tree">
-<meta name="twitter:description" content="这一片文章我们来谈谈 LCT 在实际操作中的应用。 维护链上信息「Luogu P3690」【模板】Link Cut Tree一道模板题，会讲的比较详细。 考虑维护一个 $val_x$ 代表 $x$ 所在 $\texttt{Splay}$ 中 $x$ 的子树异或和。 在查询 $x$ 到 $y$ 的点权和的时候，我们必须先 split(x,y)，也即将 $x$ 到 $y$ 的路径上的边全部抠出来扔到一">
+<meta name="twitter:description" content="这一片文章我们来谈谈 LCT 在实际操作中的应用。">
 
 
 
@@ -458,6 +458,7 @@
 
       
         <p>这一片文章我们来谈谈 LCT 在实际操作中的应用。</p>
+<a id="more"></a>
 <h3 id="维护链上信息"><a href="#维护链上信息" class="headerlink" title="维护链上信息"></a>维护链上信息</h3><h4 id="「Luogu-P3690」【模板】Link-Cut-Tree"><a href="#「Luogu-P3690」【模板】Link-Cut-Tree" class="headerlink" title="「Luogu P3690」【模板】Link Cut Tree"></a>「Luogu P3690」【模板】Link Cut Tree</h4><p>一道模板题，会讲的比较详细。</p>
 <p>考虑维护一个 $val_x$ 代表 $x$ 所在 $\texttt{Splay}$ 中 $x$ 的子树异或和。</p>
 <p>在查询 $x$ 到 $y$ 的点权和的时候，我们必须先 <code>split(x,y)</code>，也即将 $x$ 到 $y$ 的路径上的边全部抠出来扔到一个 $\texttt{Splay}$ 上，再将 $x$ 或者 $y$ 旋转到这个 $\texttt{Splay}$ 的根上，所以 $val_{rt}$ 就是答案了。</p>
