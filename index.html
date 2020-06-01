@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  62
+                  83
                 </span>
               
 
@@ -1199,6 +1199,358 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://karry5307.github.io/2020/06/01/学习笔记·Link-Cut-Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karry5307">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Karry5307's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/01/学习笔记·Link-Cut-Tree/" itemprop="url">学习笔记·Link Cut Tree</a></h1>
+        
+
+        <div class="post-meta">
+         
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-01T21:47:44+08:00">
+                2020-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/01/学习笔记·Link-Cut-Tree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/01/学习笔记·Link-Cut-Tree/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  776
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这一片文章我们来谈谈 LCT 在实际操作中的应用。</p>
+<h3 id="维护链上信息"><a href="#维护链上信息" class="headerlink" title="维护链上信息"></a>维护链上信息</h3><h4 id="「Luogu-P3690」【模板】Link-Cut-Tree"><a href="#「Luogu-P3690」【模板】Link-Cut-Tree" class="headerlink" title="「Luogu P3690」【模板】Link Cut Tree"></a>「Luogu P3690」【模板】Link Cut Tree</h4><p>一道模板题，会讲的比较详细。</p>
+<p>考虑维护一个 $val_x$ 代表 $x$ 所在 $\texttt{Splay}$ 中 $x$ 的子树异或和。</p>
+<p>在查询 $x$ 到 $y$ 的点权和的时候，我们必须先 <code>split(x,y)</code>，也即将 $x$ 到 $y$ 的路径上的边全部抠出来扔到一个 $\texttt{Splay}$ 上，再将 $x$ 或者 $y$ 旋转到这个 $\texttt{Splay}$ 的根上，所以 $val_{rt}$ 就是答案了。</p>
+<p>在修改 $x$ 的点权的时候要先将 $x$ 旋转到所在 $\texttt{Splay}$ 的根上，就可以直接修改，否则就会比较麻烦。</p>
+<p>还有一个点，注意到加边和删边操作不保证存在，因此要先判断一下再搞。</p>
+<div><div class="fold_hider"><div class="close hider_title">代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> li;</span><br><span class="line"><span class="keyword">const</span> ll MAXN=<span class="number">3e5</span>+<span class="number">51</span>;</span><br><span class="line">ll cnt,qcnt,op,x,y;</span><br><span class="line">ll num[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> ll num=<span class="number">0</span>,neg=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)&amp;&amp;ch!=<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">'-'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        neg=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))</span><br><span class="line">    &#123;</span><br><span class="line">        num=(num&lt;&lt;<span class="number">3</span>)+(num&lt;&lt;<span class="number">1</span>)+(ch-<span class="string">'0'</span>);</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num*neg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> LCT&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">        ll fa,val,rv;</span><br><span class="line">        ll ch[<span class="number">2</span>];</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">LinkCutTree</span>&#123;</span></span><br><span class="line">        Node nd[MAXN];</span><br><span class="line">    	ll st[MAXN];</span><br><span class="line">		<span class="meta">#<span class="meta-keyword">define</span> ls nd[x].ch[0]</span></span><br><span class="line">		<span class="meta">#<span class="meta-keyword">define</span> rs nd[x].ch[1]</span></span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">nroot</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> nd[nd[x].fa].ch[<span class="number">0</span>]==x||nd[nd[x].fa].ch[<span class="number">1</span>]==x;</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			nd[x].val=nd[ls].val^nd[rs].val^num[x];</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			swap(ls,rs),nd[x].rv^=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">spread</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">	   	</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(nd[x].rv)</span><br><span class="line">			&#123;</span><br><span class="line">				ls?reverse(ls):(<span class="keyword">void</span>)<span class="number">1</span>,rs?reverse(rs):(<span class="keyword">void</span>)<span class="number">1</span>;</span><br><span class="line">				nd[x].rv=<span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			ll fa=nd[x].fa,gfa=nd[fa].fa;</span><br><span class="line">			ll dir=nd[fa].ch[<span class="number">1</span>]==x,son=nd[x].ch[!dir];</span><br><span class="line">			<span class="keyword">if</span>(nroot(fa))</span><br><span class="line">			&#123;</span><br><span class="line">				nd[gfa].ch[nd[gfa].ch[<span class="number">1</span>]==fa]=x;</span><br><span class="line">			&#125;</span><br><span class="line">			nd[x].ch[!dir]=fa,nd[fa].ch[dir]=son;</span><br><span class="line">			<span class="keyword">if</span>(son)</span><br><span class="line">			&#123;</span><br><span class="line">				nd[son].fa=fa;</span><br><span class="line">			&#125;</span><br><span class="line">			nd[fa].fa=x,nd[x].fa=gfa,update(fa);</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">splay</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			ll fa=x,gfa,cur=<span class="number">0</span>;</span><br><span class="line">			st[++cur]=fa;</span><br><span class="line">			<span class="keyword">while</span>(nroot(fa))</span><br><span class="line">			&#123;</span><br><span class="line">				st[++cur]=fa=nd[fa].fa;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(cur)</span><br><span class="line">			&#123;</span><br><span class="line">				spread(st[cur--]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(nroot(x))</span><br><span class="line">			&#123;</span><br><span class="line">				fa=nd[x].fa,gfa=nd[fa].fa;</span><br><span class="line">				<span class="keyword">if</span>(nroot(fa))</span><br><span class="line">				&#123;</span><br><span class="line">					rotate((nd[fa].ch[<span class="number">0</span>]==x)^(nd[gfa].ch[<span class="number">0</span>]==fa)?x:fa);</span><br><span class="line">				&#125;</span><br><span class="line">				rotate(x);</span><br><span class="line">			&#125;</span><br><span class="line">			update(x);</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">access</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;x;x=nd[i=x].fa)</span><br><span class="line">			&#123;</span><br><span class="line">				splay(x),rs=i,update(x);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">makeRoot</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			access(x),splay(x),reverse(x);</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> ll <span class="title">findRoot</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			access(x),splay(x);</span><br><span class="line">			<span class="keyword">while</span>(nd[x].ch[<span class="number">0</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				spread(x),x=ls;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> x;</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">split</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			makeRoot(x),access(y),splay(y);</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">link</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			makeRoot(x);</span><br><span class="line">			<span class="keyword">if</span>(findRoot(y)!=x)</span><br><span class="line">			&#123;</span><br><span class="line">				nd[x].fa=y;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">cut</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			makeRoot(x);</span><br><span class="line">			<span class="keyword">if</span>(findRoot(y)==x&amp;&amp;nd[x].fa==y&amp;&amp;!rs)</span><br><span class="line">			&#123;</span><br><span class="line">				nd[x].fa=nd[y].ch[<span class="number">0</span>]=<span class="number">0</span>,update(y);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="meta">#<span class="meta-keyword">undef</span> ls</span></span><br><span class="line">		<span class="meta">#<span class="meta-keyword">undef</span> rs</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">LCT::LinkCutTree lct;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cnt=read(),qcnt=read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num[i]=read();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;qcnt;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        op=read(),x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(!op)</span><br><span class="line">        &#123;</span><br><span class="line">            lct.split(x,y);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,lct.nd[y].val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            lct.link(x,y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            lct.cut(x,y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            lct.splay(x),num[x]=y;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://karry5307.github.io/2020/05/30/HNOI2020-模拟赛总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karry5307">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Karry5307's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/30/HNOI2020-模拟赛总结/" itemprop="url">HNOI2020 模拟赛总结</a></h1>
+        
+
+        <div class="post-meta">
+         
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-30T22:22:11+08:00">
+                2020-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/30/HNOI2020-模拟赛总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/05/30/HNOI2020-模拟赛总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  232
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="0519"><a href="#0519" class="headerlink" title="0519"></a>0519</h3><p>$\texttt{10+0+10=20}$</p>
+<p>T2 傻逼题不知道为啥爆零我也是服了自己</p>
+<h3 id="0522"><a href="#0522" class="headerlink" title="0522"></a>0522</h3><p>$\texttt{15+5+40=60}$</p>
+<p>T1 之前做过原题考场上 FWT 写错，最后转暴力</p>
+<p>T3 没修改的公式推出来了，离正解只差一点点了，丢人</p>
+<h3 id="0523"><a href="#0523" class="headerlink" title="0523"></a>0523</h3><p>$\texttt{0+0+0=0}$</p>
+<p>爆零成功，也不知道为啥会被 T3 卡 TLE，T2 被卡 RE，T1 直接 T 掉</p>
+<h3 id="0526"><a href="#0526" class="headerlink" title="0526"></a>0526</h3><p>$\texttt{0+100+15=115}$</p>
+<p>妈呀 T3 $O(n^3)$ 有 $\texttt{60pts}$ 乱搞 + 暴力能 $\texttt{100pts}$ 早知道就去写了</p>
+<p>T1 鬼东西我又想歪了</p>
+<h3 id="0527"><a href="#0527" class="headerlink" title="0527"></a>0527</h3><p>$\texttt{30+10+0=40}$</p>
+<p>T3 什么神仙题目啊考成这个鬼样子</p>
+<p>T1 不会分块线段树被卡了……谁来教我分块啊</p>
+<h3 id="0529"><a href="#0529" class="headerlink" title="0529"></a>0529</h3><p>$\texttt{100+20+30=150}$</p>
+<p>这 T1 怎么暴力+假做法都能过啊</p>
+<p>这 T2 输出曼哈顿距离怎么都有 $\texttt{20pts}$ 啊</p>
+<p>这 T3 怎么要圆方树啊</p>
+<h3 id="0530"><a href="#0530" class="headerlink" title="0530"></a>0530</h3><p>$\texttt{100+100+100=300}$</p>
+<p>题目太水了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://karry5307.github.io/2020/04/06/XJOI-模拟赛题解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1687,345 +2039,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://karry5307.github.io/2019/12/11/「CodeForces-553E」Kyoya-and-Train/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Karry5307">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Karry5307's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/11/「CodeForces-553E」Kyoya-and-Train/" itemprop="url">「CodeForces 553E」Kyoya and Train</a></h1>
-        
-
-        <div class="post-meta">
-         
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T18:44:51+08:00">
-                2019-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/12/11/「CodeForces-553E」Kyoya-and-Train/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/11/「CodeForces-553E」Kyoya-and-Train/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.5k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>为了表述方便，以下所述$p_{i,k}$均为原题中的$\frac{p_{i,k}}{100000}$</p>
-<p>给定一个$n$个点$m$条边有向图，第$i$条边有边权$c_i$，可能的花费时间为$[1,t]$，且花费$k$时间的概率是$p_{i,k}$。</p>
-<p>一个人从$1$到$n$，如果到达时间超过$T$，则需要额外缴纳$X$的花费，求期望最小花费。</p>
-<p>$\texttt{Data Range:}2\leq n\leq 50,1\leq m\leq 100,1\leq t\leq 2\times 10^4,0\leq x,c_i\leq 10^6$</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/12/11/「CodeForces-553E」Kyoya-and-Train/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://karry5307.github.io/2019/12/11/「CodeForces-1054H」Epic-Convolution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Karry5307">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Karry5307's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/11/「CodeForces-1054H」Epic-Convolution/" itemprop="url">「CodeForces 1054H」Epic Convolution</a></h1>
-        
-
-        <div class="post-meta">
-         
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T18:35:27+08:00">
-                2019-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/12/11/「CodeForces-1054H」Epic-Convolution/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/11/「CodeForces-1054H」Epic-Convolution/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  10
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>给两个下标从$0$开始且长度分别为$n,m$的序列$A,B$和一个常数$C$，求：</p>
-<script type="math/tex; mode=display">\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{m-1}A_iB_jc^{i^2j^3}</script><p>答案对$490019$取模。</p>
-<p>$\texttt{Data Range:}n,m\leq 10^5,A_i,B_i\leq 10^3,c\leq 490019$</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/12/11/「CodeForces-1054H」Epic-Convolution/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2076,7 +2089,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2140,7 +2153,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">74.3k</span>
+    <span title="Site words total count">75.4k</span>
   
 </div>
 
